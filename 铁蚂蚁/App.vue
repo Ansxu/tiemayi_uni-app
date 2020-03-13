@@ -1,6 +1,8 @@
+
 <script>
 	export default {
 		onLaunch: function() {
+			// setFontSize();
 			console.log('App Launch')
 		},
 		onShow: function() {
@@ -11,7 +13,8 @@
 		}
 	}
 </script>
-
 <style>
 	/*每个页面公共css */
+	@import url('css/global.css');
+	@import url('css/style.css');
 </style>

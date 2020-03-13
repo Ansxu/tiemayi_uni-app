@@ -1,0 +1,230 @@
+.header {
+    background: #00abef;
+    color: #ffffff;
+    font-size: 1.385rem;
+    padding: 0.3125rem;
+}
+
+.header img {
+    width: 1.385rem;
+    margin-left: 0.625rem;
+    margin-top: 0.25rem;
+}
+
+.blue {
+    color: #00abef;
+}
+
+.red {
+    color: #ff0000;
+}
+
+.Promotion, .Total_reward {
+    padding: 0.625rem;
+    background: #ffffff;
+    margin-bottom: 0.625rem;
+}
+
+section {
+    margin-bottom: 0.875rem;
+}
+
+.activate_user, .activate_business {
+    padding: 0.625rem;
+    background: #ffffff;
+}
+
+.activate_user h3, .activate_business h3 {
+    font-size: 1rem;
+    color: #333333;
+}
+
+.activate_user h3 span, .activate_business h3 span {
+    font-size: 0.75rem;
+    color: #b2b2b2;
+    margin-left: 0.5rem;
+}
+
+.activate_user {
+    border-bottom: 1px solid #dddddd;
+}
+
+.activate_user ul, .activate_business ul {
+    margin-top: 0.625rem;
+}
+
+.activate_user li, .activate_business li {
+    width: 49%;
+    float: left;
+    border: 1px solid #00abef;
+    text-align: center;
+    height: 1.75rem;
+    line-height: 1.75rem;
+    color: #00abef;
+}
+
+.Total_reward {
+    margin: 0.625rem 0rem;
+}
+
+.Invitation {
+    padding: 0.625rem;
+    background: #ffffff;
+}
+
+.Invitation_logo {
+    width: 100%;
+}
+
+.Invitation .title {
+    color: #a34d00;
+    font-size: 0.875rem;
+    margin-bottom: 0.625rem;
+}
+
+.Invitation .bouns {
+    position: relative;
+    margin-bottom: 0.5rem;
+}
+
+.Invitation .bouns img {
+    width: 3rem;
+}
+
+.Invitation .bouns p {
+    padding-left: 3.5rem;
+    font-size: 0.75rem;
+    height: 3rem;
+    line-height: 1.5rem;
+}
+
+.share a {
+    display: block;
+}
+
+.share a img {
+    width: 100%;
+}
+
+.mui-control-content {
+    background-color: white;
+    min-height: 300px;
+}
+
+.mui-control-content .mui-loading {
+    margin-top: 50px;
+}
+
+.detail {
+    color: #ffffff;
+    font-size: 1rem;
+    margin-top: 3px;
+}
+
+.qrcode {
+    position: relative;
+}
+
+.mbimg_hover {
+    background: black;
+    opacity: 0.5;
+    border: 1px dashed #00AAEF;
+}
+
+.mbimg_tap {
+    -webkit-animation: mbimg_tap 0.3s linear;
+}
+
+@-webkit-keyframes mbimg_tap {
+    0% {
+        -webkit-transform: translate(0, 0px) rotate(0deg)
+    }
+    25% {
+        -webkit-transform: translate(0, 0px) rotate(1deg)
+    }
+    50% {
+        -webkit-transform: translate(0, 0px) rotate(0deg)
+    }
+    75% {
+        -webkit-transform: translate(0, 0px) rotate(-1deg)
+    }
+    100% {
+        -webkit-transform: translate(0, 0px) rotate(0deg)
+    }
+}
+
+.mbimg img {
+    margin-bottom: 10px;
+    width: 48%;
+    float: left;
+    border-radius: 5px;
+}
+
+@media only screen and (device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3) {
+    .blue2 a {
+        position: relative;
+        top: 0;
+    }
+}
+
+.qrcode1 {
+    position: absolute;
+    top: 69.8%;
+    left: 36.3%;
+    width: 27.2%;
+    z-index: 10;
+}
+
+.qrcode1 img {
+    width: 100%;
+    border-radius: 7.5%;
+}
+
+.qrcode2 {
+    position: absolute;
+    top: 46.4%;
+    left: 37.2%;
+    width: 27.2%;
+    z-index: 10;
+}
+
+.qrcode2 img {
+    width: 100%;
+    border-radius: 7.5%;
+}
+
+.qrcode3 {
+    position: absolute;
+    top: 30.1%;
+    left: 39.1%;
+    width: 27.2%;
+    z-index: 10;
+}
+
+.qrcode3 img {
+    width: 100%;
+    border-radius: 7.5%;
+}
+
+.qrcode4 {
+    position: absolute;
+    top: 62.2%;
+    left: 31.8%;
+    width: 34.5%;
+    z-index: 10;
+}
+
+.qrcode4 img {
+    width: 100%;
+    border-radius: 7.5%;
+}
+
+.qrcode100 {
+    width: 65%;
+    margin: 35% auto;
+}
+
+.qrcode100 img {
+    max-width: 100%;
+    width: 100%;
+}

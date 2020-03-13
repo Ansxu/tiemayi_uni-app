@@ -1,0 +1,294 @@
+body {
+	background: #f7f7f7;
+}
+*{
+	padding: 0px;
+	margin: 0px;
+	font-family: "微软雅黑";
+}
+p,h1,h2,h3,h4,h5,h6{
+	margin: 0px;
+	padding: 0px;
+}
+em,i {
+	font-style: normal;
+}
+ul {
+	list-style-type: none;
+	margin: 0px;
+}
+a {
+	text-decoration: none;
+	color:#333;
+}
+.clearfix {
+	*zoom: 1;
+}
+.clearfix:before,.clearfix:after {
+	display: table;
+	line-height: 0;
+	content: "";
+}
+.clearfix:after {
+	clear: both;
+}
+.pull-left {
+	float: left;
+}
+
+.pull-right {
+	float: right;
+}
+.text-center {
+	text-align: center;
+}
+.text-left {
+	text-align: left;
+}
+.text-right {
+	text-align: right;
+}
+*:focus { outline: none; }
+/*footer*/
+.footer {
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	background: #ffffff;
+	border-top: 1px solid #cccccc;
+	padding: 5px 0px;
+}
+.footer li {
+	width: 20%;
+	float: left;
+}
+.footer li img {
+	width: 1.5rem;
+}
+.footer li p {
+	font-size: 0.75remx;
+}
+.footer li a {
+	color: #333333;
+}
+.alertMask{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+}
+.alertMask-bj{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0c0c0c;
+  opacity: .5;
+  z-index: 8;
+}
+.alertMask-main{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index:9;
+}
+.alertMask-main-text{
+  background: #a5a5a5;
+  width: 50%;
+  color: #fff;
+  margin: 15rem auto;
+  padding: 1rem;
+  text-align: center;
+  border-radius: .5rem;
+}
+.dis{
+  display: none;
+}
+/*
+div.header{
+  padding:0.8rem 0px;
+}
+*/
+
+/*头部*/
+.h45{width: 100%; height: 2.5rem;}
+.head{position: fixed; top: 0; width: 100%; height: 2.5rem; z-index: 10; background: #fff;max-width: 750px; margin: 0 auto;}
+.head.bb_border{ border-bottom: 1px solid #e6e6e6; }
+.head .title {
+	margin:0 .6rem;
+	height: 2.5rem;
+	line-height: 2.5rem;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	font-size: 1rem;
+	color:#1d1d1d;
+	text-align: center;
+}
+
+.head .btn_back {
+	position:absolute;
+	top:0;
+	left:0;
+	width:2.5rem;
+	height: 2.5rem;
+	background: url(/static/image/icons/back.png) center no-repeat;
+	background-size:.5rem auto;
+	z-index: 2;
+}
+
+div.header{
+
+	padding-top: 20px;
+}
+.hdmui{
+	line-height: 1.9rem;
+}
+a{
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+
+.fixtop{
+	margin-top: 64px;
+}
+.fixtop3{
+	margin-top: 60px;
+}
+.topfix{
+	position: fixed;
+	z-index: 10;
+}
+.header2{
+	background-color: #00ABEF;
+	height: 64px;
+	font-size: 1.385rem;
+	padding-top: 20px;
+
+}
+.header2 h1,.header2 a{
+	color:white;
+}
+
+.header3{
+	background-color: #F7F7F7;
+	height: 64px;
+	font-size: 1.385rem;
+	padding-top: 20px;
+	/* Status bar height on iOS 11.0 */
+   /* padding-top: constant(safe-area-inset-top);*/
+
+    /* Status bar height on iOS 11+ */
+    /*padding-top: env(safe-area-inset-top);*/
+
+	z-index: 9999;
+}
+.header3 a{
+	padding-top:20px;
+
+}
+.mui-bar{
+	background-color: #F7F7F7;
+	height: 64px;
+	font-size: 1.385rem;
+	padding-top: 20px;
+	z-index: 9999;
+}
+
+.blue2{
+
+	background-color: #1092cd;
+	height: 64px;
+	font-size: 1.385rem;
+	padding-top: 20px;
+	z-index: 9999;
+}
+.blue2 h1,.blue2 a{
+	color:white;
+
+}
+.blue2 a{
+	padding-top: 10px;
+
+
+}
+
+.blue3{
+	background-color: #1092cd;
+	height: 44px;
+	font-size: 1.385rem;
+	padding-top: 20px;
+	z-index: 9999;
+}
+.blue3 h1,.blue3 a{
+	color:white;
+}
+.blue3 a{
+	padding-top: 10px;
+}
+
+.fixtop2{
+	margin-top: 84px;
+}
+
+@media only screen and (device-width:375px ) and (device-height:812px) and (-webkit-device-pixel-ratio:3) {
+				/*.header{
+					height:88px;
+					padding-top: env(safe-area-inset-top);
+					padding-top: constant(safe-area-inset-top);
+				}
+				.header a{
+					position: absolute;top:44px;text-align: center;
+				}*/
+				.blue2{
+					height:88px;
+					padding-top: env(safe-area-inset-top);
+					padding-top: constant(safe-area-inset-top);
+
+				}
+				.blue3{
+					background-color: #1092cd;
+					height: 44px;
+					font-size: 1.385rem;
+					padding-top: 20px;
+					padding-top: env(safe-area-inset-top);
+					padding-top: constant(safe-area-inset-top);
+				}
+				.normalhead{
+					height:88px;
+					padding-top: env(safe-area-inset-top);
+					padding-top: constant(safe-area-inset-top);
+				}
+				.normalhead h1,.normalhead a{
+					position: absolute;top:44px;text-align: center;
+				}
+				.mui-bar{
+					height:88px;
+					padding-top: env(safe-area-inset-top);
+					padding-top: constant(safe-area-inset-top);
+				}
+				.blue2 a{
+					position: relative;top:44px;
+				}
+
+				.mui-title{
+					position: absolute;top:44px;text-align: center;
+				}
+
+				.fixtop{
+					margin-top: 88px;
+				}
+				.fixtop2{
+					margin-top: 108px;
+				}
+
+				.header3{
+					padding-top: env(safe-area-inset-top);
+					padding-top: constant(safe-area-inset-top);
+				}
+
+			}

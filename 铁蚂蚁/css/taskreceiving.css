@@ -1,0 +1,378 @@
+.header {
+    background: #ffffff;
+    font-size: 1.385rem;
+}
+
+.header img {
+    width: 1.385rem;
+    margin-left: 0.625rem;
+    margin-top: 0.25rem;
+}
+
+.rate {
+    position: relative;
+    padding: 0.625rem 1rem;
+    background: #00aaef;
+}
+
+.rate p {
+    color: #ffffff;
+    font-size: 0.75rem;
+}
+
+.rate img {
+    position: absolute;
+    top: 0.65rem;
+    right: 1rem;
+    width: 1.2rem;
+}
+
+.task_list {
+    background: #ffffff;
+}
+
+.task_list li {
+    position: relative;
+    padding: 0.625rem 0rem;
+    border-bottom: 1px solid #dddddd;
+}
+
+.task_list li:last-child {
+    border-bottom: 0px;
+}
+
+.task_list li .content {
+    padding: 0rem 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.task_icon {
+    height: 2.5rem;
+    margin-right: 0.5rem;
+}
+
+.task_name {
+    color: #545454;
+}
+
+.task_rate {
+    color: #b2b2b2;
+    font-size: 0.75rem;
+}
+
+.switch {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.675rem;
+    height: 2rem;
+}
+
+.task_type {
+    background: #e8e8e8;
+    text-indent: 1rem;
+    padding: 0.25rem 0rem;
+    color: #787878;
+}
+
+.joint_task, .stop_task {
+    position: fixed;;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.stop_task {
+    right: 0.625rem;
+}
+
+.joint_task img {
+    width: 5rem;
+}
+
+.stop_task img {
+    width: 4rem;
+}
+
+.nminput {
+    background-color: white;
+    border: 0px;
+    width: 100%;
+    height: 100%;
+    background: #e8e8e8;
+    text-indent: 1rem;
+    padding: 0.25rem 0rem;
+    color: #787878;
+    text-align: left;
+}
+
+.receiving {
+    position: relative;
+    padding-top: 0.625rem;
+    border-bottom: 1px solid #dddddd;
+    background: #ffffff;
+}
+
+#receiving {
+    padding: 0.625rem 0rem;
+}
+
+.receiving .content {
+    padding: 0rem 1rem;
+    margin-bottom: 0.5rem;
+}
+
+
+/*接单遮罩*/
+
+.jiedan-over {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .8);
+    z-index: 10600;
+    visibility: hidden;
+    opacity: 0;
+    transition-duration: .4s;
+}
+
+
+/*来任务遮罩层*/
+
+.popup-overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .8);
+    z-index: 10600;
+    visibility: hidden;
+    opacity: 0;
+    transition-duration: .4s;
+}
+
+.visible {
+    visibility: visible;
+    opacity: 0.8;
+}
+
+.new_task {
+    position: absolute;
+    top: -40%;
+    left: 10%;
+    z-index: 10800;
+    display: none;
+    width: 80%;
+    border-radius: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    background: #fff;
+    -webkit-transition-property: -webkit-transform;
+    -o-transition-property: -o-transform;
+    transition-property: transform;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+    padding: 1rem;
+}
+
+.icon {
+    border-bottom: 1px solid #dddddd;
+    padding-bottom: 0.625rem;
+    height: 4rem;
+    line-height: 4rem;
+}
+
+.icon p {
+    height: 4rem;
+    line-height: 4rem;
+}
+
+.icon img {
+    width: 3rem;
+    margin-left: 25%;
+    margin-right: 0.25rem;
+}
+
+.task_describ {
+    padding: 1rem 0rem;
+}
+
+.task_describ li {
+    padding: 0rem 0.625rem 0.25rem 0.625rem;
+    border-bottom: 1px solid #dddddd;
+    margin-bottom: 0.875rem;
+}
+
+.task_describ li .main_container {
+    color: #00aaef;
+}
+
+.task_ok {
+    text-align: center;
+    background: #00aaef;
+    color: #fff;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    border-radius: 50px;
+}
+
+
+/*选择任务类型*/
+
+.taskTypeBox {
+    margin-bottom: .5rem;
+    padding: 0 .625rem;
+    background: #fff;
+}
+
+.taskTypeBox .titleHd {
+    height: 2.5rem;
+    line-height: 2.5rem;
+    font-size: 1rem;
+    border-bottom: 1px solid #eee;
+    margin-bottom: .5rem;
+}
+
+.taskTypeBox .Btns {
+    font-size: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.taskTypeBox .Btns .btn {
+    display: inline-block;
+    min-width: 26%;
+    margin: .5rem 3%;
+    font-size: .8rem;
+    line-height: 1;
+    border-radius: 100px;
+    padding: .5rem;
+    background: #efefef;
+    border: 1px solid #e6e6e6;
+    text-align: center;
+}
+
+.taskTypeBox .Btns .btn.cur {
+    background: #5c91f0;
+    color: #fff;
+    border-color: #5c91f0;
+}
+
+
+/*未绑定账号*/
+
+.account_list {
+    padding: 0rem 0.625rem;
+    background: #ffffff;
+}
+
+.account_list li {
+    padding: 0.625rem 0rem;
+    border-bottom: 1px solid #dddddd;
+}
+
+.account_icon {
+    height: 2.5rem;
+    margin-right: 0.625rem;
+}
+
+.account_name {
+    height: 2.5rem;
+    line-height: 2.5rem;
+}
+
+
+/*设置接单账号*/
+
+.setting {
+    position: absolute;
+    background: #4c4c4c;
+    top: 50%;
+    left: 35%;
+    padding: 0.625rem;
+    border-radius: 5px;
+    color: #ffffff;
+}
+
+
+/*未绑定账号弹出层*/
+
+.bind_account {
+    border-radius: 5px;
+    position: absolute;
+    top: 25%;
+    left: 15%;
+    z-index: 10800;
+    display: none;
+    width: 70%;
+    border-radius: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    background: #fff;
+    -webkit-transition-property: -webkit-transform;
+    -o-transition-property: -o-transform;
+    transition-property: transform;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+}
+
+.bind_account p {
+    font-size: 1rem;
+    color: #000000;
+    padding: 1rem;
+}
+
+.bind_account ul {
+    border-top: 1px solid #dddddd;
+}
+
+.bind_account li {
+    width: 49.5%;
+    float: left;
+}
+
+.bind_account li:first-child {
+    border-right: 1px solid #dddddd;
+}
+
+.bind_account li a {
+    display: block;
+    text-align: center;
+    height: 2rem;
+    line-height: 2rem;
+    color: #00aaef;
+}
+
+.modal-in, .modal-out {
+    -webkit-transition-duration: .4s;
+    -o-transition-duration: .4s;
+    transition-duration: .4s;
+}
+
+.disblock {
+    display: block;
+}
+
+.acivebg {
+    background: #b3dff1;
+}
+
+@-webkit-keyframes circle {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+.rotate_circle {
+    -webkit-animation: circle 1s infinite linear;
+    /*匀速 循环*/
+}

@@ -1,0 +1,1552 @@
+/**
+ * @author:冬冬
+ * @time:2018-9-20
+ * @block:通用
+ * @tips:单位是用rem，以375为参照，100px=1rem;
+ * **/
+
+.bg_f8f8f8 {
+    background-color: #F8F8F8;
+}
+
+.bg_ffeec9 {
+    background-color: #ffeec9;
+}
+
+.color_e40000 {
+    color: #e40000 !important;
+}
+
+body,
+html {
+    height: 100%;
+    position: relative;
+}
+
+@activeColor: #5c91f1;
+.fixed {
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    right: 0;
+    top: 0;
+    max-width: 750px;
+    margin: 0 auto;
+    background-color: #fff;
+}
+
+.flex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.flexRowWrap {
+    flex-flow: row wrap;
+    -webkit-flex-flow: row wrap;
+    -moz-flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    -o-flex-flow: row wrap;
+}
+
+.flexRowNowrap {
+    flex-flow: row nowrap;
+    -webkit-flex-flow: row nowrap;
+    -moz-flex-flow: row nowrap;
+    -ms-flex-flow: row nowrap;
+    -o-flex-flow: row nowrap;
+}
+
+.flex1 {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: hidden;
+}
+
+.flexInherit {
+    -webkit-box-flex: inherit;
+    -webkit-flex: inherit;
+    flex: inherit;
+}
+
+.flexAlignCenter {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.flexAlignEnd {
+    -webkit-box-align: end;
+    -webkit-align-items: flex-end;
+    align-items: flex-end;
+}
+
+.flexAlignStart {
+    align-items: flex-start;
+    -webkit-align-items: flex-start;
+    -webkit-box-align: start;
+}
+
+.flexAlignBaseline {
+    align-items: baseline;
+    -webkit-box-align: baseline;
+    -webkit-align-items: baseline;
+}
+
+.justifyBetween {
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+    -moz-justify-content: space-between;
+    -o-justify-content: space-between;
+    -ms-justify-content: space-between;
+}
+
+.justifyCenter {
+    justify-content: center;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    -o-justify-content: center;
+}
+
+.border-box {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+}
+
+.content-box {
+    box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    -o-box-sizing: content-box;
+    -ms-box-sizing: content-box;
+}
+
+.ellipsis {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+
+/*//2行溢出*/
+
+.text-line2 {
+    display: -webkit-box!important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+
+/*//3行溢出*/
+
+.text-line3 {
+    display: -webkit-box!important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.weui-input {
+    font-size: .15rem;
+    line-height: 1.6;
+    width: 100%;
+    display: block;
+}
+
+.text_l {
+    text-align: left;
+}
+
+.text_r {
+    text-align: right;
+}
+
+.center {
+    text-align: center;
+}
+
+.circleNum {
+    position: absolute;
+    content: "";
+    top: -.05rem;
+    right: -.05rem;
+    font-size: .1rem;
+    color: #fff;
+    background-color: #ff682d;
+    width: .14rem;
+    height: .14rem;
+    line-height: .14rem;
+    border-radius: 100%;
+    text-align: center;
+    .ellipsis;
+}
+
+//广告图
+.swiperImgBox {
+    img {
+        width: 100%;
+    }
+}
+
+//layer 样式
+.layui-suremMsg {
+    font-size: .16rem;
+    color: #262626;
+}
+
+//没有数据的时候页面提示
+.noConPage {
+    color: #b1b1b1;
+    .flex;
+    .flexAlignCenter;
+    .justifyCenter;
+    .noCon {
+        max-width: 70%;
+        margin: 0 auto;
+        .center;
+    }
+    .iconImg {
+        margin-bottom: .15rem;
+        img {
+            width: .7rem;
+            margin: 0 auto;
+        }
+    }
+}
+
+.conPage {
+    overflow: hidden;
+}
+
+.hasConPage {
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+//导航
+.dd_navList {
+    .flex;
+    background-color: #fff;
+    padding: .05rem 0;
+    li {
+        .flex1;
+        text-align: center;
+        font-size: .14rem;
+        line-height: 1.3;
+        color: #606060;
+        .outside {
+            display: block;
+            padding: .08rem .05rem;
+            color: #606060;
+        }
+        .icon-img {
+            width: .26rem;
+            height: .26rem;
+            margin: 0 auto;
+            margin-bottom: .05rem;
+            position: relative;
+            img {
+                width: .26rem;
+                height: .26rem;
+            }
+        }
+        .title {
+            .ellipsis;
+        }
+    }
+    &.block__navList {
+        .flexRowWrap;
+        li {
+            .flexInherit;
+        }
+    }
+}
+
+//tab
+.dd_tabList {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    flex-flow: row wrap;
+    -webkit-flex-flow: row wrap;
+    text-align: center;
+    background-color: #fff;
+    .fixed;
+    top: .45rem;
+    li {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        flex: 1;
+        line-height: 0.4rem;
+        height: 0.4rem;
+        font-size: 0.15rem;
+        a {
+            display: inline-block;
+            margin: 0 0.08rem;
+            padding: 0 0.02rem;
+            span {
+                padding: 0 0.05rem;
+                display: inline-block;
+                position: relative;
+                &:after {
+                    content: "";
+                    display: block;
+                    width: 100%;
+                    height: 0.02rem;
+                    background: transparent;
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    z-index: 2;
+                }
+            }
+        }
+        &.active a {
+            color: @activeColor;
+            span:after {
+                background: @activeColor;
+            }
+        }
+    }
+}
+
+//arrow
+.icon-arrow {
+    display: inline-block;
+    width: 0.16rem;
+    height: 0.16rem;
+    position: relative;
+    vertical-align: middle;
+}
+
+.icon-arrow:before {
+    position: absolute;
+    content: "";
+    width: 0.08rem;
+    height: 0.08rem;
+    border-top: 1px solid #b1b1b1;
+    border-left: 1px solid #b1b1b1;
+}
+
+.icon-arrow.icon-arrowRight:before {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    -moz-transform: rotate(135deg);
+    -o-transform: rotate(135deg);
+    -ms-transform: rotate(135deg);
+    top: 0.03rem;
+    right: 0.06rem;
+}
+
+//三角形
+.icon-sj {
+    display: inline-block;
+    vertical-align: middle;
+    width: 12px;
+    height: 12px;
+    position: relative;
+    &:before {
+        position: absolute;
+        content: "";
+        left: 0;
+        margin: 0 auto;
+        width: 0;
+        border: 6px solid #999;
+    }
+    &.icon-sjDown {
+        &:before {
+            border-color: #999 transparent transparent;
+            top: 3px;
+        }
+    }
+}
+
+.weui-cells {
+    line-height: 1.6;
+    position: relative;
+    overflow: hidden;
+    background-color: #fff;
+    color: #333;
+    font-size: .15rem;
+}
+
+.weui-cell {
+    position: relative;
+    .flex;
+    .flexAlignCenter;
+    padding: .1rem .12rem;
+    position: relative;
+    background-color: #fff;
+    &:before {
+        content: " ";
+        position: absolute;
+        left: .12rem;
+        right: .12rem;
+        top: 0;
+        height: 1px;
+        border-top: 1px solid #f1f1f1;
+        color: #e5e5e5;
+        z-index: 2;
+    }
+    &:first-child:before {
+        display: none;
+    }
+}
+
+.weui-cell__bd {
+    .flex1;
+}
+
+//按钮
+.weui-btn {
+    display: block;
+    line-height: .43rem;
+    border: 1px solid #c6c6c6;
+    border-radius: .04rem;
+    .center;
+    font-size: .16rem;
+    color: #333;
+    background-color: #fff;
+    margin-top: .1rem;
+    margin-bottom: .1rem;
+    &.weui-btn-active {
+        background-color: #5c91f0;
+        color: #fff;
+        border-color: #5c91f0;
+    }
+}
+
+.dd_msgBox {
+    color: #606060;
+    font-size: .13rem;
+    margin-bottom: .15rem;
+}
+
+//图文排列
+.dd_column {
+    li {
+        font-size: .14rem;
+        color: #606060;
+        line-height: 1.4;
+        .outside {
+            background-color: #fff;
+            color: #606060;
+        }
+        .pictrue {
+            padding-top: 100%;
+            position: relative;
+            img {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: 2;
+            }
+        }
+        .txtBox {
+            .title {
+                color: #222;
+                margin-bottom: .03rem;
+            }
+            .priceArea {
+                color: #fe5d1f;
+                font-size: .15rem;
+                margin-bottom: .03rem;
+            }
+        }
+    }
+    //水平
+    &.level__dd_column {
+        li {
+            position: relative;
+            &:before {
+                position: absolute;
+                content: "";
+                bottom: 0;
+                left: .12rem;
+                height: 1px;
+                background-color: #F1F1F1;
+                right: 0;
+            }
+            &:last-of-type:before {
+                display: none;
+            }
+            .outside {
+                padding: .12rem;
+                .flex;
+                .flexAlignCenter;
+            }
+            .pictrueAll {
+                width: 25%;
+                margin-right: .1rem;
+            }
+            .txtBox {
+                .flex1;
+            }
+        }
+    }
+}
+
+
+/**********遮罩层******/
+
+.shade {
+    .fixed;
+    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    display: none;
+    .shade__content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+    .shade-item {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        max-height: 80%;
+        overflow: hidden;
+        display: none;
+        &.centerShadeItem {
+            top: 50%;
+            transform: translate(0, -50%);
+            -webkit-transform: translate(0, -50%);
+            -moz-transform: translate(0, -50%);
+            -o-transform: translate(0, -50%);
+            -ms-transform: translate(0, -50%);
+        }
+    }
+    .shade__hd {
+        line-height: .45rem;
+        height: .45rem;
+        background-color: @activeColor;
+        color: #fff;
+        .center;
+        position: relative;
+        .shade__title {
+            font-weight: normal;
+            font-size: .16rem;
+            color: #fff;
+        }
+    }
+    .alignCenter__shade__content {
+        .flex;
+        .flexAlignCenter;
+        .justifyCenter;
+    }
+    .btn-close {
+        position: absolute;
+        width: .24rem;
+        height: .24rem;
+        background: url(/static/image/icons/close.png) center no-repeat;
+        background-size: .14rem .14rem;
+        top: 50%;
+        margin-top: -.12rem;
+    }
+    //协议弹窗
+    .agreement__shadeItem {
+        width: 3.1rem;
+        background-color: #fff;
+        border-radius: .1rem;
+        top: 50%;
+        max-height: 4.8rem;
+        transform: translate(0, -50%);
+        .shade__hd {
+            .btn-close {
+                right: .1rem;
+            }
+        }
+        .shade__bd {
+            padding: .15rem;
+            overflow: hidden;
+            max-height: 4.35rem;
+        }
+        .agreementCon {
+            overflow-y: auto;
+            max-height: 4.05rem;
+        }
+    }
+    .shade__ft {
+        .dd_Btns {
+            .flex;
+            padding: .07rem;
+            .weui-btn {
+                .flex1;
+                margin: .05rem .1rem;
+                line-height: .35rem;
+            }
+        }
+    }
+}
+
+
+/*****登录注册页面************/
+
+.allScreenPage {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    max-width: 750px;
+    margin: 0 auto;
+    z-index: 15;
+}
+
+.regLogForm {
+    padding: .15rem .12rem;
+    .weui-cells {
+        background-color: transparent;
+        .weui-cell {
+            &:before {
+                display: none;
+            }
+            padding:0;
+            height: .4rem;
+            border:1px solid #b2b2b2;
+            border-radius: .04rem;
+            background-color: #fff;
+            margin-bottom: .1rem;
+            .content-box;
+            .weui-cell__hd {
+                width: .4rem;
+            }
+            .iconImg {
+                height: .22rem;
+                width: .22rem;
+                margin: 0 auto;
+            }
+            .weui-input {
+                padding-right: .15rem;
+            }
+            .imgBox {
+                width: .58rem;
+                margin-right: .08rem;
+                img {
+                    height: .24rem;
+                    max-width: 100%;
+                }
+            }
+        }
+    }
+    .sendCode {
+        height: .4rem;
+        line-height: .4rem;
+        width: .85rem;
+        .center;
+        font-size: .13rem;
+        color: #fff;
+        background-color: #6ccf8d;
+    }
+    .agreement__register {
+        color: #222222;
+        font-size: .13rem;
+        padding: .05rem 0;
+        .IconsCK {
+            margin-right: .1rem;
+            span {
+                background: url(/static/image/icons/agreement_1.png) center no-repeat;
+                background-size: 100% 100%;
+            }
+            input[type=checkbox]:checked+span {
+                background: url(/static/image/icons/agreement_1_2.png) center no-repeat;
+                background-size: 100% 100%;
+            }
+        }
+    }
+    .btn-register {
+        margin-top: .3rem;
+        margin-bottom: .15rem;
+    }
+    .btn-login {
+        margin-top: .3rem;
+        margin-bottom: .15rem;
+    }
+    .hasAccountMag {
+        color: #222222;
+        font-size: .15rem;
+        .center;
+        a {
+            color: #eb0101;
+            margin: 0 .1rem;
+        }
+    }
+    .shiftPwd {
+        display: inline-block;
+        vertical-align: top;
+        height: .4rem;
+        width: .4rem;
+        &.hidePwd {
+            background: url(/static/image/icons/hidepwd.png) center no-repeat;
+            background-size: .18rem .18rem;
+        }
+        &.showPwd {
+            background: url(/static/image/icons/showpwd.png) center no-repeat;
+            background-size: .18rem .18rem;
+        }
+    }
+    //没有小图标
+    &.noIcons__regLogForm {
+        .weui-input {
+            padding-left: .12rem;
+        }
+    }
+    //修改手机号
+    &.resetTel__regLogForm {
+        .weui-cell__hd {
+            width: .85rem !important;
+            color: @activeColor;
+            padding-left: .12rem;
+        }
+    }
+    //只有输入框没有小图标的时候
+    &.onlyIpt__form {
+        .weui-input {
+            padding-left: .12rem;
+        }
+        .select__weui-cell {
+            position: relative;
+            .icon-arrow {
+                position: absolute;
+                top: 50%;
+                right: .08rem;
+                margin-top: -.08rem;
+            }
+        }
+    }
+}
+
+
+/*********会员中心******/
+
+.avatarInfo {
+    .flex;
+    .flexAlignCenter;
+    font-size: .14rem;
+    .avatar {
+        width: .58rem;
+        height: .58rem;
+        border: .03rem solid #fff;
+        background-color: #fff;
+        border-radius: 50%;
+        margin-right: .1rem;
+        img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+    }
+    .info {
+        .flex1;
+        p {
+            .ellipsis;
+        }
+    }
+    .btn_lookRule {
+        color: #fff;
+        font-size: .15rem;
+        text-decoration: underline;
+    }
+}
+
+.memberTop {
+    padding: .5rem .12rem;
+    background: #5b94fd;
+    background: -moz-linear-gradient(top, #7c6efd, #5b94fd);
+    background: -webkit-linear-gradient(top, #7c6efd, #5b94fd);
+    background: -o-linear-gradient(top, #7c6efd, #5b94fd);
+    background: -ms-linear-gradient(top, #7c6efd, #5b94fd);
+    color: #fff;
+    font-size: .13rem;
+    line-height: 1.4;
+}
+
+.memberHead {
+    .btn_back {
+        width: auto !important;
+        line-height: .45rem;
+        padding-left: .25rem;
+        background-position: .12rem center !important;
+    }
+    &.noHeight__memberHead {
+        background: transparent;
+        color: #fff;
+        .title {
+            color: #fff;
+        }
+        .btn_back {
+            background: url(/static/image/icons/back_white.png) left center no-repeat;
+            background-size: .1rem auto;
+            color: #fff;
+        }
+    }
+}
+
+.memberIndex__section {
+    margin-bottom: .1rem;
+}
+
+.section__hd {
+    font-size: 0.12rem;
+    line-height: 1.5;
+    color: #B1B1B1;
+    position: relative;
+    &:before {
+        display: block !important;
+        top: inherit;
+        bottom: 0;
+    }
+    .title {
+        color: #222222;
+        font-size: .15rem;
+    }
+    .icon-arrow {
+        vertical-align: sub;
+    }
+}
+
+.priceListBox {
+    margin: 0 .12rem;
+    margin-bottom: .1rem;
+    margin-top: -.3rem;
+    .priceList {
+        background-color: #fff;
+        padding: .12rem 0;
+        border-radius: .04rem;
+        line-height: 1.4;
+        .flex;
+        li {
+            .flex1;
+            position: relative;
+            border-right: 1px solid #F1F1F1;
+            &:last-of-type {
+                border-right: none;
+            }
+        }
+        .outside {
+            display: block;
+            .center;
+            padding: 0 .05rem;
+            color: #606060;
+            p {
+                .ellipsis;
+            }
+            .num {
+                color: #5c93fd;
+                font-family: arial;
+                font-weight: bold;
+                font-size: .16rem;
+            }
+        }
+    }
+}
+
+.navList__weui-cells {
+    .icon-navImg {
+        width: .22rem;
+        height: .22rem;
+        margin-right: .1rem;
+    }
+    .title {
+        color: #606060;
+    }
+    &.navList2__weui-cells {
+        .icon-navImg {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+}
+
+//退出登录
+.btn-loginOut {
+    border: none;
+    color: #606060;
+}
+
+
+/******我的订单页面*******/
+
+.orderMenu__section {
+    margin: .1rem 0;
+    .weui-cell {
+        &:before {
+            left: .12rem;
+            right: 0;
+        }
+    }
+    .dd_navList {
+        li {
+            .icon-img {
+                width: .4rem;
+                height: .4rem;
+                img {
+                    width: .4rem;
+                    height: .4rem;
+                }
+            }
+        }
+    }
+}
+
+
+/********订单列表页面******/
+
+.orderList__tabListBox {
+    height: .4rem;
+    padding-top: .1rem;
+    position: relative;
+    z-index: 3;
+    .content-box;
+    .dd_tabList {
+        top: .45rem;
+        border-top: .1rem solid #F8F8F8;
+    }
+}
+
+.tabShowBox {
+    margin: .1rem 0;
+}
+
+
+/*******账户信息页面****/
+
+.accountNavList {
+    margin: .1rem 0;
+    .navList__weui-cells {
+        .icon-navImg {
+            //          width: .24rem;
+            //          height: .24rem;
+        }
+    }
+}
+
+//上传头像的弹窗
+.uploadAvatar__shadeItem {
+    background-color: #fff;
+    bottom: 0;
+    .shade__bd {
+        padding: .1rem .36rem;
+    }
+    .weui-btn {
+        margin: .1rem 0;
+    }
+    .btn-selectPhoto {
+        color: @activeColor;
+    }
+}
+
+
+/**********等级规则页面***********/
+
+.gradeRule {
+    padding: .12rem;
+    color: #222222;
+    .gradeRule_section {
+        background-color: #fff;
+        border: 2px solid #e3b653;
+        border-radius: .1rem;
+        padding: 0 .23rem;
+        margin-bottom: .1rem;
+    }
+    .section__bd {
+        .con {
+            padding: .15rem 0;
+            .title {
+                font-size: .16rem;
+                font-weight: normal;
+                margin-bottom: .08rem;
+            }
+        }
+    }
+}
+
+.dd_gradeList {
+    font-size: .15rem;
+    li {
+        .flex;
+        .flexAlignCenter;
+        line-height: .42rem;
+        border-bottom: 1px dashed #d0b374;
+        padding: 0 .07rem;
+        .gradeNum {
+            width: .28rem;
+            height: .28rem;
+            border-radius: 50%;
+            line-height: .28rem;
+            .center;
+            color: #fff;
+            background-color: #f15e1d;
+            margin-right: .15rem;
+        }
+        .txtBox {
+            .flex1;
+            .number {
+                .ellipsis;
+            }
+        }
+        &:nth-of-type(2n) {
+            .gradeNum {
+                background-color: #ba8d2a;
+            }
+        }
+        &:last-of-type {
+            border-bottom: none;
+        }
+    }
+}
+
+
+/*********佣金收益页面*********/
+
+.commisionTop {
+    background-color: #fe852c;
+    color: #fff;
+    padding: .1rem .12rem;
+    margin: .1rem 0;
+    line-height: 1.4;
+    .price {
+        .num {
+            font-weight: bold;
+            font-size: 0.16rem;
+        }
+    }
+    //冻结
+    &.freeze {
+        background-color: #aeaeae;
+    }
+}
+
+.selectDateCommision__weui-cell {
+    &:before {
+        display: none;
+    }
+}
+
+.commisionList {
+    li {
+        position: relative;
+        background-color: #fff;
+        padding: .08rem .12rem;
+        color: #606060;
+        &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: .12rem;
+            height: 1px;
+            right: 0;
+            background-color: #F1F1F1;
+        }
+        .title {
+            font-size: .15rem;
+            color: #222222;
+        }
+        .price {
+            color: #fb7e21;
+            margin-left: .15rem;
+            &.reducePrice {
+                color: @activeColor;
+            }
+        }
+        p {
+            .ellipsis;
+        }
+    }
+}
+
+
+/*******佣金提现*********/
+
+.dd_withdraw {
+    background-color: #fff;
+    .withdraw__hd {
+        color: #222;
+        position: relative;
+        font-size: .15rem;
+        &:before {
+            display: block;
+            top: inherit;
+            bottom: 0;
+            right: 0;
+        }
+        .txt {
+            .ellipsis;
+        }
+        .cardID {
+            margin-left: .08rem;
+        }
+    }
+}
+
+.priceMsg {
+    font-size: .13rem;
+    color: #606060;
+    margin: .1rem 0;
+}
+
+.dd_Btns {
+    padding: 0 .12rem;
+    &.flex {
+        .flex;
+        .weui-btn {
+            .flex1;
+            margin-right: .4rem;
+            &:last-of-type {
+                margin-right: 0;
+            }
+        }
+    }
+    &.btn_tabList {
+        .weui-btn {
+            line-height: .34rem;
+            border-radius: 1rem;
+        }
+    }
+}
+
+//提现记录
+.withdrawRecordList {
+    li {
+        background-color: transparent;
+        &:before {
+            top: inherit;
+            bottom: 0;
+        }
+    }
+}
+
+//绑定信息
+.dd__hd {
+    padding: .08rem .12rem;
+    background-color: transparent;
+    .title {
+        font-size: .15rem;
+        color: #222;
+        font-weight: normal;
+    }
+    .titleMsg {
+        font-size: .13rem;
+        color: #606060;
+    }
+    .msgIcon {
+        display: inline-block;
+        margin-right: .05rem;
+        width: .18rem;
+        height: .18rem;
+        vertical-align: middle;
+    }
+}
+
+.txtMsg {
+    font-size: .13rem;
+    color: #5c91f0;
+}
+
+.bind__msgBox {
+    margin-bottom: 0;
+}
+
+//绑定QQ号
+.accountList {
+    li {
+        background-color: #fff;
+        margin: .1rem 0;
+        .weui-cell {
+            &:before {
+                right: 0;
+            }
+            .weui-cell__hd {
+                margin-right: .1rem;
+                .icon-navImg {
+                    margin-right: 0;
+                }
+                color:#606060;
+            }
+            .weui-cell__bd {
+                .title {
+                    color: #222;
+                    .ellipsis;
+                }
+            }
+        }
+        .status {
+            color: #ff682d;
+            font-size: .14rem;
+        }
+    }
+    &.accountList2 {
+        li {
+            padding-bottom: .08rem;
+            .weui-cells {
+                .weui-cell {
+                    padding-top: .02rem;
+                    padding-bottom: .02rem;
+                    &:before {
+                        display: none;
+                    }
+                    &:first-of-type {
+                        padding-bottom: .1rem;
+                        padding-top: .1rem;
+                        margin-bottom: .08rem;
+                        &:before {
+                            display: block;
+                            top: inherit;
+                            bottom: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.dd_footer {
+    .inner {
+        .fixed;
+        z-index: 10;
+        top: inherit;
+        bottom: 0;
+        &:before {
+            height: 1px;
+            position: absolute;
+            content: "";
+            left: 0;
+            right: 0;
+            background-color: #e6e6e6;
+        }
+    }
+    .weui-btn {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    &.addAcount__footer {
+        height: .45rem;
+        .inner {
+            height: .45rem;
+        }
+        .dd_Btns {
+            padding: 0;
+            .weui-btn {
+                border-color: #fff;
+                .addAcountIcon {
+                    display: inline-block;
+                    background: url(/static/image/icons/addbtn.png) left center no-repeat;
+                    background-size: .2rem .2rem;
+                    color: @activeColor;
+                    padding-left: .28rem;
+                }
+            }
+        }
+    }
+}
+
+//绑定京东账号
+.bindSection {
+    background-color: #fff;
+    margin-bottom: .1rem;
+}
+
+.lookExamples {
+    text-decoration: underline;
+}
+
+//上传图片
+.dd_piclist {
+    .flex;
+    padding: 0 .07rem;
+    li {
+        margin-bottom: .1rem;
+        .outside {
+            margin: 0 .05rem;
+        }
+        .img {
+            width: 100%;
+            padding-bottom: 100%;
+            position: relative;
+        }
+        img {
+            width: 100%;
+        }
+        .upimg {
+            width: 100%;
+            height: 100%;
+            background: url(/static/image/icons/df_pic.png) center center no-repeat;
+            background-size: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 2;
+            overflow: hidden;
+        }
+        .upbtn {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 3;
+            opacity: 0;
+        }
+        p {
+            margin-top: .1rem;
+            text-align: center;
+            font-size: .13rem;
+            .ellipsis;
+            color: #606060;
+        }
+    }
+}
+
+//可接单
+.mayOrderTaking {
+    background-color: #87aff8;
+    color: #fff;
+    padding: .08rem .12rem;
+}
+
+//示例图
+.bind__swiperImgBox {
+    padding: .2rem .12rem;
+}
+
+.dd_uploadItem {
+    position: relative;
+    &:before {
+        content: "";
+        position: absolute;
+        left: .12rem;
+        right: .12rem;
+        bottom: 0;
+        height: 1px;
+        background-color: #F1F1F1;
+    }
+}
+
+.cityInfoBox {
+    padding: .12rem;
+    font-size: .15rem;
+    color: #606060;
+    .flexCity {
+        height: 0.4rem;
+        line-height: .4rem;
+        border: 1px solid #b2b2b2;
+        background-color: #fff;
+        padding: 0 .12rem;
+        .content-box;
+        border-radius: 0.04rem;
+        font-size: .15rem;
+        margin-bottom: .05rem;
+    }
+    .weui-label {
+        margin-right: .15rem;
+        color: #b1b1b1;
+    }
+}
+
+//绑定淘宝
+//选择购物类目
+.dd_BtnsList {
+    .flex;
+    .flexRowWrap;
+    padding: .07rem;
+    font-size: .14rem;
+    li {
+        .center;
+        .outside {
+            border-radius: 1rem;
+            overflow: hidden;
+            .weui-btn {
+                border-radius: 1rem;
+                line-height: .35rem;
+                margin: 0;
+                font-size: .14rem;
+                .ellipsis;
+            }
+            margin:.05rem;
+        }
+    }
+}
+
+.selectBuyTypeShade {
+    background-color: #fff;
+    width: 86%;
+    .shade__bd {
+        max-height: 2.6rem;
+        overflow: hidden;
+        overflow-y: auto;
+    }
+}
+
+//绑定银行
+.bankListBox {
+    background-color: #fff;
+    margin: .1rem 0;
+    .dd__hd {
+        position: relative;
+        &:before {
+            content: "";
+            position: absolute;
+            left: .12rem;
+            right: 0;
+            height: 1px;
+            background-color: #F1F1F1;
+            bottom: 0;
+        }
+    }
+}
+
+.bankList__weui-cells {
+    .weui-cell:first-of-type:before {
+        display: block;
+    }
+    .weui-cell:before {
+        top: inherit;
+        bottom: 0;
+        right: 0;
+    }
+    .icon-navImg {
+        width: .28rem;
+        height: .28rem;
+        margin-right: .12rem;
+    }
+    .icon-gou {
+        display: inline-block;
+        width: .16rem;
+        height: .16rem;
+        background: url(/static/image/icons/gou.png) center no-repeat;
+        background-size: 100% 100%;
+        opacity: 0;
+    }
+    .weui-cell.active .icon-gou {
+        opacity: 1;
+    }
+}
+
+//加入VIP
+.joinVIP {
+    background-color: #39005a;
+    border-top: .1rem solid #f8f8f8;
+    padding: .05rem .12rem;
+}
+
+.joinVIP_section {
+    background-color: #fff;
+    color: #222222;
+    padding: 0 .23rem;
+    border-radius: 0.1rem;
+    margin: .15rem 0;
+    line-height: 1.6;
+    .joinVIP_section__hd{
+        padding:.18rem 0;
+        border-bottom: 1px dashed #39005a;
+        .title{
+            font-size: .18rem;
+            color:#39005a;
+            .center;
+            font-weight: 600;
+            line-height: 1.5;
+
+        }
+    }
+    .joinVIP_section__bd{
+        .con{
+            padding:.2rem 0;
+            .title{
+                font-weight: 600;
+                font-size: .15rem;
+            }
+        }
+    }
+}
+
+//底部
+.VIP__dd_footer{
+    height: .6rem;
+    .inner{
+      height: .6rem;
+    }
+    .dd_Btns{
+        height: .6rem;
+    }
+}
+
+//选择vip套餐
+.selectSetMeal{
+    margin-top:.15rem;
+    background-color: #fff;
+    border-radius: .1rem;
+    .selectSetMeal__hd{
+        padding:.18rem 0;
+        position: relative;
+        &:before{
+            position: absolute;
+            content: "";
+            bottom: 0;
+            left:.23rem;
+            right:.23rem;
+            height: 1px;
+            border-bottom: 1px dashed #d1d1d1;
+        }
+        .title{
+            color:#470282;
+            font-size: .19rem;
+            font-weight: 600;
+            .center;
+        }
+    }
+    .setMealList {
+        padding:.15rem;
+        li{
+            .outside{
+                margin:.08rem;
+            }
+            .weui-btn{
+                background-color: #ffa800;
+                color:#fff;
+                border-color:#ffa800;
+            }
+            &.active{
+                .weui-btn{
+                    background-color: #ff682d;
+                    border-color:#ff682d;
+                }
+            }
+        }
+    }
+    .selectSetMeal__bd{
+        padding:.15rem 0;
+    }
+    .selectSetMeal__ft{
+        position: relative;
+        padding:.23rem;
+        &:before{
+            position: absolute;
+            content: "";
+            top: 0;
+            left:.23rem;
+            right:.23rem;
+            height: 1px;
+            border-bottom: 1px dashed #d1d1d1;
+        }
+    }
+
+}

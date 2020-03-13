@@ -1,0 +1,56 @@
+/*系统消息*/
+/*为空时*/
+.empty{ padding-top: 1.5rem;padding-bottom:1.5rem;}
+.empty .icon{ height: .9rem; width: .9rem; border-radius: 50%; margin: 0 auto .1rem;}
+.icon_message{ background: url(/static/image/icons/no_message.png) center center no-repeat; background-size: 100%;}
+.empty p{ font-size: .15rem; color: #999; text-align: center;}
+/*消息列表*/
+.messageList .box{ padding: .12rem;}
+.messageList .time { text-align: center; margin-bottom: .05rem;}
+.messageList .time span{ font-size: .12rem; background: #ddd; color: #999; border-radius: 100px; padding: .05rem .1rem;}
+.messageList .title{ height: .3rem; line-height: .32rem; font-size: .15rem;}
+.messageList .title span{ position: relative; overflow: hidden;white-space: nowrap;text-overflow: ellipsis; width: 90%;}
+.messageList .title span .icon{ position: absolute; left: 0rem; top: 0rem; height: .09rem; width: .09rem; border-radius: 50%; background: #ee7818;}
+.messageList .desc{ color: #666;}
+.messageList .box_ft{ height: .4rem; text-align: right; line-height: .4rem; line-height: .4rem; border-bottom: 1px solid #eee; margin-top: .1rem;}
+.messageList .box_ft .link_btn{display: inline-block; color: #5c91f1;}
+.messageList .box_ft .arrow_r{ padding-right: .2rem; position: relative;}
+.messageList .box_ft .arrow_r:after{
+	content: "";
+	display: block;
+	height: .12rem;
+	width: .12rem;
+	border-top: 1px solid #bbb;
+	border-right: 1px solid #bbb;
+	position: absolute;
+	right: 0;
+	top: 50%;
+	margin-top: -.06rem;
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+}
+/*消息详情*/
+.messagedetail{ padding: .12rem;}
+.messagedetail .title{ border-bottom: 1px solid #eee; font-size: .15rem; line-height: .3rem; padding-bottom: .05rem;}
+.messagedetail .con{ color: #666; line-height: 1.6; text-align: justify;}
+
+/*公告列表*/
+.noticeList { padding: .1rem .12rem;}
+.noticeList li{ border-bottom: 1px solid #eee;}
+.noticeList li:last-child{ border-bottom: none;}
+.noticeList .box{ display: block; padding: .1rem 0;}
+.noticeList .title{ font-size: .15rem; }
+.noticeList .title p{ max-width: 80%; float: left;}
+.noticeList .title .icon_txt{ display: inline-block; color: #fff; background: #5f96f9; border-radius: 100px; font-size: .12rem; padding: 0 .05rem; margin-left: .05rem;}
+.noticeList .time{ font-size: .12rem; color: #999;}
+
+/*公告详情*/
+.notice-hd{ margin-bottom: .1rem;}
+.notice-hd .box{ padding: .1rem 0; border-bottom: 1px solid #eee; }
+.notice-hd .title{ font-size: .15rem; }
+.notice-hd .title p{ max-width: 80%; float: left;}
+.notice-hd .title .icon_txt{ display: inline-block; color: #fff; background: #5f96f9; border-radius: 100px; font-size: .12rem; padding: 0 .05rem; margin-left: .05rem;}
+.notice-hd .desc{ color: #666;}
+.notice-hd .desc .time{ font-size: .12rem; color: #999; float: right;}
+.noticecon{ color: #666; line-height: 1.6; text-align: justify;}

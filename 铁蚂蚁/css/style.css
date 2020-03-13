@@ -1,0 +1,1007 @@
+/***********首页***********/
+
+
+/*标题*/
+
+.titleHd {
+    height: .35rem;
+    line-height: .35rem;
+    font-size: .15rem;
+    margin: 0 .12rem;
+    border-bottom: 1px solid #efefef;
+}
+
+.layer_tips {
+    font-size: .16rem;
+}
+
+.layer_img {
+    margin: 0 auto;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+
+/*banner*/
+
+.banner .img {
+    width: 100%;
+    padding-bottom: 42.666%;
+}
+
+.banner .swiper-pagination-bullet {
+    background: #999;
+}
+
+.banner .swiper-pagination-bullet.swiper-pagination-bullet-active {
+    background: #f44f0f;
+}
+
+.swiper-container, .account_info, .navIcon, .Taskday, .img img {
+    border-radius: .07rem;
+}
+
+.swiper-pagination-bullet {
+    width: 5px;
+    height: 5px;
+}
+
+
+/*首页未操作订单*/
+
+.notOperatedTask {
+    padding-bottom: .12rem;
+}
+
+.notOperatedTask ul li {
+    width: 100%;
+    padding: .12rem .12rem 0;
+}
+
+.notOperatedTask ul li a {
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.notOperatedTask .pictrue_div {
+    width: .5rem;
+    height: .5rem;
+    margin-right: 0.1rem;
+}
+
+.notOperatedTask .pictrue_div .pictrue {
+    padding-top: 100%;
+    position: relative;
+}
+
+.notOperatedTask .pictrue_div .pictrue img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.notOperatedTask .info_box {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: hidden;
+    width: 100%;
+}
+
+.notOperatedTask .info_box .info_left {
+    width: 80%;
+    float: left;
+    text-align: left;
+}
+
+.notOperatedTask .info_box .info_left p {
+    height: .25rem;
+    line-height: .25rem;
+}
+
+.notOperatedTask .info_box .info_left span {
+    color: #ff682d;
+}
+
+.notOperatedTask .info_box .info_right {
+    float: right;
+    width: 20%;
+    line-height: .5rem;
+    color: #FF662A;
+}
+
+
+/*首页修改后的样式*/
+
+.xinshou {
+    height: .45rem;
+    border-radius: .25rem;
+    background-color: #FF8142;
+    padding: 0 0 0 .2rem;
+}
+
+.xinshouDiv1 {
+    width: 33%;
+    float: left;
+    line-height: .45rem;
+    /*text-align: center;*/
+    background: url(/static/image/icons/jc.png) left center no-repeat;
+    background-size: .22rem .22rem;
+    padding-left: .24rem;
+}
+
+.xinshouDiv2 {
+    width: 33%;
+    float: left;
+    line-height: .45rem;
+    /*text-align: center;*/
+    background: url(/static/image/icons/tg.png) left center no-repeat;
+    background-size: .22rem .22rem;
+    padding-left: .24rem;
+}
+
+.xinshouDiv3 {
+    width: 33%;
+    float: left;
+    line-height: .45rem;
+    /*text-align: center;*/
+    background: url(/static/image/icons/wt.png) left center no-repeat;
+    background-size: .22rem .22rem;
+    padding-left: .24rem;
+}
+
+.xinshou_img {
+    display: inline-block;
+    width: .22rem;
+    height: .22rem;
+}
+
+.xinshou_img img {
+    width: 100%;
+    height: 100%;
+}
+
+.xinshou_text {
+    color: #fff;
+}
+
+
+/*账户信息*/
+
+.account_info {
+    background: #fe9142;
+    margin: .1rem 0;
+}
+
+.account_info li {
+    float: left;
+    color: #fff;
+    line-height: .2rem;
+}
+
+.account_info .box {
+    padding: .12rem;
+}
+
+.account_info li .icon {
+    height: .4rem;
+    width: .4rem;
+    float: left;
+    margin-right: .05rem;
+}
+
+.account_info li span {
+    font-weight: 600;
+    font-size: .15rem;
+}
+
+.account_info .icon_yongj {
+    background: url(/static/image/icons/yongj.png) center center no-repeat;
+    background-size: .35rem;
+}
+
+.account_info .icon_benj {
+    background: url(/static/image/icons/benj.png) center center no-repeat;
+    background-size: .33rem;
+}
+
+
+/*任务导航*/
+
+.navIcon {
+    padding: .12rem;
+}
+
+.navIcon li {
+    float: left;
+    text-align: center;
+}
+
+.navIcon .box {
+    display: block;
+}
+
+.navIcon .icon {
+    height: .4rem;
+    width: .4rem;
+    margin: 0 auto .08rem;
+}
+
+.navIcon .icon img {
+    width: 100%;
+}
+
+.navIcon p {
+    color: #666;
+    line-height: 1;
+}
+
+
+/*公告*/
+
+.Announcement .labelhd {
+    height: .4rem;
+    line-height: .4rem;
+    font-size: .15rem;
+    margin-left: .12rem
+}
+
+.Announcement .labelhd span {
+    padding-left: .2rem;
+    color: #999;
+    background: url(/static/image/icons/notice.png) left center no-repeat;
+    background-size: .2rem;
+}
+
+.noticeList {
+    height: .4rem;
+    overflow: hidden;
+}
+
+.noticeList li {
+    height: .4rem;
+    line-height: .4rem;
+}
+
+.noticeList li .box {
+    display: block;
+    padding: 0 .12rem;
+}
+
+.noticeList li p {
+    width: 70%;
+    float: left;
+}
+
+.noticeList li .time {
+    float: right;
+    color: #606060;
+    font-size: .13rem;
+}
+
+.notice_wechat {
+    margin: 0 .12rem;
+    border-top: 1px solid #efefef;
+    height: .4rem;
+    line-height: .4rem;
+}
+
+
+/*新手任务*/
+
+.newhand {
+    padding: .12rem;
+}
+
+.newhand ul {
+    margin-right: -.1rem;
+}
+
+.newhand ul li {
+    float: left;
+    text-align: center;
+}
+
+.newhand .box {
+    display: block;
+    padding: .15rem .1rem;
+    margin-right: .1rem;
+    color: #fff;
+    border-radius: 4px;
+}
+
+.newhand .box .icon {
+    height: .3rem;
+    width: .3rem;
+    margin: 0 auto .1rem;
+}
+
+.newhand .icon-renw {
+    background: url(/static/image/icons/renw.png) center center no-repeat;
+    background-size: .3rem;
+}
+
+.newhand .icon-jiangl {
+    background: url(/static/image/icons/jiangl.png) center center no-repeat;
+    background-size: .3rem;
+}
+
+.newhand .icon-tiwen {
+    background: url(/static/image/icons/tiwen.png) center center no-repeat;
+    background-size: .3rem;
+}
+
+.newhand .box p {
+    line-height: 1;
+}
+
+
+/*每日任务*/
+
+.Taskday .con {
+    padding: .12rem;
+}
+
+.Taskday ul {
+    margin-right: -.1rem;
+}
+
+.Taskday .con li {
+    float: left;
+}
+
+.Taskday .con a {
+    display: block;
+    line-height: .4rem;
+    padding-left: .36rem;
+    margin-right: 0;
+}
+
+.Taskday .con .task_qd {
+    background: url(/static/image/icons/qiandao.png) left center no-repeat;
+    background-size: .3rem;
+}
+
+.Taskday .con .task_cj {
+    background: url(/static/image/icons/chouj.png) left center no-repeat;
+    background-size: .3rem;
+}
+
+.Taskday .con .task_qrcode {
+    background: url(/static/image/icons/erweima.png) left center no-repeat;
+    background-size: .3rem;
+}
+
+.Taskday .con .task_yq {
+    background: url(/static/image/icons/yaoqing.png) left center no-repeat;
+    background-size: .3rem;
+}
+
+
+/*首页底部广告图*/
+
+.ft_gg img {
+    width: 100%;
+}
+
+
+/*推广赚金*/
+
+.Promotion {
+    padding: .12rem;
+}
+
+.ul-list li {
+    height: .4rem;
+    line-height: .4rem;
+    border-bottom: 1px solid #efefef;
+    overflow: hidden;
+}
+
+.ul-list li:last-child {
+    border-bottom: none;
+}
+
+.ul-list li label {
+    float: left;
+}
+
+.ul-list li .txt-r {
+    float: right;
+    max-width: 76%;
+    overflow: hidden;
+    color: #666;
+}
+
+.Promotion .totalbox {
+    height: auto;
+    padding: .1rem;
+}
+
+.Promotion .totalbox .box {
+    float: left;
+    width: 50%;
+    text-align: center;
+}
+
+.Promotion .totalbox .box span {
+    display: inline-block;
+    font-size: .18rem;
+    color: #ee7818;
+}
+
+.Promotion .totalbox .box .txt {
+    border-top: 1px solid #eee;
+}
+
+.Promotion-rule {
+    background: url(/static/image/of/backgroundimg1.jpg) center center no-repeat;
+    background-size: cover;
+    padding: .15rem .2rem;
+}
+
+.Promotion-rule .rulehd {
+    text-align: center;
+}
+
+.Promotion-rule .rulehd span {
+    display: inline-block;
+    height: .36rem;
+    line-height: .36rem;
+    padding: 0 .2rem;
+    color: #5679ed;
+    font-size: .16rem;
+    font-weight: bold;
+    background: #fff;
+    border-radius: 6px;
+}
+
+.Promotion-rule .rulelist {
+    margin-top: .15rem;
+    border: .06rem solid rgba(255, 255, 255, .4);
+    padding: .1rem .1rem 0;
+    color: #fff;
+    text-align: justify;
+    line-height: 1.5;
+}
+
+.Promotion-rule .rulelist li {
+    margin-bottom: .1rem;
+}
+
+
+/*常见问题*/
+
+.Faq-type {
+    padding: .12rem;
+}
+
+.Faq-type li {
+    float: left;
+}
+
+.Faq-type .box {
+    display: block;
+    padding: .15rem .1rem;
+    border-right: 1px solid #eee;
+    border-top: 1px solid #eee;
+}
+
+.Faq-type li:nth-child(1) .box, .Faq-type li:nth-child(2) .box {
+    border-top: none;
+}
+
+.Faq-type li:nth-child(2n) .box {
+    border-right: none;
+}
+
+.Faq-type .icon {
+    margin: 0 auto;
+    width: .6rem;
+    height: .6rem;
+}
+
+.Faq-type .icon img {
+    width: 100%;
+}
+
+.Faq-type p {
+    font-size: .15rem;
+    text-align: center;
+    color: #666;
+    margin-top: .1rem;
+    line-height: 1;
+}
+
+.Faq .online {
+    padding: 0 .12rem;
+}
+
+.Faq .online .title {
+    height: .4rem;
+    line-height: .4rem;
+    font-size: .15rem;
+    padding-left: .3rem;
+    background: url(/static/image/icons/kf.png) left center no-repeat;
+    background-size: .2rem;
+    border-bottom: 1px solid #eee;
+}
+
+.Faq .online .title span {
+    color: #666;
+    font-size: .14rem;
+    margin-left: .1rem;
+}
+
+.Faq .online .desc {
+    padding: .1rem 0;
+    line-height: 1.6;
+    color: #666;
+}
+
+
+/*问题详情*/
+
+.searchbox {
+    margin: .1rem .12rem;
+}
+
+.Search {
+    position: relative;
+    border: 1px solid #ddd;
+    height: .4rem;
+    width: 100%;
+    border-radius: .2rem;
+    padding-right: .4rem;
+}
+
+.Search .input {
+    width: 100%;
+    height: 100%;
+    padding: 0 .1rem;
+}
+
+.Search .searchbtn {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: .4rem;
+    background: url(/static/image/icons/sou.png) center center no-repeat;
+    background-size: .2rem;
+}
+
+.Faq-detail li {
+    border-bottom: 1px solid #eee;
+    padding: 0 .12rem;
+}
+
+.Faq-detail li:last-child {
+    border-bottom: none;
+}
+
+.Faq-detail li .title {
+    font-size: .15rem;
+    padding: .1rem 0;
+}
+
+.Faq-detail li .arrow_r {
+    padding-right: .2rem;
+    position: relative;
+}
+
+.Faq-detail li .arrow_r:after {
+    content: "";
+    display: block;
+    height: .12rem;
+    width: .12rem;
+    border-top: 1px solid #bbb;
+    border-right: 1px solid #bbb;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -.06rem;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transition-duration: .3s;
+    -webkit-transition-duration: .3s;
+    -moz-transition-duration: .3s;
+}
+
+.Faq-detail li.active .arrow_r:after {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    -moz-transform: rotate(135deg);
+}
+
+.dropdown-box {
+    display: none;
+}
+
+.Faq-detail .dropdown-box {
+    border-top: 1px solid #eee;
+}
+
+.Faq-detail .desc {
+    padding: .1rem 0;
+    line-height: 1.6;
+    color: #666;
+    text-align: justify;
+}
+
+
+/*签到领积分*/
+
+.Sign-top {
+    padding: .3rem .2rem;
+    background: #7ca6f2;
+}
+
+.Sign-top .dl {
+    padding-left: .5rem;
+    background: url(/static/image/icons/jf_icon.png) left center no-repeat;
+    background-size: .35rem;
+    color: #fff;
+    line-height: 1;
+}
+
+.Sign-top .dl p {
+    margin-bottom: .05rem;
+}
+
+.Sign-top .dl span {
+    font-size: .18rem;
+    font-weight: 600;
+}
+
+.Sign .tips {
+    text-align: center;
+    color: #bbb;
+}
+
+.Sign-c {
+    margin-top: .3rem;
+}
+
+.Sign-c .Signbtn {
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+    margin: 0 auto .15rem;
+    color: #fff;
+    text-align: center;
+    background: #5d91ee;
+    border: .1rem solid #d6e3fb;
+}
+
+.Sign-c .Signbtn .inner {
+    padding-top: .15rem;
+}
+
+.Sign-c .Signbtn span {
+    display: block;
+    font-size: .2rem;
+    height: .3rem;
+    line-height: .3rem;
+}
+
+.Sign-c .Signbtn .num {
+    font-size: .14rem;
+    height: .2rem;
+    line-height: .2rem;
+}
+
+.Sign-c .Signbtn.active {
+    background: #fff;
+    color: #5d91ee;
+}
+
+.Sign-day {
+    padding: .3rem .12rem;
+}
+
+.Sign-day .jfitem {
+    position: relative;
+    margin-bottom: .1rem;
+}
+
+.Sign-day .jfitem, .Sign-day .dayitem {
+    text-align: center;
+    overflow: hidden;
+}
+
+.Sign-day .jf, .Sign-day .day {
+    float: left;
+    width: 14.2%;
+}
+
+.Sign-day .jf {
+    position: relative;
+    overflow: hidden;
+}
+
+.Sign-day .jf:first-child:before, .Sign-day .jf:last-child:after {
+    display: none;
+}
+
+.Sign-day .jf:before {
+    content: "";
+    display: block;
+    width: 50%;
+    height: .02rem;
+    background: #5d91ee;
+    position: absolute;
+    right: 50%;
+    margin-right: .2rem;
+    top: .17rem;
+    z-index: 1;
+}
+
+.Sign-day .jf:after {
+    content: "";
+    display: block;
+    width: 50%;
+    height: .02rem;
+    background: #5d91ee;
+    position: absolute;
+    left: 50%;
+    margin-left: .2rem;
+    top: .17rem;
+    z-index: 1;
+}
+
+.Sign-day .jf .icon {
+    height: .34rem;
+    width: .34rem;
+    border-radius: 50%;
+    border: .02rem solid #5d91ee;
+    color: #5d91ee;
+    line-height: .3rem;
+    margin: 0 auto;
+    font-size: .12rem;
+    font-weight: 600;
+    background: #fff;
+}
+
+.Sign-day .jf.cur .icon {
+    background: #5d91ee;
+    color: #fff;
+}
+
+.Sign-day .day {
+    font-size: .12rem;
+    color: #bbb;
+}
+
+
+/*积分记录*/
+
+.pointrecord {
+    padding: .12rem;
+}
+
+.pointrecord li {
+    border-bottom: 1px solid #eee;
+    padding: .1rem 0;
+    overflow: hidden;
+}
+
+.pointrecord li:last-child {
+    border-bottom: none;
+}
+
+.pointrecord li .box-l {
+    float: left;
+    max-width: 70%;
+}
+
+.pointrecord li p {
+    font-size: .15rem;
+    line-height: .2rem;
+}
+
+.pointrecord li .time {
+    display: block;
+    font-size: .12rem;
+    color: #999;
+    line-height: .2rem;
+}
+
+.pointrecord li .jf {
+    float: right;
+    line-height: .4rem;
+    font-size: .15rem;
+}
+
+.pointrecord li .jf.more {
+    color: #ee7818;
+}
+
+.pointrecord li .jf.less {
+    color: #4581ec;
+}
+
+
+/*拉新人规则页面*/
+
+.acti_Rule .Rulebanner img {
+    max-width: 100%;
+}
+
+.acti_Rule .rulebox {
+    padding: .12rem;
+}
+
+.acti_Rule .ruleitem {
+    border: 1px solid #e3b653;
+    border-radius: 10px;
+    background: #fff;
+    padding: .12rem;
+    margin-bottom: .15rem;
+    font-size: .15rem;
+    text-align: justify;
+}
+
+.acti_Rule .ruleitem .title {
+    border-bottom: 1px dashed #e3b653;
+    text-align: center;
+    font-size: .16rem;
+    padding-bottom: .1rem;
+    margin-bottom: .1rem;
+}
+
+
+/*我的下级列表页*/
+
+.tab-hd {
+    height: .4rem;
+    line-height: .4rem;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    background: #fff;
+    margin-bottom: .1rem;
+}
+
+.tab-hd li {
+    float: left;
+    font-size: .15rem;
+    height: .4rem;
+    position: relative;
+}
+
+.tab-hd li.active {
+    color: #2196f3;
+}
+
+.tab-hd li.active:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #2196f3;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.app_tg .table {
+    padding: 0 .12rem;
+    background: #fff;
+}
+
+.app_tg .table th {
+    height: .35rem;
+    line-height: .35rem;
+}
+
+.app_tg .table tr {
+    border-bottom: 1px solid #eee;
+}
+
+.app_tg .table tr:last-child {
+    border-bottom: none;
+}
+
+.app_tg .table td {
+    text-align: center;
+    line-height: .2rem;
+    padding: .1rem 0;
+}
+
+.app_tg .table td:nth-child(2) {
+    color: #ee7818;
+}
+
+.app_tg .table td:nth-child(3) {
+    color: #999;
+}
+
+.not_subordinate {
+    text-align: center;
+    margin-top: 20%;
+    padding: .5rem;
+    font-size: .18rem;
+}
+
+
+/*邀请奖励排行榜*/
+
+.bg_img {
+    height: 100%;
+    background: url(/static/image/of/backgroundimg2.jpg) top center no-repeat;
+    background-size: cover;
+}
+
+.Ranking {
+    padding: .1rem .2rem;
+}
+
+.Ranking .Rankbox {
+    background: #fff;
+    border-radius: 8px;
+    border-top: .08rem solid #f89c35;
+}
+
+.Ranking .table {
+    text-align: center;
+}
+
+.Ranking .Rankhd {
+    height: .4rem;
+    line-height: .4rem;
+    color: #5679ed;
+    font-size: .16rem;
+    font-weight: bold;
+    text-align: center;
+    background: #fcc44b;
+}
+
+.Ranking .table th {
+    height: .4rem;
+    line-height: .4rem;
+    color: #7a51ca;
+    font-weight: bold;
+}
+
+.Ranking .table td {
+    height: .4rem;
+    line-height: .4rem;
+    color: #f86b40;
+}
+
+.Ranking .table td.no span {
+    vertical-align: middle;
+    background: #f86b40;
+    color: #fff;
+    display: inline-block;
+    height: .2rem;
+    line-height: .2rem;
+    width: .2rem;
+    border-radius: 2px;
+}
+
+.Ranking .table td.no1 span {
+    background: #feba00;
+}
+
+.Ranking .table td.no2 span {
+    background: #bcbfb8;
+}
+
+.Ranking .table td.no3 span {
+    background: #f79b34;
+}
+
+
+/*赚钱秘籍*/
+
+.makemoney_box img {
+    width: 100%;
+}

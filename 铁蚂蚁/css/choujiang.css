@@ -1,0 +1,62 @@
+.bg_eb3b3b{
+	background-color: #eb3b3b;
+}
+
+.zhuanpan__hd img{
+	width: 2.13rem;
+	height:auto;
+	margin:0 auto;
+}
+.zhuanpan,
+.zhuanpanBox{
+	width: 3.13rem;
+	height: 3.15rem;
+	margin:0 auto;
+	position: relative;
+}
+
+.img_zhuanpan{
+	width: 100%;
+	height: 100%;
+}
+.zhuanpan .btn_star{
+	width: 1rem;
+	position: absolute;
+	top:48%;
+	transform: translate(0,-50%);
+	-ms-transform: translate(0,-50%);
+	-o-transform: translate(0,-50%);
+	-moz-transform: translate(0,-50%);
+	-webkit-transform: translate(0,-50%);
+	z-index: 3;
+	left:0;
+	right:0;
+	margin:0 auto;
+}
+.img_titleBox img{
+	width: 2rem;
+	height:auto;
+	margin:0 auto;
+}
+.section_content {
+	background: #ffe5b0;
+	font-size: .16rem;
+	color:#d1252c;
+	border-radius: .1rem;
+	padding:.2rem;
+	margin:.15rem .22rem;
+}
+.section_content .wenList li{
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	line-height: 1.6;
+	margin-top:.08rem;
+}
+.section_content .wenList .right{
+	max-width: 60%;
+	text-align: right;
+	color:#5b1e09;
+	float: right;
+	font-size: .15rem;
+}
