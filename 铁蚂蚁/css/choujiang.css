@@ -3,14 +3,14 @@
 }
 
 .zhuanpan__hd img{
-	width: 2.13rem;
+	width: 213px;
 	height:auto;
 	margin:0 auto;
 }
 .zhuanpan,
 .zhuanpanBox{
-	width: 3.13rem;
-	height: 3.15rem;
+	width: 313px;
+	height: 315px;
 	margin:0 auto;
 	position: relative;
 }
@@ -20,7 +20,7 @@
 	height: 100%;
 }
 .zhuanpan .btn_star{
-	width: 1rem;
+	width: 100px;
 	position: absolute;
 	top:48%;
 	transform: translate(0,-50%);
@@ -40,23 +40,23 @@
 }
 .section_content {
 	background: #ffe5b0;
-	font-size: .16rem;
+	font-size: 16px;
 	color:#d1252c;
-	border-radius: .1rem;
+	border-radius: 10px;
 	padding:.2rem;
-	margin:.15rem .22rem;
+	margin:15px 22px;
 }
 .section_content .wenList li{
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	line-height: 1.6;
-	margin-top:.08rem;
+	margin-top:8px;
 }
 .section_content .wenList .right{
 	max-width: 60%;
 	text-align: right;
 	color:#5b1e09;
 	float: right;
-	font-size: .15rem;
+	font-size: 15px;
 }

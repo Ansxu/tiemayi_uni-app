@@ -6,12 +6,12 @@
 .header img {
     width: 1.385rem;
     margin-left: 0.625rem;
-    margin-top: 0.25rem;
+    margin-top: 25px;
 }
 
 .rate {
     position: relative;
-    padding: 0.625rem 1rem;
+    padding: 0.625rem 100px;
     background: #00aaef;
 }
 
@@ -23,7 +23,7 @@
 .rate img {
     position: absolute;
     top: 0.65rem;
-    right: 1rem;
+    right: 100px;
     width: 1.2rem;
 }
 
@@ -42,7 +42,7 @@
 }
 
 .task_list li .content {
-    padding: 0rem 1rem;
+    padding: 0rem 100px;
     margin-bottom: 0.5rem;
 }
 
@@ -69,8 +69,8 @@
 
 .task_type {
     background: #e8e8e8;
-    text-indent: 1rem;
-    padding: 0.25rem 0rem;
+    text-indent: 100px;
+    padding: 25px 0rem;
     color: #787878;
 }
 
@@ -99,8 +99,8 @@
     width: 100%;
     height: 100%;
     background: #e8e8e8;
-    text-indent: 1rem;
-    padding: 0.25rem 0rem;
+    text-indent: 100px;
+    padding: 25px 0rem;
     color: #787878;
     text-align: left;
 }
@@ -117,7 +117,7 @@
 }
 
 .receiving .content {
-    padding: 0rem 1rem;
+    padding: 0rem 100px;
     margin-bottom: 0.5rem;
 }
 
@@ -176,7 +176,7 @@
     transition-property: transform;
     -webkit-transform: translate3d(0, 100%, 0);
     transform: translate3d(0, 100%, 0);
-    padding: 1rem;
+    padding: 100px;
 }
 
 .icon {
@@ -194,15 +194,15 @@
 .icon img {
     width: 3rem;
     margin-left: 25%;
-    margin-right: 0.25rem;
+    margin-right: 25px;
 }
 
 .task_describ {
-    padding: 1rem 0rem;
+    padding: 100px 0rem;
 }
 
 .task_describ li {
-    padding: 0rem 0.625rem 0.25rem 0.625rem;
+    padding: 0rem 0.625rem 25px 0.625rem;
     border-bottom: 1px solid #dddddd;
     margin-bottom: 0.875rem;
 }
@@ -232,7 +232,7 @@
 .taskTypeBox .titleHd {
     height: 2.5rem;
     line-height: 2.5rem;
-    font-size: 1rem;
+    font-size: 100px;
     border-bottom: 1px solid #eee;
     margin-bottom: .5rem;
 }
@@ -323,9 +323,9 @@
 }
 
 .bind_account p {
-    font-size: 1rem;
+    font-size: 100px;
     color: #000000;
-    padding: 1rem;
+    padding: 100px;
 }
 
 .bind_account ul {

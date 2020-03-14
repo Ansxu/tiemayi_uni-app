@@ -185,7 +185,7 @@ function optionBindResult(ret) {
                     $(".selectBankNamePage").remove();
                     $(".btn-submit").remove();
                     $("#isbandtext").show();
-                    $(".main").append("<a href=\"bindinfo.html\" class=\"weui-btn weui-btn-active\" style=\"margin:.2rem .12rem .2rem;\">返回</a>");
+                    $(".main").append("<a href=\"bindinfo.html\" class=\"weui-btn weui-btn-active\" style=\"margin:.2rem 12px .2rem;\">返回</a>");
                 }
             }
         } else if (json.errcode == 2) {

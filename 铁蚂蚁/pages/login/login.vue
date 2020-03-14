@@ -64,5 +64,16 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import url('../../css/d_style.css');  
+    .hasAccountMag{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        div{
+            margin:0 10px;
+        }
+        .a{
+            color: #eb0101;
+        }
+    }
 </style>
 

@@ -82,7 +82,7 @@ function optionBindResult(ret) {
             } //如果认证通过，则加载数据不能再次提交
             else if (json.obj.IsAUT == 1) {
                 $('.btn-submit').hide();
-                $(".main").append("<a href=\"bindinfo.html\" class=\"weui-btn weui-btn-active\" style=\"margin:.2rem .12rem .2rem;\">返回</a>");
+                $(".main").append("<a href=\"bindinfo.html\" class=\"weui-btn weui-btn-active\" style=\"margin:.2rem 12px .2rem;\">返回</a>");
                 var realName = json.obj.UserRName; //真实姓名
                 var idNum = json.obj.Idcard; //身份证号
                 var pic0 = json.obj.IdcardPositive; //身份证正面

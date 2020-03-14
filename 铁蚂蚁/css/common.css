@@ -102,7 +102,7 @@ a {
   width: 50%;
   color: #fff;
   margin: 15rem auto;
-  padding: 1rem;
+  padding: 100px;
   text-align: center;
   border-radius: .5rem;
 }
@@ -126,7 +126,7 @@ div.header{
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
-	font-size: 1rem;
+	font-size: 100px;
 	color:#1d1d1d;
 	text-align: center;
 }

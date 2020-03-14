@@ -8,7 +8,7 @@
 .header img {
     width: 1.385rem;
     margin-left: 0.625rem;
-    margin-top: 0.25rem;
+    margin-top: 25px;
 }
 
 .blue {
@@ -35,7 +35,7 @@ section {
 }
 
 .activate_user h3, .activate_business h3 {
-    font-size: 1rem;
+    font-size: 100px;
     color: #333333;
 }
 
@@ -117,7 +117,7 @@ section {
 
 .detail {
     color: #ffffff;
-    font-size: 1rem;
+    font-size: 100px;
     margin-top: 3px;
 }
 

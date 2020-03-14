@@ -2,7 +2,7 @@
  * @author:冬冬
  * @time:2018-9-20
  * @block:通用
- * @tips:单位是用rem，以375为参照，100px=1rem;
+ * @tips:单位是用rem，以375为参照，100px=100px;
  * **/
 
 .bg_f8f8f8 {
@@ -155,7 +155,7 @@ body, html {
 }
 
 .weui-input {
-    font-size: 0.15rem;
+    font-size: 15px;
     line-height: 1.6;
     width: 100%;
     display: block;
@@ -176,14 +176,14 @@ body, html {
 .circleNum {
     position: absolute;
     content: "";
-    top: -0.05rem;
-    right: -0.05rem;
-    font-size: 0.1rem;
+    top: -5px;
+    right: -5px;
+    font-size: 10px;
     color: #fff;
     background-color: #ff682d;
-    width: 0.14rem;
-    height: 0.14rem;
-    line-height: 0.14rem;
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
     border-radius: 100%;
     text-align: center;
     white-space: nowrap;
@@ -196,7 +196,7 @@ body, html {
 }
 
 .layui-suremMsg {
-    font-size: 0.16rem;
+    font-size: 16px;
     color: #262626;
 }
 
@@ -222,11 +222,11 @@ body, html {
 }
 
 .noConPage .iconImg {
-    margin-bottom: 0.15rem;
+    margin-bottom: 15px;
 }
 
 .noConPage .iconImg img {
-    width: 0.7rem;
+    width: 70px;
     margin: 0 auto;
 }
 
@@ -244,7 +244,7 @@ body, html {
     display: -webkit-flex;
     display: flex;
     background-color: #fff;
-    padding: 0.05rem 0;
+    padding: 5px 0;
 }
 
 .dd_navList li {
@@ -253,28 +253,28 @@ body, html {
     flex: 1;
     overflow: hidden;
     text-align: center;
-    font-size: 0.14rem;
+    font-size: 14px;
     line-height: 1.3;
     color: #606060;
 }
 
 .dd_navList li .outside {
     display: block;
-    padding: 0.08rem 0.05rem;
+    padding: 8px 5px;
     color: #606060;
 }
 
 .dd_navList li .icon-img {
-    width: 0.26rem;
-    height: 0.26rem;
+    width: 26px;
+    height: 26px;
     margin: 0 auto;
-    margin-bottom: 0.05rem;
+    margin-bottom: 5px;
     position: relative;
 }
 
 .dd_navList li .icon-img img {
-    width: 0.26rem;
-    height: 0.26rem;
+    width: 26px;
+    height: 26px;
 }
 
 .dd_navList li .title {
@@ -315,26 +315,26 @@ body, html {
     max-width: 750px;
     margin: 0 auto;
     background-color: #fff;
-    top: 0.45rem;
+    top: 45px;
 }
 
 .dd_tabList li {
     -webkit-box-flex: 1;
     -webkit-flex: 1;
     flex: 1;
-    line-height: 0.4rem;
-    height: 0.4rem;
-    font-size: 0.15rem;
+    line-height: 40px;
+    height: 40px;
+    font-size: 15px;
 }
 
 .dd_tabList li a {
     display: inline-block;
-    margin: 0 0.08rem;
-    padding: 0 0.02rem;
+    margin: 0 8px;
+    padding: 0 2px;
 }
 
 .dd_tabList li a span {
-    padding: 0 0.05rem;
+    padding: 0 5px;
     display: inline-block;
     position: relative;
 }
@@ -343,7 +343,7 @@ body, html {
     content: "";
     display: block;
     width: 100%;
-    height: 0.02rem;
+    height: 2px;
     background: transparent;
     position: absolute;
     left: 0;
@@ -361,8 +361,8 @@ body, html {
 
 .icon-arrow {
     display: inline-block;
-    width: 0.16rem;
-    height: 0.16rem;
+    width: 16px;
+    height: 16px;
     position: relative;
     vertical-align: middle;
 }
@@ -370,8 +370,8 @@ body, html {
 .icon-arrow:before {
     position: absolute;
     content: "";
-    width: 0.08rem;
-    height: 0.08rem;
+    width: 8px;
+    height: 8px;
     border-top: 1px solid #b1b1b1;
     border-left: 1px solid #b1b1b1;
 }
@@ -382,8 +382,8 @@ body, html {
     -moz-transform: rotate(135deg);
     -o-transform: rotate(135deg);
     -ms-transform: rotate(135deg);
-    top: 0.03rem;
-    right: 0.06rem;
+    top: 3px;
+    right: 6px;
 }
 
 .icon-sj {
@@ -414,7 +414,7 @@ body, html {
     overflow: hidden;
     background-color: #fff;
     color: #333;
-    font-size: 0.15rem;
+    font-size: 15px;
 }
 
 .weui-cell {
@@ -424,7 +424,7 @@ body, html {
     -webkit-box-align: center;
     -webkit-align-items: center;
     align-items: center;
-    padding: 0.1rem 0.12rem;
+    padding: 10px 12px;
     position: relative;
     background-color: #fff;
 }
@@ -432,8 +432,8 @@ body, html {
 .weui-cell:before {
     content: " ";
     position: absolute;
-    left: 0.12rem;
-    right: 0.12rem;
+    left: 12px;
+    right: 12px;
     top: 0;
     height: 1px;
     border-top: 1px solid #f1f1f1;
@@ -454,15 +454,15 @@ body, html {
 
 .weui-btn {
     display: block;
-    line-height: 0.43rem;
+    line-height: 43px;
     border: 1px solid #c6c6c6;
-    border-radius: 0.04rem;
+    border-radius: 4px;
     text-align: center;
-    font-size: 0.16rem;
+    font-size: 16px;
     color: #333;
     background-color: #fff;
-    margin-top: 0.1rem;
-    margin-bottom: 0.1rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .weui-btn.weui-btn-active {
@@ -473,12 +473,12 @@ body, html {
 
 .dd_msgBox {
     color: #606060;
-    font-size: 0.13rem;
-    margin-bottom: 0.15rem;
+    font-size: 13px;
+    margin-bottom: 15px;
 }
 
 .dd_column li {
-    font-size: 0.14rem;
+    font-size: 14px;
     color: #606060;
     line-height: 1.4;
 }
@@ -504,13 +504,13 @@ body, html {
 
 .dd_column li .txtBox .title {
     color: #222;
-    margin-bottom: 0.03rem;
+    margin-bottom: 3px;
 }
 
 .dd_column li .txtBox .priceArea {
     color: #fe5d1f;
-    font-size: 0.15rem;
-    margin-bottom: 0.03rem;
+    font-size: 15px;
+    margin-bottom: 3px;
 }
 
 .dd_column.level__dd_column li {
@@ -521,7 +521,7 @@ body, html {
     position: absolute;
     content: "";
     bottom: 0;
-    left: 0.12rem;
+    left: 12px;
     height: 1px;
     background-color: #F1F1F1;
     right: 0;
@@ -532,7 +532,7 @@ body, html {
 }
 
 .dd_column.level__dd_column li .outside {
-    padding: 0.12rem;
+    padding: 12px;
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
@@ -543,7 +543,7 @@ body, html {
 
 .dd_column.level__dd_column li .pictrueAll {
     width: 25%;
-    margin-right: 0.1rem;
+    margin-right: 10px;
 }
 
 .dd_column.level__dd_column li .txtBox {
@@ -554,17 +554,17 @@ body, html {
 }
 
 .dd_orderList .title {
-    height: .25rem;
-    line-height: .25rem;
+    height: 25px;
+    line-height: 25px;
 }
 
 .dd_orderList .title .plat_logo {
     display: inline-block;
     vertical-align: middle;
-    height: .25rem;
-    width: .25rem;
+    height: 25px;
+    width: 25px;
     border-radius: 50%;
-    margin-right: .08rem;
+    margin-right: 8px;
 }
 
 
@@ -612,8 +612,8 @@ body, html {
 }
 
 .shade .shade__hd {
-    line-height: 0.45rem;
-    height: 0.45rem;
+    line-height: 45px;
+    height: 45px;
     background-color: #5c91f1;
     color: #fff;
     text-align: center;
@@ -622,7 +622,7 @@ body, html {
 
 .shade .shade__hd .shade__title {
     font-weight: normal;
-    font-size: 0.16rem;
+    font-size: 16px;
     color: #fff;
 }
 
@@ -642,43 +642,43 @@ body, html {
 
 .shade .btn-close {
     position: absolute;
-    width: 0.24rem;
-    height: 0.24rem;
+    width: 24px;
+    height: 24px;
     background: url(/static/image/icons/close.png) center no-repeat;
-    background-size: 0.14rem 0.14rem;
+    background-size: 14px 14px;
     top: 50%;
-    margin-top: -0.12rem;
+    margin-top: -12px;
 }
 
 .shade .agreement__shadeItem {
-    width: 3.1rem;
+    width: 310px;
     background-color: #fff;
-    border-radius: 0.1rem;
+    border-radius: 10px;
     top: 50%;
-    max-height: 4.8rem;
+    max-height: 480px;
     transform: translate(0, -50%);
 }
 
 .shade .agreement__shadeItem .shade__hd .btn-close {
-    right: 0.1rem;
+    right: 10px;
 }
 
 .shade .agreement__shadeItem .shade__bd {
-    padding: 0.15rem;
+    padding: 15px;
     overflow: hidden;
-    max-height: 4.35rem;
+    max-height: 435px;
 }
 
 .shade .agreement__shadeItem .agreementCon {
     overflow-y: auto;
-    max-height: 4.05rem;
+    max-height: 405px;
 }
 
 .shade .shade__ft .dd_Btns {
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
-    padding: 0.07rem;
+    padding: 7px;
 }
 
 .shade .shade__ft .dd_Btns .weui-btn {
@@ -686,8 +686,8 @@ body, html {
     -webkit-flex: 1;
     flex: 1;
     overflow: hidden;
-    margin: 0.05rem 0.1rem;
-    line-height: 0.35rem;
+    margin: 5px 10px;
+    line-height: 35px;
 }
 
 
@@ -706,7 +706,7 @@ body, html {
 }
 
 .regLogForm {
-    padding: 0.15rem 0.12rem;
+    padding: 15px 12px;
 }
 
 .regLogForm .weui-cells {
@@ -715,11 +715,11 @@ body, html {
 
 .regLogForm .weui-cells .weui-cell {
     padding: 0;
-    height: 0.4rem;
+    height: 40px;
     border: 1px solid #b2b2b2;
-    border-radius: 0.04rem;
+    border-radius: 4px;
     background-color: #fff;
-    margin-bottom: 0.1rem;
+    margin-bottom: 10px;
     box-sizing: content-box;
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
@@ -732,47 +732,47 @@ body, html {
 }
 
 .regLogForm .weui-cells .weui-cell .weui-cell__hd {
-    width: 0.4rem;
+    width: 40px;
 }
 
 .regLogForm .weui-cells .weui-cell .iconImg {
-    height: 0.22rem;
-    width: 0.22rem;
+    height: 22px;
+    width: 22px;
     margin: 0 auto;
 }
 
 .regLogForm .weui-cells .weui-cell .weui-input {
-    padding-right: 0.15rem;
+    padding-right: 15px;
 }
 
 .regLogForm .weui-cells .weui-cell .imgBox {
-    width: 0.58rem;
-    margin-right: 0.08rem;
+    width: 58px;
+    margin-right: 8px;
 }
 
 .regLogForm .weui-cells .weui-cell .imgBox img {
-    height: 0.24rem;
+    height: 24px;
     max-width: 100%;
 }
 
 .regLogForm .sendCode {
-    height: 0.4rem;
-    line-height: 0.4rem;
-    width: 0.85rem;
+    height: 40px;
+    line-height: 40px;
+    width: 85px;
     text-align: center;
-    font-size: 0.13rem;
+    font-size: 13px;
     color: #fff;
     background-color: #6ccf8d;
 }
 
 .regLogForm .agreement__register {
     color: #222222;
-    font-size: 0.13rem;
-    padding: 0.05rem 0;
+    font-size: 13px;
+    padding: 5px 0;
 }
 
 .regLogForm .agreement__register .IconsCK {
-    margin-right: 0.1rem;
+    margin-right: 10px;
 }
 
 .regLogForm .agreement__register .IconsCK span {
@@ -786,55 +786,55 @@ body, html {
 }
 
 .regLogForm .btn-register {
-    margin-top: 0.3rem;
-    margin-bottom: 0.15rem;
+    margin-top: 30px;
+    margin-bottom: 15px;
 }
 
 .regLogForm .btn-login {
-    margin-top: 0.3rem;
-    margin-bottom: 0.15rem;
+    margin-top: 30px;
+    margin-bottom: 15px;
 }
 
 .regLogForm .hasAccountMag {
     color: #222222;
-    font-size: 0.15rem;
+    font-size: 15px;
     text-align: center;
 }
 
 .regLogForm .hasAccountMag .a {
     color: #eb0101;
-    margin: 0 0.1rem;
+    margin: 0 10px;
 }
 
 .regLogForm .shiftPwd {
     display: inline-block;
     vertical-align: top;
-    height: 0.4rem;
-    width: 0.4rem;
+    height: 40px;
+    width: 40px;
 }
 
 .regLogForm .shiftPwd.hidePwd {
     background: url(/static/image/icons/hidepwd.png) center no-repeat;
-    background-size: 0.18rem 0.18rem;
+    background-size: 18px 18px;
 }
 
 .regLogForm .shiftPwd.showPwd {
     background: url(/static/image/icons/showpwd.png) center no-repeat;
-    background-size: 0.18rem 0.18rem;
+    background-size: 18px 18px;
 }
 
 .regLogForm.noIcons__regLogForm .weui-input {
-    padding-left: 0.12rem;
+    padding-left: 12px;
 }
 
 .regLogForm.resetTel__regLogForm .weui-cell__hd {
-    width: 0.85rem !important;
+    width: 85px !important;
     color: #5c91f1;
-    padding-left: 0.12rem;
+    padding-left: 12px;
 }
 
 .regLogForm.onlyIpt__form .weui-input {
-    padding-left: 0.12rem;
+    padding-left: 12px;
 }
 
 .regLogForm.onlyIpt__form .select__weui-cell {
@@ -844,8 +844,8 @@ body, html {
 .regLogForm.onlyIpt__form .select__weui-cell .icon-arrow {
     position: absolute;
     top: 50%;
-    right: 0.08rem;
-    margin-top: -0.08rem;
+    right: 8px;
+    margin-top: -8px;
 }
 
 
@@ -858,16 +858,16 @@ body, html {
     -webkit-box-align: center;
     -webkit-align-items: center;
     align-items: center;
-    font-size: 0.14rem;
+    font-size: 14px;
 }
 
 .avatarInfo .avatar {
-    width: 0.58rem;
-    height: 0.58rem;
-    border: 0.03rem solid #fff;
+    width: 58px;
+    height: 58px;
+    border: 3px solid #fff;
     background-color: #fff;
     border-radius: 50%;
-    margin-right: 0.1rem;
+    margin-right: 10px;
 }
 
 .avatarInfo .avatar img {
@@ -891,17 +891,17 @@ body, html {
 
 .avatarInfo .btn_lookRule {
     color: #fff;
-    font-size: 0.15rem;
+    font-size: 15px;
     text-decoration: underline;
 }
 
 .memberTop {
-    padding: 0.5rem 0.12rem;
-    height: 3rem;
+    padding: 50px 12px;
+    height: 300px;
     background: url(/static/image/of/top_bgc.png) center no-repeat;
     background-size: 100% 100%;
     color: #fff;
-    font-size: 0.13rem;
+    font-size: 13px;
     line-height: 1.4;
 }
 
@@ -914,22 +914,22 @@ body, html {
 }
 
 .touxiang {
-    height: .6rem;
-    width: .6rem;
+    height: 60px;
+    width: 60px;
     margin: 0 auto;
-    margin-top: .1rem;
-    margin-bottom: .2rem;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 .touxiang img {
     width: 100%;
     height: 100%;
-    border-radius: .3rem;
+    border-radius: .300px;
 }
 
 .btn_vs {
     position: absolute;
-    top: .18rem;
+    top: 18px;
     right: 0;
     color: #fff;
     text-decoration: underline;
@@ -937,8 +937,8 @@ body, html {
 
 .mySome {
     text-align: center;
-    margin-top: .1rem;
-    height: .3rem;
+    margin-top: 10px;
+    height: .300px;
 }
 
 .mySomes {
@@ -954,8 +954,8 @@ body, html {
 }
 
 .myPrice {
-    height: .3rem;
-    margin-top: .1rem;
+    height: .300px;
+    margin-top: 10px;
 }
 
 .myPrice_text {
@@ -966,9 +966,9 @@ body, html {
 
 .memberHead .btn_back {
     width: auto !important;
-    line-height: 0.45rem;
-    padding-left: 0.25rem;
-    background-position: 0.12rem center !important;
+    line-height: 45px;
+    padding-left: 025px;
+    background-position: 12px center !important;
 }
 
 .memberHead.noHeight__memberHead {
@@ -986,23 +986,23 @@ body, html {
 
 .memberHead.noHeight__memberHead .btn_back {
     background: url(/static/image/icons/back_white.png) left center no-repeat;
-    background-size: 0.1rem auto;
+    background-size: 10px auto;
     color: #fff;
 }
 
 .btn_set {
     position: absolute;
-    top: .13rem;
-    right: .1rem;
+    top: .1300px;
+    right: 10px;
     color: #000;
 }
 
 .memberIndex__section {
-    margin-bottom: 0.1rem;
+    margin-bottom: 10px;
 }
 
 .section__hd {
-    font-size: 0.12rem;
+    font-size: 12px;
     line-height: 1.5;
     color: #B1B1B1;
     position: relative;
@@ -1016,7 +1016,7 @@ body, html {
 
 .section__hd .title {
     color: #222222;
-    font-size: 0.15rem;
+    font-size: 15px;
 }
 
 .section__hd .icon-arrow {
@@ -1024,15 +1024,15 @@ body, html {
 }
 
 .priceListBox {
-    margin: 0 0.12rem;
-    margin-bottom: 0.1rem;
-    margin-top: -0.3rem;
+    margin: 0 12px;
+    margin-bottom: 10px;
+    margin-top: -30px;
 }
 
 .priceListBox .priceList {
     background-color: #fff;
-    padding: 0.12rem 0;
-    border-radius: 0.04rem;
+    padding: 12px 0;
+    border-radius: 4px;
     line-height: 1.4;
     display: -webkit-box;
     display: -webkit-flex;
@@ -1055,7 +1055,7 @@ body, html {
 .priceListBox .priceList .outside {
     display: block;
     text-align: center;
-    padding: 0 0.05rem;
+    padding: 0 5px;
     color: #606060;
 }
 
@@ -1069,13 +1069,13 @@ body, html {
     color: #5c93fd;
     font-family: arial;
     font-weight: bold;
-    font-size: 0.16rem;
+    font-size: 16px;
 }
 
 .navList__weui-cells .icon-navImg {
-    width: 0.22rem;
-    height: 0.22rem;
-    margin-right: 0.1rem;
+    width: 22px;
+    height: 22px;
+    margin-right: 10px;
 }
 
 .navList__weui-cells .title {
@@ -1093,29 +1093,29 @@ body, html {
 }
 
 .dingdan {
-    border-radius: .07rem;
-    margin: -.5rem .12rem .1rem .12rem;
+    border-radius: 7px;
+    margin: -50px -12px 10px -12px;
     overflow: hidden;
     box-shadow: 0 1px 2px #EEEEEE;
 }
 
 .messageMenu {
-    height: 1.5rem;
-    margin: .14rem .1rem;
+    height: 150px;
+    margin: 14px 10px;
     background: #fff;
-    border-radius: .07rem;
+    border-radius: 7px;
 }
 
 .messageMenuLi {
     width: 25%;
     text-align: center;
     float: left;
-    margin: .1rem 0;
+    margin: 10px 0;
 }
 
 .messageMenuLi div {
-    width: .32rem;
-    height: .32rem;
+    width: 32px;
+    height: 32px;
     margin: 0 auto;
 }
 
@@ -1128,30 +1128,30 @@ body, html {
 /******我的订单页面*******/
 
 .orderMenu__section {
-    margin: 0.1rem 0;
+    margin: 10px 0;
 }
 
 .orderMenu__section .weui-cell:before {
-    left: 0.12rem;
+    left: 12px;
     right: 0;
 }
 
 .orderMenu__section .dd_navList li .icon-img {
-    width: 0.4rem;
-    height: 0.4rem;
+    width: 40px;
+    height: 40px;
 }
 
 .orderMenu__section .dd_navList li .icon-img img {
-    width: 0.4rem;
-    height: 0.4rem;
+    width: 40px;
+    height: 40px;
 }
 
 
 /********订单列表页面******/
 
 .orderList__tabListBox {
-    height: 0.4rem;
-    padding-top: 0.1rem;
+    height: 40px;
+    padding-top: 10px;
     position: relative;
     z-index: 3;
     box-sizing: content-box;
@@ -1162,19 +1162,19 @@ body, html {
 }
 
 .orderList__tabListBox .dd_tabList {
-    top: 0.45rem;
-    border-top: 0.1rem solid #F8F8F8;
+    top: 45px;
+    border-top: 10px solid #F8F8F8;
 }
 
 .tabShowBox {
-    margin: 0.1rem 0;
+    margin: 10px 0;
 }
 
 
 /*******账户信息页面****/
 
 .accountNavList {
-    margin: 0.1rem 0;
+    margin: 10px 0;
 }
 
 .uploadAvatar__shadeItem {
@@ -1183,11 +1183,11 @@ body, html {
 }
 
 .uploadAvatar__shadeItem .shade__bd {
-    padding: 0.1rem 0.36rem;
+    padding: 10px 36px;
 }
 
 .uploadAvatar__shadeItem .weui-btn {
-    margin: 0.1rem 0;
+    margin: 10px 0;
 }
 
 .uploadAvatar__shadeItem .btn-selectPhoto {
@@ -1198,30 +1198,30 @@ body, html {
 /**********等级规则页面***********/
 
 .gradeRule {
-    padding: 0.12rem;
+    padding: 12px;
     color: #222222;
 }
 
 .gradeRule .gradeRule_section {
     background-color: #fff;
     border: 2px solid #e3b653;
-    border-radius: 0.1rem;
-    padding: 0 0.23rem;
-    margin-bottom: 0.1rem;
+    border-radius: 10px;
+    padding: 0 0.2300px;
+    margin-bottom: 10px;
 }
 
 .gradeRule .section__bd .con {
-    padding: 0.15rem 0;
+    padding: 15px 0;
 }
 
 .gradeRule .section__bd .con .title {
-    font-size: 0.16rem;
+    font-size: 16px;
     font-weight: normal;
-    margin-bottom: 0.08rem;
+    margin-bottom: 8px;
 }
 
 .dd_gradeList {
-    font-size: 0.15rem;
+    font-size: 15px;
 }
 
 .dd_gradeList li {
@@ -1231,20 +1231,20 @@ body, html {
     -webkit-box-align: center;
     -webkit-align-items: center;
     align-items: center;
-    line-height: 0.42rem;
+    line-height: 42px;
     border-bottom: 1px dashed #d0b374;
-    padding: 0 0.07rem;
+    padding: 0 07px;
 }
 
 .dd_gradeList li .gradeNum {
-    width: 0.28rem;
-    height: 0.28rem;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
-    line-height: 0.28rem;
+    line-height: 28px;
     text-align: center;
     color: #fff;
     background-color: #f15e1d;
-    margin-right: 0.15rem;
+    margin-right: 15px;
 }
 
 .dd_gradeList li .txtBox {
@@ -1274,14 +1274,14 @@ body, html {
 .commisionTop {
     background-color: #fe852c;
     color: #fff;
-    padding: 0.1rem 0.12rem;
-    margin: 0.1rem 0;
+    padding: 10px 12px;
+    margin: 10px 0;
     line-height: 1.4;
 }
 
 .commisionTop .price .num {
     font-weight: bold;
-    font-size: 0.16rem;
+    font-size: 16px;
 }
 
 .commisionTop.freeze {
@@ -1295,7 +1295,7 @@ body, html {
 .commisionList li {
     position: relative;
     background-color: #fff;
-    padding: 0.08rem 0.12rem;
+    padding: 8px 12px;
     color: #606060;
 }
 
@@ -1303,20 +1303,20 @@ body, html {
     content: "";
     position: absolute;
     top: 0;
-    left: 0.12rem;
+    left: 12px;
     height: 1px;
     right: 0;
     background-color: #F1F1F1;
 }
 
 .commisionList li .title {
-    font-size: 0.15rem;
+    font-size: 15px;
     color: #222222;
 }
 
 .commisionList li .price {
     color: #fb7e21;
-    margin-left: 0.15rem;
+    margin-left: 15px;
 }
 
 .commisionList li .price.reducePrice {
@@ -1339,7 +1339,7 @@ body, html {
 .dd_withdraw .withdraw__hd {
     color: #222;
     position: relative;
-    font-size: 0.15rem;
+    font-size: 15px;
 }
 
 .dd_withdraw .withdraw__hd:before {
@@ -1356,17 +1356,17 @@ body, html {
 }
 
 .dd_withdraw .withdraw__hd .cardID {
-    margin-left: 0.08rem;
+    margin-left: 8px;
 }
 
 .priceMsg {
-    font-size: 0.13rem;
+    font-size: 13px;
     color: #606060;
-    margin: 0.1rem 0;
+    margin: 10px 0;
 }
 
 .dd_Btns {
-    padding: 0 0.12rem;
+    padding: 0 12px;
 }
 
 .dd_Btns.flex {
@@ -1380,7 +1380,7 @@ body, html {
     -webkit-flex: 1;
     flex: 1;
     overflow: hidden;
-    margin-right: 0.4rem;
+    margin-right: 40px;
 }
 
 .dd_Btns.flex .weui-btn:last-of-type {
@@ -1388,8 +1388,8 @@ body, html {
 }
 
 .dd_Btns.btn_tabList .weui-btn {
-    line-height: 0.34rem;
-    border-radius: 1rem;
+    line-height: 34px;
+    border-radius: 100px;
 }
 
 .withdrawRecordList li {
@@ -1402,31 +1402,31 @@ body, html {
 }
 
 .dd__hd {
-    padding: 0.08rem 0.12rem;
+    padding: 8px 12px;
     background-color: transparent;
 }
 
 .dd__hd .title {
-    font-size: 0.15rem;
+    font-size: 15px;
     color: #222;
     font-weight: normal;
 }
 
 .dd__hd .titleMsg {
-    font-size: 0.13rem;
+    font-size: 13px;
     color: #606060;
 }
 
 .dd__hd .msgIcon {
     display: inline-block;
-    margin-right: 0.05rem;
-    width: 0.18rem;
-    height: 0.18rem;
+    margin-right: 5px;
+    width: 18px;
+    height: 18px;
     vertical-align: middle;
 }
 
 .txtMsg {
-    font-size: 0.13rem;
+    font-size: 13px;
     color: #5c91f0;
 }
 
@@ -1436,7 +1436,7 @@ body, html {
 
 .accountList li {
     background-color: #fff;
-    margin: 0.1rem 0;
+    margin: 10px 0;
 }
 
 .accountList li .weui-cell:before {
@@ -1444,7 +1444,7 @@ body, html {
 }
 
 .accountList li .weui-cell .weui-cell__hd {
-    margin-right: 0.1rem;
+    margin-right: 10px;
     color: #606060;
 }
 
@@ -1461,16 +1461,16 @@ body, html {
 
 .accountList li .status {
     color: #ff682d;
-    font-size: 0.14rem;
+    font-size: 14px;
 }
 
 .accountList.accountList2 li {
-    padding-bottom: 0.08rem;
+    padding-bottom: 8px;
 }
 
 .accountList.accountList2 li .weui-cells .weui-cell {
-    padding-top: 0.02rem;
-    padding-bottom: 0.02rem;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 
 .accountList.accountList2 li .weui-cells .weui-cell:before {
@@ -1478,9 +1478,9 @@ body, html {
 }
 
 .accountList.accountList2 li .weui-cells .weui-cell:first-of-type {
-    padding-bottom: 0.1rem;
-    padding-top: 0.1rem;
-    margin-bottom: 0.08rem;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-bottom: 8px;
 }
 
 .accountList.accountList2 li .weui-cells .weui-cell:first-of-type:before {
@@ -1517,11 +1517,11 @@ body, html {
 }
 
 .dd_footer.addAcount__footer {
-    height: 0.45rem;
+    height: 45px;
 }
 
 .dd_footer.addAcount__footer .inner {
-    height: 0.45rem;
+    height: 45px;
 }
 
 .dd_footer.addAcount__footer .dd_Btns {
@@ -1535,14 +1535,14 @@ body, html {
 .dd_footer.addAcount__footer .dd_Btns .weui-btn .addAcountIcon {
     display: inline-block;
     background: url(/static/image/icons/addbtn.png) left center no-repeat;
-    background-size: 0.2rem 0.2rem;
+    background-size: 020px 020px;
     color: #5c91f1;
-    padding-left: 0.28rem;
+    padding-left: 28px;
 }
 
 .bindSection {
     background-color: #fff;
-    margin-bottom: 0.1rem;
+    margin-bottom: 10px;
 }
 
 .lookExamples {
@@ -1553,15 +1553,15 @@ body, html {
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
-    padding: 0 0.07rem;
+    padding: 0 07px;
 }
 
 .dd_piclist li {
-    margin-bottom: 0.1rem;
+    margin-bottom: 10px;
 }
 
 .dd_piclist li .outside {
-    margin: 0 0.05rem;
+    margin: 0 5px;
 }
 
 .dd_piclist li .img {
@@ -1597,9 +1597,9 @@ body, html {
 }
 
 .dd_piclist li p {
-    margin-top: 0.1rem;
+    margin-top: 10px;
     text-align: center;
-    font-size: 0.13rem;
+    font-size: 13px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -1609,11 +1609,11 @@ body, html {
 .mayOrderTaking {
     background-color: #87aff8;
     color: #fff;
-    padding: 0.08rem 0.12rem;
+    padding: 8px 12px;
 }
 
 .bind__swiperImgBox {
-    padding: 0.2rem 0.12rem;
+    padding: 020px 12px;
 }
 
 .dd_uploadItem {
@@ -1623,37 +1623,37 @@ body, html {
 .dd_uploadItem:before {
     content: "";
     position: absolute;
-    left: 0.12rem;
-    right: 0.12rem;
+    left: 12px;
+    right: 12px;
     bottom: 0;
     height: 1px;
     background-color: #F1F1F1;
 }
 
 .cityInfoBox {
-    padding: 0.12rem;
-    font-size: 0.15rem;
+    padding: 12px;
+    font-size: 15px;
     color: #606060;
 }
 
 .cityInfoBox .flexCity {
-    height: 0.4rem;
-    line-height: 0.4rem;
+    height: 40px;
+    line-height: 40px;
     border: 1px solid #b2b2b2;
     background-color: #fff;
-    padding: 0 0.12rem;
+    padding: 0 12px;
     box-sizing: content-box;
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
     -o-box-sizing: content-box;
     -ms-box-sizing: content-box;
-    border-radius: 0.04rem;
-    font-size: 0.15rem;
-    margin-bottom: 0.05rem;
+    border-radius: 4px;
+    font-size: 15px;
+    margin-bottom: 5px;
 }
 
 .cityInfoBox .weui-label {
-    margin-right: 0.15rem;
+    margin-right: 15px;
     color: #b1b1b1;
 }
 
@@ -1666,8 +1666,8 @@ body, html {
     -moz-flex-flow: row wrap;
     -ms-flex-flow: row wrap;
     -o-flex-flow: row wrap;
-    padding: 0.07rem;
-    font-size: 0.14rem;
+    padding: 07px;
+    font-size: 14px;
 }
 
 .dd_BtnsList li {
@@ -1675,16 +1675,16 @@ body, html {
 }
 
 .dd_BtnsList li .outside {
-    border-radius: 1rem;
+    border-radius: 100px;
     overflow: hidden;
-    margin: 0.05rem;
+    margin: 5px;
 }
 
 .dd_BtnsList li .outside .weui-btn {
-    border-radius: 1rem;
-    line-height: 0.35rem;
+    border-radius: 100px;
+    line-height: 35px;
     margin: 0;
-    font-size: 0.14rem;
+    font-size: 14px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -1696,14 +1696,14 @@ body, html {
 }
 
 .selectBuyTypeShade .shade__bd {
-    max-height: 2.6rem;
+    max-height: 260px;
     overflow: hidden;
     overflow-y: auto;
 }
 
 .bankListBox {
     background-color: #fff;
-    margin: 0.1rem 0;
+    margin: 10px 0;
 }
 
 .bankListBox .dd__hd {
@@ -1713,7 +1713,7 @@ body, html {
 .bankListBox .dd__hd:before {
     content: "";
     position: absolute;
-    left: 0.12rem;
+    left: 12px;
     right: 0;
     height: 1px;
     background-color: #F1F1F1;
@@ -1731,15 +1731,15 @@ body, html {
 }
 
 .bankList__weui-cells .icon-navImg {
-    width: 0.28rem;
-    height: 0.28rem;
-    margin-right: 0.12rem;
+    width: 28px;
+    height: 28px;
+    margin-right: 12px;
 }
 
 .bankList__weui-cells .icon-gou {
     display: inline-block;
-    width: 0.16rem;
-    height: 0.16rem;
+    width: 16px;
+    height: 16px;
     background: url(/static/image/icons/gou.png) center no-repeat;
     background-size: 100% 100%;
     opacity: 0;
@@ -1751,26 +1751,26 @@ body, html {
 
 .joinVIP {
     background-color: #39005a;
-    border-top: 0.1rem solid #f8f8f8;
-    padding: 0.05rem 0.12rem;
+    border-top: 10px solid #f8f8f8;
+    padding: 5px 12px;
 }
 
 .joinVIP_section {
     background-color: #fff;
     color: #222222;
-    padding: 0 0.23rem;
-    border-radius: 0.1rem;
-    margin: 0.15rem 0;
+    padding: 0 0.2300px;
+    border-radius: 10px;
+    margin: 15px 0;
     line-height: 1.6;
 }
 
 .joinVIP_section .joinVIP_section__hd {
-    padding: 0.18rem 0;
+    padding: 18px 0;
     border-bottom: 1px dashed #39005a;
 }
 
 .joinVIP_section .joinVIP_section__hd .title {
-    font-size: 0.18rem;
+    font-size: 18px;
     color: #39005a;
     text-align: center;
     font-weight: 600;
@@ -1778,34 +1778,34 @@ body, html {
 }
 
 .joinVIP_section .joinVIP_section__bd .con {
-    padding: 0.2rem 0;
+    padding: 020px 0;
 }
 
 .joinVIP_section .joinVIP_section__bd .con .title {
     font-weight: 600;
-    font-size: 0.15rem;
+    font-size: 15px;
 }
 
 .VIP__dd_footer {
-    height: 0.6rem;
+    height: 060px;
 }
 
 .VIP__dd_footer .inner {
-    height: 0.6rem;
+    height: 060px;
 }
 
 .VIP__dd_footer .dd_Btns {
-    height: 0.6rem;
+    height: 060px;
 }
 
 .selectSetMeal {
-    margin-top: 0.15rem;
+    margin-top: 15px;
     background-color: #fff;
-    border-radius: 0.1rem;
+    border-radius: 10px;
 }
 
 .selectSetMeal .selectSetMeal__hd {
-    padding: 0.18rem 0;
+    padding: 18px 0;
     position: relative;
 }
 
@@ -1813,25 +1813,25 @@ body, html {
     position: absolute;
     content: "";
     bottom: 0;
-    left: 0.23rem;
-    right: 0.23rem;
+    left: 0.2300px;
+    right: 0.2300px;
     height: 1px;
     border-bottom: 1px dashed #d1d1d1;
 }
 
 .selectSetMeal .selectSetMeal__hd .title {
     color: #470282;
-    font-size: 0.19rem;
+    font-size: 19px;
     font-weight: 600;
     text-align: center;
 }
 
 .selectSetMeal .setMealList {
-    padding: 0.15rem;
+    padding: 15px;
 }
 
 .selectSetMeal .setMealList li .outside {
-    margin: 0.08rem;
+    margin: 8px;
 }
 
 .selectSetMeal .setMealList li .weui-btn {
@@ -1846,20 +1846,20 @@ body, html {
 }
 
 .selectSetMeal .selectSetMeal__bd {
-    padding: 0.15rem 0;
+    padding: 15px 0;
 }
 
 .selectSetMeal .selectSetMeal__ft {
     position: relative;
-    padding: 0.23rem;
+    padding: 0.2300px;
 }
 
 .selectSetMeal .selectSetMeal__ft:before {
     position: absolute;
     content: "";
     top: 0;
-    left: 0.23rem;
-    right: 0.23rem;
+    left: 0.2300px;
+    right: 0.2300px;
     height: 1px;
     border-bottom: 1px dashed #d1d1d1;
 }
@@ -1872,29 +1872,29 @@ body, html {
 }
 
 .completionRate-box {
-    margin: .1rem;
+    margin: 10px;
 }
 
 .completionRate-box .completionRate-tit {
-    padding: .05rem 0;
+    padding: 5px 0;
     border-bottom: 1px solid #dadada;
 }
 
 .completionRate-box .completionRate-tit p {
-    font-size: .18rem;
+    font-size: 18px;
     color: #222;
 }
 
 .completionRate-box .completionRate-p {
-    font-size: .15rem;
+    font-size: 15px;
     color: #222;
-    line-height: .25rem;
+    line-height: 25px;
 }
 
 .completionRate-box .completionRate-text {
-    font-size: .15rem;
+    font-size: 15px;
     color: #222;
-    margin: .05rem 0;
+    margin: 5px 0;
 }
 
 .popup-mask-box {
@@ -1928,7 +1928,7 @@ body, html {
     transition-property: transform;
     -webkit-transform: translate3d(0, 100%, 0);
     transform: translate3d(0, 100%, 0);
-    padding: 0.2rem;
+    padding: 020px;
 }
 
 .popup-mask-box .modal-in {
@@ -1944,7 +1944,7 @@ body, html {
 }
 
 .popup-mask-box .popup_text_div h1 {
-    font-size: 0.2rem;
+    font-size: 020px;
     font-weight: bold;
     width: 100%;
     display: block;
@@ -1952,15 +1952,15 @@ body, html {
 }
 
 .popup-mask-box .popup_text_div p {
-    font-size: 0.15rem;
-    line-height: 0.25rem;
+    font-size: 15px;
+    line-height: 025px;
 }
 
 .popup-mask-box .bind_jump {
     display: block;
     width: 100%;
-    margin-top: 0.1rem;
-    font-size: 0.18rem;
+    margin-top: 10px;
+    font-size: 18px;
     color: red;
     text-align: center;
 }

@@ -94,7 +94,7 @@ function optionBindResult(ret) {
                 document.getElementById("qqNum").value = qq;
                 document.getElementById("qqNum").readOnly = true;
                 $(".btn-submit").remove();
-                $(".main").append("<a href=\"bindinfo.html\" class=\"weui-btn weui-btn-active\" style=\"margin:.2rem .12rem .2rem;\">返回</a>");
+                $(".main").append("<a href=\"bindinfo.html\" class=\"weui-btn weui-btn-active\" style=\"margin:.2rem 12px .2rem;\">返回</a>");
             }
         } else if (json.errcode == 2) {
             tips("登陆失败，请重新登陆");

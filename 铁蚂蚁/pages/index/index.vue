@@ -8,7 +8,7 @@
 			</a>
 			</div>
 		</div>
-		<div class="main" style="padding:.1rem;">
+		<div class="main" style="padding:10px;">
 			<div class="swiper-container banner">
 			<div class="swiper-wrapper"></div>
 			<!-- Add Pagination -->
