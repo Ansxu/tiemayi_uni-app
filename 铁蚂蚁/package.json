@@ -10,5 +10,8 @@
   "license": "ISC",
   "devDependencies": {
     "@types/uni-app": "^1.4.1"
+  },
+  "dependencies": {
+    "js-md5": "^0.7.3"
   }
 }

@@ -1,16 +1,24 @@
+import md5 from 'js-md5';
 //API接口地址
 // 线上
-// const host = 'https://api.gllyz.com/api/';
+// const host = 'https://api.damingduo.cn/api/';
 // 线上后台地址
 // const filePath = 'http://xcx.gllgyz.com';
-const host = 'http://hxapia.com/api/';// 测试
+const host = 'http://xmyapi.wtvxin.com/api/';// 测试
+const website = 'http://www.3318pk.com';
 const wssPath = 'wss://hxapia.com/WebSocketServer.ashx';// wss地址
 const filePath = 'http://www.hxapia.com';// 测试后台地址
 const LoginPath = "/pages/login/main";//登录路径
 const RegisterPath = "/pages/login/register/main";//注册路径
+
+const RequestFrom = 'H5';
+const Apikey = 'TxRe@5_6A7a#e_8Fr5c1_36El@1a1_u7tFtr@Rg';
+const AppId = 'A6010957284142';
+const ClientId = '32422354D41A4E7814D0ACDF510D2167';
+const ClientSecret = '79C8F22AB0DD19B4A74F254A75887DAA';
 export {
   host,filePath,wssPath,
-  dateUtils,LoginPath,RegisterPath
+  dateUtils,LoginPath,RegisterPath,ClientId,ClientSecret
 }
 
 //请求封装 //loginFn:重新登录后执行的函数
@@ -19,7 +27,7 @@ let status = false;
 const code={
   success:0,//成功
   fail:1,//失败
-  notRegister:2,//未注册
+  notRegister:3,//未注册
   resCode1:200,//成功特别方式
 }
 function request(url, data,method, loginFn) {
@@ -27,16 +35,27 @@ function request(url, data,method, loginFn) {
     title: '加载中' //数据请求前loading
   })
   return new Promise((resolve, reject) => {
+    const Timetamp = (new Date()).getTime(); //当前时间戳
+    const Sign = md5(AppId + ClientId + ClientSecret + Apikey + Timetamp); //签名
+    console.log({
+      AppId,
+      Timetamp,
+      Sign,
+      RequestFrom
+    })
     uni.request({
       url: host + url, //仅为示例，并非真实的接口地址
       method: method,
       data: data,
       header: {
-        'content-type': 'application/json'
+        AppId,
+        Timetamp,
+        Sign,
+        RequestFrom
       },
       success: function (res) {
         uni.hideLoading();
-        switch (res.data.code) {
+        switch (res.data.errcode) {
           case code.success:
             resolve(res.data);
             break;
@@ -166,24 +185,23 @@ export function valPhone(tel) {
   var r_phone = /^[1][3,4,5,6,7,8][0-9]{9}$/;
   // var phoneNumber = $.trim($('#phoneNumber').val());
   if (trim(tel) == "") {
-    uni.showToast({
-      title: "手机号不能为空!",
-      icon: "none",
-      duration: 2000
-    });
+    toast( "手机号不能为空!");
     return false;
   }
   if (!r_phone.test(tel)) {
-    uni.showToast({
-      title: "请输入正确的手机格式!",
-      icon: "none",
-      duration: 1500
-    });
+    toast("请输入正确的手机格式!");
     return false;
   }
   return true;
 }
 
+export function toast(title,icon,time=2000){
+  uni.showToast({
+      title,
+      icon:icon?'success':'none',
+      duration:time
+  })
+}
 
 // 函数防抖
 let timeout = null
@@ -436,4 +454,15 @@ export function goUrl(url){
   uni.navigateTo({
     url
   })
+}
+
+//产生不相同的字符串
+export function CreatOnlyVal() {
+  var d = new Date().getTime();
+  var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = (d + Math.random() * 16) % 16 | 0;
+      d = Math.floor(d / 16);
+      return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+  });
+  return uuid;
 }

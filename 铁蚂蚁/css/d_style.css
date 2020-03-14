@@ -1964,3 +1964,9 @@ body, html {
     color: red;
     text-align: center;
 }
+.inputGou{
+    background:url('/static/image/icons/agreement_1_2.png') center no-repeat !important;
+}
+.codeTimeend{
+    background:#999!important;
+}
