@@ -8,7 +8,10 @@ const wssPath = 'wss://hxapia.com/WebSocketServer.ashx';// wss地址
 const filePath = 'http://www.hxapia.com';// 测试后台地址
 const LoginPath = "/pages/login/main";//登录路径
 const RegisterPath = "/pages/login/register/main";//注册路径
-
+export {
+  host,filePath,wssPath,
+  dateUtils,LoginPath,RegisterPath
+}
 
 //请求封装 //loginFn:重新登录后执行的函数
 let status = false;
@@ -428,14 +431,9 @@ export function get_time_diff(time) {
 
   return diff;
 }
-// module.exports = {
-//   dateUtils: dateUtils,
-// }
-export {
-  host,
-  filePath,
-  wssPath,
-  dateUtils,
-  LoginPath,
-  RegisterPath
+
+export function goUrl(url){
+  uni.navigateTo({
+    url
+  })
 }

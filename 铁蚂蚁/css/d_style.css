@@ -801,7 +801,7 @@ body, html {
     text-align: center;
 }
 
-.regLogForm .hasAccountMag a {
+.regLogForm .hasAccountMag .a {
     color: #eb0101;
     margin: 0 0.1rem;
 }
