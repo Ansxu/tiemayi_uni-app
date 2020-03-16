@@ -138,68 +138,50 @@
 			</div>
 			</div>
 		</div>
-		<!--底部-->
-		<div class="null50">
-			<footer>
-			<ul class="navList clear">
-				<li class="ft1 active">
-				<a href="index.html">首页</a>
-				</li>
-				<li class="ft2">
-				<a href="javascript:IsNovice();">全部任务</a>
-				</li>
-				<li class="ft3">
-				<a href="html/task/dispatchtask.html" class="icon ftbtn">接单</a>
-				</li>
-				<li class="ft4">
-				<a href="html/task/receivedtask.html">已接任务</a>
-				</li>
-				<li class="ft5">
-				<a href="html/user/member.html">个人中心</a>
-				</li>
-			</ul>
-			</footer>
-		</div>
-		<!--底部 end-->
+		<footers></footers>
 	</div>
 </template>
 
 <script>
+import footers from '@/components/footer.vue'
 export default {
-  data() {
-    return {
-      title: "Hello"
-    };
-  },
-  onLoad() {},
-  methods: {}
+	components:{
+		footers
+	},
+	data() {
+		return {
+		title: "Hello"
+		};
+	},
+	onLoad() {},
+	methods: {}
 };
 </script>
 
-<style>
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+<style lang="scss" scoped>
+	.content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	}
 
-.logo {
-  height: 200rpx;
-  width: 200rpx;
-  margin-top: 200rpx;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 50rpx;
-}
+	.logo {
+	height: 200rpx;
+	width: 200rpx;
+	margin-top: 200rpx;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 50rpx;
+	}
 
-.text-area {
-  display: flex;
-  justify-content: center;
-}
+	.text-area {
+	display: flex;
+	justify-content: center;
+	}
 
-.title {
-  font-size: 36rpx;
-  color: #8f8f94;
-}
+	.title {
+	font-size: 36rpx;
+	color: #8f8f94;
+	}
 </style>

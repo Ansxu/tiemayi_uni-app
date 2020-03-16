@@ -434,7 +434,7 @@ footer {
     width: 25%;
 }
 
-.navList li a {
+.navList li p {
     display: block;
     font-size: 12px;
     color: #666;
@@ -443,51 +443,51 @@ footer {
     text-align: center;
 }
 
-.navList li.active a, .navList li a:hover {
+.navList li.active p {
     color: #FF662A;
 }
 
-.navList li.ft1 a {
+.navList li.ft1 p {
     background: url(/static/image/footer/ft1.png) center 6px no-repeat;
     background-size: 26px auto;
 }
 
-.navList li.ft1 a:hover, .navList li.ft1.active a {
+ .navList li.ft1.active p {
     background: url(/static/image/footer/ft1_1.png) center 6px no-repeat;
     background-size: 26px auto;
 }
 
-.navList li.ft2 a {
+.navList li.ft2 p {
     background: url(/static/image/footer/ft2.png) center 6px no-repeat;
     background-size: 26px auto;
 }
 
-.navList li.ft2 a:hover, .navList li.ft2.active a {
+.navList li.ft2.active p {
     background: url(/static/image/footer/ft2_1.png) center 6px no-repeat;
     background-size: 26px auto;
 }
 
-.navList li.ft4 a {
+.navList li.ft4 p {
     background: url(/static/image/footer/ft3.png) center 6px no-repeat;
     background-size: 26px auto;
 }
 
-.navList li.ft4.active a, .navList li.ft4 a:hover {
+.navList li.ft4.active p{
     background: url(/static/image/footer/ft3_1.png) center 6px no-repeat;
     background-size: 26px auto;
 }
 
-.navList li.ft5 a {
+.navList li.ft5 p {
     background: url(/static/image/footer/ft4.png) center 6px no-repeat;
     background-size: 26px auto;
 }
 
-.navList li.ft5.active a, .navList li.ft5 a:hover {
+.navList li.ft5.active p {
     background: url(/static/image/footer/ft4_1.png) center 6px no-repeat;
     background-size: 26px auto;
 }
 
-.navList li.ft3 a {
+.navList li.ft3 p {
     display: block;
     height: 60px;
     width: 60px;

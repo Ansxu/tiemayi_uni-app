@@ -64,11 +64,10 @@ export default {
         }
     },
     onLoad(){
-
+        this.phone = uni.getStorageSync('userPhone');
+        this.pwd = uni.setStorageSync('userPassword');
     },
     methods:{
-        // Login/LoginByMobile
-        // Advertisement/GetHomeBanners
         login(){
             if(!this.check()) return;
             post('Login/LoginByMobile',{
@@ -78,6 +77,14 @@ export default {
                 client_secret: ClientSecret
             }).then(res=>{
                 console.log(res,'res')
+                if(this.recording){
+                    uni.setStorageSync('userPhone',this.phone)
+                    uni.setStorageSync('userPassword',this.pwd)
+                }
+                toast('登录成功',true)
+                setTimeout(()=>{
+                    uni.navigateBack();
+                },2000)
             })
         },
         check(){

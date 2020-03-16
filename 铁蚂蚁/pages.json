@@ -23,6 +23,12 @@
 			"style": {
 				"navigationStyle":"custom"
 			}
+		},
+		{
+			"path": "pages/user/menber",
+			"style": {
+				"navigationStyle":"custom"
+			}
 		}
 	],
 	"globalStyle": {
