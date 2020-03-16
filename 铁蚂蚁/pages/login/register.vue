@@ -143,7 +143,7 @@
 </template>
     
 <script>
-import {CreatOnlyVal,host,goUrl,valPhone,toast,post} from '@/utils'
+import {CreatOnlyVal,host,valPhone,toast,post} from '@/utils'
 export default {
     data(){
         return {
