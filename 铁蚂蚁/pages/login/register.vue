@@ -229,7 +229,7 @@ export default {
                 return false;
             }
             if(this.pwd.length<6||this.pwd.length>15){
-                toast('请输入密码！');
+                toast('请输入6到16位密码！');
                 return false;
             }
             if(this.pwd!==this.comfirmPwd){
