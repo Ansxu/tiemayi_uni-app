@@ -94,9 +94,6 @@
 		</div>
 		<a href="javascript:;" class="weui-btn weui-btn-active btn-submit" style="margin:.2rem .12rem .2rem;">提交</a>
 	</div>
-	<link rel="stylesheet" type="text/css" href="../../script/uploader/css/weui.css" />
-	<script type="text/javascript" src="../../script/common/uploadimg.js"></script>
-	<script type="text/javascript" src="../../script/user/bindidcard.js"></script>
 </div>
 </template>
 

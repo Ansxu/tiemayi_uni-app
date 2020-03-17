@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="weui-cell__ft">
                                     <div class="imgBox">
-                                        <img src="" id="ValidateImg" alt="验证码,看不清楚?请点击刷新验证码" alt="" />
+                                        <img src="" id="ValidateImg" alt="验证码,看不清楚?请点击刷新验证码"/>
                                     </div>
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
                                 </div>
                                 <div class="weui-cell__ft">
                                     <div class="imgBox">
-                                        <img src="" id="ValidateImg2" alt="验证码,看不清楚?请点击刷新验证码" alt="" />
+                                        <img src="" id="ValidateImg2" alt="验证码,看不清楚?请点击刷新验证码" />
                                     </div>
                                 </div>
                             </div>
