@@ -251,24 +251,24 @@
     margin-left: 12px
 }
 
-.Announcement .labelhd span {
+.Announcement .labelhd span {	
     padding-left: 20px;
     color: #999;
     background: url(/static/image/icons/notice.png) left center no-repeat;
     background-size: 20px;
 }
 
-.noticeList {
+/* .noticeList {
     height: 40px;
     overflow: hidden;
-}
+} */
 
-.noticeList li {
+/* .noticeList li {
     height: 40px;
     line-height: 40px;
-}
+} */
 
-.noticeList li .box {
+/* .noticeList li .box {
     display: block;
     padding: 0 12px;
 }
@@ -282,15 +282,15 @@
     float: right;
     color: #606060;
     font-size: 13px;
-}
+} */
 
-.notice_wechat {
+/* .notice_wechat {
     margin: 0 12px;
     border-top: 1px solid #efefef;
     height: 40px;
     line-height: 40px;
 }
-
+ */
 
 /*新手任务*/
 
