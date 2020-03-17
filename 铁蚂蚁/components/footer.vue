@@ -31,19 +31,19 @@ export default {
             tab:[
                 {
                     name:'首页',
-                    url:'ingdex/index',
+                    url:'index/index',
                 },
                 {
                     name:'全部任务',
-                    url:'ingdex/index',
+                    url:'index/index',
                 },
                 {
                     name:'接单',
-                    url:'ingdex/index',
+                    url:'index/index',
                 },
                 {
                     name:'已接任务',
-                    url:'ingdex/index',
+                    url:'index/index',
                 },
                 {
                     name:'个人中心',
@@ -61,7 +61,7 @@ export default {
     methods:{
         // 跳转tabbar
         switchTab(url){
-            uni.switchTab({
+            uni.navigateTo({
                 url:'/pages/'+url
             })
         }

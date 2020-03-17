@@ -195,14 +195,6 @@ export function valPhone(tel) {
   return true;
 }
 
-export function toast(title,icon,time=2000){
-  uni.showToast({
-      title,
-      icon:icon?'success':'none',
-      duration:time
-  })
-}
-
 // 函数防抖
 let timeout = null
 export function debounce(fn, wait = 500) {
@@ -449,10 +441,23 @@ export function get_time_diff(time) {
 
   return diff;
 }
-
-export function goUrl(url){
+// 提示
+export function toast(title,icon,time=2000){
+  uni.showToast({
+      title,
+      icon:icon?'success':'none',
+      duration:time
+  })
+}
+// 跳转url,带参
+export function goUrl(url,params){
+  let p ='';
+  Object.keys(params).map((item,index)=>{
+    p+=`${item}=${params[index]}`;
+    if(index<params.length){p+='&'};
+  })
   uni.navigateTo({
-    url
+    url:`/pages/${url}?${p}`
   })
 }
 

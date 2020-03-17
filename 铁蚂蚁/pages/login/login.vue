@@ -42,8 +42,8 @@
                         </div>
                         <div  class="weui-btn weui-btn-active btn-login" @click="login">登录</div>
                         <div class="hasAccountMag">
-                            <div style="color:#222;" @click="goUrl('/pages/login/forgetpwd')">忘记密码</div>还没有账号？
-                            <div class="a" @click="goUrl('/pages/login/register')" >立即注册</div>
+                            <div style="color:#222;" @click="goUrl('login/forgetpwd')">忘记密码</div>还没有账号？
+                            <div class="a" @click="goUrl('login/register')" >立即注册</div>
                         </div>
                     </div>
                 </form>
@@ -64,8 +64,8 @@ export default {
         }
     },
     onLoad(){
-        this.phone = uni.getStorageSync('userPhone');
-        this.pwd = uni.setStorageSync('userPassword');
+        this.phone = uni.getStorageSync('userPhone')||'';
+        this.pwd = uni.getStorageSync('userPassword')||'';
     },
     methods:{
         login(){
@@ -76,11 +76,14 @@ export default {
                 client_id: ClientId,
                 client_secret: ClientSecret
             }).then(res=>{
-                console.log(res,'res')
+                const data = res.obj;
                 if(this.recording){
-                    uni.setStorageSync('userPhone',this.phone)
-                    uni.setStorageSync('userPassword',this.pwd)
+                    uni.setStorageSync('userPhone',this.phone);
+                    uni.setStorageSync('userPassword',this.pwd);
                 }
+                uni.setStorageSync('userId',data.UserId);
+                uni.setStorageSync('token',data.Token);
+                uni.setStorageSync('userInfo',data);
                 toast('登录成功',true)
                 setTimeout(()=>{
                     uni.navigateBack();
