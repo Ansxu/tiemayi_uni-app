@@ -1,31 +1,31 @@
 /*系统消息*/
 /*为空时*/
-.empty{ padding-top: 1.5rem;padding-bottom:1.5rem;}
-.empty .icon{ height: .9rem; width: .9rem; border-radius: 50%; margin: 0 auto 10px;}
+.empty{ padding-top: 150px;padding-bottom:150px;}
+.empty .icon{ height: 90px; width: 90px; border-radius: 50%; margin: 0 auto 10px;}
 .icon_message{ background: url(/static/image/icons/no_message.png) center center no-repeat; background-size: 100%;}
 .empty p{ font-size: 15px; color: #999; text-align: center;}
 /*消息列表*/
 .messageList .box{ padding: 12px;}
 .messageList .time { text-align: center; margin-bottom: 5px;}
 .messageList .time span{ font-size: 12px; background: #ddd; color: #999; border-radius: 100px; padding: 5px 10px;}
-.messageList .title{ height: 30px; line-height: .32rem; font-size: 15px;}
+.messageList .title{ height: 30px; line-height: 32px; font-size: 15px;}
 .messageList .title span{ position: relative; overflow: hidden;white-space: nowrap;text-overflow: ellipsis; width: 90%;}
-.messageList .title span .icon{ position: absolute; left: 0rem; top: 0rem; height: 9px; width: 9px; border-radius: 50%; background: #ee7818;}
+.messageList .title span .icon{ position: absolute; left: 0; top: 0; height: 9px; width: 9px; border-radius: 50%; background: #ee7818;}
 .messageList .desc{ color: #666;}
-.messageList .box_ft{ height: .4rem; text-align: right; line-height: .4rem; line-height: .4rem; border-bottom: 1px solid #eee; margin-top: 10px;}
+.messageList .box_ft{ height: 40px; text-align: right; line-height: 40px; line-height: 40px; border-bottom: 1px solid #eee; margin-top: 10px;}
 .messageList .box_ft .link_btn{display: inline-block; color: #5c91f1;}
-.messageList .box_ft .arrow_r{ padding-right: .2rem; position: relative;}
+.messageList .box_ft .arrow_r{ padding-right: 20px; position: relative;}
 .messageList .box_ft .arrow_r:after{
 	content: "";
 	display: block;
-	height: 12px;
-	width: 12px;
+	height: 10px;
+	width: 10px;
 	border-top: 1px solid #bbb;
 	border-right: 1px solid #bbb;
 	position: absolute;
 	right: 0;
 	top: 50%;
-	margin-top: -6px;
+	margin-top: -5px;
 	transform: rotate(45deg);
 	-webkit-transform: rotate(45deg);
 	-moz-transform: rotate(45deg);

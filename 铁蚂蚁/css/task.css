@@ -44,11 +44,11 @@
 /*垫付/浏览任务列表*/
 
 .tabNav {
-    height: .4rem;
-    line-height: .4rem;
+    height: 40px;
+    line-height: 40px;
     margin: 0 12px 10px;
     border: 1px solid #e6e6e6;
-    border-radius: .2rem;
+    border-radius: 20px;
     overflow: hidden;
 }
 
@@ -89,7 +89,7 @@
     color: #ff682d;
     padding-left: 25px;
     background: url(/static/image/icons/jb_icon.png) left center no-repeat;
-    background-size: .2rem;
+    background-size: 20px;
 }
 
 .df_taskList .box-left .rb {
@@ -101,7 +101,7 @@
     margin-top: 5px;
     color: #999;
     font-size: 12px;
-    line-height: .2rem;
+    line-height: 20px;
 }
 
 .df_taskList .box-right {
@@ -124,7 +124,7 @@
     margin-top: 5px;
     color: #999;
     font-size: 12px;
-    line-height: .2rem;
+    line-height: 20px;
     text-align: right;
 }
 

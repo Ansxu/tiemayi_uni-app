@@ -579,7 +579,7 @@
 
 .Faq-detail li {
     border-bottom: 1px solid #eee;
-    padding: 0 12px;
+    padding: 0 12px!important;
 }
 
 .Faq-detail li:last-child {
@@ -934,7 +934,7 @@
 /*邀请奖励排行榜*/
 
 .bg_img {
-    height: 100%;
+    height: 100vh;
     background: url(/static/image/of/backgroundimg2.jpg) top center no-repeat;
     background-size: cover;
 }

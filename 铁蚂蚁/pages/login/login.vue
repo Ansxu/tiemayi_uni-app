@@ -93,7 +93,7 @@ export default {
             }
             if(!this.pwd){
                 toast('请输入密码！');
-                return false;
+                return false;		
             }
             return true;
         },

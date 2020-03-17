@@ -34,7 +34,7 @@
 	margin:0 auto;
 }
 .img_titleBox img{
-	width: 2rem;
+	width:200px;
 	height:auto;
 	margin:0 auto;
 }
@@ -43,7 +43,7 @@
 	font-size: 16px;
 	color:#d1252c;
 	border-radius: 10px;
-	padding:.2rem;
+	padding:40px;
 	margin:15px 22px;
 }
 .section_content .wenList li{
