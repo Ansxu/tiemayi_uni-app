@@ -42,7 +42,7 @@
 .noticeList .box{ display: block; padding: 10px 0;}
 .noticeList .title{ font-size: 15px; }
 .noticeList .title p{ max-width: 80%; float: left;}
-.noticeList .title .icon_txt{ display: inline-block; color: #fff; background: #5f96f9; border-radius: 100px; font-size: 12px; padding: 0 5px; margin-left: 5px;}
+.noticeList .title .icon_txt{ display: inline-block; color: #fff; background: #5f96f9; border-radius: 10px; font-size: 12px; padding:5px; margin-left: 5px;}
 .noticeList .time{ font-size: 12px; color: #999;}
 
 /*公告详情*/
