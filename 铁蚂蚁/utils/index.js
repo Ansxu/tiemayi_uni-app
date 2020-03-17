@@ -452,10 +452,12 @@ export function toast(title,icon,time=2000){
 // 跳转url,带参
 export function goUrl(url,params){
   let p ='';
-  Object.keys(params).map((item,index)=>{
-    p+=`${item}=${params[index]}`;
-    if(index<params.length){p+='&'};
-  })
+  if(params){
+    Object.keys(params).map((item,index)=>{
+      p+=`${item}=${params[index]}`;
+      if(index<params.length){p+='&'};
+    })
+  }
   uni.navigateTo({
     url:`/pages/${url}?${p}`
   })

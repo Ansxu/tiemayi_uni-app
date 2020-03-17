@@ -18,4 +18,5 @@
 	@import url('css/common.css');
 	@import url('css/global.css');
 	@import url('css/style.css');
+    @import url('css/d_style.css');
 </style>

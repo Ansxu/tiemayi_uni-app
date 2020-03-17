@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta content="telephone=no" name="format-detection">       <!--不把11位数字转化为电话号码-->
+	<title>接单操作选择</title>
+	<link rel="stylesheet" type="text/css" href="../../css/global.css" />
+	<link rel="stylesheet" type="text/css" href="../../script/layer_mobile/need/layer.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/task.css" />
+	<link href="../../css/ion_rangeslider.css" rel="stylesheet">
+	<link href="../../css/ion_rangeslider_skinhtml5.css" rel="stylesheet">
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/jquery/jquerymin.js"></script>
+	<script type="text/javascript" src="../../script/ion_rangeslider/ion_rangeslider.js"></script>
+	<script type="text/javascript" src="../../script/resetfontsize.js"></script>
+	<script type="text/javascript" src="../../script/common/constant.js"></script>
+	<script type="text/javascript" src="../../script/common/common.js"></script>
+	<script type="text/javascript" src="../../script/layer_mobile/layer.js"></script>
+	<script type="text/javascript" src="../../script/task/selecttaskinfo.js"></script>
+</head>
+
+<body class="bg_fff">
+	<div class="h45">
+		<div class="head bb_border">
+			<a href="javascript:api.closeWin();" class="btn_back"></a>
+			<div class="title center">接单操作选择</div>
+		</div>
+	</div>
+	<div class="main mt10">
+		<div class="Browsetask">
+			<div class="itembox">
+				<div class="titleHd">
+					<span><span id="txtPlatName">淘宝</span>接单账号选择(必填)</span>
+				</div>
+				<div class="lines">
+					<div class="select" id="selectbtn"><span class="text name">选择接单账号</span></div>
+					<ul id="accountList" style="display: none;">
+					</ul>
+				</div>
+			</div>
+			<div class="itembox">
+				<div class="titleHd">
+					<span>选择操作设备</span>
+				</div>
+				<div class="Btns text_l">
+					<!-- <a class="btn" href="javascript:;">全部</a> -->
+					<a class="btn cur" href="javascript:;">手机</a>
+					<!-- <a class="btn" href="javascript:;">电脑</a> -->
+				</div>
+			</div>
+			<div class="itembox" id="selectMaxMoney">
+				<div class="titleHd">
+					<span>选择垫付金额</span>
+				</div>
+				<input type="text" id="maxMoney" name="maxMoney" value="" />
+			</div>
+			<div class="itembox">
+				<div class="titleHd">
+					<span>选择返款方式</span>
+				</div>
+				<div class="Btns text_l">
+					<!-- <a class="btn" href="javascript:;">全部</a> -->
+					<a class="btn cur" href="javascript:;">平台返款</a>
+					<!-- <a class="btn" href="javascript:;">商家返款</a> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="null50">
+		<footer class="ftbtn">
+			<a class="btn" onclick="submitOk()">确认</a>
+		</footer>
+	</div>
+</body>
+
+</html>

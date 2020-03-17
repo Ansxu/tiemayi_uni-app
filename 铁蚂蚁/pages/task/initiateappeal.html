@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta content="telephone=no" name="format-detection">       <!--不把11位数字转化为电话号码-->
+    <title>申诉任务</title>
+    <link rel="stylesheet" type="text/css" href="../../css/global.css" />
+    <link rel="stylesheet" type="text/css" href="../../script/layer_mobile/need/layer.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/task.css" />
+    <script type="text/javascript" src="../../script/api.js"></script>
+    <script type="text/javascript" src="../../script/jquery/jquerymin.js"></script>
+    <script type="text/javascript" src="../../script/resetfontsize.js"></script>
+    <script type="text/javascript" src="../../script/common/constant.js"></script>
+    <script type="text/javascript" src="../../script/common/common.js"></script>
+    <script type="text/javascript" src="../../script/layer_mobile/layer.js"></script>
+    <script type="text/javascript" src="../../script/dot_min.js"></script>
+    <script type="text/javascript" src="../../script/common/uploadimg.js"></script>
+    <script type="text/javascript" src="../../script/task/initiateappeal.js"></script>
+</head>
+
+<body class="bg_fff">
+    <div class="h45">
+        <div class="head bb_border">
+            <a href="../../html/task/receivedtask.html" class="btn_back"></a>
+            <div class="title center">申诉任务</div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="from pd12">
+            <div class="from-item mb10 arrow_r" id="select_type">
+                <label class="text">申诉类型</label>
+                <span style="color:#666;float:right;" class="questiontype_text"></span>
+            </div>
+            <div class="from-item mb20">
+                <div class="textarea_box">
+                    <textarea placeholder="请简要填写申诉说明" id="txtQuestion"></textarea>
+                </div>
+            </div>
+            <div class="piclist Uploadimg mb10">
+                <ul class="clear">
+                    <li>
+                        <div class="img">
+                          <div class="upimg" onclick="getpic(this,'questionImgF',10)"><img class="uploadImg" /></div>
+                          <input type="hidden" id="questionImgF" readonly="true" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img">
+                          <div class="upimg" onclick="getpic(this,'questionImgS',10)"><img class="uploadImg" /></div>
+                          <input type="hidden" id="questionImgS" readonly="true" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img">
+                          <div class="upimg" onclick="getpic(this,'questionImgT',10)"><img class="uploadImg" /></div>
+                          <input type="hidden" id="questionImgT" readonly="true" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <a class="btn_100" onclick="submitAppeal()">提交</a>
+        </div>
+    </div>
+</body>
+
+</html>

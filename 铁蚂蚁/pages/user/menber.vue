@@ -1,17 +1,17 @@
 <template>
     <div class="bg_f8f8f8">
         <div class="head memberHead noHeight__memberHead">
-            <!-- <a href="../../index.html" class="btn_back">返回</a> -->
+            <!-- <div href="../../index.html" class="btn_back">返回</div> -->
             <div class="title center">个人中心</div>
-            <!-- <a href="#" class="btn_set">设置</a> -->
+            <!-- <div href="#" class="btn_set">设置</div> -->
         </div>
         <div class="main">
             <div class="memberTop">
                 <div class="myMessages">
-                    <div class="touxiang" onclick="location='accountinfo.html'">
+                    <div class="touxiang" @click="goUrl('user/accountinfo')">
                         <img src="static/image/tx/tx_pic.jpg" id="Avatar" alt="" />
                     </div>
-                    <a href="grade_rule.html" class="btn_vs">查看等级规则</a>
+                    <div @click="goUrl('user/grade_rule')" class="btn_vs">查看等级规则</div>
                     <div class="mySome">
                         <span class="mySomes" id="UserId">ID：XXXXX</span>
                         <span class="myUsername" id="UserName">用户名：XXXXX</span>
@@ -22,70 +22,70 @@
                 </div>
                 <div class="myPrice">
                     <div class="myPrice_text">
-                        <a href="../../html/user/commision/commision.html" class="outside">
+                        <div @click="goUrl('user/commision/commision')" class="outside">
                             <p>佣金收益(金)</p>
                             <p style="font-size:.16rem;" id="UserAmount">0</p>
-                        </a>
+                        </div>
                     </div>
                     <div class="myPrice_text">
-                        <a href="../../html/user/commision/corpus.html" class="outside">
+                        <div @click="goUrl('user/commision/corpus')" class="outside">
                             <p>本金总计(元)</p>
                             <p style="font-size:.16rem;" id="UserWallet">0</p>
-                        </a>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="shuxian"></div>
             <div class="section memberIndex__section dingdan">
-                <div class="section__hd weui-cell" onclick="location='../task/receivedtask.html'">
+                <div class="section__hd weui-cell" @click="goUrl('task/receivedtask')">
                     <div class="weui-cell__bd">
                         <p class="title">我的订单</p>
                     </div>
                     <div class="weui-cell__ft">
-                        <a href="../task/receivedtask.html">
+                        <div @click="goUrl('task/receivedtask')">
                             <span class="more">全部订单</span>
                             <span class="icon-arrow icon-arrowRight"></span>
-                        </a>
+                        </div>
                     </div>
                 </div>
                 <div class="section__bd">
                     <ul class="dd_navList li25 block__navList">
                         <li>
-                            <a href="../task/receivedtask.html" class="outside">
+                            <div @click="goUrl('task/receivedtask')" class="outside">
                                 <div class="icon-img">
                                     <img src="static/image/nav/memberindex_nav1_1.png" alt="">
                                     <span class="circleNum" id="OrderUndone">0</span>
                                 </div>
                                 <p class="title" style="color:#7A7A7A">未完成</p>
-                            </a>
+                            </div>
                         </li>
                         <li>
-                            <a href="../task/receivedtask.html" class="outside">
+                            <div @click="goUrl('task/receivedtask')" class="outside">
                                 <div class="icon-img">
                                     <img src="static/image/nav/memberindex_nav1_2.png" alt="">
                                     <span class="circleNum" id="OrderCompleted">0</span>
                                 </div>
                                 <p class="title" style="color:#7A7A7A">已完成</p>
-                            </a>
+                            </div>
                         </li>
 
                         <li>
-                            <a href="../task/receivedtask.html" class="outside">
+                            <div @click="goUrl('task/receivedtask')" class="outside">
                                 <div class="icon-img">
                                     <img src="static/image/nav/memberindex_nav1_3.png" alt="">
                                     <span class="circleNum" id="OrderRevoked">0</span>
                                 </div>
                                 <p class="title" style="color:#7A7A7A">已撤销</p>
-                            </a>
+                            </div>
                         </li>
                         <li>
-                            <a href="../task/receivedtask.html" class="outside">
+                            <div @click="goUrl('task/receivedtask')" class="outside">
                                 <div class="icon-img">
                                     <img src="static/image/nav/memberindex_nav1_4.png" alt="">
                                     <span class="circleNum" id="OrderAppeal">0</span>
                                 </div>
                                 <p class="title" style="color:#7A7A7A">申诉中</p>
-                            </a>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -94,53 +94,73 @@
             <div class="messageMenu">
                 <ul>
                     <li class="messageMenuLi">
-                        <a href="bindinfo.html" class="outside">
+                        <div @click="goUrl('user/bindinfo')" class="outside">
                             <div>
                                 <img src="static/image/nav/memberindex_nav2_1.png" alt="" />
                             </div>
                             <span style="color:#7A7A7A">绑定信息</span>
-                        </a>
+                        </div>
                     </li>
-
-                    <!-- <li class="messageMenuLi">
-                        <a href="../user/appeal/appeals_center.html" class="outside">
+                    <li class="messageMenuLi">
+                        <div @click="goUrl('user/appeal/appeals_center')" class="outside">
                             <div>
                                 <img src="static/image/nav/memberindex_nav2_3.png" alt="" />
                             </div>
                             <span style="color:#7A7A7A">申诉中心</span>
-                    </li> -->
+                        </div>
+                    </li>
+                    <li class="messageMenuLi">
+                        <div @click="goUrl('other/faq')" class="outside">
+                            <div>
+                                <img src="static/image/nav/memberindex_nav2_4.png" alt="" />
+                            </div>
+                            <span style="color:#7A7A7A">新手教学</span>
+                        </div>
+                    </li>
+                    <li class="messageMenuLi" id="shareqrcode">
+                        <div @click="goUrl('user/shareqrcode')" class="outside">
+                            <div>
+                                <img src="static/image/nav/memberindex_nav2_7.png" alt="" />
+                            </div>
+                            <span style="color:#7A7A7A">分享二维码</span>
+                        </div>
+                    </li>
+                    <li class="messageMenuLi">
+                        <div @click="goUrl('user/taskcompletionrate')" class="outside">
+                            <div>
+                                <img src="static/image/nav/memberindex_nav2_8.png" alt="" />
+                            </div>
+                            <span style="color:#7A7A7A">账号完成率</span>
+                        </div>
+                    </li>
+                    <li class="messageMenuLi">
+                        <div @click="goUrl('user/version')" class="outside">
+                            <div>
+                                <img src="static/image/nav/memberindex_nav2_5.png" alt="" />
+                            </div>
+                            <span style="color:#7A7A7A">版本信息</span>
+                        </div>
+                    </li>
                 </ul>
             </div>
-            <a href="javascript:;" class="weui-btn btn-loginOut">退出登录</a>
+            <div href="javascript:;" class="weui-btn btn-loginOut">退出登录</div>
         </div>
         <!--底部-->
-        <footers :showIndex="4" :showOrderReceiving="false"></footers>
+        <footers :showIndex="4"></footers>
         <!--底部 end-->
-        <!--底部 end-->
-        <!-- <script type="text/javascript">
-            $(function() {
-                $(window).scroll(function() {
-                    if ($(this).scrollTop() > 0) {
-                        $('.head').removeClass("noHeight__memberHead");
-                        //console.log("aaa");
-                    } else {
-                        $('.head').addClass("noHeight__memberHead");
-                    }
-                });
-            });
-        </script> -->
     </div>
 </template>
     
 <script>
 import footers from '@/components/footer.vue';
+import {goUrl} from '@/utils';
 export default {
     components:{
         footers
     },
     data(){
         return {
-
+            goUrl,
         }
     },
     onLoad(){
@@ -156,5 +176,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+    @import url('../../css/d_style.css');
+    .section__hd{
+        padding-left:30px;
+        padding-right:20px;
+    }
 </style>

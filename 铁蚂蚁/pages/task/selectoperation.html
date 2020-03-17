@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta content="telephone=no" name="format-detection">       <!--不把11位数字转化为电话号码-->
+	<title>选择任务操作</title>
+	<link rel="stylesheet" type="text/css" href="../../css/global.css" />
+	<link rel="stylesheet" type="text/css" href="../../script/layer_mobile/need/layer.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/fsgallery.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/task.css" />
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/jquery/jquerymin.js"></script>
+	<script type="text/javascript" src="../../script/resetfontsize.js"></script>
+	<script type="text/javascript" src="../../script/common/constant.js"></script>
+	<script type="text/javascript" src="../../script/common/common.js"></script>
+	<script type="text/javascript" src="../../script/layer_mobile/layer.js"></script>
+	<script type="text/javascript" src="../../script/dot_min.js"></script>
+	<script type="text/javascript" src="../../script/common/uploadimg.js"></script>
+	<script type="text/javascript" src="../../script/task/selectoperation.js"></script>
+</head>
+
+<body class="bg_fff">
+	<div class="h45">
+		<div class="head bb_border">
+			<a href="../../html/task/receivedtask.html" class="btn_back"></a>
+			<div class="title center">选择任务操作</div>
+		</div>
+	</div>
+	<div class="main">
+		<div class="order-detail" id="taskInfo">
+
+		</div>
+		<script id="taskInfoTemp" type="text/x-dot-template">
+			<div class="shopId">
+				<span class="id">商家ID:{{=it.SellerID}}</span>
+			</div>
+			<div class="topInfo">
+				<div class="g-name"><span>目标商品</span><span class="fr">任务状态：<em class="c_Org">{{=it.AcceptTaskStatusText}}</em></span></div>
+				<div class="dl clear">
+					<div class="img fl"><img src="{{=it.ProductImg}}"></div>
+					<div class="box_r">
+						<p class="text">{{=it.ProductName}}</p>
+						<p class="text">商品价格 <span class="c_Org">{{=it.ProductPrice}}元</span></p>
+						{{if(it.TaskType==1){ }}
+						<p class="text">件数 <span class="c_Org">{{=it.ProductNum}}</span></p>
+						{{} }} {{if(it.AcceptTaskStatus==0){ }}
+						<p class="text"><span id="count_down" class="c_Org"></span>
+						</p>
+						{{} }}
+					</div>
+					{{if(it.IsPresaleTask==1){ }}
+					<div class="img fr presale-img">
+						<img src="../../image/nav/presaletask.png" />
+					</div>
+					{{} }}
+				</div>
+				{{if(it.IsPresaleTask==1){ }}
+				<div class="g-name c_Org">
+						预售任务：{{=it.PaymentStartTime}} 到 {{=it.PaymentEndTime}}在{{=it.PlatName}}平台去下单
+						<p style="font-size:0.16rem;font-weight:bold;color:red;">不到订单时间支付不能拍下付款，否则该笔订单无效</p>
+				</div>
+				{{} }}
+				{{if(it.IsTrialStatus==1){ }}
+				<div class="g-name c_Org">
+						商家审号任务：{{=it.TrialNumberTime}} 分钟内审号完成,请稍等片刻
+						<p style="font-size:0.16rem;font-weight:bold;color:red;">	商家审号通过才能操作，否则该笔订单无效</p>
+				</div>
+				{{} }}
+			</div>
+			<div class="StatusInfo">
+				<div class="Btns mb10">
+					<a class="btn {{=(it.AcceptTaskStatus<=1||(it.AcceptTaskStatus==9&&it.PayCountdown>0))&&(it.IsTrialStatus==0||it.IsTrialStatus==2)?" cur ":" "}}"
+					href="{{=(it.AcceptTaskStatus<=1||(it.AcceptTaskStatus==9&&it.PayCountdown>0))&&(it.IsTrialStatus==0||it.IsTrialStatus==2)?" javascript:operationTask(); ":"javascript:; "}}">{{=it.AcceptTaskStatus==1?"重新提交":it.AcceptTaskStatus==9&&it.PayCountdown>0?"下单提交":"操作任务"}}</a>
+					<a class="btn {{=(it.AcceptTaskStatus==4||it.AcceptTaskStatus==2)&&it.IsAppeal==0?" cur ":" "}}" href="{{=(it.AcceptTaskStatus==4||it.AcceptTaskStatus==2)&&it.IsAppeal==0?" javascript:showAppeal(); ":"javascript:; "}}">申诉任务</a>
+					<a class="btn {{=it.AcceptTaskStatus==0||it.AcceptTaskStatus==9?" cur ":" "}}" href="{{=it.AcceptTaskStatus==0||it.AcceptTaskStatus==9?" javascript:cancelTheTask(); ":"javascript:; "}}">取消任务</a> {{=it.AcceptTaskStatus==4?'
+					<p style="color:red; font-size:.18rem;" class="text_l">拒绝返款原因：'+it.SellerDenialReason+'</p>':''}}
+				</div>
+				<div class="stepInfo">
+					<ul>
+						<li class="no1 end">
+							<i class="icon num">1</i>
+							<dl>
+								<dt><label>接受任务</label><span>{{=it.CreateTime}}</span></dt>
+								{{if(it.AcceptTaskStatus==2&&!isNullOrEmpty(it.PlatOrderNo)){ }}
+								<dd>
+									<label>提交订单号</label><span id="txt_platOrderNo">{{=it.PlatOrderNo}}</span>
+									<a class="link_btn copybtn" onclick="CopyPlatOrderNo()">复制</a>
+								</dd>
+								{{} }}
+								<dd>
+									<label>任务编号</label><span id="txt_taskNo">{{=it.TaskNo}}</span>
+									<a class="link_btn copybtn" onclick="CopyTaskNo()">复制</a>
+								</dd>
+								<dd>
+									<label>接单号</label><span id="txt_taskAcceptNo">{{=it.TaskAcceptNo}}</span>
+									<a class="link_btn copybtn" onclick="CopyTaskAcceptNo()">复制</a>
+								</dd>
+								<dd><label>接单账号</label><span>{{=it.AccountName}}</span></dd>
+								{{if(it.TaskType==1){ }}
+								<dd><label>垫付金额</label><span>{{=it.Amount}}元</span></dd>
+								{{} }}
+							</dl>
+						</li>
+						<li class="no2 {{=it.AcceptTaskStatus>0&&it.AcceptTaskStatus!=5&&it.AcceptTaskStatus!=6?" active ":" "}}">
+							<i class="icon num">2</i>
+							<dl>
+								<dt><label>任务提交</label></dt> {{if(it.ChannelType!=0){ }}
+								<dd><label>任务指导图</label></dd>
+								<dd>
+									<div class="imglist thumbnails">
+										<span class="img">
+										{{if(!isNullOrEmpty(it.StepImg)){ }}
+											<img src="{{=it.StepImg}}">
+												{{} }}
+										</span>
+										<span class="img">
+										{{if(!isNullOrEmpty(it.StepImg1)){ }}
+											<img src="{{=it.StepImg1}}">
+												{{} }}
+										</span>
+										<span class="img">
+										{{if(!isNullOrEmpty(it.StepImg2)){ }}
+											<img src="{{=it.StepImg2}}">
+												{{} }}
+										</span>
+										<span class="img">
+										{{if(!isNullOrEmpty(it.StepImg3)){ }}
+											<img src="{{=it.StepImg3}}">
+												{{} }}
+										</span>
+										<span class="img">
+										{{if(!isNullOrEmpty(it.StepImg4)){ }}
+											<img src="{{=it.StepImg4}}">
+												{{} }}
+										</span>
+									</div>
+								</dd>
+								{{} }}
+								{{if(it.IsSearchList==1){ }}
+								<dd><label>搜索列表</label></dd>
+								<dd>
+									<div class="imglist thumbnails">
+										<span class="img">
+										{{if(!isNullOrEmpty(it.ImgJson.SearchPageImg)){ }}
+											<img src="{{=it.ImgJson.SearchPageImg}}">
+											{{} }}
+										</span>
+									</div>
+								</dd>
+								{{} }}
+								{{if((it.HuoBisj==1 && it.IsAddedservices==1) &&it.TaskType==1){ }}
+								<dd><label>货比三家</label></dd>
+								<dd>
+									<div class="imglist thumbnails">
+											<div class="from">
+													<p>货比三家链接1</p>
+													<div class="from-item mt10">
+															<input class="input" id="huobisanj1" style="width:300px" value="{{=it.ShoparoundLink1}}" type="text" placeholder="货比商品链接1" />
+
+													</div>
+											</div>
+
+											<div class="from">
+													<p>货比三家链接2</p>
+													<div class="from-item mt10">
+														 <input class="input" id="huobisanj2" style="width:300px" value="{{=it.ShopAroundlink2}}" type="text" placeholder="货比商品链接2" />
+													</div>
+											</div>
+
+
+
+									</div>
+								</dd>
+								{{} }}
+
+								{{if(it.IsBrowseStore==1){ }}
+								<dd><label>浏览店铺</label></dd>
+								<dd>
+									<div class="imglist thumbnails">
+										<span class="img">
+										{{if(!isNullOrEmpty(it.ImgJson.TargetProductTopImg)){ }}
+											<img src="{{=it.ImgJson.TargetProductTopImg}}">
+												{{} }}
+										</span>
+										<span class="img">
+										{{if(!isNullOrEmpty(it.ImgJson.TargetProductBottomImg)){ }}
+											<img src="{{=it.ImgJson.TargetProductBottomImg}}">
+												{{} }}
+										</span>
+										{{if(!isNullOrEmpty(it.ImgJson.ShopProductBottomImgA)){ }}
+											<span class="img">
+											<img src="{{=it.ImgJson.ShopProductBottomImgA}}">
+											</span>
+										{{} }}
+										{{if(!isNullOrEmpty(it.ImgJson.ShopProductBottomImgB)){ }}
+										<span class="img">
+											<img src="{{=it.ImgJson.ShopProductBottomImgB}}">
+										</span>
+										{{} }}
+										 {{if(!isNullOrEmpty(it.ProductName1)){ }}
+										<span class="img">
+										{{if(it.TaskType==1&&(!isNullOrEmpty(it.ProductName1)||!isNullOrEmpty(it.ProductName2))){ }}
+										 {{if(!isNullOrEmpty(it.ImgJson.AdditionalProductA1)){ }}
+											<img src="{{=it.ImgJson.AdditionalProductA1}}">
+												{{} }}
+										</span>
+										<span class="img">
+										{{if(!isNullOrEmpty(it.ImgJson.AdditionalProductB1)){ }}
+											<img src="{{=it.ImgJson.AdditionalProductB1}}">
+												{{} }}
+										</span>
+										 {{} }} {{if(!isNullOrEmpty(it.ProductName2)){ }}
+										{{if(!isNullOrEmpty(it.ImgJson.AdditionalProductA2)){ }}
+									  <span class="img">
+											<img src="{{=it.ImgJson.AdditionalProductA2}}">
+								  	</span>
+										{{} }}
+										{{if(!isNullOrEmpty(it.ImgJson.AdditionalProductB2)){ }}
+										<span class="img">
+											<img src="{{=it.ImgJson.AdditionalProductB2}}">
+										</span>
+										{{} }}
+									{{} }}
+								 {{} }}
+									</div>
+								</dd>
+								{{} }}
+								{{if(it.ShouCandp==1){ }}
+								<dd><label>收藏店铺</label></dd>
+								<dd>
+									<div class="imglist thumbnails">
+										<span class="img">
+										{{if(!isNullOrEmpty(it.ImgJson.ShouCandpimg)){ }}
+											<img src="{{=it.ImgJson.ShopCollectionImg}}">
+											{{} }}
+										</span>
+									</div>
+								</dd>
+								{{} }}
+								{{if(it.Llshoucandp==1){ }}
+								<dd><label>收藏店铺</label></dd>
+								<dd>
+									<div class="imglist thumbnails">
+										<span class="img">
+										{{if(!isNullOrEmpty(it.ImgJson.ShopCollectionImg)){ }}
+											<img src="{{=it.ImgJson.ShopCollectionImg}}">
+											{{} }}
+										</span>
+									</div>
+								</dd>
+								{{} }}
+								{{if(it.ShouCansp==1){ }}
+								<dd><label>收藏商品</label></dd>
+								<dd>
+									<div class="imglist thumbnails">
+										<span class="img">
+										{{if(!isNullOrEmpty(it.ImgJson.ProductCollectionImg)){ }}
+											<img src="{{=it.ImgJson.ProductCollectionImg}}">
+											{{} }}
+										</span>
+									</div>
+								</dd>
+								{{} }} {{if(it.Jiarugouwu==1){ }}
+								<dd><label>加入购物车</label></dd>
+								<dd>
+									<div class="imglist">
+										<span class="img">
+										{{if(!isNullOrEmpty(it.ImgJson.ShoppingCartImg)){ }}
+											<img src="{{=it.ImgJson.ShoppingCartImg}}">
+											{{} }}
+										</span>
+									</div>
+								</dd>
+								{{} }} {{if(it.ChatPlaceAnOrder>0||it.PlatName=='拼多多'){ }}
+								<dd><label>订单详情截图</label></dd>
+								<dd>
+									<div class="imglist thumbnails">
+
+										<span class="img">
+										{{if(!isNullOrEmpty(it.ImgJson.OrderDetailsImg)){ }}
+											<img src="{{=it.ImgJson.OrderDetailsImg}}">
+											{{} }}
+										</span>
+									</div>
+								</dd>
+								<dd class="text_r"><a class="link_btn blue">点击可查看图片</a></dd>
+								{{} }}
+							</dl>
+						</li>
+						{{if(it.TaskType==1){ }}
+						<li class="no3 {{=it.AcceptTaskStatus>1&&it.AcceptTaskStatus!=4&&it.AcceptTaskStatus!=5&&it.AcceptTaskStatus!=6?" active ":" "}}">
+							<i class="icon num">3</i>
+							<dl>
+								<dt><label>商家确认订单</label></dt>
+								<dd><label>任务类型</label><span>{{=it.PlatType}}</span></dd>
+								<dd><label>返款方式</label><span>平台返款</span></dd>
+								<dd><label>返款金额</label><span class="c_Org">{{=it.Amount}}元</span></dd>
+								<dd class="text_r"><span>平台规定商家24小时内返款</span>{{if(it.AcceptTaskStatus==1&&it.IsReminders==0&&it.IsAppeal!=1){ }}<a class="btn" onclick="urgeRebate()">催返款</a>{{} }}</dd>
+							</dl>
+						</li>
+						<li class="no4 {{=it.AcceptTaskStatus==7||it.AcceptTaskStatus==8?" active ":" "}}">
+							<i class="icon num">4</i>
+							<dl>
+								<dt><label>收货好评</label>{{if(it.AcceptTaskStatus==2 && it.EvaluationCountdown < 72){ }}<span class="text_r c_Org" style="float:right;" id="evaluation_Countdown"></span>{{} }}</dt>
+								<dd><label>第一步：去{{=it.PlatName}}评价并截图</label> {{if(!isNullOrEmpty(it.EvaluationClaim)){ }}
+									<div class="evaluate_box">
+										<p class="evaluateTit">文字要求<span class="c_Org">（评价必须粘贴一下文字）</span></p>
+										<textarea type="text" class="keybox" id="praiseText" readonly>{{=it.EvaluationClaim}}</textarea><a class="link_btn" onclick="CopyPraiseText()">复制评价文字</a>
+									</div>
+									{{} }}
+									{{if(!isNullOrEmpty(it.EvaluationVideo)){ }}
+									<div class="evaluate_box" style="padding-bottom:.46rem">
+										<p style="width:3rem;color:#333;"><label>视频要求<label class="c_Org">（在评价里必须上传以下视频）</label></label></p>
+										<div class="imglist thumbnails evaluationImglst">
+												<video src="{{=it.EvaluationVideo}}" controls="controls" style="width:100%"></video>
+										</div>
+										<a class="link_btn" onclick="downVideo('{{=it.EvaluationVideo}}')">点击下载视频</a>
+									</div>
+									{{} }}
+									{{if(!isNullOrEmpty(it.EvaluationImg)||!isNullOrEmpty(it.EvaluationImg2)||!isNullOrEmpty(it.EvaluationImg2)){ }}
+									<div class="evaluate_box" style="margin-top:0.5rem;">
+										<p class="evaluateTit">图片要求<span class="c_Org">（在评价里必须上传一下图片）</span></p>
+										<div class="imglist thumbnails evaluationImglst">
+											{{if(!isNullOrEmpty(it.EvaluationImg)){ }}
+											<span class="img">
+											<img src="{{=it.EvaluationImg}}">
+										</span> {{} if(!isNullOrEmpty(it.EvaluationImg1)){ }}
+											<span class="img">
+											<img src="{{=it.EvaluationImg1}}">
+										</span> {{} if(!isNullOrEmpty(it.EvaluationImg2)){ }}
+											<span class="img">
+											<img src="{{=it.EvaluationImg3}}">
+										</span> {{} if(!isNullOrEmpty(it.EvaluationImg3)){ }}
+											<span class="img">
+											<img src="{{=it.EvaluationImg4}}">
+										</span> {{} if(!isNullOrEmpty(it.EvaluationImg4)){ }}
+											<span class="img">
+											<img src="{{=it.EvaluationImg2}}">
+										</span> {{} }}
+										</div>
+										<a class="link_btn" onclick="downEvaluationImg()">点击下载图片</a>
+									</div>
+									{{} }}
+								</dd>
+								<dd><label>第二步：上传物流签收与评价截图</label></dd>
+								<dd>
+									<div class="imglist thumbnails">
+										<span class="img">
+										{{if(!isNullOrEmpty(it.OkImgJson.LogisticsReceiptImg)){ }}
+											<img src="{{=it.OkImgJson.LogisticsReceiptImg}}">
+											{{} }}
+										</span>
+										<span class="img">
+										{{if(!isNullOrEmpty(it.OkImgJson.EvaluationImg)){ }}
+											<img src="{{=it.OkImgJson.EvaluationImg}}">
+											{{} }}
+										</span>
+									</div>
+								</dd>
+								<dd class="text_r"><a class="link_btn blue">点击可查看图片</a></dd>
+								<dd class="text_r"><span>{{=it.EvaluationTitle}}</span>{{if(it.AcceptTaskStatus==2){ }}<a class="btn" onclick="confirmTask({{=it.EvaluationCountdown}})">去收货</a>{{} }}</dd>
+							</dl>
+						</li>
+						<li class="no5 {{=it.AcceptTaskStatus==8?" active ":" "}}">
+							<i class="icon num">5</i>
+							<dl>
+								<dt><label>任务完成</label></dt>
+								<dd><label>获得佣金</label><span class="c_Org">{{=it.Commission}} 金</span></dd>
+							</dl>
+						</li>
+						{{} else { }}
+						<li class="no3 {{=it.AcceptTaskStatus==8?" active ":" "}}">
+							<i class="icon num">3</i>
+							<dl>
+								<dt><label>任务完成</label></dt>
+								<dd><label>获得佣金</label><span class="c_Org">{{=it.Commission}} 金</span></dd>
+							</dl>
+						</li>
+						{{} }}
+					</ul>
+				</div>
+			</div>
+		</script>
+	</div>
+</body>
+
+</html>
