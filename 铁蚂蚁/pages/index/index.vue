@@ -9,35 +9,36 @@
       </div>
     </div>
     <div class="main" style="padding:10px;">
-	  <!-- getBanner -->
+      <!-- getBanner -->
       <swiper class="swiper-container banner" indicator-dots indicator-active-color="#fff">
         <swiper-item class="swiper-slide" v-for="(item,index) in banner" :key="index">
           <img class="img" :src="item.Pic" />
         </swiper-item>
       </swiper>
-	  <!-- task -->
+      <!-- task -->
       <div class="bg_fff mb10" id="notOperated">
         <div class="notOperatedTask">
           <ul class="clear notOperatedList">
-
-			 <li v-for="(item,index) in taskList" :key="index">
-				<div @click="taskDetail(item.TaskAcceptNo)" class="outside">
-					<div class="pictrue_div">
-						<div class="pictrue">
-							<img :src="item.ProductImg" alt="" />
-						</div>
-					</div>
-					<div class="info_box">
-						<div class="info_left">
-							<p>{{item.TaskText}}<span>&nbsp;{{item.GetCommission}}金</span></p>
-							<p>{{item.AcceptTaskStatusText}}</p>
-						</div>
-						<div class="info_right">查&nbsp;看</div>
-					</div>
-				</div>
-			</li>
-
-		  </ul>
+            <li v-for="(item,index) in taskList" :key="index">
+              <div @click="taskDetail(item.TaskAcceptNo)" class="outside">
+                <div class="pictrue_div">
+                  <div class="pictrue">
+                    <img :src="item.ProductImg" alt />
+                  </div>
+                </div>
+                <div class="info_box">
+                  <div class="info_left">
+                    <p>
+                      {{item.TaskText}}
+                      <span>&nbsp;{{item.GetCommission}}金</span>
+                    </p>
+                    <p>{{item.AcceptTaskStatusText}}</p>
+                  </div>
+                  <div class="info_right">查&nbsp;看</div>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
       <div class="navIcon bg_fff mb10">
@@ -67,9 +68,10 @@
             </div>
           </li>
           <li>
-            <a class="box yhq"
+            <a
+              class="box yhq"
               href="mqqapi://card/show_pslcard?src_type=internal&version=1&uin=759198439&card_type=group&source=qrcode"
-             >
+            >
               <i class="icon">
                 <img src="/static/image/icons/nav5.png" />
               </i>
@@ -79,18 +81,20 @@
         </ul>
       </div>
       <div class="Announcement bg_fff mb10">
-        <div class="labelhd fl">
-          <span>公告</span>
-        </div>
-        <div class="noticeList">
-          <ul>
-			<li v-for="(item,index) in messageList" :key="index">
-				<div class="box" @click="goUrl('other/noticelist')">
-					<p class="text">{{item.Title}}</p>
-					<span class="time">{{item.PubTime}}</span>
-				</div>
-			</li>
-			</ul>
+        <div class="AnnouncementTop">
+          <div class="labelhd fl">
+            <span>公告</span>
+          </div>
+          <div class="noticeList">
+            <ul :style="'margin-top:'+messageTop+'px'">
+              <li v-for="(item,index) in messageList" :key="index">
+                <div class="box" @click="goUrl('other/noticelist')">
+                  <p class="text">{{item.Title}}</p>
+                  <span class="time">{{item.PubTime}}</span>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="notice_wechat">
           客服QQ号:
@@ -110,7 +114,7 @@
           </div>
         </div>
         <div class="xinshouDiv3">
-          <div  @click="goUrl('other/faq')">
+          <div @click="goUrl('other/faq')">
             <span class="xinshou_text">常见问题</span>
           </div>
         </div>
@@ -123,7 +127,7 @@
         <div class="con">
           <ul class="li33 clear">
             <li>
-              <div  @click="goUrl('other/sign')" class="task_qd">签到领积分</div>
+              <div @click="goUrl('other/sign')" class="task_qd">签到领积分</div>
             </li>
             <!-- <li><a href="#" class="task_cj">积分抽奖</a></li> -->
             <!--<li><a href="html/user/shareqrcode.html" class="task_qrcode">分享二维码</a></li>-->
@@ -139,7 +143,7 @@
       <!--底部广告-->
       <div class="ft_gg mb10">
         <div class="img">
-          <div  @click="goUrl('other/inviterlist')">
+          <div @click="goUrl('other/inviterlist')">
             <img src="/static/image/banner/guanggao.jpg" />
           </div>
         </div>
@@ -151,115 +155,139 @@
 
 <script>
 import footers from "@/components/footer.vue";
-import { get, post,goUrl,toast } from "@/utils";
+import { get, post, goUrl, toast, editTime } from "@/utils";
 export default {
   components: {
     footers
   },
   data() {
     return {
-		goUrl,
-		userId:'',
-		token:'',
-		unreadCount:0,//未读消息数量
-		banner: [],
-		taskList:[],
-		messageList:[],//滚动公告
+      goUrl,
+      userId: "",
+      token: "",
+      unreadCount: 0, //未读消息数量
+      banner: [],
+      taskList: [],
+      messageList: [], //滚动公告
+      messageTop:0,
+      messageInterval:null,//定时器
     };
   },
   onLoad() {
-	this.userId = uni.getStorageSync('userId');
-	this.token = uni.getStorageSync('token');
-	this.getBanner();
-	this.getTaskList();// 获取工作列表
-	this.getUnreadCount();// 获取未读消息数量
-	this.getMessageList();//滚动公告
+    this.userId = uni.getStorageSync("userId");
+    this.token = uni.getStorageSync("token");
+    this.getBanner();
+    this.getTaskList(); // 获取工作列表
+    this.getUnreadCount(); // 获取未读消息数量
+    this.getMessageList(); //滚动公告
   },
-  onShow(){
-	  if(this.userId!==uni.getStorageSync('userId')||this.token!==uni.getStorageSync('token')){
-		this.userId = uni.getStorageSync('userId');
-		this.token = uni.getStorageSync('token');
-	  }
+  onShow() {
+    if (
+      this.userId !== uni.getStorageSync("userId") ||
+      this.token !== uni.getStorageSync("token")
+    ) {
+      this.userId = uni.getStorageSync("userId");
+      this.token = uni.getStorageSync("token");
+    }
   },
   methods: {
     getBanner() {
       get("Advertisement/GetHomeBanners").then(res => {
         this.banner = res.obj;
-      },true);
-	},
-	// 获取工作列表
-	getTaskList(){
-      post("Task/GetMemberTaskList",{
-		UserId: this.userId,
-		Token: this.token,
-		MemberAcceptTaskStatus: 5,
-		Page: 1
-	  }).then(res => {
+      }, true);
+    },
+    // 获取工作列表
+    getTaskList() {
+      post("Task/GetMemberTaskList", {
+        UserId: this.userId,
+        Token: this.token,
+        MemberAcceptTaskStatus: 5,
+        Page: 1
+      }).then(res => {
         this.taskList = res.obj.AcceptTaskList;
       });
-	},
-	//滚动公告
-	getMessageList() {
-		post("Notice/GetNoticeByMember",{
-			UserId: this.userId,
-			Token: this.token,
-			Page: 1,
-			PageSize: 3,
-			SendType: 0
-		}).then(res => {
-			const data =res.obj;
-			this.messageList = data.NoticeList;
-		});
-	
-	},
-	// 跳转到详情
-	taskDetail(TaskAcceptNo){
-		goUrl('task/selectoperation',{
-			id:TaskAcceptNo
-		})
-	},
-	//点击新手任务
+    },
+    //滚动公告
+    getMessageList() {
+      post("Notice/GetNoticeByMember", {
+        UserId: this.userId,
+        Token: this.token,
+        Page: 1,
+        PageSize: 3,
+        SendType: 0
+      }).then(res => {
+        const data = res.obj;
+        data.NoticeList.map(item => {
+          item.PubTime = editTime(item.PubTime);
+        });
+        this.messageList = data.NoticeList;
+        if(data.NoticeList.length>1){
+          clearInterval(this.messageInterval);
+          this.messageInterval = setInterval(()=>{
+            this.messageTime();
+          },3000)
+        }
+      });
+    },
+    // 公告定时器,每个item高为40
+    messageTime(){
+      setTimeout(()=>{
+        if(this.messageTop>-40){
+          this.messageTop-=1;
+          this.messageTime();
+        }else{
+          this.messageTop=0;
+          this.messageList.push(this.messageList.splice(0,1)[0]);
+        }
+      },10)
+    },
+    // 跳转到详情
+    taskDetail(TaskAcceptNo) {
+      goUrl("task/selectoperation", {
+        id: TaskAcceptNo
+      });
+    },
+    //点击新手任务
     ifTask() {
-		post('Member/GetBindPageData',{
-			UserId: this.userId,
-			Token: this.token
-		}).then(res=>{
-			const data = res.obj;
-			if (data.IsAUT === 1 && data.BankStr != "" && data.QQStr != "") {
-				data.MemberAccount.map(item=>{
-					if(item.IsBindText === "已绑定"){
-						toast("已完成新手任务",true);
-					}
-				})
-			} else {
-				goUrl("user/bindinfo");
-			}
-		})
-	},
-	//判断是否有抽奖活动
-	lotteryUrl() {
-		post('PlayActivities/lotteryUrl').then(res=>{
-			const data = res.obj;
-			if(res.errcode===2){
-				// 待测试跳转地址
-				location.href = json.url;
-			}else{
-				toast(data.msg);
-			}
-		})
-	},
-	// 获取未读消息数量
-	getUnreadCount(){
-		post('Notice/GetNoticeUnreadCount',{
-			UserId: this.userId,
-			Token: this.token,
-			SendType: 1
-		}).then(res=>{
-			const data = res.obj;
-			this.unreadCount = data.obj;
-		})
-	}
-
+      post("Member/GetBindPageData", {
+        UserId: this.userId,
+        Token: this.token
+      }).then(res => {
+        const data = res.obj;
+        if (data.IsAUT === 1 && data.BankStr != "" && data.QQStr != "") {
+          data.MemberAccount.map(item => {
+            if (item.IsBindText === "已绑定") {
+              toast("已完成新手任务", true);
+            }
+          });
+        } else {
+          goUrl("user/bindinfo");
+        }
+      });
+    },
+    //判断是否有抽奖活动
+    lotteryUrl() {
+      post("PlayActivities/lotteryUrl").then(res => {
+        const data = res.obj;
+        if (res.errcode === 2) {
+          // 待测试跳转地址
+          location.href = json.url;
+        } else {
+          toast(data.msg);
+        }
+      });
+    },
+    // 获取未读消息数量
+    getUnreadCount() {
+      post("Notice/GetNoticeUnreadCount", {
+        UserId: this.userId,
+        Token: this.token,
+        SendType: 1
+      }).then(res => {
+        const data = res.obj;
+        this.unreadCount = data.obj;
+      });
+    }
   }
 };
 </script>
@@ -290,10 +318,46 @@ export default {
   font-size: 36rpx;
   color: #8f8f94;
 }
-.Taskday .con li div{
-	display: block;
-    line-height: 40px;
-    padding-left: 36px;
-    margin-right: 0;
+.Taskday .con li div {
+  display: block;
+  line-height: 40px;
+  padding-left: 36px;
+  margin-right: 0;
+}
+.notice_wechat{
+  padding:0 10px;
+}
+.AnnouncementTop{
+  display:flex;
+  align-items:center;
+  .noticeList{
+    position:relative;
+    flex:0 0 auto;
+    width:80%;
+    height:40px;
+    overflow:hidden;
+    ul{
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:40px;
+      margin-left:7px;
+      li{
+        height:40px;
+        .box{
+          height:40px;
+          line-height:40px;
+          display:flex;
+          align-items:center;
+          justify-content:space-between;
+          span{
+            color:#999;
+            font-size:12px;
+          }
+        }
+      }
+    }
+  }
 }
 </style>

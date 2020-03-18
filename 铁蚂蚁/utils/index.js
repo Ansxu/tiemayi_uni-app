@@ -331,7 +331,6 @@ export function uni_pay(param) {
 // 更改时间格式
 // type:'date'--返回日期；'time'--返回日期+时间; 's'--日期+时间+秒
 export function editTime(time, type = 'date') {
-
   let newTime = ''
   if (type === 'time') {
     newTime = time.substr(0, time.lastIndexOf(':'))
