@@ -8,7 +8,7 @@ const host = 'http://xmyapi.wtvxin.com/api/';// 测试
 const website = 'http://www.3318pk.com';
 const wssPath = 'wss://hxapia.com/WebSocketServer.ashx';// wss地址
 const filePath = 'http://www.hxapia.com';// 测试后台地址
-const LoginPath = "/pages/login/main";//登录路径
+const LoginPath = "/pages/login/login";//登录路径
 const RegisterPath = "/pages/login/register/main";//注册路径
 
 const RequestFrom = 'H5';
@@ -128,17 +128,20 @@ function request(url, data,method, loginFn) {
     })
   })
 }
-export function get(url, data,isLogin, loginFn) {
+export function get(url, data,loginFn) {
+  if(!judgeLogin()) return false;
   return request(url, data, 'GET', loginFn)
 }
-export function post(url, data,isLogin, loginFn) {
+export function post(url, data,loginFn) {
+  if(!judgeLogin()) return false;
   return request(url, data,'POST', loginFn)
 }
 //判断是否登录，未登录做弹窗跳转登录页面
 export function judgeLogin(){
   if (!uni.getStorageSync("userId") || !uni.getStorageSync("token")) {
       uni.showModal({
-        title:'是否跳转到登录页面？',
+        title:'未登录',
+        content:'是否跳转到登录页面？',
         success(res){
           if(res.confirm){
             uni.navigateTo({

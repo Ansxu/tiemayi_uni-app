@@ -9,13 +9,13 @@
             <div class="memberTop">
                 <div class="myMessages">
                     <div class="touxiang" @click="goUrl('user/accountinfo')">
-                        <img src="static/image/tx/tx_pic.jpg" id="Avatar" alt="" />
+                        <img :src="userInfo.Avatar||'static/image/tx/tx_pic.jpg'" id="Avatar" alt="" />
                     </div>
                     <div @click="goUrl('user/grade_rule')" class="btn_vs">查看等级规则</div>
                     <div class="mySome">
-                        <span class="mySomes" id="UserId">ID：XXXXX</span>
-                        <span class="myUsername" id="UserName">用户名：XXXXX</span>
-                        <span class="mySomes" id="UserGrade">等级：L0</span>
+                        <span class="mySomes" id="UserId">ID：{{userInfo.MemberID||'XXXXX'}}</span>
+                        <span class="myUsername" id="UserName">用户名：{{userInfo.NickName||'XXXXX'}}</span>
+                        <span class="mySomes" id="UserGrade">等级：{{userInfo.Level||'L0'}}</span>
                         <!-- <p class="name" id="UserReferralCode">邀请码：xxx</p>
                         <p id="isvipTime" style="display:none;">VIP有效期：2018.01.01-2019.01.01</p>-->
                     </div>
@@ -24,13 +24,13 @@
                     <div class="myPrice_text">
                         <div @click="goUrl('user/commision/commision')" class="outside">
                             <p>佣金收益(金)</p>
-                            <p style="font-size:.16rem;" id="UserAmount">0</p>
+                            <p style="font-size:16px;" id="UserAmount">{{userInfo.Amount||0}}</p>
                         </div>
                     </div>
                     <div class="myPrice_text">
                         <div @click="goUrl('user/commision/corpus')" class="outside">
                             <p>本金总计(元)</p>
-                            <p style="font-size:.16rem;" id="UserWallet">0</p>
+                            <p style="font-size:16px;" id="UserWallet">{{userInfo.Wallet||0}}</p>
                         </div>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                             <div @click="goUrl('task/receivedtask')" class="outside">
                                 <div class="icon-img">
                                     <img src="static/image/nav/memberindex_nav1_1.png" alt="">
-                                    <span class="circleNum" id="OrderUndone">0</span>
+                                    <span class="circleNum" id="OrderUndone">{{userInfo.OrderUndone||0}}</span>
                                 </div>
                                 <p class="title" style="color:#7A7A7A">未完成</p>
                             </div>
@@ -63,7 +63,7 @@
                             <div @click="goUrl('task/receivedtask')" class="outside">
                                 <div class="icon-img">
                                     <img src="static/image/nav/memberindex_nav1_2.png" alt="">
-                                    <span class="circleNum" id="OrderCompleted">0</span>
+                                    <span class="circleNum" id="OrderCompleted">{{userInfo.OrderCompleted||0}}</span>
                                 </div>
                                 <p class="title" style="color:#7A7A7A">已完成</p>
                             </div>
@@ -73,7 +73,7 @@
                             <div @click="goUrl('task/receivedtask')" class="outside">
                                 <div class="icon-img">
                                     <img src="static/image/nav/memberindex_nav1_3.png" alt="">
-                                    <span class="circleNum" id="OrderRevoked">0</span>
+                                    <span class="circleNum" id="OrderRevoked">{{userInfo.OrderRevoked||0}}</span>
                                 </div>
                                 <p class="title" style="color:#7A7A7A">已撤销</p>
                             </div>
@@ -82,7 +82,7 @@
                             <div @click="goUrl('task/receivedtask')" class="outside">
                                 <div class="icon-img">
                                     <img src="static/image/nav/memberindex_nav1_4.png" alt="">
-                                    <span class="circleNum" id="OrderAppeal">0</span>
+                                    <span class="circleNum" id="OrderAppeal">{{userInfo.OrderAppeal||0}}</span>
                                 </div>
                                 <p class="title" style="color:#7A7A7A">申诉中</p>
                             </div>
@@ -117,7 +117,7 @@
                             <span style="color:#7A7A7A">新手教学</span>
                         </div>
                     </li>
-                    <li class="messageMenuLi" id="shareqrcode">
+                    <li class="messageMenuLi" id="shareqrcode" v-if="userInfo.IsInviteRole">
                         <div @click="goUrl('user/shareqrcode')" class="outside">
                             <div>
                                 <img src="static/image/nav/memberindex_nav2_7.png" alt="" />
@@ -153,7 +153,7 @@
     
 <script>
 import footers from '@/components/footer.vue';
-import {goUrl} from '@/utils';
+import {goUrl,post,get} from '@/utils';
 export default {
     components:{
         footers
@@ -161,16 +161,36 @@ export default {
     data(){
         return {
             goUrl,
+            userId:'',
+            token:'',
+            userInfo:{
+            },
         }
     },
     onLoad(){
-
+        this.userId=uni.getStorageSync('userId');
+        this.token=uni.getStorageSync('token');
+        this.getMemberInfo();
     },
     onShow(){
-
+        this.userId=uni.getStorageSync('userId');
+        this.token=uni.getStorageSync('token');
+        if(!this.userInfo){
+            this.getMemberInfo();
+        }
     },
     methods:{
+        //获取用户信息
+        async getMemberInfo() {
+            const res = await get('Login/GetMemberInfo',{
+                UserId: this.userId,
+                Token: this.token
+            })
+            const data = res.obj;
+            this.userInfo = data;
+            // uni.setStorage('isAdvanceRange', isAdvanceRange);
 
+        }
     }
 }
 </script>
