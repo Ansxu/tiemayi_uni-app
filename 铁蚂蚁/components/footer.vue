@@ -43,7 +43,7 @@ export default {
                 },
                 {
                     name:'已接任务',
-                    url:'index/index',
+                    url:'task/receivedtask',
                 },
                 {
                     name:'个人中心',

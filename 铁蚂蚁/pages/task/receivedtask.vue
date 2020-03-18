@@ -1,22 +1,5 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-		<meta charset="UTF-8">
-		<meta content="telephone=no" name="format-detection">       <!--不把11位数字转化为电话号码-->
-		<title>我的订单</title>
-    <link rel="stylesheet" type="text/css" href="../../css/global.css" />
-    <link rel="stylesheet" type="text/css" href="../../script/layer_mobile/need/layer.css" />
-		<link rel="stylesheet" type="text/css" href="../../css/d_style.css" />
-    <script type="text/javascript" src="../../script/api.js"></script>
-    <script type="text/javascript" src="../../script/jquery/jquerymin.js"></script>
-    <script type="text/javascript" src="../../script/resetfontsize.js"></script>
-    <script type="text/javascript" src="../../script/common/constant.js"></script>
-    <script type="text/javascript" src="../../script/common/common.js"></script>
-    <script type="text/javascript" src="../../script/layer_mobile/layer.js"></script>
-    <script type="text/javascript" src="../../script/task/receivedtask.js"></script>
-	</head>
-	<body class="bg_f8f8f8">
+<template>
+	<div class="bg_f8f8f8">
 		<div class="h45">
 			<div class="head bb_border">
 				<a href="../../html/user/member.html" class="btn_back"></a>
@@ -139,5 +122,29 @@
 			</footer>
 		</div>
 	<!--底部 end-->
-	</body>
-</html>
+	</div>
+</template>
+
+<script>
+import {} from '@/utils';
+export default {
+    data(){
+        return {
+
+        }
+    },
+    onLoad(){
+
+    },
+    onShow(){
+
+    },
+    methods:{
+
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+
+</style>
