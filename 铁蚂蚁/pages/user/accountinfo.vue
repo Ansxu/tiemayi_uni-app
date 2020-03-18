@@ -11,7 +11,7 @@
                 <div class="weui-cells navList__weui-cells">
                     <a href="accountinfo_avatar.html" class="weui-cell">
                         <div class="weui-cell__hd">
-                            <img src="static/image/nav/account_nav1_1.png" alt="" class="icon-navImg" />
+                            <img src="/static/image/nav/account_nav1_1.png" alt="" class="icon-navImg" />
                         </div>
                         <div class="weui-cell__bd">
                             <p class="title">头像</p>
@@ -22,7 +22,7 @@
                     </a>
                     <a href="accountinfo_modifymobile.html" class="weui-cell">
                         <div class="weui-cell__hd">
-                            <img src="static/image/nav/account_nav1_2.png" alt="" class="icon-navImg" />
+                            <img src="/static/image/nav/account_nav1_2.png" alt="" class="icon-navImg" />
                         </div>
                         <div class="weui-cell__bd">
                             <p class="title">用户手机号</p>
@@ -33,7 +33,7 @@
                     </a>
                     <a href="accountinfo_resetpwd.html" class="weui-cell">
                         <div class="weui-cell__hd">
-                            <img src="static/image/nav/account_nav1_3.png" alt="" class="icon-navImg" />
+                            <img src="/static/image/nav/account_nav1_3.png" alt="" class="icon-navImg" />
                         </div>
                         <div class="weui-cell__bd">
                             <p class="title">用户密码</p>
@@ -44,7 +44,7 @@
                     </a>
                     <!-- <a href="javascript:;" class="weui-cell">
                         <div class="weui-cell__hd">
-                            <img src="static/image/nav/account_nav1_4.png" alt="" class="icon-navImg" />
+                            <img src="/static/image/nav/account_nav1_4.png" alt="" class="icon-navImg" />
                         </div>
                         <div class="weui-cell__bd">
                             <p class="title">声音</p>

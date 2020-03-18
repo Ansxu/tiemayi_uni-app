@@ -8,7 +8,7 @@
 		</div>
 		<div class="main">
 			<div class="dd__hd weui-cell">
-				<div class="weui-cell__hd"><img src="static/image/icons/d_msg1.png" alt="" class="msgIcon" /></div>
+				<div class="weui-cell__hd"><img src="/static/image/icons/d_msg1.png" alt="" class="msgIcon" /></div>
 				<div class="weui-cell__bd">
 					<p class="titleMsg">为了方便与你的联系，请务必填写真实的QQ号码</p>
 				</div>

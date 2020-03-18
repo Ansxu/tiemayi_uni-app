@@ -18,7 +18,7 @@
 							</span>
 						</div>
 					    <div class="dl clear">
-					        <div class="img fl"><img src="static/logo.png"></div>
+					        <div class="img fl"><img src="/static/logo.png"></div>
 					        <div class="box_r">
 					            <p class="text">产品名称</p>
 					            <p class="text">单件商品单价：<span class="c_Org">300元</span></p>
@@ -29,7 +29,7 @@
 					            <p class="text c_Org" v-if="TaskType==2">普通浏览任务:收藏</p>
 					        </div>
 					        <div class="img fr presale-img" v-if="IsPresaleTask==1">
-					          <img src="static/image/nav/presaletask.png" />
+					          <img src="/static/image/nav/presaletask.png" />
 					        </div>
 					    </div>
 					    <div class="g-name" v-if="TaskType==1"><span>附加商品1</span></div>
@@ -70,9 +70,9 @@
 					       
 					        <p style="font-size:0.2rem; color:red;">备注图片：</p>
 					        
-					        <div class="img_div"><img src="static/logo.png" /></div> 
-					        <div class="img_div"><img src="static/logo.png" /></div>
-					        <div class="img_div"><img src="static/logo.png" /></div>
+					        <div class="img_div"><img src="/static/logo.png" /></div> 
+					        <div class="img_div"><img src="/static/logo.png" /></div>
+					        <div class="img_div"><img src="/static/logo.png" /></div>
 					        <div style="clear:both;"></div>
 					    </div>
 					    <div class="itembox">

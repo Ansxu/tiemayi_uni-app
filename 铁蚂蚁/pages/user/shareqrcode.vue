@@ -13,19 +13,19 @@
 
         <div style="padding:10px; padding-bottom:50px;">
             <div class="mbimg">
-                <img data-num='100' src="static/image/of/moban0.jpg" class="mbimg_hover" style="float:left; border:1px dashed #666;" />
+                <img data-num='100' src="/static/image/of/moban0.jpg" class="mbimg_hover" style="float:left; border:1px dashed #666;" />
             </div>
             <div class="mbimg">
-                <img data-num='1' src="static/image/of/moban1.jpg" style="float:right;" />
+                <img data-num='1' src="/static/image/of/moban1.jpg" style="float:right;" />
             </div>
             <div class="mbimg">
-                <img data-num='2' src="static/image/of/moban2.jpg" style="float:left;" />
+                <img data-num='2' src="/static/image/of/moban2.jpg" style="float:left;" />
             </div>
             <div class="mbimg">
-                <img data-num='3' src="static/image/of/moban3.jpg" style="float:right;" />
+                <img data-num='3' src="/static/image/of/moban3.jpg" style="float:right;" />
             </div>
             <div class="mbimg">
-                <img data-num='4' src="static/image/of/moban4.jpg" style="float:left;" />
+                <img data-num='4' src="/static/image/of/moban4.jpg" style="float:left;" />
             </div>
             <div style="clear:both;"></div>
         </div>

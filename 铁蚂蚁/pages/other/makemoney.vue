@@ -7,7 +7,7 @@
 			</div>
 		</div>
 		<div class="makemoney_box">
-			<img src="static/image/of/makemoney.jpg" alt="" />
+			<img src="/static/image/of/makemoney.jpg" alt="" />
 		</div>
 	</div>
 </template>

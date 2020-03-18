@@ -24,7 +24,7 @@
 					<ul class="li50 clear">
 						<li v-for="(item,index) in 4" :key="index">
 							<a class="box" href="./faqdetail.html">
-								<i class="icon"><img src="static/logo.png"></i>
+								<i class="icon"><img src="/static/logo.png"></i>
 								<p>哈哈哈哈</p>
 								<div style="display:none">343434343</div>
 							</a>

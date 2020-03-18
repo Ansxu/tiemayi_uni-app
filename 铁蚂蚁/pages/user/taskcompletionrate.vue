@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class="main completionRate">
-            <img class="bannertop" src="static/image/banner/accountrule.png" />
+            <img class="bannertop" src="/static/image/banner/accountrule.png" />
             <div class="completionRate-box">
                 <div class="completionRate-tit">
                     <p>接单规则</p>

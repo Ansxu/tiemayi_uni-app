@@ -19,7 +19,7 @@
                                 <dd>
                                     <div class="imglist thumbnails">
                                         <span class="img">
-                                                <img id="productimg" src="static/image/image/of/order_pic1.jpg"/>
+                                                <img id="productimg" src="/static/image/image/of/order_pic1.jpg"/>
                                             </span>
                                     </div>
                                 </dd>

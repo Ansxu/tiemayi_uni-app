@@ -1,18 +1,13 @@
 <template>
     <div class="bg_f8f8f8">
-        <div class="h45">
-            <div class="head">
-                <a href="javascript:history.go(-1);" class="btn_back"></a>
-                <div class="title center">欢迎来到铁蚂蚁</div>
-            </div>
-        </div>
+        <headers>欢迎来到铁蚂蚁</headers>
         <div class="main">
             <div class="regLogForm">
                 <form action="">
                     <div class="weui-cells">
                         <div class="weui-cell">
                             <div class="weui-cell__hd">
-                                <img src="static/image/icons/d_tel.png" alt="" class="iconImg" />
+                                <img src="/static/image/icons/d_tel.png" alt="" class="iconImg" />
                             </div>
                             <div class="weui-cell__bd">
                                 <div class="inputBox">
@@ -22,7 +17,7 @@
                         </div>
                         <div class="weui-cell">
                             <div class="weui-cell__hd">
-                                <img src="static/image/icons/d_pwd.png" alt="" class="iconImg" />
+                                <img src="/static/image/icons/d_pwd.png" alt="" class="iconImg" />
                             </div>
                             <div class="weui-cell__bd">
                                 <div class="inputBox">
@@ -75,18 +70,23 @@ export default {
                 PassWord: this.pwd,
                 client_id: ClientId,
                 client_secret: ClientSecret
-            }).then(res=>{
+            },true).then(res=>{
                 const data = res.obj;
                 if(this.recording){
                     uni.setStorageSync('userPhone',this.phone);
                     uni.setStorageSync('userPassword',this.pwd);
+                }else{
+                    uni.setStorageSync('userPhone','');
+                    uni.setStorageSync('userPassword','');
                 }
                 uni.setStorageSync('userId',data.UserId);
                 uni.setStorageSync('token',data.Token);
                 uni.setStorageSync('userInfo',data);
                 toast('登录成功',true)
                 setTimeout(()=>{
-                    uni.navigateBack();
+                    uni.reLaunch({
+                        url: '/pages/user/menber'
+                    })
                 },2000)
             })
         },

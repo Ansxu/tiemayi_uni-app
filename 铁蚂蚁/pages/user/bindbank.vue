@@ -8,7 +8,7 @@
         </div>
         <div class="main">
             <div class="dd__hd weui-cell">
-                <div class="weui-cell__hd"><img src="static/image/icons/d_msg1.png" alt="" class="msgIcon"></div>
+                <div class="weui-cell__hd"><img src="/static/image/icons/d_msg1.png" alt="" class="msgIcon"></div>
                 <div class="weui-cell__bd">
                     <p class="titleMsg">姓名必须和身份证中的一样，务必保证银行卡信息正确，否则无法退款</p>
                     <p style="color:red;display:none;" id="isbandtext">修改银行卡资料请联系我们微信客服：</p>

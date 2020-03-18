@@ -1,18 +1,13 @@
 <template>
     <div class="bg_f8f8f8">
-        <div class="h45">
-            <div class="head">
-                <a href="javascript:history.go(-1);" class="btn_back"></a>
-                <div class="title center">注册</div>
-            </div>
-        </div>
+        <headers>注册</headers>
         <div class="main">
             <div class="regLogForm">
                 <form action="">
                     <div class="weui-cells">
                         <div class="weui-cell">
                             <div class="weui-cell__hd">
-                                <img src="static/image/icons/d_tel.png" alt="" class="iconImg" />
+                                <img src="/static/image/icons/d_tel.png" alt="" class="iconImg" />
                             </div>
                             <div class="weui-cell__bd">
                                 <div class="inputBox">
@@ -22,7 +17,7 @@
                         </div>
                         <div class="weui-cell">
                             <div class="weui-cell__hd">
-                                <img src="static/image/icons/d_pic.png" class="iconImg" />
+                                <img src="/static/image/icons/d_pic.png" class="iconImg" />
                             </div>
                             <div class="weui-cell__bd">
                                 <div class="inputBox">
@@ -37,7 +32,7 @@
                         </div>
                         <div class="weui-cell">
                             <div class="weui-cell__hd">
-                                <img src="static/image/icons/d_xinxi.png" alt="" class="iconImg" />
+                                <img src="/static/image/icons/d_xinxi.png" alt="" class="iconImg" />
                             </div>
                             <div class="weui-cell__bd">
                                 <div class="inputBox">
@@ -50,7 +45,7 @@
                         </div>
                         <div class="weui-cell">
                             <div class="weui-cell__hd">
-                                <img src="static/image/icons/d_pwd.png" alt="" class="iconImg" />
+                                <img src="/static/image/icons/d_pwd.png" alt="" class="iconImg" />
                             </div>
                             <div class="weui-cell__bd">
                                 <div class="inputBox">
@@ -60,7 +55,7 @@
                         </div>
                         <div class="weui-cell">
                             <div class="weui-cell__hd">
-                                <img src="static/image/icons/d_pwd.png" alt="" class="iconImg" />
+                                <img src="/static/image/icons/d_pwd.png" alt="" class="iconImg" />
                             </div>
                             <div class="weui-cell__bd">
                                 <div class="inputBox">
@@ -70,7 +65,7 @@
                         </div>
                         <!-- <div class="weui-cell">
                             <div class="weui-cell__hd">
-                                <img src="static/image/icons/d_email.png" alt="" class="iconImg" />
+                                <img src="/static/image/icons/d_email.png" alt="" class="iconImg" />
                             </div>
                             <div class="weui-cell__bd">
                                 <div class="inputBox">
@@ -80,7 +75,7 @@
                         </div> -->
                         <div class="weui-cell">
                             <div class="weui-cell__hd">
-                                <img src="static/image/icons/d_email.png" alt="" class="iconImg" />
+                                <img src="/static/image/icons/d_email.png" alt="" class="iconImg" />
                             </div>
                             <div class="weui-cell__bd">
                                 <div class="inputBox">
@@ -90,7 +85,7 @@
                         </div>
                         <div class="weui-cell">
                             <div class="weui-cell__hd">
-                                <img src="static/image/icons/d_yaoqing.png" alt="" class="iconImg" />
+                                <img src="/static/image/icons/d_yaoqing.png" alt="" class="iconImg" />
                             </div>
                             <div class="weui-cell__bd">
                                 <div class="inputBox">
@@ -186,7 +181,7 @@ export default {
                 VerifyType: 0,
                 ImgCode: this.imgCode,
                 OnlyVal: this.OnlyVal
-            }).then(res=>{
+            },true).then(res=>{
                 toast('已发送至该手机',true);
                 this.timeFn = setInterval(()=>{
                     this.timeEnd-=1;
@@ -204,7 +199,7 @@ export default {
                 Password: this.pwd,
                 InviteCode: this.inviteCode,
                 QQ:this.qq
-            })
+            },true)
             toast('注册成功！',true)
             this.back();
         },

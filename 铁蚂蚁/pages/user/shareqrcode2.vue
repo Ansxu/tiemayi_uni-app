@@ -7,7 +7,7 @@
             </div>
         </div>
         <!-- <div class="hahahaha" style="position: absolute;width:100%;">
-            <img src="static/image/of/moban4.jpg" style="width:100%;" />
+            <img src="/static/image/of/moban4.jpg" style="width:100%;" />
             <div class="qrcode qrcode4">
                 <img src="http://mlb.wtvxin.com/ajax/tools/qrcode_ajax.ashx?chl=http://mlb.wtvxin.com/invite/register.html?rCode=123" />
             </div>

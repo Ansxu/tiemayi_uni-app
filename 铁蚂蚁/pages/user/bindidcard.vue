@@ -48,7 +48,7 @@
 					<li>
 						<div class="outside">
 							<div class="img">
-								<div class="upimg"><img src="static/image/examplespic/idcard/pic2.jpg"></div>
+								<div class="upimg"><img src="/static/image/examplespic/idcard/pic2.jpg"></div>
 							</div>
 						</div>
 					</li>
@@ -66,7 +66,7 @@
 					<li>
 						<div class="outside">
 							<div class="img">
-								<div class="upimg"><img src="static/image/examplespic/idcard/pic0.jpg"></div>
+								<div class="upimg"><img src="/static/image/examplespic/idcard/pic0.jpg"></div>
 							</div>
 						</div>
 					</li>
@@ -84,7 +84,7 @@
 					<li>
 						<div class="outside">
 							<div class="img">
-								<div class="upimg"><img src="static/image/examplespic/idcard/pic1.jpg"></div>
+								<div class="upimg"><img src="/static/image/examplespic/idcard/pic1.jpg"></div>
 							</div>
 						</div>
 					</li>

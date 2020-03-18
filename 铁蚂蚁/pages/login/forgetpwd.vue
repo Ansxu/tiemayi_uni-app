@@ -2,19 +2,14 @@
     <div class="bg_f8f8f8">
         <!--第一步-->
         <div class="defaultPage oneStep__defaultPage" v-if="page===1">
-            <div class="h45">
-                <div class="head">
-                    <a href="javascript:history.go(-1);" class="btn_back"></a>
-                    <div class="title center">忘记密码</div>
-                </div>
-            </div>
+            <headers>忘记密码</headers>
             <div class="main">
                 <div class="regLogForm">
                     <form action="">
                         <div class="weui-cells">
                             <div class="weui-cell">
                                 <div class="weui-cell__hd">
-                                    <img src="static/image/icons/d_tel.png" alt="" class="iconImg" />
+                                    <img src="/static/image/icons/d_tel.png" alt="" class="iconImg" />
                                 </div>
                                 <div class="weui-cell__bd">
                                     <div class="inputBox">
@@ -24,7 +19,7 @@
                             </div>
                             <div class="weui-cell">
                                 <div class="weui-cell__hd">
-                                    <img src="static/image/icons/d_pic.png" alt="" class="iconImg" />
+                                    <img src="/static/image/icons/d_pic.png" alt="" class="iconImg" />
                                 </div>
                                 <div class="weui-cell__bd">
                                     <div class="inputBox">
@@ -39,7 +34,7 @@
                             </div>
                             <div class="weui-cell">
                                 <div class="weui-cell__hd">
-                                    <img src="static/image/icons/d_code.png" alt="" class="iconImg" />
+                                    <img src="/static/image/icons/d_code.png" alt="" class="iconImg" />
                                 </div>
                                 <div class="weui-cell__bd">
                                     <div class="inputBox">
@@ -71,7 +66,7 @@
                         <div class="weui-cells">
                             <div class="weui-cell">
                                 <div class="weui-cell__hd">
-                                    <img src="static/image/icons/d_pwd.png" alt="" class="iconImg" />
+                                    <img src="/static/image/icons/d_pwd.png" alt="" class="iconImg" />
                                 </div>
                                 <div class="weui-cell__bd">
                                     <div class="inputBox">
@@ -81,7 +76,7 @@
                             </div>
                             <div class="weui-cell">
                                 <div class="weui-cell__hd">
-                                    <img src="static/image/icons/d_pwd.png" alt="" class="iconImg" />
+                                    <img src="/static/image/icons/d_pwd.png" alt="" class="iconImg" />
                                 </div>
                                 <div class="weui-cell__bd">
                                     <div class="inputBox">
@@ -141,7 +136,7 @@ export default {
                 VerifyType: 2,
                 ImgCode: this.imgCode,
                 OnlyVal: this.OnlyVal
-            }).then(res=>{
+            },true).then(res=>{
                 toast('已发送至该手机',true);
                 this.timeFn = setInterval(()=>{
                     this.timeEnd-=1;
@@ -178,7 +173,7 @@ export default {
                 VerifyType: 2,
                 VerifyCode: this.code,
                 NewLoginPwd: this.pwd
-            })
+            },true)
             toast('修改成功！',true)
             this.back();
         },

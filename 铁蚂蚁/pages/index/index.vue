@@ -45,7 +45,7 @@
           <li>
             <a href="javascript:IsNovice();" class="box">
               <i class="icon">
-                <img src="static/image/icons/nav1.png" />
+                <img src="/static/image/icons/nav1.png" />
               </i>
               <p>垫付任务</p>
             </a>
@@ -53,7 +53,7 @@
           <li>
             <a href="javascript:IsNovice();" class="box">
               <i class="icon">
-                <img src="static/image/icons/nav2.png" />
+                <img src="/static/image/icons/nav2.png" />
               </i>
               <p>浏览任务</p>
             </a>
@@ -61,7 +61,7 @@
           <li>
             <div @click="goUrl('user/vip/vip')" class="box">
               <i class="icon">
-                <img src="static/image/icons/nav6.png" />
+                <img src="/static/image/icons/nav6.png" />
               </i>
               <p>VIP</p>
             </div>
@@ -71,7 +71,7 @@
               href="mqqapi://card/show_pslcard?src_type=internal&version=1&uin=759198439&card_type=group&source=qrcode"
              >
               <i class="icon">
-                <img src="static/image/icons/nav5.png" />
+                <img src="/static/image/icons/nav5.png" />
               </i>
               <p>用户群</p>
             </a>
@@ -140,7 +140,7 @@
       <div class="ft_gg mb10">
         <div class="img">
           <div  @click="goUrl('other/inviterlist')">
-            <img src="static/image/banner/guanggao.jpg" />
+            <img src="/static/image/banner/guanggao.jpg" />
           </div>
         </div>
       </div>
@@ -185,7 +185,7 @@ export default {
     getBanner() {
       get("Advertisement/GetHomeBanners").then(res => {
         this.banner = res.obj;
-      });
+      },true);
 	},
 	// 获取工作列表
 	getTaskList(){

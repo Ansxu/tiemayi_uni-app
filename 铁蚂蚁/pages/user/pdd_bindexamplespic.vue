@@ -8,8 +8,8 @@
 		</div>
 		<div class="main">
 			<div class="swiperImgBox bind__swiperImgBox">
-				<img src="static/image/examplespic/pdd/pic1.jpg" alt="" />
-				<img src="static/image/examplespic/pdd/pic2.jpg" alt="" />
+				<img src="/static/image/examplespic/pdd/pic1.jpg" alt="" />
+				<img src="/static/image/examplespic/pdd/pic2.jpg" alt="" />
 			</div>
 		</div>
 	</div>

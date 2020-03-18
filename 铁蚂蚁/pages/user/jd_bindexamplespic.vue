@@ -8,7 +8,7 @@
 		</div>
 		<div class="main">
 			<div class="swiperImgBox bind__swiperImgBox">
-				<img src="static/image/examplespic/jd/pic0.jpg" alt="" />
+				<img src="/static/image/examplespic/jd/pic0.jpg" alt="" />
 			</div>
 		</div>
 	</div>

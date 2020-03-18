@@ -34,7 +34,7 @@
 	        <div class="conPage noConPage" style="display: block; padding-top:100px;">
 	            <div class="noCon">
 	                <div class="iconImg">
-	                    <img src="static/image/icons/nodataicon.png" alt="">
+	                    <img src="/static/image/icons/nodataicon.png" alt="">
 	                </div>
 	                <p class="msg">暂时没有相关数据</p>
 	            </div>

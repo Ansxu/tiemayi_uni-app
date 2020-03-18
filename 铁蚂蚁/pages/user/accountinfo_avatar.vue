@@ -15,7 +15,7 @@
                     <li>
                         <div class="outside">
                             <div class="img">
-                                <div class="upimg"><img src="static/image/tx/tx_pic.jpg" id="useravatarImg" class="uploadImg" /></div>
+                                <div class="upimg"><img src="/static/image/tx/tx_pic.jpg" id="useravatarImg" class="uploadImg" /></div>
                                 <!-- <input class="upbtn" type="file">-->
                                 <input id="uploaderInput0" data-type="uploader" data-for-inputname="pic0" type="file" accept="image/*" class="upbtn" onclick="getimage(this)" />
                                 <input type="hidden" data-name="pic0" name="pic0" id="purl0" data-forval="ͼƬ0" data-forid='unneedpic' class="on" placeholder="图片0" data-for="uploaderInput" />

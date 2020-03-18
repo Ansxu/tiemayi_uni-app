@@ -8,7 +8,7 @@
 		    </div>
 		    <div class="main acti_Rule">
 		        <div class="Rulebanner">
-		            <div class="img"><img src="static/image/banner/newrulesimg.jpg"></div>
+		            <div class="img"><img src="/static/image/banner/newrulesimg.jpg"></div>
 		        </div>
 		        <div class="rulebox">
 		            <div class="ruleitem">

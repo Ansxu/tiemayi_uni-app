@@ -8,7 +8,7 @@
         </div>
         <div class="main">
             <div class="swiperImgBox">
-                <img src="static/image/banner/graderule_ban1.jpg" alt="" />
+                <img src="/static/image/banner/graderule_ban1.jpg" alt="" />
             </div>
             <div class="gradeRule">
                 <div class="gradeRule_section">

@@ -11,12 +11,12 @@
 				<div class="zhuanpanContent" style="padding-top:.6rem;padding-bottom: .4rem;">
 					<h2 style="display: none;">您已拥有<span class="playnum"></span>次抽奖机会，点击立刻抽奖！~</h2>
 					<div class="zhuanpan__hd" style="margin-bottom: .25rem;">
-						<img src="static/image/lottery/cj_title.png" alt="" />
+						<img src="/static/image/lottery/cj_title.png" alt="" />
 					</div>
 					<div class="zhuanpan__bd">
 						<div class="zhuanpan">
-							<div class="zhuanpanBox"><img src="static/image/lottery/cj_zhuanpan.png" alt="" class="img_zhuanpan" id="rotate" /></div>
-							<img src="static/image/lottery/cj_starbtn.png" alt="" class="btn_star" id="btn_star" />
+							<div class="zhuanpanBox"><img src="/static/image/lottery/cj_zhuanpan.png" alt="" class="img_zhuanpan" id="rotate" /></div>
+							<img src="/static/image/lottery/cj_starbtn.png" alt="" class="btn_star" id="btn_star" />
 						</div>
 					</div>
 				</div>
@@ -24,7 +24,7 @@
 				<!--我的中奖纪录-->
 				<div class="zj_record" style="padding-bottom: .1rem;">
 					<div class="img_titleBox">
-						<img src="static/image/lottery/bg_title1.png" alt="" />
+						<img src="/static/image/lottery/bg_title1.png" alt="" />
 					</div>
 					<div class="section_content">
 						<ul class="wenList" id="MylotteryInformation">
@@ -38,7 +38,7 @@
 				<!--奖品详情-->
 				<div class="jp_details">
 					<div class="img_titleBox">
-						<img src="static/image/lottery/bg_title2.png" alt="" />
+						<img src="/static/image/lottery/bg_title2.png" alt="" />
 					</div>
 					<div class="section_content">
 						<ul class="wenList" id="prizelist">

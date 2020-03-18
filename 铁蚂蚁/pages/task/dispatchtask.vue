@@ -22,7 +22,7 @@
 	        <p id="useridd">ID:&nbsp;|&nbsp;完成率100%</p>
 	        <p>设置好每个平台的模式，可以组合多个平台同时接单！</p>
 	        <p>点击账号可以切换接单账号</p>
-	        <a href="javascript:description();;"><img src="static/image/icons/mark@2x.png"></a>
+	        <a href="javascript:description();;"><img src="/static/image/icons/mark@2x.png"></a>
 	    </div>
 	
 	    <div class="taskTypeBox">
@@ -52,14 +52,14 @@
 	    <div style="height:60px"></div>
 	    <div class="text-center joint_task">
 	        <p class="text-center timer-c"></p>
-	        <img class="js-jointTask" src="static/image/icons/jiedan@2x.png">
+	        <img class="js-jointTask" src="/static/image/icons/jiedan@2x.png">
 	        <span style="position: absolute;top:52%;left: 50%;transform:translate(-50%,-30%);color: #fff;font-size: 13px"></span>
 	    </div>
 	
 	    <div class="new_task modal-in">
 	        <!-- <div class="icon text-center"> -->
 	        <div class="icon clearfix">
-	            <img src="static/image/icons/lamp@2x.png" class="pull-left">
+	            <img src="/static/image/icons/lamp@2x.png" class="pull-left">
 	            <p class="pull-left">来任务啦~</p>
 	        </div>
 	        <ul class="task_describ">

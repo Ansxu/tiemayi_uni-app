@@ -16,7 +16,7 @@
 										<div class="weui-cells navList__weui-cells">
 											<div class="weui-cell">
 												<div class="weui-cell__hd">
-													<img src="static/image/image/icons/taobao.png" alt="" class="icon-navImg" />
+													<img src="/static/image/image/icons/taobao.png" alt="" class="icon-navImg" />
 												</div>
 												<div class="weui-cell__bd">
 													<p class="title">{{=value.PlatAccount}}</p>
