@@ -450,9 +450,10 @@ export function toast(title,icon,time=2000){
 export function goUrl(url,params){
   let p ='';
   if(params){
-    Object.keys(params).map((item,index)=>{
-      p+=`${item}=${params[index]}`;
-      if(index<params.length){p+='&'};
+    let arr = Object.keys(params);
+    arr.map((item,index)=>{
+      p+=`${item}=${params[item]}`;
+      if(index<arr.length-1){p+='&'};
     })
   }
   uni.navigateTo({

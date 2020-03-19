@@ -1,11 +1,6 @@
 <template>
 	<div>
-	    <div class="h45">
-	        <div class="head bb_border">
-	            <a href="faq.html" class="btn_back"></a>
-	            <div class="title center"></div>
-	        </div>
-	    </div>
+		<headers>{{name}}</headers>
 	    <div class="main">
 	        <div class="searchbox">
 	            <div class="Search">
@@ -47,8 +42,25 @@
 </template>
 
 <script>
+	
+	export default {
+		data(){
+			return {
+				id:'',
+				name:'常见问题',
+			}
+		},
+		onLoad(options){
+			console.log(options)
+			this.id = options.id;
+			this.name = options.name;
+		},
+		methods:{
+
+		}
+	}
 </script>
 
 <style lang="scss" scoped>
-	@import '../../css/api.css'
+	@import '../../css/api.css';
 </style>
