@@ -48,19 +48,25 @@
 </template>
 
 <script>
-import {goUrl,valPhone,toast,post,ClientId,ClientSecret} from '@/utils'
+import {goUrl,valPhone,toast,post,get,ClientId,ClientSecret} from '@/utils'
 export default {
     data(){
         return {
             goUrl,
-            phone:'15014010199',
-            pwd:'123456',
+            phone:'',
+            pwd:'',
             recording:true,//是否记录账号
         }
     },
     onLoad(){
-        this.phone = uni.getStorageSync('userPhone')||'';
-        this.pwd = uni.getStorageSync('userPassword')||'';
+        this.phone = uni.getStorageSync('userPhone')||'15014010199';
+        this.pwd = uni.getStorageSync('userPassword')||'123456';
+        console.log('Advertisement/GetHomeBanners')
+        // get('Advertisement/GetHomeBanners',{},true)
+        post('News/NoticeList',{
+            type: 0,
+            Page: 1,
+            PageSize: 10},true)
     },
     methods:{
         login(){
@@ -68,8 +74,8 @@ export default {
             post('Login/LoginByMobile',{
                 Mobile: this.phone,
                 PassWord: this.pwd,
-                client_id: ClientId,
-                client_secret: ClientSecret
+                // client_id: ClientId,
+                // client_secret: ClientSecret
             },true).then(res=>{
                 const data = res.obj;
                 if(this.recording){

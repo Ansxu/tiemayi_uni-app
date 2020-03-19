@@ -46,7 +46,7 @@
 	      <div class='discribe pull-left'><p class='task_name '>ces</p>
 	        <p class='task_rate'>今日已接垫付：&nbsp;浏览/∞单</p></div></div>
 	      <p class='task_type' data-ifband='true'>任务</p>
-	      <img src='../../image/icons/switch_on@2x.png' class='switch' data-accountId='0' data-platId='0' onclick='switchOnOrOff(this)' />
+	      <img src='/static/image/icons/switch_on@2x.png' class='switch' data-accountId='0' data-platId='0' onclick='switchOnOrOff(this)' />
 	      </div> -->
 	    </ul>
 	    <div style="height:60px"></div>

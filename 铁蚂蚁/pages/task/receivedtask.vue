@@ -18,7 +18,7 @@
 						<li>
 							<a href="javascript:;" class="outside">
 								<div class="icon-img">
-									<img src="../../image/nav/ordermenu_nav1_1.png" alt="">
+									<img src="/static/image/nav/ordermenu_nav1_1.png" alt="">
 									<span class="circleNum">0</span>
 								</div>
 								<p class="title">未完成</p>
@@ -27,7 +27,7 @@
 						<li>
 							<a href="javascript:;" class="outside">
 								<div class="icon-img">
-									<img src="../../image/nav/ordermenu_nav1_2.png" alt="">
+									<img src="/static/image/nav/ordermenu_nav1_2.png" alt="">
                   <span class="circleNum">0</span>
 								</div>
 								<p class="title">已完成</p>
@@ -36,7 +36,7 @@
 						<li>
 							<a href="javascript:;" class="outside">
 								<div class="icon-img">
-									<img src="../../image/nav/ordermenu_nav1_3.png" alt="">
+									<img src="/static/image/nav/ordermenu_nav1_3.png" alt="">
                   <span class="circleNum">0</span>
 								</div>
 								<p class="title">已撤销</p>
@@ -45,7 +45,7 @@
 						<li>
 							<a href="javascript:;" class="outside">
 								<div class="icon-img">
-									<img src="../../image/nav/ordermenu_nav1_4.png" alt="">
+									<img src="/static/image/nav/ordermenu_nav1_4.png" alt="">
                   <span class="circleNum">0</span>
 								</div>
 								<p class="title">申诉中</p>
@@ -65,7 +65,7 @@
 						<li>
 							<a href="javascript:;" class="outside">
 								<div class="icon-img">
-									<img src="../../image/nav/ordermenu_nav1_1.png" alt="">
+									<img src="/static/image/nav/ordermenu_nav1_1.png" alt="">
 									<span class="circleNum">0</span>
 								</div>
 								<p class="title">未完成</p>
@@ -74,7 +74,7 @@
 						<li>
 							<a href="javascript:;" class="outside">
 								<div class="icon-img">
-									<img src="../../image/nav/ordermenu_nav1_2.png" alt="">
+									<img src="/static/image/nav/ordermenu_nav1_2.png" alt="">
                   <span class="circleNum">0</span>
 								</div>
 								<p class="title">已完成</p>
@@ -83,7 +83,7 @@
 						<li>
 							<a href="javascript:;" class="outside">
 								<div class="icon-img">
-									<img src="../../image/nav/ordermenu_nav1_3.png" alt="">
+									<img src="/static/image/nav/ordermenu_nav1_3.png" alt="">
                   <span class="circleNum">0</span>
 								</div>
 								<p class="title">已撤销</p>
@@ -92,7 +92,7 @@
 						<li>
 							<a href="javascript:;" class="outside">
 								<div class="icon-img">
-									<img src="../../image/nav/ordermenu_nav1_4.png" alt="">
+									<img src="/static/image/nav/ordermenu_nav1_4.png" alt="">
                   <span class="circleNum">0</span>
 								</div>
 								<p class="title">申诉中</p>
@@ -103,31 +103,16 @@
 			</div>
 		</div>
 		<!--底部-->
-		<div class="null50">
-			<footer>
-				<ul class="navList li25 clear">
-					<li class="ft1">
-						<a href="../../index.html">首页</a>
-					</li>
-					<li class="ft2">
-					  <a href="javascript:IsNovice();">全部任务</a>
-					</li>
-					<li class="ft4 active">
-						<a href="../../html/task/receivedtask.html">已接任务</a>
-					</li>
-					<li class="ft5">
-						<a href="../../html/user/member.html">个人中心</a>
-					</li>
-				</ul>
-			</footer>
-		</div>
+		<footers :showIndex="3" :showOrderReceiving="false"></footers>
 	<!--底部 end-->
 	</div>
 </template>
 
 <script>
+import footers from '@/components/footer.vue'
 import {} from '@/utils';
 export default {
+    components:{footers},
     data(){
         return {
 

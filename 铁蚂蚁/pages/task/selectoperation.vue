@@ -28,7 +28,7 @@
                     </div>
                     {{if(it.IsPresaleTask==1){ }}
                     <div class="img fr presale-img">
-                        <img src="../../image/nav/presaletask.png" />
+                        <img src="/static/image/nav/presaletask.png" />
                     </div>
                     {{} }}
                 </div>
