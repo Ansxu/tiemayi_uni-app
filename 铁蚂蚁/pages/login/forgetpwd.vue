@@ -136,7 +136,7 @@ export default {
                 VerifyType: 2,
                 ImgCode: this.imgCode,
                 OnlyVal: this.OnlyVal
-            },true).then(res=>{
+            },{isLoadin:true}).then(res=>{
                 toast('已发送至该手机',true);
                 this.timeFn = setInterval(()=>{
                     this.timeEnd-=1;
@@ -173,7 +173,7 @@ export default {
                 VerifyType: 2,
                 VerifyCode: this.code,
                 NewLoginPwd: this.pwd
-            },true)
+            },{isLoadin:true})
             toast('修改成功！',true)
             this.back();
         },

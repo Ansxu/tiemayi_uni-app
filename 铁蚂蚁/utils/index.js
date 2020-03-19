@@ -38,7 +38,7 @@ function request(url, data,method, loginFn) {
     const Timetamp = (new Date()).getTime(); //当前时间戳
     const Sign = md5(AppId + ClientId + ClientSecret + Apikey + Timetamp); //签名
     uni.request({
-      url: host + url, //仅为示例，并非真实的接口地址
+      url: host + url,
       method: method,
       data: data,
       header: {
@@ -122,13 +122,13 @@ function request(url, data,method, loginFn) {
     })
   })
 }
-export function get(url, data,loginPage, loginFn) {
-  if(!loginPage){if(!judgeLogin()) return false;}
+// 如果status.isLogin存在，就是登录注册页面请求登录，不用判断是否登录
+export function get(url, data,status={}, loginFn) {
+  if(status&&!status.isLogin){if(!judgeLogin()) return false;}
   return request(url, data, 'GET', loginFn)
 }
-export function post(url, data,loginPage,loginFn) {
-  // 如果loginPage存在，就是登录注册页面请求登录，不用判断是否登录
-  if(!loginPage){if(!judgeLogin()) return false;}
+export function post(url, data,status,loginFn) {
+  if(status&&!status.isLogin){if(!judgeLogin()) return false;}
   return request(url, data,'POST', loginFn)
 }
 //判断是否登录，未登录做弹窗跳转登录页面

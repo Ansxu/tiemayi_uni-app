@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import {goUrl,valPhone,toast,post,get,ClientId,ClientSecret} from '@/utils'
+import {goUrl,valPhone,toast,post,ClientId,ClientSecret} from '@/utils'
 export default {
     data(){
         return {
@@ -61,12 +61,6 @@ export default {
     onLoad(){
         this.phone = uni.getStorageSync('userPhone')||'15014010199';
         this.pwd = uni.getStorageSync('userPassword')||'123456';
-        console.log('Advertisement/GetHomeBanners')
-        // get('Advertisement/GetHomeBanners',{},true)
-        post('News/NoticeList',{
-            type: 0,
-            Page: 1,
-            PageSize: 10},true)
     },
     methods:{
         login(){
@@ -76,7 +70,7 @@ export default {
                 PassWord: this.pwd,
                 // client_id: ClientId,
                 // client_secret: ClientSecret
-            },true).then(res=>{
+            },{isLogin:true}).then(res=>{
                 const data = res.obj;
                 if(this.recording){
                     uni.setStorageSync('userPhone',this.phone);

@@ -187,6 +187,7 @@ export default {
             })
             const data = res.obj;
             this.userInfo = data;
+            uni.setStorageSync('userInfo',data);
             // uni.setStorage('isAdvanceRange', isAdvanceRange);
 
         },

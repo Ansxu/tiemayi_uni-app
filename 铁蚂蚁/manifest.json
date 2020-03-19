@@ -93,11 +93,11 @@
             "disableHostCheck" : true,
             "proxy" : {
                 "/api" : {
-                    "target" : "http://xmyapi.wtvxin.com/api",
+                    "target" : "http://xmyapi.wtvxin.com",
                     "changeOrigin" : true,
                     "secure" : false,
                     "pathRewrite" : {
-                        "^/api" : ""
+                        "^/api" : "/api"
                     }
                 }
             },

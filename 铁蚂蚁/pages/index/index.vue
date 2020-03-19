@@ -192,9 +192,9 @@ export default {
   },
   methods: {
     getBanner() {
-      get("Advertisement/GetHomeBanners").then(res => {
+      get("Advertisement/GetHomeBanners",{},{isLogin:true}).then(res => {
         this.banner = res.obj;
-      }, true);
+      });
     },
     // 获取工作列表
     getTaskList() {

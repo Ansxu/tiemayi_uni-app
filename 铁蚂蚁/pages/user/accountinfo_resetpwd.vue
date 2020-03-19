@@ -1,11 +1,6 @@
 <template>
     <div class="bg_f8f8f8">
-        <div class="h45">
-            <div class="head bb_border">
-                <a href="accountinfo.html" class="btn_back"></a>
-                <div class="title center">修改登录密码</div>
-            </div>
-        </div>
+        <headers>修改登录密码</headers>
         <div class="main">
             <div class="regLogForm">
                 <form action="">

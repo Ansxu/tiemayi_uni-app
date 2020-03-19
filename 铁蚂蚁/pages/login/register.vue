@@ -181,7 +181,7 @@ export default {
                 VerifyType: 0,
                 ImgCode: this.imgCode,
                 OnlyVal: this.OnlyVal
-            },true).then(res=>{
+            },{isLoadin:true}).then(res=>{
                 toast('已发送至该手机',true);
                 this.timeFn = setInterval(()=>{
                     this.timeEnd-=1;
@@ -199,7 +199,7 @@ export default {
                 Password: this.pwd,
                 InviteCode: this.inviteCode,
                 QQ:this.qq
-            },true)
+            },{isLoadin:true})
             toast('注册成功！',true)
             this.back();
         },

@@ -2,12 +2,7 @@
     <div class="bg_f8f8f8">
         <!--第一步-->
         <div class="defaultPage oneStep__defaultPage">
-            <div class="h45">
-                <div class="head bb_border">
-                    <a href="accountinfo.html" class="btn_back"></a>
-                    <div class="title center">手机号修改</div>
-                </div>
-            </div>
+            <headers>手机号修改</headers>
             <div class="main">
                 <div class="regLogForm resetTel__regLogForm">
                     <div class="dd_msgBox">
