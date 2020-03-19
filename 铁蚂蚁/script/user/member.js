@@ -92,7 +92,7 @@ function optionResult(ret) {
                 $("#Avatar").attr("src", Avatar);
                 $api.setStorage('userAvatar', Avatar);
             } else {
-                $api.setStorage('userAvatar', "../../image/tx/tx_pic.jpg");
+                $api.setStorage('userAvatar', "../../image/tx/tx_pic.png");
             }
             if (IsInviteRole==0)   $("#shareqrcode").hide();
             $api.setStorage('isAdvanceRange', isAdvanceRange);

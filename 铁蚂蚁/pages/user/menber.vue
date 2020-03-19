@@ -9,7 +9,7 @@
             <div class="memberTop">
                 <div class="myMessages">
                     <div class="touxiang" @click="goUrl('user/accountinfo')">
-                        <img :src="userInfo.Avatar||'static/image/tx/tx_pic.jpg'" id="Avatar" alt="" />
+                        <img :src="userInfo.Avatar||'static/image/tx/tx_pic.png'" id="Avatar" alt="" />
                     </div>
                     <div @click="goUrl('user/grade_rule')" class="btn_vs">查看等级规则</div>
                     <div class="mySome">

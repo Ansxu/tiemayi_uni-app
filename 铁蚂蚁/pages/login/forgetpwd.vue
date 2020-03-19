@@ -141,6 +141,7 @@ export default {
                 this.timeFn = setInterval(()=>{
                     this.timeEnd-=1;
                     if(this.timeEnd<1){
+                        this.timeEnd=60;
                         clearInterval(this.timeFn);
                     }
                 },1000)

@@ -10,6 +10,13 @@
 <script>
 import {} from '@/utils';
 export default {
+    props:{
+        // 是否自定义后退方法
+        onBack:{
+            type: Boolean,
+            default:false
+        }
+    },
     data(){
         return {
 
@@ -23,7 +30,11 @@ export default {
     },
     methods:{
         goBack(){
-            uni.navigateBack();
+            if(this.onBack){
+                this.$emit('onBack')
+            }else{
+                uni.navigateBack();
+            }
         }
     }
 }

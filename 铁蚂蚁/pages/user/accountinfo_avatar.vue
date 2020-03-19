@@ -11,7 +11,7 @@
                         <div class="outside" @click="upAvatar">
                             <div class="img">
                                 <div class="upimg">
-                                    <img :src="userInfo.Avatar||'/static/image/tx/tx_pic.jpg'" id="useravatarImg" class="uploadImg" />
+                                    <img :src="userInfo.Avatar||'/static/image/tx/tx_pic.png'" id="useravatarImg" class="uploadImg" />
                                 </div>
                                 <!-- <input class="upbtn" type="file">-->
                                 <!-- <input id="uploaderInput0" data-type="uploader" data-for-inputname="pic0" type="file" accept="image/*" class="upbtn" onclick="getimage(this)" />
