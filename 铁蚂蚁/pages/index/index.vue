@@ -106,7 +106,7 @@
       <!--新手-->
       <div class="xinshou">
         <div class="xinshouDiv1">
-          <span class="xinshou_text" @click="ifTask()">新手教程</span>
+          <span class="xinshou_text" @click="goUrl('other/faq')">新手教程</span>
         </div>
         <div class="xinshouDiv2">
           <div @click="goUrl('other/invite')">

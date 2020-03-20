@@ -4,35 +4,18 @@
 	    <div class="main">
 	        <div class="searchbox">
 	            <div class="Search">
-	                <input type="text" class="input" placeholder="简单输入问题，如“找回密码”" />
-	                <input type="button" class="searchbtn" onclick="search()" />
+	                <input type="text" v-model="searchWord" class="input" placeholder="简单输入问题，如“找回密码”" />
+	                <div type="button" class="searchbtn" @click="search"></div> 
 	            </div>
 	        </div>
 	        <div class="Faq-detail">
-	            <!--  循环 -->
-	        <!--    <script id="FAQUserTemp" type="text/x-dot-template">
-	                {{~it:value:index}}
-	                <li onclick="showContent(this)">
-	                    <div class="title arrow_r">
-	                        <p>{{=value.Jianjie}}</p>
-	                    </div>
-	                    <div class="dropdown-box">
-	                        <div class="desc">
-	                            {{=value.ContentText}}
-	                        </div>
-	                    </div>
-	                </li>
-	                {{~}}
-	            </script> -->
-	            <ul class="downlist" v-for="(item,index) in 6" :key="index">
-					<li onclick="showContent(this)">
+	            <ul class="downlist" v-for="(item,index) in list" :key="index">
+					<li @click="item.status=!item.status">
 						<div class="title arrow_r">
-							<p>这个是好问题哈 哈哈哈哈哈哈</p>
+							<p>{{item.Jianjie}}</p>
 						</div>
-						<div class="dropdown-box">
-							<div class="desc">
-								内容是不可能高速你的哈哈哈哈哈 哈哈和 和哈哈和和和哈哈和哈哈和fsdfsfsdgsgsgsgdsgds
-							</div>
+						<div class="dropdown-box" v-show="item.status">
+							<div class="desc" v-html="item.ContentText"></div>
 						</div>
 					</li>
 	            </ul>
@@ -42,25 +25,76 @@
 </template>
 
 <script>
-	
+	import {post} from '@/utils';
 	export default {
 		data(){
 			return {
 				id:'',
 				name:'常见问题',
+				list:[],
+				page:1,
+				pageSize:20,
+				searchWord:'',//搜索关键词
+				notData:false,
 			}
 		},
 		onLoad(options){
 			console.log(options)
 			this.id = options.id;
 			this.name = options.name;
+			this.getList();
 		},
 		methods:{
-
+			search(){
+				this.notData=false;
+				this.page=1;
+				this.list=[];
+				this.getList();
+			},
+			getList(){
+				post('Help/GetHelpList',{
+					HelpClassId: this.id,
+					Page: this.page,
+					PageSize: this.pageSize,
+					SarchKeyword: this.searchWord
+				}).then(res=>{
+					const data = res.obj;
+					data.HelpClassList.map(item=>{
+						item.status = false;
+					})
+					this.list.push(...data.HelpClassList);
+					if(data.HelpClassList<this.pageSize){
+						this.notData=true;
+					}
+				})
+			}
+		},
+		// 上拉加载
+		onReachBottom(){
+			if(!this.notData){
+				this.page+=1;
+				this.getList();
+			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
 	@import '../../css/api.css';
+	.searchbox{
+		padding:0 10px;
+	}
+	.Search{
+		border: 1px solid #e8e8e8;
+		input{
+			font-size:12px;
+		}
+	}
+	.downlist{
+		border-bottom: 1px solid #e8e8e8;
+		font-size:14px;
+	}
+	.dropdown-box{
+		display:block;
+	}
 </style>

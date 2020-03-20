@@ -1,12 +1,6 @@
 <template>
     <div class="bg_f8f8f8">
-        <div class="h45">
-            <div class="head bb_border">
-
-                <a href="member.html" class="btn_back"></a>
-                <div class="title center">绑定信息</div>
-            </div>
-        </div>
+        <headers>绑定信息</headers>
         <div class="main">
             <div class="navSection">
                 <div class="dd__hd">
@@ -14,39 +8,39 @@
                 </div>
                 <div class="navSection__bd">
                     <div class="weui-cells navList__weui-cells navList2__weui-cells">
-                        <a href="bindidcard.html" class="weui-cell">
+                        <div href="bindidcard.html" class="weui-cell">
                             <div class="weui-cell__hd">
                                 <img src="/static/image/nav/bind_nav1_1.png" alt="" class="icon-navImg"><span class="title">绑定身份证</span>
                             </div>
                             <div class="weui-cell__bd text_r">
-                                <p class="txtMsg" id="IdentityCard">未绑定</p>
+                                <p class="txtMsg" id="IdentityCard">{{info.IsAUTStr}}</p>
                             </div>
                             <div class="weui-cell__ft">
                                 <span class="icon-arrow icon-arrowRight"></span>
                             </div>
-                        </a>
-                        <a href="bindbank.html" class="weui-cell">
+                        </div>
+                        <div href="bindbank.html" class="weui-cell">
                             <div class="weui-cell__hd">
                                 <img src="/static/image/nav/bind_nav1_2.png" alt="" class="icon-navImg"><span class="title">绑定银行卡</span>
                             </div>
                             <div class="weui-cell__bd text_r">
-                                <p class="txtMsg" id="BankCard">未绑定</p>
+                                <p class="txtMsg" id="BankCard">{{info.BankStr}}</p>
                             </div>
                             <div class="weui-cell__ft">
                                 <span class="icon-arrow icon-arrowRight"></span>
                             </div>
-                        </a>
-                        <a href="bindqq.html" class="weui-cell">
+                        </div>
+                        <div href="bindqq.html" class="weui-cell">
                             <div class="weui-cell__hd">
                                 <img src="/static/image/nav/bind_nav1_3.png" alt="" class="icon-navImg"><span class="title">QQ号</span>
                             </div>
                             <div class="weui-cell__bd text_r">
-                                <p class="txtMsg color_5c91f0" id="QACQ">未绑定</p>
+                                <p class="txtMsg color_5c91f0" id="QACQ">{{info.QQStr||'未绑定'}}</p>
                             </div>
                             <div class="weui-cell__ft">
                                 <span class="icon-arrow icon-arrowRight"></span>
                             </div>
-                        </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -56,7 +50,7 @@
                 </div>
                 <div class="navSection__bd">
                     <div class="weui-cells navList__weui-cells navList2__weui-cells">
-                        <a href="javascript:bindAccountPage('./list/taobaolist.html','淘宝');" class="weui-cell" id="TbAccountShow">
+                        <div href="javascript:bindAccountPage('./list/taobaolist.html','淘宝');" class="weui-cell" id="TbAccountShow">
                             <div class="weui-cell__hd">
                                 <img src="/static/image/nav/bind_nav2_1.png" alt="" class="icon-navImg"><span class="title">绑定淘宝账号</span>
                             </div>
@@ -66,8 +60,8 @@
                             <div class="weui-cell__ft">
                                 <span class="icon-arrow icon-arrowRight"></span>
                             </div>
-                        </a>
-                        <a href="javascript:bindAccountPage('./list/jdlist.html','京东');" class="weui-cell" id="JdAccountShow">
+                        </div>
+                        <div href="javascript:bindAccountPage('./list/jdlist.html','京东');" class="weui-cell" id="JdAccountShow">
                             <div class="weui-cell__hd">
                                 <img src="/static/image/nav/bind_nav2_2.png" alt="" class="icon-navImg"><span class="title">绑定京东账号</span>
                             </div>
@@ -77,8 +71,8 @@
                             <div class="weui-cell__ft">
                                 <span class="icon-arrow icon-arrowRight"></span>
                             </div>
-                        </a>
-                        <a href="javascript:bindAccountPage('./list/pddlist.html','拼多多');" class="weui-cell" id="PddAccountShow">
+                        </div>
+                        <div href="javascript:bindAccountPage('./list/pddlist.html','拼多多');" class="weui-cell" id="PddAccountShow">
                             <div class="weui-cell__hd">
                                 <img src="/static/image/nav/bind_nav2_3.png" alt="" class="icon-navImg"><span class="title">绑定拼多多账号</span>
                             </div>
@@ -88,8 +82,8 @@
                             <div class="weui-cell__ft">
                                 <span class="icon-arrow icon-arrowRight"></span>
                             </div>
-                        </a>
-                        <a href="javascript:bindAccountPage('./list/albblist.html','阿里巴巴');" class="weui-cell" id="AlbbAccountShow">
+                        </div>
+                        <div href="javascript:bindAccountPage('./list/albblist.html','阿里巴巴');" class="weui-cell" id="AlbbAccountShow">
                             <div class="weui-cell__hd">
                                 <img src="/static/image/nav/bind_nav2_6.png" alt="" class="icon-navImg"><span class="title">绑定阿里巴巴账号</span>
                             </div>
@@ -99,8 +93,8 @@
                             <div class="weui-cell__ft">
                                 <span class="icon-arrow icon-arrowRight"></span>
                             </div>
-                        </a>
-                        <!-- <a href="./list/mgjlist.html" class="weui-cell">
+                        </div>
+                        <!-- <div href="./list/mgjlist.html" class="weui-cell">
                             <div class="weui-cell__hd">
                                 <img src="/static/image/nav/bind_nav2_4.png" alt="" class="icon-navImg"><span class="title">绑定蘑菇街账号</span>
                             </div>
@@ -110,8 +104,8 @@
                             <div class="weui-cell__ft">
                                 <span class="icon-arrow icon-arrowRight"></span>
                             </div>
-                        </a>
-                        <a href="./list/mlslist.html" class="weui-cell">
+                        </div>
+                        <div href="./list/mlslist.html" class="weui-cell">
                             <div class="weui-cell__hd">
                                 <img src="/static/image/nav/bind_nav2_5.png" alt="" class="icon-navImg"><span class="title">绑定美丽说账号</span>
                             </div>
@@ -121,7 +115,7 @@
                             <div class="weui-cell__ft">
                                 <span class="icon-arrow icon-arrowRight"></span>
                             </div>
-                        </a> -->
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -132,7 +126,7 @@
                     <h1>温馨提示</h1>
                     <p class="pull-left">根据国家网信办新规，平台进行实名安全工作。我们承诺保障您账户的资金安全，且不会泄露您的个人信息，请您积极配合。</p>
                 </div>
-                <a href="bindidcard.html" class="bind_jump">点击跳转实名认证</a>
+                <div href="bindidcard.html" class="bind_jump">点击跳转实名认证</div>
             </div>
         </div>-->
 
@@ -140,21 +134,39 @@
 </template>
 
 <script>
-import {} from '@/utils';
+import {post} from '@/utils';
 export default {
     data(){
         return {
-
+            userId:'',
+            token:'',
+            info:{},
         }
     },
     onLoad(){
-
+        this.userId = uni.getStorageSync('userId');
+        this.token = uni.getStorageSync('token');
+        this.getUserInfo();
     },
     onShow(){
 
     },
     methods:{
-
+        getUserInfo(){
+            post('Member/GetBindPageData',{
+                UserId: this.userId,
+                Token: this.token
+            }).then(res=>{
+                const data = res.obj
+                this.info = data;
+            })
+        },
+        bindAccountPage(url, msg) {
+            if (isIdCard != 1 || isQQ != 1) {
+                alert("身份证绑定并认证以及绑定QQ号后才可以绑定" + msg + "账号")
+            } else
+                location.href = url;
+        },
     }
 }
 </script>

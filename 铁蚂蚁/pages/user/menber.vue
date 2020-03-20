@@ -114,7 +114,7 @@
                             <div>
                                 <img src="/static/image/nav/memberindex_nav2_4.png" alt="" />
                             </div>
-                            <span style="color:#7A7A7A">新手教学</span>
+                            <span style="color:#7A7A7A">新手教程</span>
                         </div>
                     </li>
                     <li class="messageMenuLi" id="shareqrcode" v-if="userInfo.IsInviteRole">
