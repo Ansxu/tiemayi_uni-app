@@ -31,24 +31,36 @@
 </template>
 
 <script>
-import {} from '@/utils';
+import {post} from '@/utils';
 export default {
     data(){
         return {
-
+			userId:'',
+			token:'',
+			data:{},
         }
     },
     onLoad(){
-
+		this.userId = uni.getStorageSync('userId');
+		this.token = uni.getStorageSync('token');
+		this.getData();
     },
     onShow(){
 
     },
     methods:{
-
+		getData(){
+			post('Member/GetUserBindIdCardInfo',{
+                UserId: this.userId,
+                Token: this.token
+			}).then(res=>{
+				this.data = res.obj;
+			})
+		}
     }
 }
 </script>
+
 
 <style lang="scss" scoped>
 

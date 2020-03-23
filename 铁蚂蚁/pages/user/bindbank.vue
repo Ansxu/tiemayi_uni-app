@@ -15,41 +15,36 @@
                 </div>
             </div>
             <div class="bindForm regLogForm onlyIpt__form" style="padding-top:.1rem;">
-                <form action="">
-                    <div class="weui-cells">
-                        <div class="weui-cell">
-                            <div class="weui-cell__bd">
-                                <input type="text" class="weui-input" id="BankCardName" placeholder="请输入持卡人姓名">
-                            </div>
-                        </div>
-                        <div class="weui-cell">
-                            <div class="weui-cell__bd">
-                                <input type="text" class="weui-input" id="BankCardNo" placeholder="请输入卡号">
-                            </div>
-                        </div>
-                        <div class="weui-cell selectCity__weui-cell select__weui-cell">
-                            <div class="weui-cell__bd">
-                                <input type="text" class="weui-input"  id="area"  value="" placeholder="请选择城市" onclick="picker3()"/>
-                                <span class="icon-arrow icon-arrowRight"></span>
-                            </div>
-                            <input type="hidden" id="provinceCode" readonly="true"/>
-                            <input type="hidden" id="cityCode" readonly="true"/>
-                            <input type="hidden" id="districtCode" readonly="true"/>
-                        </div>
-
-                        <div class="weui-cell">
-                            <div class="weui-cell__bd">
-                                <input type="text" class="weui-input" id="BankAddress" placeholder="请输入开户行详细地址">
-                            </div>
-                        </div>
-                        <div class="weui-cell" id="showSelectBankNamePage">
-                            <div class="weui-cell__bd">
-                                <input type="text" class="weui-input" id="BankName" placeholder="请选择开户银行" unselectable="on" onfocus="this.blur()" readonly="readonly">
-                            </div>
+                <div class="weui-cells">
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <input type="text" v-model.trim="data.BankCardName" :disabled="data.IsAUT===1" class="weui-input" id="BankCardName" placeholder="请输入持卡人姓名">
                         </div>
                     </div>
-                    <a href="javascript:;" class="weui-btn weui-btn-active btn-submit" style="margin-top:.2rem;">提交</a>
-                </form>
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <input type="text" class="weui-input"  v-model.trim="data.BankCardNo" id="BankCardNo" placeholder="请输入卡号">
+                        </div>
+                    </div>
+                    <div class="weui-cell selectCity__weui-cell select__weui-cell" @click="showArea">
+                        <div class="weui-cell__bd">
+                            <input type="text" class="weui-input" v-model="addressSelect" disabled  id="area"  value="" placeholder="请选择城市" />
+                            <span class="icon-arrow icon-arrowRight"></span>
+                        </div>
+                    </div>
+
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <input type="text" class="weui-input" v-model.trim="data.BankAddress":disabled="data.IsAUT===1" id="BankAddress" placeholder="请输入开户行详细地址">
+                        </div>
+                    </div>
+                    <div class="weui-cell" id="showSelectBankNamePage">
+                        <div class="weui-cell__bd">
+                            <input type="text" class="weui-input" v-model.trim="data.BankName" :disabled="data.IsAUT===1" id="BankName" placeholder="请选择开户银行" unselectable="on" onfocus="this.blur()" readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+                <div @click="submit" v-if="data.IsAUT!==1" class="weui-btn weui-btn-active btn-submit" style="margin-top:.2rem;">提交</div>
             </div>
         </div>
         <!--弹窗-->
@@ -87,45 +82,132 @@
                 </div>
             </div>
         </div>
-        <!-- <script type="text/javascript">
-            $(function() {
-                $('#showSelectBankNamePage').click(function() {
-                    $('.selectBankNamePage').show();
-                });
-
-                $('.allScreenPage .head .btn_back').click(function() {
-                    $(this).parents(".allScreenPage").hide();
-                });
-
-                $('.bankList__weui-cells').on("click", ".weui-cell", function() {
-                    $(this).addClass("active").siblings(".weui-cell").removeClass("active");
-                    $('#showSelectBankNamePage .weui-input').val($(this).find(".name").text());
-                    $('.selectBankNamePage').hide();
-                });
-            });
-        </script> -->
+        <w-picker 
+			mode="linkage"
+			:level="3"
+			@confirm="onConfirm"
+			ref="linkage"
+            :defaultVal="defaultArea"
+            :linkage="areaList"
+            themeColor="#5c91f0"
+            >
+        </w-picker>
     </div>
 </template>
 
 <script>
-import {} from '@/utils';
+import {post,get} from '@/utils';
+import wPicker from "@/components/w-picker/w-picker.vue";
 export default {
+    components:{
+        wPicker
+    },
     data(){
         return {
-
+            userId:'',
+			token:'',
+            data:{
+                IsAUT:1,
+                BankCardName:'', //绑定的银行卡用户名
+                BankCardNo:'', //银行卡卡号
+                BankName:'', //银行卡对应的银行名称
+                BankProvince:'', //银行所属省市
+                BankCity:'', //银行所属城市
+                BankArea:'', //银行所属地区
+                BankAddress:'', //详细地址
+                BankRegionText:'', //银行所属省市城市地区文本
+            },
+            areaList:[],//动态地区列表
+            defaultArea:['广东省','深圳市','龙华新区'],//默认地址
+            addressSelect:'',//选中的地址
         }
     },
     onLoad(){
-
+		this.userId = uni.getStorageSync('userId');
+		this.token = uni.getStorageSync('token');
+		this.getData();
+		this.getBankList();
+		this.getAreaList();
     },
     onShow(){
 
     },
     methods:{
-
+		getData(){
+			post('Member/GetUserBankInfo',{
+                UserId: this.userId,
+                Token: this.token
+			}).then(res=>{
+                const data = res.obj;
+                this.defaultArea = data.BankRegionText.split(' ')
+                this.addressSelect = data.BankRegionText;
+				this.data = data;
+			})
+        },
+        getBankList(){
+            get('Help/GetAllBank').then(res=>{
+                this.addressList = res.obj;
+            })
+        },
+        // 获取地区列表
+        getAreaList(){
+            post('area/GetAreaList',{
+                UserId: this.userId,
+                Token: this.token
+            }).then(res=>{
+            console.log(res)
+            })
+        },
+        // 显示城市选择
+        showArea(){
+            if(this.data.IsAUT===1) return;
+            this.$refs['linkage'].show()
+        },
+        // 确认地区选择
+        onConfirm(e){
+            this.defaultArea = e.checkArr;
+            this.addressSelect = e.checkArr.join(' ');
+            this.getAddressList(this.addressSelect)
+        },
+        // 提交、
+        submit(){
+            const data = this.data;
+            let provinceCode='';
+            let cityCode='';
+            let districtCode='';
+            this.areaList.map(province=>{
+                if(province.label===data.defaultArea[0]){
+                    provinceCode= province.value;
+                    province.children.map(city=>{
+                        if(city.label===data.defaultArea[1]){
+                            cityCode = city.value;
+                            city.children.map(district=>{
+                                if(data.defaultArea[2]&&district.label===data.defaultArea[2]){
+                                    districtCode = district.value;
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+			post('Member/BindUserBank',{
+                UserId: this.userId,
+                Token: this.token,
+                ProvinceCode: provinceCode,// 省
+                CityCode: cityCode,// 市
+                DistrictCode: districtCode,// 区
+                BankCardName: data.BankCardName, //持卡人姓名
+                BankAddress: data.BankAddress, //开卡行银行地址 ; 深圳龙华建设银行支行
+                BankCardNo: data.BankCardNo, //银行卡号
+                BankName: data.BankName, //银行名称； 建设银行，农业银行 ....
+			}).then(res=>{
+                
+			})
+        }
     }
 }
 </script>
+
 
 <style lang="scss" scoped>
     .allScreenPage {

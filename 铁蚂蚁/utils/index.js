@@ -4,8 +4,10 @@ import md5 from 'js-md5';
 // const host = 'https://api.damingduo.cn/api/';
 // 线上后台地址
 // const filePath = 'http://xcx.gllgyz.com';
-const host = 'http://xmyapi.wtvxin.com/api/';// 测试
-const website = 'http://www.3318pk.com';
+const host = 'http://hnapi.wtvxin.com/api/';// 红鸟  旺店宝测试
+// const host = 'http://xmyapi.wtvxin.com/api/';// 铁蚂蚁测试
+// const website = 'http://www.3318pk.com';
+const website = 'http://hn.wtvxin.com';
 const wssPath = 'wss://hxapia.com/WebSocketServer.ashx';// wss地址
 const filePath = 'http://www.hxapia.com';// 测试后台地址
 const LoginPath = "/pages/login/login";//登录路径
@@ -301,31 +303,6 @@ export function formatTime(date) {
   const t2 = [hour, minute, second].map(formatNumber).join(':')
 
   return `${t1} ${t2}`
-}
-
-// 微信支付
-// param--支付参数（后台返回）；success--支付成功执行的方法
-export function uni_pay(param) {
-  return new Promise((resolve, reject) => {
-    let payData = JSON.parse(param);
-    uni.requestPayment({
-      timeStamp: payData.timeStamp,
-      nonceStr: payData.nonceStr,
-      package: payData.package,
-      signType: payData.signType,
-      paySign: payData.paySign,
-      success(res) {
-        resolve(res)
-      },
-      fail(err) {
-        uni.showToast({
-          title: "支付失败，请重新尝试",
-          icon: "none"
-        });
-        reject(err)
-      }
-    });
-  })
 }
 
 // 更改时间格式

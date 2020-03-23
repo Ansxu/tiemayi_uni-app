@@ -1,11 +1,6 @@
 <template>
 <div class="bg_f8f8f8">
-	<div class="h45">
-		<div class="head bb_border">
-			<a href="javascript:history.go(-1);" class="btn_back"></a>
-			<div class="title center">身份证信息</div>
-		</div>
-	</div>
+	<headers>身份证认证</headers>
 	<div class="main">
 		<div class="dd__hd weui-cell">
 			<div class="weui-cell__bd">
@@ -19,12 +14,14 @@
 				<div class="weui-cells" style="margin-top:0;">
 					<div class="weui-cell">
 						<div class="weui-cell__bd">
-							<input type="text" class="weui-input" id="realName" placeholder="请输入您的真实姓名" />
+							<input type="text" class="weui-input" 
+								:disabled="data.IsAUT===1" v-model.trim="data.Idcard"  id="realName" placeholder="请输入您的真实姓名" />
 						</div>
 					</div>
 					<div class="weui-cell">
 						<div class="weui-cell__bd">
-							<input type="text" class="weui-input" id="idNum" placeholder="请输入您的身份证号码" />
+							<input type="text" class="weui-input" 
+								:disabled="data.IsAUT===1" v-model.trim="data.UserRName" id="idNum" placeholder="请输入您的身份证号码" />
 						</div>
 					</div>
 				</div>
@@ -37,10 +34,11 @@
 				</div>
 				<ul class="dd_piclist li25">
 					<li>
-						<div class="outside">
+						<div class="outside" @click="upImg(1)">
 							<div class="img">
-								<div class="upimg" onclick="photograph(this,'pic0',10)" id="getpic0"><img src="" id="IdcardPositive" class="uploadImg" /></div>
-								<input type="hidden" id="pic0" readonly="true" />
+								<!-- <div class="upimg" onclick="photograph(this,'pic0',10)" id="getpic0"><img src="" id="IdcardPositive" class="uploadImg" /></div> -->
+								<img class="upimg" :src="data.IdcardPositive" alt="">
+								<!-- <input type="hidden" id="pic0" readonly="true" /> -->
 							</div>
 							<p class="title">身份证正面照</p>
 						</div>
@@ -55,10 +53,11 @@
 				</ul>
 				<ul class="dd_piclist li25">
 					<li>
-						<div class="outside">
+						<div class="outside" @click="upImg(2)">
 							<div class="img">
-								<div class="upimg" onclick="photograph(this,'pic1',10)" id="getpic1"><img src="" id="IdcardNegative" class="uploadImg" /></div>
-								<input type="hidden" id="pic1" readonly="true" />
+								<!-- <div class="upimg" onclick="photograph(this,'pic1',10)" id="getpic1"><img src="" id="IdcardNegative" class="uploadImg" /></div> -->
+								<img class="upimg" :src="data.IdcardNegative" alt="">
+								<!-- <input type="hidden" id="pic1" readonly="true" /> -->
 							</div>
 							<p class="title">身份证反面照</p>
 						</div>
@@ -73,7 +72,7 @@
 				</ul>
 				<ul class="dd_piclist li25" style="display:none;">
 					<li>
-						<div class="outside">
+						<div class="outside" @click="upImg(3)">
 							<div class="img">
 								<div class="upimg" onclick="photograph(this,'pic2',10)" id="getpic2"><img src="" id="IdcardInHand" class="uploadImg" /></div>
 								<input type="hidden" id="pic2" readonly="true" />
@@ -82,7 +81,7 @@
 						</div>
 					</li>
 					<li>
-						<div class="outside">
+						<div class="outside" >
 							<div class="img">
 								<div class="upimg"><img src="/static/image/examplespic/idcard/pic1.jpg"></div>
 							</div>
@@ -92,31 +91,122 @@
 
 			</div>
 		</div>
-		<a href="javascript:;" class="weui-btn weui-btn-active btn-submit" style="margin:.2rem .12rem .2rem;">提交</a>
+		<div class="weui-btn weui-btn-active btn-submit" @click="submit" v-if="data.IsAUT!==1" style="margin:.2rem .12rem .2rem;">提交</div>
 	</div>
 </div>
 </template>
 
 <script>
-import {} from '@/utils';
+import {post,getImgPath,toast} from '@/utils';
+import {pathToBase64} from '@/utils/image-tools'
 export default {
     data(){
         return {
-
+			userId:'',
+			token:'',
+			// IsAUT--1:已认证
+			data:{
+				Idcard:'',
+				UserRName:'',
+				IdcardNegative:'',
+				IdcardPositive:'',
+				IsAUT:0,
+			},
+			// isSubmit:true,//是否可以重新提交
         }
     },
     onLoad(){
-
+		this.userId = uni.getStorageSync('userId');
+		this.token = uni.getStorageSync('token');
+		this.getData();
     },
     onShow(){
 
     },
     methods:{
-
+		getData(){
+			post('Member/GetUserBindIdCardInfo',{
+                UserId: this.userId,
+                Token: this.token
+			}).then(res=>{
+				const data = res.obj;
+				this.data = data;
+				
+			})
+		},
+		// 上传照片,1-正面，2反面
+		upImg(type){
+			if(this.data.IsAUT==1)return;
+			getImgPath().then(res=>{
+				if(type===1){
+					this.data.IdcardPositive = res;
+				}else{
+					this.data.IdcardNegative = res;
+				}
+			})
+		},
+		// 提交
+		submit(){
+			if(!this.check()) return;
+			let Positive ='';
+			let Negative ='';
+			// pathToBase64(this.data.IdcardPositive).then(a=>{
+			// })
+			Promise.all([pathToBase64(this.data.IdcardPositive),pathToBase64(this.data.IdcardNegative)]).then(arr=>{
+				console.log(arr,'a')
+				post('Member/BindUserIdCard',{
+					UserId: this.userId,
+					Token: this.token,
+					UserRName: this.data.UserRName,
+					Idcard: this.data.Idcard,
+					IdCardImgOne: arr[0],
+					IdCardImgTwo: arr[1],
+					IdCardImgThree: ''
+				}).then(res=>{
+					toast('提交成功',true);
+					uni.navigateBack();
+				})
+			})
+		},
+		// 校验
+		check(){
+			const data = this.data;
+			if(!data.Idcard){
+				toast('请输入身份证！');
+				return false;
+			}
+			if(!data.UserRName){
+				toast('请输入姓名！');
+				return false;
+			}
+			if(!data.IdcardPositive){
+				toast('请上传身份证正面！');
+				return false;
+			}
+			if(!data.IdcardNegative){
+				toast('请上传身份证反面！');
+				return false;
+			}
+			return true;
+		}
     }
 }
 </script>
 
 <style lang="scss" scoped>
-
+	.outside{
+		width:100px;
+	}
+	.main{
+		padding:0 10px;
+		img{
+			border-radius: 3px;
+			width:100px;
+			height:100px;
+		}
+	}
+	.li25 li {
+    	width: 30%;
+	}
+	
 </style>

@@ -8,7 +8,7 @@
                 </div>
                 <div class="navSection__bd">
                     <div class="weui-cells navList__weui-cells navList2__weui-cells">
-                        <div href="bindidcard.html" class="weui-cell">
+                        <div @click="goUrl('user/bindidcard')" class="weui-cell">
                             <div class="weui-cell__hd">
                                 <img src="/static/image/nav/bind_nav1_1.png" alt="" class="icon-navImg"><span class="title">绑定身份证</span>
                             </div>
@@ -19,7 +19,7 @@
                                 <span class="icon-arrow icon-arrowRight"></span>
                             </div>
                         </div>
-                        <div href="bindbank.html" class="weui-cell">
+                        <div @click="goUrl('user/bindbank')" class="weui-cell">
                             <div class="weui-cell__hd">
                                 <img src="/static/image/nav/bind_nav1_2.png" alt="" class="icon-navImg"><span class="title">绑定银行卡</span>
                             </div>
@@ -30,7 +30,7 @@
                                 <span class="icon-arrow icon-arrowRight"></span>
                             </div>
                         </div>
-                        <div href="bindqq.html" class="weui-cell">
+                        <div @click="goUrl('user/bindqq')" class="weui-cell">
                             <div class="weui-cell__hd">
                                 <img src="/static/image/nav/bind_nav1_3.png" alt="" class="icon-navImg"><span class="title">QQ号</span>
                             </div>
@@ -50,18 +50,19 @@
                 </div>
                 <div class="navSection__bd">
                     <div class="weui-cells navList__weui-cells navList2__weui-cells">
-                        <div href="javascript:bindAccountPage('./list/taobaolist.html','淘宝');" class="weui-cell" id="TbAccountShow">
+                        <!-- <div href="javascript:bindAccountPage('./list/taobaolist.html','淘宝');" class="weui-cell" id="TbAccountShow" v-for="(item,index) in bindList"> -->
+                        <div  class="weui-cell" id="TbAccountShow" v-for="(item,index) in bindList" :key="index" @click="onBindAccount(item)">
                             <div class="weui-cell__hd">
-                                <img src="/static/image/nav/bind_nav2_1.png" alt="" class="icon-navImg"><span class="title">绑定淘宝账号</span>
+                                <img :src="item.Logo" alt="" class="icon-navImg"><span class="title">{{item.PlatName}}</span>
                             </div>
                             <div class="weui-cell__bd text_r">
-                                <p class="txtMsg" id="TbAccount">未绑定</p>
+                                <p class="txtMsg" id="TbAccount">{{item.IsBindText}}</p>
                             </div>
                             <div class="weui-cell__ft">
                                 <span class="icon-arrow icon-arrowRight"></span>
                             </div>
                         </div>
-                        <div href="javascript:bindAccountPage('./list/jdlist.html','京东');" class="weui-cell" id="JdAccountShow">
+                        <!-- <div href="javascript:bindAccountPage('./list/jdlist.html','京东');" class="weui-cell" id="JdAccountShow">
                             <div class="weui-cell__hd">
                                 <img src="/static/image/nav/bind_nav2_2.png" alt="" class="icon-navImg"><span class="title">绑定京东账号</span>
                             </div>
@@ -93,7 +94,7 @@
                             <div class="weui-cell__ft">
                                 <span class="icon-arrow icon-arrowRight"></span>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- <div href="./list/mgjlist.html" class="weui-cell">
                             <div class="weui-cell__hd">
                                 <img src="/static/image/nav/bind_nav2_4.png" alt="" class="icon-navImg"><span class="title">绑定蘑菇街账号</span>
@@ -134,22 +135,24 @@
 </template>
 
 <script>
-import {post} from '@/utils';
+import {post,toast,goUrl} from '@/utils';
 export default {
     data(){
         return {
+            goUrl,
             userId:'',
             token:'',
             info:{},
+            bindList:[],
+            bindAccount:[],
         }
     },
     onLoad(){
         this.userId = uni.getStorageSync('userId');
         this.token = uni.getStorageSync('token');
-        this.getUserInfo();
     },
     onShow(){
-
+        this.getUserInfo();
     },
     methods:{
         getUserInfo(){
@@ -159,13 +162,22 @@ export default {
             }).then(res=>{
                 const data = res.obj
                 this.info = data;
+                this.bindList = data.MemberAccount;
+                this.bindAccount = data.MemberAccountShow;
             })
         },
-        bindAccountPage(url, msg) {
-            if (isIdCard != 1 || isQQ != 1) {
-                alert("身份证绑定并认证以及绑定QQ号后才可以绑定" + msg + "账号")
-            } else
-                location.href = url;
+        //绑定账号 
+        // ReviewStatus:-1 未绑定 
+        // 0 待审核,
+        // 1 审核通过,
+        // 2  审核失败
+        onBindAccount(item){
+            if (this.info.isIdCard !== 1 || this.info.isQQ !== 1) {
+                toast("需要绑定身份证以及QQ号，并认证后才可以绑定！")
+                return;
+            }
+
+
         },
     }
 }
