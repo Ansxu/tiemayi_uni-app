@@ -28,19 +28,19 @@
                     </div>
                     <div class="weui-cell selectCity__weui-cell select__weui-cell" @click="showArea">
                         <div class="weui-cell__bd">
-                            <input type="text" class="weui-input" v-model="addressSelect" disabled  id="area"  value="" placeholder="请选择城市" />
+                            <input type="text" class="weui-input" v-model="data.BankRegionText" disabled  id="area"  value="" placeholder="请选择开户银行所在地区" />
                             <span class="icon-arrow icon-arrowRight"></span>
                         </div>
                     </div>
 
                     <div class="weui-cell">
                         <div class="weui-cell__bd">
-                            <input type="text" class="weui-input" v-model.trim="data.BankAddress":disabled="data.IsAUT===1" id="BankAddress" placeholder="请输入开户行详细地址">
+                            <input type="text" class="weui-input" v-model.trim="data.BankAddress" :disabled="data.IsAUT===1" id="BankAddress" placeholder="请输入开户行详细地址">
                         </div>
                     </div>
-                    <div class="weui-cell" id="showSelectBankNamePage">
+                    <div class="weui-cell" id="showSelectBankNamePage" @click="onShowBankList">
                         <div class="weui-cell__bd">
-                            <input type="text" class="weui-input" v-model.trim="data.BankName" :disabled="data.IsAUT===1" id="BankName" placeholder="请选择开户银行" unselectable="on" onfocus="this.blur()" readonly="readonly">
+                            <input type="text" class="weui-input" v-model.trim="data.BankName" disabled id="BankName" placeholder="请选择开户银行">
                         </div>
                     </div>
                 </div>
@@ -49,10 +49,10 @@
         </div>
         <!--弹窗-->
         <!--选择银行弹窗-->
-        <div class="defaultPage allScreenPage selectBankNamePage">
+        <div class="defaultPage allScreenPage selectBankNamePage" v-show="showBankList">
             <div class="h45">
                 <div class="head bb_border">
-                    <a href="javascript:;" class="btn_back"></a>
+                    <div class="btn_back" @click="showBankList=false"></div>
                     <div class="title center">选择银行名称</div>
                 </div>
             </div>
@@ -62,41 +62,38 @@
                         <p class="title">推荐银行</p>
                     </div>
                     <div class="weui-cells bankList__weui-cells" id="banklist">
-
-                    </div>
-                    <!-- <script id="bankListTemp" type="text/x-dot-template">
-                        {{~it:value:index}}
-                        <div class="weui-cell">
+                        <div class="weui-cell" v-for="(item,index) in bankList" :key="index" @click="confirmBank(item)">
                             <div class="weui-cell__hd">
-                                <img src="{{=value.BankLogo}}" alt="" class="icon-navImg" />
+                                <img :src="item.BankLogo" alt="" class="icon-navImg" />
                             </div>
                             <div class="weui-cell__bd">
-                                <p class="name">{{=value.BankName}}</p>
+                                <p class="name">{{item.BankName}}</p>
                             </div>
                             <div class="weui-cell__ft">
                                 <span class="icon-gou"></span>
                             </div>
                         </div>
-                        {{~}}
-                    </script> -->
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- 地区联动 -->
         <w-picker 
 			mode="linkage"
 			:level="3"
 			@confirm="onConfirm"
 			ref="linkage"
             :defaultVal="defaultArea"
-            :linkage="areaList"
+            :linkList="areaList"
             themeColor="#5c91f0"
+            v-if="areaList.length>0"
             >
         </w-picker>
     </div>
 </template>
 
 <script>
-import {post,get} from '@/utils';
+import {post,get,toast,requestNotLoad} from '@/utils';
 import wPicker from "@/components/w-picker/w-picker.vue";
 export default {
     components:{
@@ -117,9 +114,11 @@ export default {
                 BankAddress:'', //详细地址
                 BankRegionText:'', //银行所属省市城市地区文本
             },
+            BankName:'',//银行名称
             areaList:[],//动态地区列表
             defaultArea:['广东省','深圳市','龙华新区'],//默认地址
-            addressSelect:'',//选中的地址
+            bankList:[],//银行卡列表
+            showBankList:false,
         }
     },
     onLoad(){
@@ -139,50 +138,63 @@ export default {
                 Token: this.token
 			}).then(res=>{
                 const data = res.obj;
-                this.defaultArea = data.BankRegionText.split(' ')
-                this.addressSelect = data.BankRegionText;
-				this.data = data;
+                if(data.BankRegionText){
+                    this.defaultArea = data.BankRegionText.split(' ');
+                }
+                this.data = data;
 			})
         },
         getBankList(){
             get('Help/GetAllBank').then(res=>{
-                this.addressList = res.obj;
+                this.bankList = res.obj.BankList;
             })
         },
         // 获取地区列表
         getAreaList(){
-            post('area/GetAreaList',{
-                UserId: this.userId,
-                Token: this.token
-            }).then(res=>{
-            console.log(res)
+            requestNotLoad('Area/GetAllAreaList',{
+            },'post').then(res=>{
+                this.areaList = res.obj;
             })
         },
         // 显示城市选择
         showArea(){
-            if(this.data.IsAUT===1) return;
+            if(this.data.IsAUT===1||this.areaList.length<1){
+                toast('获取地区失败，请重试！')
+                return;
+            } 
             this.$refs['linkage'].show()
         },
         // 确认地区选择
         onConfirm(e){
             this.defaultArea = e.checkArr;
-            this.addressSelect = e.checkArr.join(' ');
-            this.getAddressList(this.addressSelect)
+            this.data.BankRegionText = e.checkArr.join(' ');
+        },
+        // 显示银行列表
+        onShowBankList(){
+            if(this.data.IsAUT===1) return;
+            this.showBankList= true;
+        },
+        // 确认选择银行
+        confirmBank(item){
+            this.data.BankName = item.BankName;
+            this.showBankList= false;
         },
         // 提交、
         submit(){
+            const tips = this.check();
+            if(tips){toast(tips); return;}
             const data = this.data;
             let provinceCode='';
             let cityCode='';
             let districtCode='';
             this.areaList.map(province=>{
-                if(province.label===data.defaultArea[0]){
+                if(province.label===this.defaultArea[0]){
                     provinceCode= province.value;
                     province.children.map(city=>{
-                        if(city.label===data.defaultArea[1]){
+                        if(city.label===this.defaultArea[1]){
                             cityCode = city.value;
                             city.children.map(district=>{
-                                if(data.defaultArea[2]&&district.label===data.defaultArea[2]){
+                                if(this.defaultArea[2]&&district.label===this.defaultArea[2]){
                                     districtCode = district.value;
                                 }
                             })
@@ -203,6 +215,15 @@ export default {
 			}).then(res=>{
                 
 			})
+        },
+        check(){
+            const data = this.data;
+            if(!data.BankCardName)return '请输入持卡人姓名！';
+            if(!data.BankCardNo)return '请输入银行卡号！';
+            if(!data.BankName)return '请选择银行名称！';
+            if(!data.BankAddress)return '请输入银行详细地址！';
+            if(this.defaultArea.length<1)return '请选择地区！';
+            return false;
         }
     }
 }
@@ -210,7 +231,4 @@ export default {
 
 
 <style lang="scss" scoped>
-    .allScreenPage {
-        display: none;
-    }
 </style>

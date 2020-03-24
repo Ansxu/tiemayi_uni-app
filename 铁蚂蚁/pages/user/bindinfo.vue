@@ -19,7 +19,7 @@
                                 <span class="icon-arrow icon-arrowRight"></span>
                             </div>
                         </div>
-                        <div @click="goUrl('user/bindbank')" class="weui-cell">
+                        <div @click="goBindBank" class="weui-cell">
                             <div class="weui-cell__hd">
                                 <img src="/static/image/nav/bind_nav1_2.png" alt="" class="icon-navImg"><span class="title">绑定银行卡</span>
                             </div>
@@ -167,18 +167,49 @@ export default {
             })
         },
         //绑定账号 
-        // ReviewStatus:-1 未绑定 
-        // 0 待审核,
-        // 1 审核通过,
-        // 2  审核失败
+        // ReviewStatus:
+        //-1 未绑定 // 0 待审核,// 1 审核通过,// 2  审核失败
         onBindAccount(item){
-            if (this.info.isIdCard !== 1 || this.info.isQQ !== 1) {
+            if (this.info.IsAUT !== 1 || this.info.IsQQ !== 1) {
                 toast("需要绑定身份证以及QQ号，并认证后才可以绑定！")
+                return;
+            }
+            // 淘宝
+            if(item.PlatName.indexOf('淘宝')!==-1){
+                goUrl('user/list/taobaolist');
+                return;
+            }
+            // 淘宝
+            if(item.PlatName.indexOf('淘宝')!==-1){
+                goUrl('user/list/taobaolist');
+                return;
+            }
+            // 淘宝
+            if(item.PlatName.indexOf('淘宝')!==-1){
+                goUrl('user/list/taobaolist');
+                return;
+            }
+            // 淘宝
+            if(item.PlatName.indexOf('淘宝')!==-1){
+                goUrl('user/list/taobaolist');
+                return;
+            }
+            // 淘宝
+            if(item.PlatName.indexOf('淘宝')!==-1){
+                goUrl('user/list/taobaolist');
                 return;
             }
 
 
         },
+        // 绑定银行卡
+        goBindBank(){
+            // if(this.info.IsAUT !== 1){
+            //     toast("需要先绑定身份证，认证通过后才能绑定！");
+            //     return;
+            // }
+            goUrl('user/bindbank');
+        }
     }
 }
 </script>

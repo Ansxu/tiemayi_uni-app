@@ -32,6 +32,7 @@ const code={
   notRegister:3,//未注册
   resCode1:200,//成功特别方式
 }
+// 请求封装
 function request(url, data,method, loginFn) {
   uni.showLoading({
     title: '加载中' //数据请求前loading
@@ -51,6 +52,95 @@ function request(url, data,method, loginFn) {
       },
       success: function (res) {
         uni.hideLoading();
+        switch (res.data.errcode) {
+          case code.success:
+            resolve(res.data);
+            break;
+          case code.resCode1:
+            resolve(res.data);
+            break;
+          case code.notRegister:
+            uni.showToast({
+              title: '需要重新登录!',
+              icon: 'none'
+            })
+            // 没登录过跳转到登录页面
+            if (!uni.getStorageSync("userId") || !uni.getStorageSync("token")) {
+              if(!status){
+                status = true;
+                uni.showModal({
+                  title:'是否跳转到登录页面？',
+                  success(res){
+                    if(res.confirm){
+                      uni.navigateTo({
+                        url: LoginPath
+                      })
+                    }
+                  },
+                  complete(){
+                    status = false;
+                  }
+                })
+              }
+            } else {
+              // 设置需要重新登录执行的函数
+              // getApp()--微信全局对象
+              if (loginFn) {
+                // 创建全局对象userInfoReadyCallback为匿名函数，执行需要重新登录函数
+                getApp().userInfoReadyCallback = () => {
+                  loginFn()
+                }
+              }
+              // 登录过期自动重新登录
+              logins({
+                success() {
+                  if (getApp().userInfoReadyCallback) {
+                    getApp().userInfoReadyCallback()
+                    // 执行完成清空匿名函数
+                    getApp().userInfoReadyCallback = null
+                  }
+                }
+              }).then(() => {
+                reject()
+              });
+            }
+            break;
+          default:
+            uni.showToast({
+              title: res.data.msg, //提示的内容,
+              icon: "none", //图标,
+              mask: false, //显示透明蒙层，防止触摸穿透,
+            });
+            reject(res.data)
+        }
+      },
+      fail: function (error) {
+        uni.hideLoading();
+        uni.showToast({
+          title: error || '请求失败' + '，请刷新页面重试!',
+          icon: "none"
+        })
+        reject(false)
+      }
+    })
+  })
+}
+// 请求封装---不提示加载中
+export function requestNotLoad(url, data,method, loginFn) {
+  return new Promise((resolve, reject) => {
+    const Timetamp = (new Date()).getTime(); //当前时间戳
+    const Sign = md5(AppId + ClientId + ClientSecret + Apikey + Timetamp); //签名
+    uni.request({
+      url: host + url,
+      method: method,
+      data: data,
+      header: {
+        AppId,
+        Timetamp,
+        Sign,
+        RequestFrom
+      },
+      success: function (res) {
         switch (res.data.errcode) {
           case code.success:
             resolve(res.data);

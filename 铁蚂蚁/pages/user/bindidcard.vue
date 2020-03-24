@@ -37,7 +37,8 @@
 						<div class="outside" @click="upImg(1)">
 							<div class="img">
 								<!-- <div class="upimg" onclick="photograph(this,'pic0',10)" id="getpic0"><img src="" id="IdcardPositive" class="uploadImg" /></div> -->
-								<img class="upimg" :src="data.IdcardPositive" alt="">
+								<img class="upimg" :src="data.IdcardPositive" alt="" v-if="data.IdcardPositive">
+								<img class="upimg" src="/static/image/tx/tx_pic.png" alt="" v-else>
 								<!-- <input type="hidden" id="pic0" readonly="true" /> -->
 							</div>
 							<p class="title">身份证正面照</p>
@@ -56,7 +57,8 @@
 						<div class="outside" @click="upImg(2)">
 							<div class="img">
 								<!-- <div class="upimg" onclick="photograph(this,'pic1',10)" id="getpic1"><img src="" id="IdcardNegative" class="uploadImg" /></div> -->
-								<img class="upimg" :src="data.IdcardNegative" alt="">
+								<img class="upimg" :src="data.IdcardNegative" alt="" v-if="data.IdcardNegative">
+								<img class="upimg" src="/static/image/tx/tx_pic.png" alt="" v-else>
 								<!-- <input type="hidden" id="pic1" readonly="true" /> -->
 							</div>
 							<p class="title">身份证反面照</p>
@@ -70,12 +72,14 @@
 						</div>
 					</li>
 				</ul>
-				<ul class="dd_piclist li25" style="display:none;">
+				<ul class="dd_piclist li25">
 					<li>
 						<div class="outside" @click="upImg(3)">
 							<div class="img">
-								<div class="upimg" onclick="photograph(this,'pic2',10)" id="getpic2"><img src="" id="IdcardInHand" class="uploadImg" /></div>
-								<input type="hidden" id="pic2" readonly="true" />
+								<!-- <div class="upimg" onclick="photograph(this,'pic2',10)" id="getpic2"><img src="" id="IdcardInHand" class="uploadImg" /></div>
+								<input type="hidden" id="pic2" readonly="true" /> -->
+								<img class="upimg" :src="data.IdcardInHand" alt="" v-if="data.IdcardInHand">
+								<img class="upimg" src="/static/image/tx/tx_pic.png" alt="" v-else>
 							</div>
 							<p class="title">手持身份证照</p>
 						</div>
@@ -110,6 +114,7 @@ export default {
 				UserRName:'',
 				IdcardNegative:'',
 				IdcardPositive:'',
+				IdcardInHand:'',
 				IsAUT:0,
 			},
 			// isSubmit:true,//是否可以重新提交
@@ -134,14 +139,16 @@ export default {
 				
 			})
 		},
-		// 上传照片,1-正面，2反面
+		// 上传照片,1-正面，2反面,3-手持照片
 		upImg(type){
 			if(this.data.IsAUT==1)return;
 			getImgPath().then(res=>{
 				if(type===1){
 					this.data.IdcardPositive = res;
-				}else{
+				}else if(type===2){
 					this.data.IdcardNegative = res;
+				}else if(type===3){
+					this.data.IdcardInHand = res;
 				}
 			})
 		},
@@ -152,8 +159,8 @@ export default {
 			let Negative ='';
 			// pathToBase64(this.data.IdcardPositive).then(a=>{
 			// })
-			Promise.all([pathToBase64(this.data.IdcardPositive),pathToBase64(this.data.IdcardNegative)]).then(arr=>{
-				console.log(arr,'a')
+			Promise.all([pathToBase64(this.data.IdcardPositive),pathToBase64(this.data.IdcardNegative),pathToBase64(this.data.IdcardInHand)])
+			.then(arr=>{
 				post('Member/BindUserIdCard',{
 					UserId: this.userId,
 					Token: this.token,
@@ -161,10 +168,12 @@ export default {
 					Idcard: this.data.Idcard,
 					IdCardImgOne: arr[0],
 					IdCardImgTwo: arr[1],
-					IdCardImgThree: ''
+					IdCardImgThree: arr[2]
 				}).then(res=>{
-					toast('提交成功',true);
-					uni.navigateBack();
+					toast(res.msg,true); 
+					setTimeout(()=>{
+						uni.navigateBack();
+					},1500)
 				})
 			})
 		},
@@ -185,6 +194,10 @@ export default {
 			}
 			if(!data.IdcardNegative){
 				toast('请上传身份证反面！');
+				return false;
+			}
+			if(!data.IdcardInHand){
+				toast('请上传手持身份证！');
 				return false;
 			}
 			return true;
