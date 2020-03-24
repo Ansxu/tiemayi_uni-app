@@ -174,33 +174,33 @@ export default {
                 toast("需要绑定身份证以及QQ号，并认证后才可以绑定！")
                 return;
             }
+            //typeId = 1--淘宝；3--京东；4--阿里巴巴；5--拼多多；6--美丽说；7--蘑菇街；
+            let params = {};
             // 淘宝
             if(item.PlatName.indexOf('淘宝')!==-1){
-                goUrl('user/list/taobaolist');
-                return;
+               params= {name:'淘宝',typeId:1,url:'bindtaobao'};
+            }else
+            // 京东
+            if(item.PlatName.indexOf('京东')!==-1){
+               params= {name:'京东',typeId:3,url:'bindjd'};
+            }else
+            // 阿里巴巴
+            if(item.PlatName.indexOf('阿里巴巴')!==-1){
+               params= {name:'阿里巴巴',typeId:4,url:'bindalbb'};
+            }else
+            // 拼多多
+            if(item.PlatName.indexOf('拼多多')!==-1){
+               params= {name:'拼多多',typeId:5,url:'bindpdd'};
+            }else
+            // 美丽说
+            if(item.PlatName.indexOf('美丽说')!==-1){
+               params= {name:'美丽说',typeId:6,url:'bindmls'};
+            }else
+            // 蘑菇街
+            if(item.PlatName.indexOf('蘑菇街')!==-1){
+               params= {name:'蘑菇街',typeId:7,url:'bindmgj'};
             }
-            // 淘宝
-            if(item.PlatName.indexOf('淘宝')!==-1){
-                goUrl('user/list/taobaolist');
-                return;
-            }
-            // 淘宝
-            if(item.PlatName.indexOf('淘宝')!==-1){
-                goUrl('user/list/taobaolist');
-                return;
-            }
-            // 淘宝
-            if(item.PlatName.indexOf('淘宝')!==-1){
-                goUrl('user/list/taobaolist');
-                return;
-            }
-            // 淘宝
-            if(item.PlatName.indexOf('淘宝')!==-1){
-                goUrl('user/list/taobaolist');
-                return;
-            }
-
-
+            goUrl('user/bindlist',params);
         },
         // 绑定银行卡
         goBindBank(){
