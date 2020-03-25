@@ -11,20 +11,20 @@
 
 .rate {
     position: relative;
-    padding: 62.5px 100px;
+    padding: 10px 10px;
     background: #00aaef;
 }
 
 .rate p {
     color: #ffffff;
-    font-size: 075px;
+    font-size: 12px;
 }
 
 .rate img {
     position: absolute;
-    top: 65px;
-    right: 100px;
-    width: 120px;
+    top: 7 px;
+    right: 10px;
+    width: 17px;
 }
 
 .task_list {
@@ -47,8 +47,8 @@
 }
 
 .task_icon {
-    height: 250px;
-    margin-right: 50px;
+    height: 40px;
+    margin-right: 10px;
 }
 
 .task_name {
@@ -57,40 +57,44 @@
 
 .task_rate {
     color: #b2b2b2;
-    font-size: 075px;
+    font-size: 10px;
 }
 
 .switch {
     position: absolute;
-    top: 075px;
-    right: 67.5px;
-    height: 200px;
+    top: 17px;
+    right: 5px;
+    height: 30px;
 }
 
 .task_type {
     background: #e8e8e8;
-    text-indent: 100px;
-    padding: 25px 0;
+    text-indent: 10px;
+    padding: 3px 0;
     color: #787878;
 }
 
 .joint_task, .stop_task {
-    position: fixed;;
+    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
 }
-
+.joint_task{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
 .stop_task {
     right: 62.5px;
 }
 
 .joint_task img {
-    width: 500px;
+    width: 60px;
 }
 
 .stop_task img {
-    width: 400px;
+    width: 40px;
 }
 
 .nminput {
@@ -117,8 +121,8 @@
 }
 
 .receiving .content {
-    padding: 0 100px;
-    margin-bottom: 50px;
+    /* padding: 0 10px; */
+    margin-bottom: 5px;
 }
 
 
@@ -224,8 +228,8 @@
 /*选择任务类型*/
 
 .taskTypeBox {
-    margin-bottom: 50px;
-    padding:20px;
+    border-bottom:5px #f2f2f2 solid;
+    /* padding:10px; */
     background: #fff;
 }
 
@@ -234,7 +238,7 @@
     line-height: 35px;
     font-size: 16px;
     border-bottom: 1px solid #eee;
-    margin-bottom: 50px;
+    margin-bottom: 5px;
 }
 
 .taskTypeBox .Btns {
@@ -247,7 +251,7 @@
     display: inline-block;
     min-width: 26%;
     margin: 5px 3%;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1;
     border-radius: 100px;
     padding: 5px;
@@ -266,23 +270,24 @@
 /*未绑定账号*/
 
 .account_list {
-    padding: 0 62.5px;
+    padding: 0 10px;
     background: #ffffff;
 }
 
 .account_list li {
-    padding: 62.5px 0;
+    padding: 10px 0;
     border-bottom: 1px solid #dddddd;
 }
 
 .account_icon {
-    height: 25px;
-    margin-right: 62.5px;
+    height: 40px;
+    margin-right: 10px;
 }
 
 .account_name {
-    height: 25px;
-    line-height: 25px
+    height: 40px;
+    line-height: 40px;
+    color:#999;
 }
 
 

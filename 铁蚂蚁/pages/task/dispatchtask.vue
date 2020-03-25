@@ -25,12 +25,12 @@
 	            <a class="btn" href="javascript:;">浏览任务</a>
 	        </div>
 	    </div>
-	    <div class="taskTypeBox" id="selectMaxMoney">
+	    <!-- <div class="taskTypeBox" id="selectMaxMoney">
 	        <div class="titleHd">
 	            <span>选择垫付金额</span>
 	        </div>
 	        <input type="text" id="maxMoney" name="maxMoney" value="" />
-	    </div>
+	    </div> -->
 	    <ul class="account_list js-accountList">
 			<block v-for="(item,index) in list" :key="index">
 				<li class='receiving' v-if="item.IsBind > 0 && item.ReviewStatus == 1">
@@ -141,14 +141,14 @@ export default {
 				})
 				this.list= data;
 				//  如果没有一个绑定过的账号
-				// if(!this.isVerification){
-				// 	uni.showModal({
-				// 		title:'没有绑定账号或账号未审核！',
-				// 		success(e){
-				// 			uni.navigateBack();
-				// 		}
-				// 	})
-				// }
+				if(!this.isVerification){
+					uni.showModal({
+						title:'没有绑定账号或账号未审核！',
+						success(e){
+							uni.navigateBack();
+						}
+					})
+				}
 			})
 		},
 		getCompletionRate(){
