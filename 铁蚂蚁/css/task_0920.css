@@ -1,20 +1,20 @@
 /*任务 by liling****************/
-.titleHd{height: .35rem; line-height: .35rem; font-size: 15px; border-bottom: 1px solid #eee; margin-bottom: 10px;}
+.titleHd{height: 35px; line-height: 35px; font-size: 15px; border-bottom: 1px solid #eee; margin-bottom: 10px;}
 /*全部任务*/
 .navIcon{ padding: 12px;}
 .navIcon li{ float: left; text-align: center; margin-bottom: 10px;}
 .navIcon .box{ display: block;}
-.navIcon .icon{ height: .4rem; width: .4rem; margin: 0 auto 8px;}
+.navIcon .icon{ height: 40px; width: 40px; margin: 0 auto 8px;}
 .navIcon .icon img{ width: 100%;}
 .navIcon p{ color: #666; line-height: 1;}
 /*垫付/浏览任务列表*/
 
 .tabNav {
-	height: .4rem;
-	line-height: .4rem;
+	height: 40px;
+	line-height: 40px;
 	margin: 0 12px 10px;
 	border: 1px solid #e6e6e6;
-	border-radius: .2rem;
+	border-radius: 20px;
 	overflow: hidden;
 }
 
@@ -55,7 +55,7 @@
 	color: #ff682d;
 	padding-left: 25px;
 	background: url(/static/image/icons/jb_icon.png) left center no-repeat;
-	background-size: .2rem;
+	background-size: 20px;
 }
 
 .df_taskList .box-left .rb {
@@ -67,7 +67,7 @@
 	margin-top: 5px;
 	color: #999;
 	font-size: 12px;
-	line-height: .2rem;
+	line-height: 20px;
 }
 
 .df_taskList .box-right {
@@ -90,7 +90,7 @@
 	margin-top: 5px;
 	color: #999;
 	font-size: 12px;
-	line-height: .2rem;
+	line-height: 20px;
 	text-align: right;
 }
 
@@ -99,8 +99,8 @@
 
 .taskinfo li {
 	border-bottom: 1px solid #eee;
-	height: .4rem;
-	line-height: .4rem;
+	height: 40px;
+	line-height: 40px;
 }
 
 .taskinfo li:last-child {
@@ -120,16 +120,16 @@
 
 
 /**任务详情**************/
-.order-detail .shopId{ height: .4rem; line-height: .4rem; font-size: 0; padding: 0 12px;}
+.order-detail .shopId{ height: 40px; line-height: 40px; font-size: 0; padding: 0 12px;}
 .order-detail .shopId span{ display: inline-block; width: 50%; font-size: 14px; color: #666;}
-.order-detail .shopId .type{ padding-left: .4rem; background: url(/static/image/icons/phone.png) 10px center no-repeat; background-size: .2rem; position: relative;}
+.order-detail .shopId .type{ padding-left: 40px; background: url(/static/image/icons/phone.png) 10px center no-repeat; background-size: 20px; position: relative;}
 .order-detail .shopId .type:before{
 	position: absolute;
 	left: 0;
 	top: 10px;
 	content: "";
 	display: inline-block;
-	height: .2rem;
+	height: 20px;
 	width: 1px;
 	background: #ddd;
 	margin-right: 10px;
@@ -137,26 +137,26 @@
 
 .order-detail .topInfo .title {
 	margin: 0 12px;
-	height: .4rem;
-	line-height: .4rem;
+	height: 40px;
+	line-height: 40px;
 	padding-left: 25px;
 	background: url(/static/image/icons/shop.png) left center no-repeat;
-	background-size: .2rem;
+	background-size: 20px;
 	color: #666;
 }
 .order-detail .topInfo .g-name{ margin: 0 12px; margin-bottom: 10px;}
 .order-detail .topInfo .dl {
 	padding: 0 12px;
 }
-.order-detail .topInfo .dl .img{ float: left; height: .95rem; width: .95rem; background: #999; overflow: hidden;}
+.order-detail .topInfo .dl .img{ float: left; height: 95px; width: 95px; background: #999; overflow: hidden;}
 .order-detail .topInfo .dl .img img{width: 100%;}
 .order-detail .topInfo .dl .box_r{ margin-left: 105px;}
 .order-detail .topInfo .dl .box_r p{ line-height: 25px; font-size: 15px;}
-.order-detail .topInfo .dl .box_r .link_btn{ display: inline-block; height: .35rem; line-height: .35rem; color: #5c91f1; border: 1px solid #ddd; border-radius: 4px; padding: 0 10px; margin-top: 10px;}
+.order-detail .topInfo .dl .box_r .link_btn{ display: inline-block; height: 35px; line-height: 35px; color: #5c91f1; border: 1px solid #ddd; border-radius: 4px; padding: 0 10px; margin-top: 10px;}
 .order-detail .StatusInfo{ padding:12px; }
 .order-detail .StatusInfo .titleHd .status{color: #ee7818; float: right;}
 .Btns{ font-size: 0; text-align: center;}
-.Btns .btn{ display: inline-block; min-width: .8rem; margin: 10px; font-size: 15px; line-height: 1; border-radius: 100px; padding: 10px 15px; background: #efefef; border: 1px solid #e6e6e6; text-align: center;}
+.Btns .btn{ display: inline-block; min-width: 80px; margin: 10px; font-size: 15px; line-height: 1; border-radius: 100px; padding: 10px 15px; background: #efefef; border: 1px solid #e6e6e6; text-align: center;}
 .Btns .btn.cur{background: #5c91f0; color: #fff; border-color: #5c91f0;}
 
 .stepInfo ul{padding-left: 25px;}
@@ -167,7 +167,7 @@
 }
 .stepInfo ul li.active,.stepInfo ul li.end{border-left: 2px solid #73cd6c;}
 .stepInfo ul li:last-child{ border-left: none;}
-.stepInfo ul li dl{ padding-left: 30px; padding-bottom: .2rem; line-height: 1.2; }
+.stepInfo ul li dl{ padding-left: 30px; padding-bottom: 20px; line-height: 1.2; }
 .stepInfo ul li dl dt{margin-bottom: 10px;}
 .stepInfo ul li dl dd,.stepInfo ul li dl dt{ font-size: 14px; color: #b1b1b1;padding-bottom: 5px;}
 .stepInfo ul li dl dt label{ color: #333; font-size: 15px;}
@@ -185,43 +185,43 @@
 	height: 5px;
 	background: #fff;
 }
-.stepInfo ul li dl label{ min-width: .8rem; display: inline-block;}
+.stepInfo ul li dl label{ min-width: 80px; display: inline-block;}
 .stepInfo ul li dl .imglist{ font-size: 0;}
-.stepInfo ul li dl .imglist .img{ display: inline-block; margin: 5px 10px 10px 0; height: .6rem; width: .6rem; overflow: hidden;background: #999; border: 1px solid #e6e6e6; background: url(/static/image/icons/df_picicon.png) center center no-repeat; background-size: 30px;}
+.stepInfo ul li dl .imglist .img{ display: inline-block; margin: 5px 10px 10px 0; height: 60px; width: 60px; overflow: hidden;background: #999; border: 1px solid #e6e6e6; background: url(/static/image/icons/df_picicon.png) center center no-repeat; background-size: 30px;}
 .stepInfo ul li dl .imglist .img img{ width: 100%; }
 .stepInfo ul li dl dd .btn{ border: 1px solid #ddd; display: inline-block; padding: 5px 10px; border-radius: 100px; color: #4581ec; margin-left: 10px;}
 /*操作任务*/
 .Browsetask{ padding: 0 12px;}
 .Browsetask .itembox{margin-bottom: 10px;}
 .Browsetask .lines .select,.Browsetask .lines li.select_ed{
-	height: .4rem; line-height: .4rem; font-size: 15px; color: #666; padding-right: 30px;background: url(/static/image/icons/gou.png) right center no-repeat; background-size: .2rem;
+	height: 40px; line-height: 40px; font-size: 15px; color: #666; padding-right: 30px;background: url(/static/image/icons/gou.png) right center no-repeat; background-size: 20px;
 }
 .Browsetask .lines ul{ background: #eee;margin: 0 -12px; padding: 0 12px;border-top: 1px solid #ddd;}
-.Browsetask .lines li{ height: .4rem; line-height: .4rem; font-size: 15px; color: #666; border-bottom: 1px solid #ddd;padding-right: 30px;}
+.Browsetask .lines li{ height: 40px; line-height: 40px; font-size: 15px; color: #666; border-bottom: 1px solid #ddd;padding-right: 30px;}
 .Browsetask .lines li:last-child{border-bottom: none;}
 .Browsetask .addbtn{ display: block; padding: 10px; text-align: center; font-size: 16px; color: #5c91f0; border: 1px solid #e6e6e6; border-radius: 4px; margin-top: 10px;}
 .Browsetask .addbtn span{ padding-left: 25px;background: url(/static/image/icons/addbtn.png) left center no-repeat; background-size: auto 100%;}
 .Browsetask .Range .lab{ display: inline-block;font-size: 14px;}
-.Browsetask .rangebox{ position: relative; height: .6rem;}
+.Browsetask .rangebox{ position: relative; height: 60px;}
 .Range{ padding: 0 15px 20px; text-align: right;}
 
 /****审核提交****************/
 .checkInfo{ padding: 12px;}
 .checkInfo .itembox,.checkInfo .Step{ margin-bottom: 10px;}
 .checkInfo .itembox:last-child,.checkInfo .Step:last-child{ margin-bottom: 0;}
-.ul-list li{ height: .4rem; line-height: .4rem; border-bottom: 1px solid #efefef; overflow: hidden;}
+.ul-list li{ height: 40px; line-height: 40px; border-bottom: 1px solid #efefef; overflow: hidden;}
 .ul-list li label{ float: left; color: #999;}
 .ul-list li .txt-r{ float: right; max-width: 76%; overflow: hidden;}
 .checkInfo .ul-list .link_btn{ display: inline-block; height: 30px; line-height: 30px; color: #4581ec; border: 1px solid #ddd; border-radius: 2px; padding: 0 10px; margin-top: 5px; margin-left: 10px;}
-.checkInfo .ul-list .keybox{ display: inline-block; width: 1.2rem; text-align: right;}
+.checkInfo .ul-list .keybox{ display: inline-block; width: 120px; text-align: right;}
 .checkInfo .txtbox p{ margin-bottom: 5px; color: #666;}
-.checkInfo .Step .No{height: .4rem; line-height: 30px; padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid #EFEFEF;}
+.checkInfo .Step .No{height: 40px; line-height: 30px; padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid #EFEFEF;}
 .checkInfo .Step .No span{color: #ee7818; font-size: 15px; }
 .checkInfo .Step .No .link_btn{ float: right; display: block; height: 30px; line-height: 30px; color: #4581ec; border: 1px solid #ddd; border-radius: 2px; padding: 0 10px;}
-.checkInfo .hedui{ height: .4rem;  position: relative;margin: 10px 0;}
-.checkInfo .hedui .inputbox{ width: 100%; padding-right: .8rem; }
-.checkInfo .hedui .btn{ width: .7rem; height: .4rem;line-height: .4rem; text-align: center; position: absolute; right: 0; top: 0; background: #5c91f1; color: #fff;border-radius: 4px; font-size: 15px;}
-.checkInfo .input{ height: .4rem; border: 1px solid #ddd; border-radius: 4px; padding: 0 10px;}
+.checkInfo .hedui{ height: 40px;  position: relative;margin: 10px 0;}
+.checkInfo .hedui .inputbox{ width: 100%; padding-right: 80px; }
+.checkInfo .hedui .btn{ width: 70px; height: 40px;line-height: 40px; text-align: center; position: absolute; right: 0; top: 0; background: #5c91f1; color: #fff;border-radius: 4px; font-size: 15px;}
+.checkInfo .input{ height: 40px; border: 1px solid #ddd; border-radius: 4px; padding: 0 10px;}
 .checkInfo .piclist {
 	margin-top: 10px;
 }
@@ -235,14 +235,14 @@
 .textarea_box textarea{ padding: 10px; height: 100px; border: 1px solid #ddd; border-radius: 4px; resize: none;}
 .hedui2 .Btns .btn{ border-radius: 4px;}
 /*申诉任务弹出*/
-.open-typebox li{ height: .4rem; line-height: .4rem; font-size: 15px; text-align: center; border-bottom: 1px solid #eee; color: #5c91f1; padding: 0 .2rem;}
+.open-typebox li{ height: 40px; line-height: 40px; font-size: 15px; text-align: center; border-bottom: 1px solid #eee; color: #5c91f1; padding: 0 20px;}
 .open-typebox li:last-child{border-bottom: none;}
-.open-typebox li.active{ background: url(/static/image/icons/gou.png) right center no-repeat; background-size: .2rem;}
+.open-typebox li.active{ background: url(/static/image/icons/gou.png) right center no-repeat; background-size: 20px;}
 
 .layui-m-layercont .closebtn{ display: block; height: 30px; line-height: 1; font-size: 30px; color: #fff; position: absolute; right: 10px; top: 10px;}
 
 /*申诉中心*/
-.appealsCenter .tabnav{ height: .4rem; line-height: .4rem; font-size: 15px; text-align: center; background: #fff; padding: 0 12px;}
+.appealsCenter .tabnav{ height: 40px; line-height: 40px; font-size: 15px; text-align: center; background: #fff; padding: 0 12px;}
 .appealsCenter .tabnav li{float: left; position: relative; }
 .appealsCenter .tabnav li.active{ color: #5c91f1;}
 .appealsCenter .tabnav li:after{
@@ -277,15 +277,15 @@
 .appealslist .box .info{ color: #666; margin-top: 5px;}
 .appealslist .box .info .time{ float: right;}
 /*申诉详情*/
-.appealsDetail{ padding: .2rem 0;}
+.appealsDetail{ padding: 20px 0;}
 /*如何获取旺旺号，链接*/
-.blue-title{ height: .4rem; line-height: .4rem; margin-bottom: 10px; background: #87aff7; color: #fff; font-size: 15px; padding: 0 12px;}
+.blue-title{ height: 40px; line-height: 40px; margin-bottom: 10px; background: #87aff7; color: #fff; font-size: 15px; padding: 0 12px;}
 .demoimg{ padding: 0 12px 10px;}
 .demoimg img{ width: 100%;}
-.demoimg .downico{ display: block; margin: 10px auto; height: .4rem; width: .4rem; border-radius: 50%; background: url(/static/image/icons/down.png) center center no-repeat; background-size: cover;}
+.demoimg .downico{ display: block; margin: 10px auto; height: 40px; width: 40px; border-radius: 50%; background: url(/static/image/icons/down.png) center center no-repeat; background-size: cover;}
 
 /*表单*/
-.from-item.arrow_r { height: .4rem; line-height: .4rem; border-bottom: 1px solid #eee; padding-right: .2rem; position: relative;}
+.from-item.arrow_r { height: 40px; line-height: 40px; border-bottom: 1px solid #eee; padding-right: 20px; position: relative;}
 .from-item label{ font-size: 15px;}
 .from-item.arrow_r:after{
 	content: "";

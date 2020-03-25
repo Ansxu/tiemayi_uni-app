@@ -1,13 +1,13 @@
 .header {
     background: #00abef;
     color: #ffffff;
-    font-size: 1.385rem;
-    padding: 0.3125rem;
+    font-size: 138.5px;
+    padding: 31.25px;
 }
 
 .header img {
-    width: 1.385rem;
-    margin-left: 0.625rem;
+    width: 138.5px;
+    margin-left: 62.5px;
     margin-top: 25px;
 }
 
@@ -20,17 +20,17 @@
 }
 
 .Promotion, .Total_reward {
-    padding: 0.625rem;
+    padding: 62.5px;
     background: #ffffff;
-    margin-bottom: 0.625rem;
+    margin-bottom: 62.5px;
 }
 
 section {
-    margin-bottom: 0.875rem;
+    margin-bottom: 87.5px;
 }
 
 .activate_user, .activate_business {
-    padding: 0.625rem;
+    padding: 62.5px;
     background: #ffffff;
 }
 
@@ -40,9 +40,9 @@ section {
 }
 
 .activate_user h3 span, .activate_business h3 span {
-    font-size: 0.75rem;
+    font-size: 075px;
     color: #b2b2b2;
-    margin-left: 0.5rem;
+    margin-left: 50px;
 }
 
 .activate_user {
@@ -50,7 +50,7 @@ section {
 }
 
 .activate_user ul, .activate_business ul {
-    margin-top: 0.625rem;
+    margin-top: 62.5px;
 }
 
 .activate_user li, .activate_business li {
@@ -58,17 +58,17 @@ section {
     float: left;
     border: 1px solid #00abef;
     text-align: center;
-    height: 1.75rem;
-    line-height: 1.75rem;
+    height: 175px;
+    line-height: 175px;
     color: #00abef;
 }
 
 .Total_reward {
-    margin: 0.625rem 0rem;
+    margin: 62.5px 0;
 }
 
 .Invitation {
-    padding: 0.625rem;
+    padding: 62.5px;
     background: #ffffff;
 }
 
@@ -78,24 +78,24 @@ section {
 
 .Invitation .title {
     color: #a34d00;
-    font-size: 0.875rem;
-    margin-bottom: 0.625rem;
+    font-size: 87.5px;
+    margin-bottom: 62.5px;
 }
 
 .Invitation .bouns {
     position: relative;
-    margin-bottom: 0.5rem;
+    margin-bottom: 50px;
 }
 
 .Invitation .bouns img {
-    width: 3rem;
+    width: 300px;
 }
 
 .Invitation .bouns p {
-    padding-left: 3.5rem;
-    font-size: 0.75rem;
-    height: 3rem;
-    line-height: 1.5rem;
+    padding-left: 350px;
+    font-size: 075px;
+    height: 300px;
+    line-height: 150px;
 }
 
 .share a {

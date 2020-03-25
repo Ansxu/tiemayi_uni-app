@@ -63,10 +63,10 @@ a {
 	float: left;
 }
 .footer li img {
-	width: 1.5rem;
+	width: 150px;
 }
 .footer li p {
-	font-size: 0.75remx;
+	font-size: 075pxx;
 }
 .footer li a {
 	color: #333333;
@@ -101,28 +101,28 @@ a {
   background: #a5a5a5;
   width: 50%;
   color: #fff;
-  margin: 15rem auto;
+  margin: 15px auto;
   padding: 100px;
   text-align: center;
-  border-radius: .5rem;
+  border-radius: 50px;
 }
 .dis{
   display: none;
 }
 /*
 div.header{
-  padding:0.8rem 0px;
+  padding:80px 0px;
 }
 */
 
 /*头部*/
-.h45{width: 100%; height: 2.5rem;}
-.head{position: fixed; top: 0; width: 100%; height: 2.5rem; z-index: 10; background: #fff;max-width: 750px; margin: 0 auto;}
+.h45{width: 100%; height: 250px;}
+.head{position: fixed; top: 0; width: 100%; height: 250px; z-index: 10; background: #fff;max-width: 750px; margin: 0 auto;}
 .head.bb_border{ border-bottom: 1px solid #e6e6e6; }
 .head .title {
-	margin:0 .6rem;
-	height: 2.5rem;
-	line-height: 2.5rem;
+	margin:0 60px;
+	height: 250px;
+	line-height: 250px;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
@@ -135,10 +135,10 @@ div.header{
 	position:absolute;
 	top:0;
 	left:0;
-	width:2.5rem;
-	height: 2.5rem;
+	width:250px;
+	height: 250px;
 	background: url(/static/image/icons/back.png) center no-repeat;
-	background-size:.5rem auto;
+	background-size:50px auto;
 	z-index: 2;
 }
 
@@ -147,7 +147,7 @@ div.header{
 	padding-top: 20px;
 }
 .hdmui{
-	line-height: 1.9rem;
+	line-height: 190px;
 }
 a{
   -webkit-tap-highlight-color:rgba(0,0,0,0);
@@ -166,7 +166,7 @@ a{
 .header2{
 	background-color: #00ABEF;
 	height: 64px;
-	font-size: 1.385rem;
+	font-size: 138.5px;
 	padding-top: 20px;
 
 }
@@ -177,7 +177,7 @@ a{
 .header3{
 	background-color: #F7F7F7;
 	height: 64px;
-	font-size: 1.385rem;
+	font-size: 138.5px;
 	padding-top: 20px;
 	/* Status bar height on iOS 11.0 */
    /* padding-top: constant(safe-area-inset-top);*/
@@ -194,7 +194,7 @@ a{
 .mui-bar{
 	background-color: #F7F7F7;
 	height: 64px;
-	font-size: 1.385rem;
+	font-size: 138.5px;
 	padding-top: 20px;
 	z-index: 9999;
 }
@@ -203,7 +203,7 @@ a{
 
 	background-color: #1092cd;
 	height: 64px;
-	font-size: 1.385rem;
+	font-size: 138.5px;
 	padding-top: 20px;
 	z-index: 9999;
 }
@@ -220,7 +220,7 @@ a{
 .blue3{
 	background-color: #1092cd;
 	height: 44px;
-	font-size: 1.385rem;
+	font-size: 138.5px;
 	padding-top: 20px;
 	z-index: 9999;
 }
@@ -253,7 +253,7 @@ a{
 				.blue3{
 					background-color: #1092cd;
 					height: 44px;
-					font-size: 1.385rem;
+					font-size: 138.5px;
 					padding-top: 20px;
 					padding-top: env(safe-area-inset-top);
 					padding-top: constant(safe-area-inset-top);
