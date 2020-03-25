@@ -6,17 +6,7 @@
 	            <p class="alertMask-main-text stopgetTask">你还有未操作的任务，请操作后再接其他任务</p>
 	        </div>
 	    </div>
-	    <!-- <header class="header mui-bar mui-bar-nav">
-	        <a class="mui-action-back mui-icon icon-fenxiang mui-pull-left"></a>
-	        <h1 class="mui-title">接任务</h1>
-	    </header> -->
-	    <div class="h45">
-	        <div class="head bb_border">
-	            <a href="../../index.html" class="btn_back"></a>
-	            <div class="title center">接任务</div>
-	        </div>
-	    </div>
-	
+		<headers>接任务</headers>
 	    <div class="rate">
 	        <!--fixtop-->
 	        <p id="useridd">ID:&nbsp;|&nbsp;完成率100%</p>
@@ -42,12 +32,23 @@
 	        <input type="text" id="maxMoney" name="maxMoney" value="" />
 	    </div>
 	    <ul class="account_list js-accountList">
-	        <!-- <div class='receiving'><div class='clearfix content'><img src='' class='task_icon pull-left' />
-	      <div class='discribe pull-left'><p class='task_name '>ces</p>
-	        <p class='task_rate'>今日已接垫付：&nbsp;浏览/∞单</p></div></div>
-	      <p class='task_type' data-ifband='true'>任务</p>
-	      <img src='/static/image/icons/switch_on@2x.png' class='switch' data-accountId='0' data-platId='0' onclick='switchOnOrOff(this)' />
-	      </div> -->
+			<block v-for="(item,index) in list" :key="index">
+				<li class='receiving' v-if="item.IsBind > 0 && item.ReviewStatus == 1">
+						<div class='clearfix content'>
+							<img :src='item.Logo' class='task_icon pull-left' />
+							<div class='discribe pull-left'>
+								<p class='task_name '>{{item.AccountName}}</p>
+								<p class='task_rate'>今日已接垫付：{{item.DayCountText}}&nbsp;浏览{{item.BrowseDayCount}}/∞单</p>
+							</div>
+						</div>
+						<p class='task_type' data-ifband='true'>{{item.PlatName}}任务</p>
+						<img src='/static/image/icons/switch_on@2x.png' class='switch' data-accountId='0' data-platId='0' onclick='switchOnOrOff(this)' />
+				</li>
+				<li class="clearfix"  v-else>
+					<img :src="item.Logo" class="account_icon pull-left">
+					<p class="account_name">添加{{item.PlatName}}账号</p>
+				</li>
+			</block>
 	    </ul>
 	    <div style="height:60px"></div>
 	    <div class="text-center joint_task">
@@ -82,7 +83,7 @@
 	        </ul>
 	        <div class="task_ok">确认</div>
 	    </div>
-	    <div class="alertMask js-alertMask">
+	    <div class="alertMask js-alertMask dis">
 	        <div class="alertMask-bj">
 	        </div>
 	        <div class="alertMask-main">
@@ -100,6 +101,7 @@ export default {
         return {
 			userId:'',
 			token:'',
+			isVerification:false,//是否有已绑定的账号
 			selectAccountId:0,
 			selectPlatformId:0,
 			list:[],//平台全部任务列表
@@ -108,9 +110,10 @@ export default {
     onLoad(options){
 		this.userId = uni.getStorageSync('userId');
 		this.token = uni.getStorageSync('token');
-        this.selectAccount = options.selectAccountId;
-        this.selectPlatform = options.selectPlatformId;
+        this.selectAccountId = options.selectAccountId||0;
+        this.selectPlatformId = options.selectPlatformId||0;
 		this.getAllPlatFormAccount();
+		this.getCompletionRate();
     },
     onShow(){
 
@@ -119,22 +122,49 @@ export default {
 		// 查询账号是否满足接单条件
 		// 获取平台全部任务
 		getAllPlatFormAccount(){
-			post('Member/LoadMemberAccountInfo',{
+			post('Member/GetSysSendTaskAccount',{
                 UserId: this.userId,
                 Token: this.token,
-                SelectAccountId: this.selectAccount,
-                SelectPlatFormId: this.selectPlatform
+                SelectAccountId: this.selectAccountId,
+                SelectPlatFormId: this.selectPlatformId
 			}).then(res=>{
-				this.list= res.obj;
+				const data = res.obj;
+				data.map(item=>{
+					const name = item.PlatName;
+					if(item.IsBind > 0 && item.ReviewStatus === 1){
+						this.isVerification = true;//是否已绑定账号
+						item.status = true;//是否已绑定账号
+					}else{
+						item.status = false;//是否已绑定账号
+						item.PlatName = '绑定' + name + '账号';
+					}
+				})
+				this.list= data;
+				//  如果没有一个绑定过的账号
+				// if(!this.isVerification){
+				// 	uni.showModal({
+				// 		title:'没有绑定账号或账号未审核！',
+				// 		success(e){
+				// 			uni.navigateBack();
+				// 		}
+				// 	})
+				// }
 			})
 		},
+		getCompletionRate(){
+			post('Member/GetCompletionRate',{
+                UserId: this.userId,
+                Token: this.token
+			}).then(res=>{
+				// this.list= res.obj;
+			})
+		}
 	}
 
 }
 </script>
 
 <style scoped lang="scss">
-	// @import '../../css/mui.css';
 	@import '../../css/ion_rangeslider.css';
 	@import '../../css/ion_rangeslider_skinhtml5.css';
 	@import '../../css/taskreceiving.css';
