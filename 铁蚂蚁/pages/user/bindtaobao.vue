@@ -1,11 +1,6 @@
 <template>
 	<div class="bg_f8f8f8">
-		<div class="h45">
-			<div class="head bb_border">
-				<a href="javascript:api.closeWin();" class="btn_back"></a>
-				<div class="title center">绑定淘宝账号</div>
-			</div>
-		</div>
+		<headers>绑定淘宝账号</headers>
 		<div class="main">
 			<div class="dd_msgBox bind__msgBox" style="padding:.1rem .12rem;">
 				<p class="title" style="font-size: .15rem;color:#222;">注意事项</p>
@@ -21,31 +16,28 @@
 						<div class="weui-cells">
 							<div class="weui-cell">
 								<div class="weui-cell__bd">
-									<input type="text" class="weui-input" id="taobaoName" placeholder="请输入淘宝账号" />
+									<input type="text" class="weui-input" id="taobaoName" v-model.trim="data.PlatAccount" placeholder="请输入淘宝账号" />
 								</div>
 							</div>
 							<div class="weui-cell">
 								<div class="weui-cell__bd">
-									<input type="text" class="weui-input" id="shouhuoren" placeholder="收货人姓名" />
+									<input type="text" class="weui-input" id="shouhuoren" v-model.trim="data.ConsigneeName" placeholder="收货人姓名" />
 								</div>
 							</div>
 							<div class="weui-cell">
 								<div class="weui-cell__bd">
-									<input type="text" class="weui-input" id="lianxidianhua" placeholder="联系电话" />
+									<input type="text" class="weui-input" id="lianxidianhua" v-model.trim="data.ConsigneeCall" placeholder="联系电话" />
 								</div>
 							</div>
-							<div class="weui-cell selectCity__weui-cell select__weui-cell">
+							<div class="weui-cell selectCity__weui-cell select__weui-cell" @click="showAreaSelect">
 								<div class="weui-cell__bd">
-									<input type="text" class="weui-input"  id="area"  value="" placeholder="请选择城市" onclick="picker3()"/>
+									<input type="text" class="weui-input"  id="area" disabled value="" v-model.trim="areaText" placeholder="请选择城市"/>
 									<span class="icon-arrow icon-arrowRight"></span>
 								</div>
-								<input type="hidden" id="provinceCode" readonly="true"/>
-								<input type="hidden" id="cityCode" readonly="true"/>
-								<input type="hidden" id="districtCode" readonly="true"/>
 							</div>
 							<div class="weui-cell">
 								<div class="weui-cell__bd">
-									<input type="text" class="weui-input" id="xiangxidizhi"  placeholder="请输入详细地址" />
+									<input type="text" class="weui-input" id="xiangxidizhi" v-model.trim="data.Address"  placeholder="请输入详细地址" />
 								</div>
 							</div>
 						</div>
@@ -58,66 +50,43 @@
 				</div>
 				<div class="bindForm regLogForm onlyIpt__form" style="padding-top:0;padding-bottom: 0;">
 					<form action="">
-						<div class="weui-cells">
-							<div class="weui-cell selectSex__weui-cell select__weui-cell">
+						<div class="weui-cells selectCity__weui-cell select__weui-cell">
+							<div class="weui-cell" @click="showPicker('Gender')">
 								<div class="weui-cell__bd">
-									<select name="" id="sexId" class="weui-input">
-										<option value="0">请选择性别</option>
-										<option value="1">男</option>
-										<option value="2">女</option>
-
-									</select>
+									<input type="text" class="weui-input" id="nianling" disabled v-model.trim="data.Gender" placeholder="请选择性别" />
+									<span class="icon-arrow icon-arrowRight"></span>
 								</div>
 							</div>
 							<div class="weui-cell">
 								<div class="weui-cell__bd">
-									<input type="text" class="weui-input" id="nianling" placeholder="请输入你的年龄" />
+									<input type="number" class="weui-input" id="nianling" v-model.trim="data.Age" placeholder="请输入你的年龄" />
 								</div>
 							</div>
-							<div class="weui-cell selectGrade__weui-cell select__weui-cell">
+							
+							<div class="weui-cell" @click="showPicker('CreditRating')">
 								<div class="weui-cell__bd">
-									<select name="" id="xydj" class="weui-input">
-										<option value="0">请选择信誉等级</option>
-										<option value="1">1心</option>
-										<option value="2">2心</option>
-										<option value="3">3心</option>
-										<option value="4">4心</option>
-										<option value="5">5心</option>
-										<option value="6">1钻</option>
-										<option value="7">2钻</option>
-										<option value="8">3钻</option>
-										<option value="9">4钻</option>
-										<option value="10">5钻</option>
-										<option value="11">皇冠及以上</option>
-									</select>
-								</div>
-							</div>
-							<div class="weui-cell selectGrade__weui-cell select__weui-cell">
-								<div class="weui-cell__bd">
-									<select name="" id="taoqizhi" class="weui-input">
-										<option value="0">请选择淘气值</option>
-										<option value="1">1000以下</option>
-										<option value="2">1000-1500</option>
-										<option value="3">1500-2000</option>
-										<option value="4">2000以上</option>
-									</select>
-									<!--<input type="text" class="weui-input" unselectable="on" onfocus="this.blur()" readonly="readonly" placeholder="请选择淘气值" />-->
+									<input type="text" class="weui-input" id="nianling" disabled v-model.trim="data.CreditRating" placeholder="请选择信誉等级" />
 									<span class="icon-arrow icon-arrowRight"></span>
 								</div>
 							</div>
-							<div class="weui-cell selectGrade__weui-cell select__weui-cell" id="showSelectBuyTypeShade">
+							<div class="weui-cell" @click="showPicker('TaobaoValue')">
 								<div class="weui-cell__bd">
-									<input type="text" class="weui-input" unselectable="on" id="shopingId" onfocus="this.blur()" readonly="readonly" placeholder="请选择购物类目" />
+									<input type="text" class="weui-input" id="nianling" disabled v-model.trim="data.TaobaoValue" placeholder="请选择淘气值" />
 									<span class="icon-arrow icon-arrowRight"></span>
 								</div>
-								<input type="hidden" id="shoppingCategoryIdArray" readonly="true"/>
+							</div>
+							<div class="weui-cell" @click="showShoppingCategoryWin=true">
+								<div class="weui-cell__bd">
+									<input type="text" class="weui-input" id="nianling" disabled v-model.trim="data.ConsumerCategoryList" placeholder="请选择购物类目" />
+									<span class="icon-arrow icon-arrowRight"></span>
+								</div>
 							</div>
 						</div>
 					</form>
 				</div>
 			</div>
 			<!--上传图片-->
-			<div class="bindSection">
+			<!-- <div class="bindSection">
 				<div class="dd__hd">
 					<span class="titleMsg">点击上传图片(上传后，长按看大图，点击可更换图片）</span>
 					<a href="taobao_bindexamplespic.html" class="lookExamples color_e40000">查看截图示列</a>
@@ -160,68 +129,294 @@
 						</div>
 					</li>
 				</ul>
-			</div>
+			</div> -->
 			<!--上传图片  end-->
 			<div class="dd__hd" style="padding-top:0;">
 				<p class="titleMsg color_e40000">花呗：选填，开通花呗账号接单可获得更多佣金</p>
 			</div>
-			<a href="javascript:;" class="weui-btn weui-btn-active btn-submit" style="margin:.15rem .12rem .2rem;">提交审核</a>
+			<div @click="submit" class="weui-btn weui-btn-active btn-submit" style="margin:.15rem .12rem .2rem;">提交审核</div>
 		</div>
 
 		<!--请选择购物类目的弹窗-->
-		<div class="shade">
+		<div class="shade" v-show="showShoppingCategoryWin">
 			<div class="shade__content">
 				<div class="shade-item selectBuyTypeShade centerShadeItem">
 					<div class="shade__hd">
 						<h2 class="shade__title">请选择经常购买的3-5个购物类目</h2>
 					</div>
-					<!--  循环 -->
-                  <!-- <script id="shopingCategoryListTemp" type="text/x-dot-template">
-					{{~it:value:index}}
-		                  	<li>
-							<div class="outside">
-                            <div class="weui-btn" index={{=value.Id}}>{{=value.Name}}</div>
-                             </div>
-							</li>
-							 {{~}}
-                    </script> -->
 					<div class="shade__bd">
 						<ul class="dd_BtnsList li33" id="shoppingcategory">
-
+		                  	<li v-for="(item,index) in ShoppingCategory" :key="index" @click="item.status = !item.status">
+								<div class="outside">
+									<div class="weui-btn" :class="{'active':item.status}">{{item.Name}}</div>
+								</div>
+							</li>
 						</ul>
 					</div>
 					<div class="shade__ft">
 						<div class="dd_Btns">
-							<div class="weui-btn weui-btn-mini btn-cancle">取消</div>
-							<div class="weui-btn weui-btn-mini btn-sure weui-btn-active">确定</div>
+							<div class="weui-btn weui-btn-mini btn-cancle" @click="showShoppingCategoryWin=false">取消</div>
+							<div class="weui-btn weui-btn-mini btn-sure weui-btn-active" @click="confirmShoppingCategory">确定</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+        <!-- 地区联动 -->
+        <w-picker 
+			mode="linkage"
+			:level="3"
+			@confirm="onAreaConfirm"
+			ref="linkage"
+            :defaultVal="defaultArea"
+            :linkList="areaList"
+            themeColor="#5c91f0"
+            v-if="areaList.length>0"
+            >
+        </w-picker>
+        <!-- 单项联动选择 -->
+        <w-picker 
+			mode="selector"
+			:level="1"
+			@confirm="onConfirm"
+			ref="pickerList"
+            :defaultVal="defaultPicker"
+            :selectList="pickerList"
+            themeColor="#5c91f0"
+            >
+        </w-picker>
 	</div>
 </template>
 
 <script>
-import {} from '@/utils';
+import {get,post,toast} from '@/utils';
+import GetAreaList from '@/utils/areaList';
+import wPicker from "@/components/w-picker/w-picker.vue";
 export default {
+    components:{
+        wPicker
+    },
     data(){
         return {
+			userId:'',
+			token:'',
+			data:{
+				AccountId: '',
+				PlatAccount: '', //平台账号√
+				ConsigneeName: '', //收货人√
+				ConsigneeCall: '', //联系电话√
+				ProvinceCode: '', //省份code √
+				CityCode: '', //市区code √
+				DistrictCode: '', //区县code √
+				Address: '', //详细地址 √
+				Gender: '', //男女性别 √
+				Age: '', //年龄 √
+				CreditRating: '', //信用等级 √ 可为空
+				TaobaoValue: '', //淘气值 √
+				ConsumerCategoryList: '', //购物类目 √ //购物类目Id集合字符串(例：”1,2,3”)，最多选择3个
+				// CreditRatingImg: '', //信誉等级图片base64  √
+				// TaobaoValueImg: '', //淘气值图片base64 √
+				// VerifiedImg: '', //实名认证图片base64 √
+				// BorrowingImg: '' //花呗图片base64 √
+			},
+			areaText:'',//地区显示的值
+			areaList:[],//地区列表
+			defaultArea:['广东省','深圳市','龙华新区'],//默认地址
+			
+			pickerList:[{label:'',value:''}],//选项列表
+			defaultPicker:'',//默认选项
+			// 性别
+			Gender:{
+				array:[{label:'男'},{label:'女'}],
+				default:'男',
+			},
+			// 信誉
+			CreditRating:{
+				array:[
+					{label:'1心'},
+					{label:'2心'},
+					{label:'3心'},
+					{label:'4心'},
+					{label:'5心'},
+					{label:'1钻'},
+					{label:'2钻'},
+					{label:'3钻'},
+					{label:'4钻'},
+					{label:'5钻'},
+					{label:'皇冠及以上'}
+				],
+				default:'1心',
+			},
+			//淘气值 √
+			TaobaoValue:{
+				array:[
+					{label:'1000以下'},
+					{label:'1000-1500'},
+					{label:'1500-2000'},
+					{label:'2000以上'}
+				],
+				default:'1000以下',
+			},
+			nowSelectVal:'',//现在正在选择的值
 
+			ShoppingCategory:[],//购物类目
+			showShoppingCategoryWin:false,//购物类目
         }
     },
-    onLoad(){
-
+    onLoad(options){
+		this.data.AccountId = options.id;
+		this.userId = uni.getStorageSync('userId');
+		this.token = uni.getStorageSync('token');
+		this.getAreaList();//获取地址列表
+		this.getData();//获取已存在数据
+		this.getShoppingCategory();//获取购物类目
     },
     onShow(){
 
     },
     methods:{
+        // 获取地区列表
+        getAreaList(){
+            GetAreaList().then(res=>{
+                this.areaList = res;
+            });
+        },
+		// 如果已绑定查询绑定信息
+		getData(){
+			if(!this.data.AccountId) return;
+			post('Member/LoadMemberAccountInfo',{
+                UserId: this.userId,
+                Token: this.token,
+                PlatId: 1, //平台ID  1淘宝 2天猫 3京东 5拼多多 7蘑菇街 6 美丽说
+                AccountId: this.data.AccountId
+			}).then(res=>{
+				this.data= res.obj;
+			})
+		},
+		//获取购物类目
+		getShoppingCategory(){
+			get('Member/GetALLShoppingCategory').then(res=>{
+				const data = res.obj;
+				data.map(item=>{
+					item.status = false;
+				})
+				this.ShoppingCategory=data;
+			})
+		},
+        // 显示城市选择
+        showAreaSelect(){
+            // if(this.data.IsAUT===1){
+            //     return;
+            // } 
+            if(this.areaList.length<1){
+                toast('获取地区失败，请重试！')
+                return;
+            } 
+            this.$refs['linkage'].show()
+        },
+        // 确认地区选择
+        onAreaConfirm(e){
+			this.defaultArea = e.checkArr;
+			const data = this.data;
+			data.ProvinceCode = e.checkValue[0];
+			data.CityCode = e.checkValue[1];
+			e.checkValue[2]&&(data.DistrictCode = e.checkValue[2]);
+            this.areaText = e.checkArr.join(' ');
+		},
+		// 显示联动选择
+		showPicker(str){
+			this.nowSelectVal = str;
+			this.pickerList = this[str].array;
+			this.defaultPicker = this[str].default;
+            this.$refs['pickerList'].show()
+		},
+        // 单项联动选择
+        onConfirm(e){
+            this.data[this.nowSelectVal] = e.result;
+            this[this.nowSelectVal].default = e.result;
+		},
+		// 完成购物类目选择
+		confirmShoppingCategory(){
+			let arr =[];
+			this.ShoppingCategory.map(item=>{
+				if(item.status){
+					arr.push(item.Name)
+				}
+			})
+			if(arr.length<5){
+				toast('购物类目不能小于5个');return;
+			}
+			if(arr.length>8){
+				toast('购物类目不能大于8个');return;
+			}
+			this.data.ConsumerCategoryList = arr.join(',');
+			this.showShoppingCategoryWin = false;
+		},
+		submit(){
+			const tips = this.check();
+			if(tips){
+				toast(tips);return;
+			}
+			const data = this.data;
+			post('Member/BindOnAccount',{
+                    UserId: this.userId,
+                    Token: this.token,
+                    PlatId: 1, //平台ID  1淘宝 2天猫 3京东 5拼多多 7蘑菇街 6 美丽说
+                    AccountId: data.AccountId,
+                    PlatAccount: data.PlatAccount, //平台账号√
+                    ConsigneeName: data.ConsigneeName, //收货人√
+                    ConsigneeCall: data.ConsigneeCall, //联系电话√
+                    ProvinceCode: data.ProvinceCode, //省份code √
+                    CityCode: data.CityCode, //市区code √
+                    DistrictCode: data.DistrictCode, //区县code √
+                    Address: data.Address, //详细地址 √
+                    Gender: data.Gender, //男女性别 √
+                    Age: data.Age, //年龄 √
+                    CreditRating: data.CreditRating, //信用等级 √ 可为空
+                    TaobaoValue: data.TaobaoValue, //淘气值 √
+                    ConsumerCategoryList: data.ConsumerCategoryList, //购物类目 √ //购物类目Id集合字符串(例：”1,2,3”)，最多选择3个
+                    // CreditRatingImg: xinyudengjiImg, //信誉等级图片base64  √
+                    // TaobaoValueImg: taoqizhiImg, //淘气值图片base64 √
+                    // VerifiedImg: shimingrenzhengImg, //实名认证图片base64 √
+                    // BorrowingImg: huabeiIMg //花呗图片base64 √
+			}).then(res=>{
+				toast(res.msg,true);
+				setTImeout(()=>{
+					uni.navigateBack();
+				},1500)
+			})
 
+		},
+		check(){
+			const data = this.data;
+			if(!data.PlatAccount) return '请输入淘宝账号！';
+			if(!data.ConsigneeName) return '请输入收货人姓名！';
+			if(!data.ConsigneeCall) return '请输入联系电话！';
+			if(!data.PlatAccount) return '请选择城市！';
+			if(!data.Address) return '请输入详细地址！';
+			if(!data.Gender) return '请选择性别！';
+			if(!data.Age) return '请输入你的年龄！';
+			if(!data.CreditRating) return '请选择信誉等级！';
+			if(!data.TaobaoValue) return '请选择淘气值！';
+			if(!data.ConsumerCategoryList) return '请选择购物类目！';
+			return false;
+		}
     }
 }
 </script>
 
 <style lang="scss" scoped>
-
+	.main{
+		padding:10px;
+	}
+	.shade {
+		display:block;
+		.shade-item{
+			display:block;
+		}
+	}
+	.active{
+		background: #5c91f0;
+		color:#fff;
+	}
 </style>

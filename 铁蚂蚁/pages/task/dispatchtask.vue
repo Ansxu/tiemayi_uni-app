@@ -94,6 +94,43 @@
 </template>
 
 <script>
+import {get,post,toast} from '@/utils';
+export default {
+    data(){
+        return {
+			userId:'',
+			token:'',
+			selectAccountId:0,
+			selectPlatformId:0,
+			list:[],//平台全部任务列表
+		}
+	},
+    onLoad(options){
+		this.userId = uni.getStorageSync('userId');
+		this.token = uni.getStorageSync('token');
+        this.selectAccount = options.selectAccountId;
+        this.selectPlatform = options.selectPlatformId;
+		this.getAllPlatFormAccount();
+    },
+    onShow(){
+
+    },
+    methods:{
+		// 查询账号是否满足接单条件
+		// 获取平台全部任务
+		getAllPlatFormAccount(){
+			post('Member/LoadMemberAccountInfo',{
+                UserId: this.userId,
+                Token: this.token,
+                SelectAccountId: this.selectAccount,
+                SelectPlatFormId: this.selectPlatform
+			}).then(res=>{
+				this.list= res.obj;
+			})
+		},
+	}
+
+}
 </script>
 
 <style scoped lang="scss">

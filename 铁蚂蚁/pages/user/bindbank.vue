@@ -93,7 +93,8 @@
 </template>
 
 <script>
-import {post,get,toast,requestNotLoad} from '@/utils';
+import {post,get,toast} from '@/utils';
+import GetAreaList from '@/utils/areaList';
 import wPicker from "@/components/w-picker/w-picker.vue";
 export default {
     components:{
@@ -151,14 +152,16 @@ export default {
         },
         // 获取地区列表
         getAreaList(){
-            requestNotLoad('Area/GetAllAreaList',{
-            },'post').then(res=>{
-                this.areaList = res.obj;
-            })
+            GetAreaList().then(res=>{
+                this.areaList = res;
+            });
         },
         // 显示城市选择
         showArea(){
-            if(this.data.IsAUT===1||this.areaList.length<1){
+            // if(this.data.IsAUT===1){
+            //     return;
+            // } 
+            if(this.areaList.length<1){
                 toast('获取地区失败，请重试！')
                 return;
             } 

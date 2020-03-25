@@ -39,7 +39,7 @@ export default {
                 },
                 {
                     name:'接单',
-                    url:'index/index',
+                    url:'task/dispatchtask',
                 },
                 {
                     name:'已接任务',
