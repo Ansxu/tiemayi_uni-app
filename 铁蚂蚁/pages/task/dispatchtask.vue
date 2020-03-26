@@ -95,7 +95,7 @@
 </template>
 
 <script>
-import {get,post,toast} from '@/utils';
+import {get,post,toast,goUrl} from '@/utils';
 export default {
     data(){
         return {

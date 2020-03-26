@@ -1,11 +1,6 @@
 <template>
     <div class="bg_fff">
-        <div class="h45">
-            <div class="head bb_border">
-                <a href="javascript:api.closeWin();" class="btn_back"></a>
-                <div class="title center">接单操作选择</div>
-            </div>
-        </div>
+        <headers>接单操作选择</headers>
         <div class="main mt10">
             <div class="Browsetask">
                 <div class="itembox">
@@ -13,9 +8,11 @@
                         <span><span id="txtPlatName">淘宝</span>接单账号选择(必填)</span>
                     </div>
                     <div class="lines">
-                        <div class="select" id="selectbtn"><span class="text name">选择接单账号</span></div>
-                        <ul id="accountList" style="display: none;">
-                        </ul>
+                        <div class="select" id="selectbtn" v-for="(item,index) in data" :key="index">
+                            <span class="text name">{{item.PlatAccount}}</span>
+                        </div>
+                        <!-- <ul id="accountList" style="display: none;">
+                        </ul> -->
                     </div>
                 </div>
                 <div class="itembox">
@@ -28,12 +25,12 @@
                         <!-- <a class="btn" href="javascript:;">电脑</a> -->
                     </div>
                 </div>
-                <div class="itembox" id="selectMaxMoney">
+                <!-- <div class="itembox" id="selectMaxMoney">
                     <div class="titleHd">
                         <span>选择垫付金额</span>
                     </div>
                     <input type="text" id="maxMoney" name="maxMoney" value="" />
-                </div>
+                </div> -->
                 <div class="itembox">
                     <div class="titleHd">
                         <span>选择返款方式</span>
@@ -48,28 +45,53 @@
         </div>
         <div class="null50">
             <footer class="ftbtn">
-                <a class="btn" onclick="submitOk()">确认</a>
+                <div class="btn" @click="submit">确认</div>
             </footer>
         </div>
     </div>
 </template>
 
 <script>
-import {} from '@/utils';
+import {post,toast,goUrl} from '@/utils';
 export default {
     data(){
         return {
-
+			userId:'',
+            token:'',
+            platformId:'',
+            typeIndex:'',
+			data:{}
         }
     },
-    onLoad(){
-
+    onLoad(options){
+        this.platformId = options.platformId;
+        this.typeIndex = options.typeIndex;
+		this.userId = uni.getStorageSync('userId');
+		this.token = uni.getStorageSync('token');
+		this.getData();
     },
     onShow(){
 
     },
     methods:{
-
+		getData(){
+			post('Task/GetMemberCanReceiveAccount',{
+                UserId: this.userId,
+                Token: this.token,
+                PlatId:this.platformId,
+                TaskType:  this.typeIndex
+			}).then(res=>{
+				this.data = res.obj;
+			})
+		},
+		submit(){
+			goUrl('task/list',{
+                platformId: this.platformId,
+                typeIndex:this.typeIndex,
+                accountId:this.data[0].Id,
+                TaskType:  this.typeIndex
+			})
+		},
     }
 }
 </script>

@@ -19,7 +19,7 @@
 							<a href="javascript:;" class="outside">
 								<div class="icon-img">
 									<img src="/static/image/nav/ordermenu_nav1_1.png" alt="">
-									<span class="circleNum">0</span>
+									<span class="circleNum" v-if="data.AdvanceUndone">{{data.AdvanceUndone}}</span>
 								</div>
 								<p class="title">未完成</p>
 							</a>
@@ -28,7 +28,7 @@
 							<a href="javascript:;" class="outside">
 								<div class="icon-img">
 									<img src="/static/image/nav/ordermenu_nav1_2.png" alt="">
-                  <span class="circleNum">0</span>
+                  					<span class="circleNum" v-if="data.AdvanceCompleted">{{data.AdvanceCompleted}}</span>
 								</div>
 								<p class="title">已完成</p>
 							</a>
@@ -37,7 +37,7 @@
 							<a href="javascript:;" class="outside">
 								<div class="icon-img">
 									<img src="/static/image/nav/ordermenu_nav1_3.png" alt="">
-                  <span class="circleNum">0</span>
+                 					 <span class="circleNum" v-if="data.AdvanceRevoked">{{data.AdvanceRevoked}}</span>
 								</div>
 								<p class="title">已撤销</p>
 							</a>
@@ -46,7 +46,7 @@
 							<a href="javascript:;" class="outside">
 								<div class="icon-img">
 									<img src="/static/image/nav/ordermenu_nav1_4.png" alt="">
-                  <span class="circleNum">0</span>
+                					 <span class="circleNum" v-if="data.AdvanceAppeal">{{data.AdvanceAppeal}}</span>
 								</div>
 								<p class="title">申诉中</p>
 							</a>
@@ -66,7 +66,7 @@
 							<a href="javascript:;" class="outside">
 								<div class="icon-img">
 									<img src="/static/image/nav/ordermenu_nav1_1.png" alt="">
-									<span class="circleNum">0</span>
+									<span class="circleNum" v-if="data.BrowseUndone">{{data.BrowseUndone}}</span>
 								</div>
 								<p class="title">未完成</p>
 							</a>
@@ -75,7 +75,7 @@
 							<a href="javascript:;" class="outside">
 								<div class="icon-img">
 									<img src="/static/image/nav/ordermenu_nav1_2.png" alt="">
-                  <span class="circleNum">0</span>
+                  					<span class="circleNum" v-if="data.BrowseCompleted">{{data.BrowseCompleted}}</span>
 								</div>
 								<p class="title">已完成</p>
 							</a>
@@ -84,7 +84,7 @@
 							<a href="javascript:;" class="outside">
 								<div class="icon-img">
 									<img src="/static/image/nav/ordermenu_nav1_3.png" alt="">
-                  <span class="circleNum">0</span>
+                  					<span class="circleNum" v-if="data.BrowseRevoked">{{data.BrowseRevoked}}</span>
 								</div>
 								<p class="title">已撤销</p>
 							</a>
@@ -93,7 +93,7 @@
 							<a href="javascript:;" class="outside">
 								<div class="icon-img">
 									<img src="/static/image/nav/ordermenu_nav1_4.png" alt="">
-                  <span class="circleNum">0</span>
+                  					<span class="circleNum" v-if="data.BrowseAppeal">{{data.BrowseAppeal}}</span>
 								</div>
 								<p class="title">申诉中</p>
 							</a>
@@ -110,22 +110,33 @@
 
 <script>
 import footers from '@/components/footer.vue'
-import {} from '@/utils';
+import {post,toast} from '@/utils';
 export default {
     components:{footers},
     data(){
         return {
-
+			userId:'',
+			token:'',
+			data:{}
         }
     },
     onLoad(){
-
+		this.userId = uni.getStorageSync('userId');
+		this.token = uni.getStorageSync('token');
+		this.getMyOrderCount();
     },
     onShow(){
 
     },
     methods:{
-
+		getMyOrderCount(){
+			post('Task/GetMyOrderCount',{
+                UserId: this.userId,
+                Token: this.token,
+			}).then(res=>{
+				this.data = res.obj;
+			})
+		}
     }
 }
 </script>

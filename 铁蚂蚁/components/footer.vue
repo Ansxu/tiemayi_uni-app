@@ -35,7 +35,7 @@ export default {
                 },
                 {
                     name:'全部任务',
-                    url:'index/index',
+                    url:'task/platformlist',
                 },
                 {
                     name:'接单',
