@@ -134,6 +134,14 @@
                         </div>
                     </li>
                     <li class="messageMenuLi">
+                        <div @click="goUrl('user/check/taobaolist')" class="outside">
+                            <div>
+                                <img src="/static/image/nav/memberindex_nav2_9.png" alt="" />
+                            </div>
+                            <span style="color:#7A7A7A">淘宝验号</span>
+                        </div>
+                    </li>
+                    <li class="messageMenuLi">
                         <div @click="goUrl('user/version')" class="outside">
                             <div>
                                 <img src="/static/image/nav/memberindex_nav2_5.png" alt="" />

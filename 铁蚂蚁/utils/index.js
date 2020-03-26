@@ -29,7 +29,7 @@ let status = false;
 const code={
   success:0,//成功
   fail:1,//失败
-  notRegister:3,//未注册
+  notRegister:-3,//未注册
   resCode1:200,//成功特别方式
 }
 // 请求封装
@@ -216,12 +216,28 @@ export function requestNotLoad(url, data,method, loginFn) {
 }
 // 如果status.isLogin存在，就是登录注册页面请求登录，不用判断是否登录
 export function get(url, data,status={}, loginFn) {
-  if(status&&!status.isLogin){if(!judgeLogin()) return false;}
-  return request(url, data, 'GET', loginFn)
+  return new Promise ((resolve,reject)=>{
+    if(!status||!status.isLogin){
+      if(!judgeLogin()){ reject()};
+    }
+    request(url, data,'GET', loginFn).then(res=>{
+      resolve(res)
+    }).catch(err=>{
+      reject(err)
+    })
+})
 }
 export function post(url, data,status,loginFn) {
-  if(status&&!status.isLogin){if(!judgeLogin()) return false;}
-  return request(url, data,'POST', loginFn)
+  return new Promise ((resolve,reject)=>{
+    if(!status||!status.isLogin){
+      if(!judgeLogin()){ reject()};
+    }
+    request(url, data,'POST', loginFn).then(res=>{
+      resolve(res)
+    }).catch(err=>{
+      reject(err)
+    })
+  })
 }
 //判断是否登录，未登录做弹窗跳转登录页面
 export function judgeLogin(){

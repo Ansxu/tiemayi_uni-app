@@ -22,7 +22,7 @@
 
 .rate img {
     position: absolute;
-    top: 7 px;
+    top: 10px;
     right: 10px;
     width: 17px;
 }
@@ -202,13 +202,17 @@
 }
 
 .task_describ {
-    padding: 100px 0;
+    padding: 20px 0;
+    color:#888;
 }
 
 .task_describ li {
-    padding: 0 62.5px 25px 62.5px;
+    padding: 0 6px 5px 6px;
     border-bottom: 1px solid #dddddd;
-    margin-bottom: 87.5px;
+    margin-bottom: 8px;
+}
+.task_describ p {
+    
 }
 
 .task_describ li .main_container {
@@ -219,9 +223,9 @@
     text-align: center;
     background: #00aaef;
     color: #fff;
-    height: 250px;
-    line-height: 250px;
-    border-radius: 50px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 30px;
 }
 
 

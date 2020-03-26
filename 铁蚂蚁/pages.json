@@ -83,7 +83,9 @@
 				{ "path": "list/mlslist" },
 				{ "path": "list/pddlist" },
 				{ "path": "list/taobaolist" },
-				{ "path": "vip/vip" }
+				{ "path": "vip/vip" },
+				{ "path": "check/taobaolist" },
+				{ "path": "check/yanzheng_tkl" }
 			]
 		}
 	],
