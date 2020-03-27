@@ -11,7 +11,11 @@
 			"pages":[
 				{ "path": "operationtask" },
 				{ "path": "myorderlist" },
-				{ "path": "list" },
+				{ "path": "list",
+				  "style": {
+					  "enablePullDownRefresh": true
+				  }
+				},
 				{ "path": "initiateappeal" },
 				{ "path": "dispatchtask" },
 				{ "path": "platformlist" },

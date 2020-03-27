@@ -127,6 +127,7 @@ export default {
 		this.token = uni.getStorageSync('token');
         this.selectAccountId = options.selectAccountId||0;
         this.selectPlatformId = options.selectPlatformId||0;
+		this.taskOrder.TaskAcceptNo='';//重置已接的任务
 		this.getAllPlatFormAccount();
 		this.getCompletionRate();
     },
@@ -238,7 +239,7 @@ export default {
 		// 确认任务
 		taskOk(){
 			this.taskOrder.TaskAcceptNo='';
-			goUrl('task/selectoperation',{taskId:this.taskOrder.TaskAcceptNo})
+			goUrl('task/selectoperation',{TaskAcceptNo:this.taskOrder.TaskAcceptNo})
 		},
 		ontips(){
 			uni.showModal({

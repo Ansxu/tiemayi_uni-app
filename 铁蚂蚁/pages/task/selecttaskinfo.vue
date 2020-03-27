@@ -86,9 +86,8 @@ export default {
 		},
 		submit(){
 			goUrl('task/list',{
-                platformId: this.platformId,
-                typeIndex:this.typeIndex,
-                accountId:this.data[0].Id,
+                PlatformId: this.platformId,
+                AccountId:this.data[0].Id,
                 TaskType:  this.typeIndex
 			})
 		},
