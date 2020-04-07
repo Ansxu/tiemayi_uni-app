@@ -15,41 +15,33 @@
 				</div>
 				<div class="section__bd">
 					<ul class="dd_navList li25 block__navList" id="advanceOrderStatus">
-						<li>
-							<a href="javascript:;" class="outside">
-								<div class="icon-img">
-									<img src="/static/image/nav/ordermenu_nav1_1.png" alt="">
-									<span class="circleNum" v-if="data.AdvanceUndone">{{data.AdvanceUndone}}</span>
-								</div>
-								<p class="title">未完成</p>
-							</a>
+						<li class="outside" @click="goOrderList(1,1)">
+							<div class="icon-img">
+								<img src="/static/image/nav/ordermenu_nav1_1.png" alt="">
+								<span class="circleNum" v-if="data.AdvanceUndone">{{data.AdvanceUndone}}</span>
+							</div>
+							<p class="title">未完成</p>
 						</li>
-						<li>
-							<a href="javascript:;" class="outside">
+						<li class="outside" @click="goOrderList(1,2)">
 								<div class="icon-img">
 									<img src="/static/image/nav/ordermenu_nav1_2.png" alt="">
                   					<span class="circleNum" v-if="data.AdvanceCompleted">{{data.AdvanceCompleted}}</span>
 								</div>
 								<p class="title">已完成</p>
-							</a>
 						</li>
-						<li>
-							<a href="javascript:;" class="outside">
+						<li class="outside" @click="goOrderList(1,3)">
 								<div class="icon-img">
 									<img src="/static/image/nav/ordermenu_nav1_3.png" alt="">
                  					 <span class="circleNum" v-if="data.AdvanceRevoked">{{data.AdvanceRevoked}}</span>
 								</div>
 								<p class="title">已撤销</p>
-							</a>
 						</li>
-						<li>
-							<a href="javascript:;" class="outside">
+						<li class="outside" @click="goOrderList(1,4)">
 								<div class="icon-img">
 									<img src="/static/image/nav/ordermenu_nav1_4.png" alt="">
                 					 <span class="circleNum" v-if="data.AdvanceAppeal">{{data.AdvanceAppeal}}</span>
 								</div>
 								<p class="title">申诉中</p>
-							</a>
 						</li>
 					</ul>
 				</div>
@@ -62,41 +54,33 @@
 				</div>
 				<div class="section__bd">
 					<ul class="dd_navList li25 block__navList" id="browseOrderStatus">
-						<li>
-							<a href="javascript:;" class="outside">
+						<li class="outside" @click="goOrderList(2,1)">
 								<div class="icon-img">
 									<img src="/static/image/nav/ordermenu_nav1_1.png" alt="">
 									<span class="circleNum" v-if="data.BrowseUndone">{{data.BrowseUndone}}</span>
 								</div>
 								<p class="title">未完成</p>
-							</a>
 						</li>
-						<li>
-							<a href="javascript:;" class="outside">
+						<li class="outside" @click="goOrderList(2,2)">
 								<div class="icon-img">
 									<img src="/static/image/nav/ordermenu_nav1_2.png" alt="">
                   					<span class="circleNum" v-if="data.BrowseCompleted">{{data.BrowseCompleted}}</span>
 								</div>
 								<p class="title">已完成</p>
-							</a>
 						</li>
-						<li>
-							<a href="javascript:;" class="outside">
+						<li class="outside" @click="goOrderList(2,3)">
 								<div class="icon-img">
 									<img src="/static/image/nav/ordermenu_nav1_3.png" alt="">
                   					<span class="circleNum" v-if="data.BrowseRevoked">{{data.BrowseRevoked}}</span>
 								</div>
 								<p class="title">已撤销</p>
-							</a>
 						</li>
-						<li>
-							<a href="javascript:;" class="outside">
+						<li class="outside" @click="goOrderList(2,4)">
 								<div class="icon-img">
 									<img src="/static/image/nav/ordermenu_nav1_4.png" alt="">
                   					<span class="circleNum" v-if="data.BrowseAppeal">{{data.BrowseAppeal}}</span>
 								</div>
 								<p class="title">申诉中</p>
-							</a>
 						</li>
 					</ul>
 				</div>
@@ -110,7 +94,7 @@
 
 <script>
 import footers from '@/components/footer.vue'
-import {post,toast} from '@/utils';
+import {post,toast,goUrl} from '@/utils';
 export default {
     components:{footers},
     data(){
@@ -136,11 +120,21 @@ export default {
 			}).then(res=>{
 				this.data = res.obj;
 			})
+		},
+		// taskType//任务类型，1-垫付任务，0浏览任务
+		//orderStatus--1未完成，2已完成，3已撤销，4申诉中
+		goOrderList(taskType,orderStatus){
+			goUrl('task/myorderlist',{
+				taskType,
+				orderStatus
+			})
 		}
     }
 }
 </script>
 
 <style lang="scss" scoped>
-
+.outside{
+	padding:10px;
+}
 </style>

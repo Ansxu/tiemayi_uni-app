@@ -10,7 +10,10 @@
 			"root":"pages/task",
 			"pages":[
 				{ "path": "operationtask" },
-				{ "path": "myorderlist" },
+				{ "path": "myorderlist",
+					"style": {
+						"enablePullDownRefresh": true
+					} },
 				{ "path": "list",
 				  "style": {
 					  "enablePullDownRefresh": true

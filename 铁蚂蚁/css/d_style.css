@@ -327,19 +327,19 @@ body, html {
     font-size: 15px;
 }
 
-.dd_tabList li a {
+.dd_tabList li  {
     display: inline-block;
     margin: 0 8px;
     padding: 0 2px;
 }
 
-.dd_tabList li a span {
+.dd_tabList li  span {
     padding: 0 5px;
     display: inline-block;
     position: relative;
 }
 
-.dd_tabList li a span:after {
+.dd_tabList li  span:after {
     content: "";
     display: block;
     width: 100%;
@@ -351,11 +351,11 @@ body, html {
     z-index: 2;
 }
 
-.dd_tabList li.active a {
+.dd_tabList li.active{
     color: #5c91f1;
 }
 
-.dd_tabList li.active a span:after {
+.dd_tabList li.active span:after {
     background: #5c91f1;
 }
 

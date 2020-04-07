@@ -82,7 +82,11 @@ export default {
                 TaskType:  this.typeIndex
 			}).then(res=>{
 				this.data = res.obj;
-			})
+			}).catch(err=>{
+                setTimeout(()=>{
+                    uni.navigateBack();
+                },1500)
+            })
 		},
 		submit(){
 			goUrl('task/list',{
