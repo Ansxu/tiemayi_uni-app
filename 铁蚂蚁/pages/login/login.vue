@@ -68,6 +68,7 @@ export default {
             post('Login/LoginByMobile',{
                 Mobile: this.phone,
                 PassWord: this.pwd,
+                IMEI:'123'
                 // client_id: ClientId,
                 // client_secret: ClientSecret
             },{isLogin:true}).then(res=>{

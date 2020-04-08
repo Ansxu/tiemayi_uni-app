@@ -15,7 +15,8 @@
 	            <div class="tabItem">
 	                <ul class="dd_column level__dd_column dd_orderList">
 
-						<li v-for="(item,index) in list" :key="index" @click="goUrl('task/selectoperation',{taskAcceptNo:item.TaskAcceptNo})">
+						<li v-for="(item,index) in list" :key="index" 
+							@click="goUrl('task/selectoperation',{TaskAcceptNo:item.TaskAcceptNo})">
 							<!-- <div href="javascript:orderInfo();" class="outside"> -->
 							<div  class="outside">
 								<div class="pictrueAll">
@@ -127,6 +128,8 @@
 				this.orderStatus = item.id;
 				this.page=1;
 				this.getList();
+
+				
 			},
 		},
 		// 下拉刷新

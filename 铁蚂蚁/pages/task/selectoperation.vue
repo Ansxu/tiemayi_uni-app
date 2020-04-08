@@ -1,381 +1,522 @@
 <template>
   <div class="bg_fff">
-    <div class="h45">
-      <div class="head bb_border">
-        <a href="../../html/task/receivedtask.html" class="btn_back"></a>
-        <div class="title center">选择任务操作</div>
-      </div>
-    </div>
+    <headers>选择任务操作</headers>
     <div class="main">
       <div class="order-detail" id="taskInfo"></div>
-      <!-- <script id="taskInfoTemp" type="text/x-dot-template">
             <div class="shopId">
-                <span class="id">商家ID:{{=it.SellerID}}</span>
+                <span class="id">商家ID:{{data.SellerID}}</span>
             </div>
             <div class="topInfo">
-                <div class="g-name"><span>目标商品</span><span class="fr">任务状态：<em class="c_Org">{{=it.AcceptTaskStatusText}}</em></span></div>
+                <div class="g-name">
+                    <span>目标商品</span>
+                    <span class="fr">任务状态：<em class="c_Org">{{data.AcceptTaskStatusText}}</em></span></div>
                 <div class="dl clear">
-                    <div class="img fl"><img src="{{=it.ProductImg}}"></div>
-                    <div class="box_r">
-                        <p class="text">{{=it.ProductName}}</p>
-                        <p class="text">商品价格 <span class="c_Org">{{=it.ProductPrice}}元</span></p>
-                        {{if(it.TaskType==1){ }}
-                        <p class="text">件数 <span class="c_Org">{{=it.ProductNum}}</span></p>
-                        {{} }} {{if(it.AcceptTaskStatus==0){ }}
-                        <p class="text"><span id="count_down" class="c_Org"></span>
-                        </p>
-                        {{} }}
+                    <div class="img fl">
+                        <img :src="data.ProductImg">
+                        <img class="maskimg" src="/static/image/icons/maskBg.png" />
                     </div>
-                    {{if(it.IsPresaleTask==1){ }}
-                    <div class="img fr presale-img">
+                    <div class="box_r">
+                        <p class="text">{{data.ProductName}}</p>
+                        <p class="text">商品价格 <span class="c_Org">{{data.ProductPrice}}元</span></p>
+                        <p class="text" v-if="data.TaskType==1">件数 <span class="c_Org">{{data.ProductNum}}</span></p>
+                        <p class="text" v-if="data.AcceptTaskStatus==0"><span id="count_down" class="c_Org"></span>
+                        </p>
+                    </div>
+                    <div class="img fr presale-img" v-if="data.IsPresaleTask==1">
                         <img src="/static/image/nav/presaletask.png" />
                     </div>
-                    {{} }}
                 </div>
-                {{if(it.IsPresaleTask==1){ }}
-                <div class="g-name c_Org">
-                        预售任务：{{=it.PaymentStartTime}} 到 {{=it.PaymentEndTime}}在{{=it.PlatName}}平台去下单
+                <div class="g-name c_Org" v-if="data.IsPresaleTask==1">
+                        预售任务：{{data.PaymentStartTime}} 到 {{data.PaymentEndTime}}在{{data.PlatName}}平台去下单
                         <p style="font-size:0.16rem;font-weight:bold;color:red;">不到订单时间支付不能拍下付款，否则该笔订单无效</p>
                 </div>
-                {{} }}
-                {{if(it.IsTrialStatus==1){ }}
-                <div class="g-name c_Org">
-                        商家审号任务：{{=it.TrialNumberTime}} 分钟内审号完成,请稍等片刻
+                <div class="g-name c_Org" v-if="data.IsTrialStatus==1">
+                        商家审号任务：{{data.TrialNumberTime}} 分钟内审号完成,请稍等片刻
                         <p style="font-size:0.16rem;font-weight:bold;color:red;">	商家审号通过才能操作，否则该笔订单无效</p>
                 </div>
-                {{} }}
             </div>
             <div class="StatusInfo">
                 <div class="Btns mb10">
-                    <a class="btn {{=(it.AcceptTaskStatus<=1||(it.AcceptTaskStatus==9&&it.PayCountdown>0))&&(it.IsTrialStatus==0||it.IsTrialStatus==2)?" cur ":" "}}"
-                    href="{{=(it.AcceptTaskStatus<=1||(it.AcceptTaskStatus==9&&it.PayCountdown>0))&&(it.IsTrialStatus==0||it.IsTrialStatus==2)?" javascript:operationTask(); ":"javascript:; "}}">{{=it.AcceptTaskStatus==1?"重新提交":it.AcceptTaskStatus==9&&it.PayCountdown>0?"下单提交":"操作任务"}}</a>
-                    <a class="btn {{=(it.AcceptTaskStatus==4||it.AcceptTaskStatus==2)&&it.IsAppeal==0?" cur ":" "}}" href="{{=(it.AcceptTaskStatus==4||it.AcceptTaskStatus==2)&&it.IsAppeal==0?" javascript:showAppeal(); ":"javascript:; "}}">申诉任务</a>
-                    <a class="btn {{=it.AcceptTaskStatus==0||it.AcceptTaskStatus==9?" cur ":" "}}" href="{{=it.AcceptTaskStatus==0||it.AcceptTaskStatus==9?" javascript:cancelTheTask(); ":"javascript:; "}}">取消任务</a> {{=it.AcceptTaskStatus==4?'
-                    <p style="color:red; font-size:.18rem;" class="text_l">拒绝返款原因：'+it.SellerDenialReason+'</p>':''}}
+                    <p :class="['btn',{'cur':data.AcceptTaskStatus<1||(data.AcceptTaskStatus==9&&data.PayCountdown>0)||(data.AcceptTaskStatus==9&&data.CompetingGoodsCountdown>0)}]" @click="operationTask">
+                        <!-- href="{{=(data.AcceptTaskStatus<=1||(data.AcceptTaskStatus==9&&data.PayCountdown>0))&&(data.IsTrialStatus==0||data.IsTrialStatus==2)?" javascript:operationTask(); ":"javascript:; "}}"> -->
+                        {{data.AcceptTaskStatus==1?"重新提交":data.AcceptTaskStatus==9&&data.PayCountdown>0?"下单提交":"操作任务"}}
+                    </p>
+                    <p :class="['btn',{'cur':(data.AcceptTaskStatus==4||data.AcceptTaskStatus==2)&&data.IsAppeal==0}]" >
+                    <!-- href="{{=(data.AcceptTaskStatus==4||data.AcceptTaskStatus==2)&&data.IsAppeal==0?" javascript:showAppeal(); ":"javascript:; "}}"> -->
+                    申诉任务</p>
+                    <p :class="['btn',{'cur':data.AcceptTaskStatus==0||data.AcceptTaskStatus==9}]" 
+                        @click="onShowCancelTask">
+                        <!-- href="{{data.AcceptTaskStatus==0||data.AcceptTaskStatus==9?" javascript:cancelTheTask(); ":"javascript:; "}}"> -->
+                    取消任务</p> 
+                    <p style="color:red; font-size:.18rem;" class="text_l" v-if="data.AcceptTaskStatus==4">拒绝返款原因：{{data.SellerDenialReason}}</p>
                 </div>
                 <div class="stepInfo">
                     <ul>
                         <li class="no1 end">
                             <i class="icon num">1</i>
                             <dl>
-                                <dt><label>接受任务</label><span>{{=it.CreateTime}}</span></dt>
-                                {{if(it.AcceptTaskStatus==2&&!isNullOrEmpty(it.PlatOrderNo)){ }}
-                                <dd>
-                                    <label>提交订单号</label><span id="txt_platOrderNo">{{=it.PlatOrderNo}}</span>
-                                    <a class="link_btn copybtn" onclick="CopyPlatOrderNo()">复制</a>
-                                </dd>
-                                {{} }}
-                                <dd>
-                                    <label>任务编号</label><span id="txt_taskNo">{{=it.TaskNo}}</span>
-                                    <a class="link_btn copybtn" onclick="CopyTaskNo()">复制</a>
+                                <dt><label>接受任务</label><span>{{data.CreateTime}}</span></dt>
+                                <dd v-if="data.AcceptTaskStatus==2&&!isNullOrEmpty(data.PlatOrderNo)">
+                                    <label>提交订单号</label><span id="txt_platOrderNo">{{data.PlatOrderNo}}</span>
+                                    <p class="link_btn copybtn" @click="copy(data.PlatOrderNo)">复制</p>
                                 </dd>
                                 <dd>
-                                    <label>接单号</label><span id="txt_taskAcceptNo">{{=it.TaskAcceptNo}}</span>
-                                    <a class="link_btn copybtn" onclick="CopyTaskAcceptNo()">复制</a>
+                                    <label>任务编号</label><span id="txt_taskNo">{{data.TaskNo}}</span>
+                                    <p class="link_btn copybtn"  @click="copy(data.TaskNo)">复制</p>
                                 </dd>
-                                <dd><label>接单账号</label><span>{{=it.AccountName}}</span></dd>
-                                {{if(it.TaskType==1){ }}
-                                <dd><label>垫付金额</label><span>{{=it.Amount}}元</span></dd>
-                                {{} }}
+                                <dd>
+                                    <label>接单号</label><span id="txt_taskAcceptNo">{{data.TaskAcceptNo}}</span>
+                                    <p class="link_btn copybtn" @click="copy(data.TaskAcceptNo)">复制</p>
+                                </dd>
+                                <dd><label>接单账号</label><span>{{data.AccountName}}</span></dd>
+                                <dd v-if="data.TaskType==1"><label>垫付金额</label><span>{{data.Amount}}元</span></dd>
                             </dl>
                         </li>
-                        <li class="no2 {{=it.AcceptTaskStatus>0&&it.AcceptTaskStatus!=5&&it.AcceptTaskStatus!=6?" active ":" "}}">
+                        <li :class="['no2',{'active':(data.AcceptTaskStatus>0&&data.AcceptTaskStatus!=5&&data.AcceptTaskStatus!=6)}]">
                             <i class="icon num">2</i>
                             <dl>
-                                <dt><label>任务提交</label></dt> {{if(it.ChannelType!=0){ }}
-                                <dd><label>任务指导图</label></dd>
-                                <dd>
+                                <dt><label>任务信息</label></dt> 
+                                <!-- 红鸟隐藏 -->
+                                <!-- <dd v-if="data.ChannelType!=0"><label>任务指导图</label></dd>
+                                <dd v-if="data.ChannelType!=0">
                                     <div class="imglist thumbnails">
                                         <span class="img">
-                                        {{if(!isNullOrEmpty(it.StepImg)){ }}
-                                            <img src="{{=it.StepImg}}">
-                                                {{} }}
+                                            <img :src="data.StepImg" v-if="data.StepImg">
                                         </span>
                                         <span class="img">
-                                        {{if(!isNullOrEmpty(it.StepImg1)){ }}
-                                            <img src="{{=it.StepImg1}}">
-                                                {{} }}
+                                            <img :src="data.StepImg1" v-if="data.StepImg1">
                                         </span>
                                         <span class="img">
-                                        {{if(!isNullOrEmpty(it.StepImg2)){ }}
-                                            <img src="{{=it.StepImg2}}">
-                                                {{} }}
+                                            <img  :src="data.StepImg2" v-if="data.StepImg2">
                                         </span>
                                         <span class="img">
-                                        {{if(!isNullOrEmpty(it.StepImg3)){ }}
-                                            <img src="{{=it.StepImg3}}">
-                                                {{} }}
+                                            <img  :src="data.StepImg3" v-if="data.StepImg3">
                                         </span>
                                         <span class="img">
-                                        {{if(!isNullOrEmpty(it.StepImg4)){ }}
-                                            <img src="{{=it.StepImg4}}">
-                                                {{} }}
+                                            <img  :src="data.StepImg4" v-if="data.StepImg4">
                                         </span>
                                     </div>
-                                </dd>
-                                {{} }}
-                                {{if(it.IsSearchList==1){ }}
-                                <dd><label>搜索列表</label></dd>
-                                <dd>
-                                    <div class="imglist thumbnails">
-                                        <span class="img">
-                                        {{if(!isNullOrEmpty(it.ImgJson.SearchPageImg)){ }}
-                                            <img src="{{=it.ImgJson.SearchPageImg}}">
-                                            {{} }}
-                                        </span>
-                                    </div>
-                                </dd>
-                                {{} }}
-                                {{if((it.HuoBisj==1 && it.IsAddedservices==1) &&it.TaskType==1){ }}
-                                <dd><label>货比三家</label></dd>
-                                <dd>
-                                    <div class="imglist thumbnails">
-                                            <div class="from">
-                                                    <p>货比三家链接1</p>
-                                                    <div class="from-item mt10">
-                                                            <input class="input" id="huobisanj1" style="width:300px" value="{{=it.ShoparoundLink1}}" type="text" placeholder="货比商品链接1" />
-
-                                                    </div>
-                                            </div>
-
-                                            <div class="from">
-                                                    <p>货比三家链接2</p>
-                                                    <div class="from-item mt10">
-                                                        <input class="input" id="huobisanj2" style="width:300px" value="{{=it.ShopAroundlink2}}" type="text" placeholder="货比商品链接2" />
-                                                    </div>
-                                            </div>
-
-
-
-                                    </div>
-                                </dd>
-                                {{} }}
-
-                                {{if(it.IsBrowseStore==1){ }}
-                                <dd><label>浏览店铺</label></dd>
-                                <dd>
-                                    <div class="imglist thumbnails">
-                                        <span class="img">
-                                        {{if(!isNullOrEmpty(it.ImgJson.TargetProductTopImg)){ }}
-                                            <img src="{{=it.ImgJson.TargetProductTopImg}}">
-                                                {{} }}
-                                        </span>
-                                        <span class="img">
-                                        {{if(!isNullOrEmpty(it.ImgJson.TargetProductBottomImg)){ }}
-                                            <img src="{{=it.ImgJson.TargetProductBottomImg}}">
-                                                {{} }}
-                                        </span>
-                                        {{if(!isNullOrEmpty(it.ImgJson.ShopProductBottomImgA)){ }}
-                                            <span class="img">
-                                            <img src="{{=it.ImgJson.ShopProductBottomImgA}}">
+                                </dd> -->
+                                <block v-if="data.IsSearchList==1&&data.ImgJson&&data.ImgJson.SearchPageImg">
+                                    <dd><label>搜索列表</label></dd>
+                                    <dd>
+                                        <div class="imglist thumbnails">
+                                            <span class="img">}
+                                                <img :src="data.ImgJson.SearchPageImg">
                                             </span>
-                                        {{} }}
-                                        {{if(!isNullOrEmpty(it.ImgJson.ShopProductBottomImgB)){ }}
-                                        <span class="img">
-                                            <img src="{{=it.ImgJson.ShopProductBottomImgB}}">
-                                        </span>
-                                        {{} }}
-                                        {{if(!isNullOrEmpty(it.ProductName1)){ }}
-                                        <span class="img">
-                                        {{if(it.TaskType==1&&(!isNullOrEmpty(it.ProductName1)||!isNullOrEmpty(it.ProductName2))){ }}
-                                        {{if(!isNullOrEmpty(it.ImgJson.AdditionalProductA1)){ }}
-                                            <img src="{{=it.ImgJson.AdditionalProductA1}}">
-                                                {{} }}
-                                        </span>
-                                        <span class="img">
-                                        {{if(!isNullOrEmpty(it.ImgJson.AdditionalProductB1)){ }}
-                                            <img src="{{=it.ImgJson.AdditionalProductB1}}">
-                                                {{} }}
-                                        </span>
-                                        {{} }} {{if(!isNullOrEmpty(it.ProductName2)){ }}
-                                        {{if(!isNullOrEmpty(it.ImgJson.AdditionalProductA2)){ }}
-                                    <span class="img">
-                                            <img src="{{=it.ImgJson.AdditionalProductA2}}">
-                                    </span>
-                                        {{} }}
-                                        {{if(!isNullOrEmpty(it.ImgJson.AdditionalProductB2)){ }}
-                                        <span class="img">
-                                            <img src="{{=it.ImgJson.AdditionalProductB2}}">
-                                        </span>
-                                        {{} }}
-                                    {{} }}
-                                {{} }}
-                                    </div>
-                                </dd>
-                                {{} }}
-                                {{if(it.ShouCandp==1){ }}
-                                <dd><label>收藏店铺</label></dd>
-                                <dd>
+                                        </div>
+                                    </dd>
+                                </block>
+                                <block v-if="data.ImgJson&&data.ImgJson.CollectionCompetitiveProducts2&&data.IsCompetingGoodsTask==1">
+								<dd><label>收藏竞品商品</label></dd>
+								<dd>
+											<div class="imglist thumbnails">
+												<span class="img">
+													<img :src="data.ImgJson.CollectionCompetitiveProducts2">
+												</span>
+											</div>
+								</dd>
+                                </block>
+                                <block v-if="data.ImgJson&&data.ImgJson.CollectionCompetitiveProducts3&&data.IsCompetingGoodsTask==1">
+								<dd><label>加竞品购物车</label></dd>
+								<dd>
+											<div class="imglist thumbnails">
+												<span class="img">
+													<img :src="data.ImgJson.CollectionCompetitiveProducts3">
+												</span>
+											</div>
+								</dd>
+								</block>
+
+                                
+
+                                <block v-if="data.HuoBisj==1 &&data.ImgJson&& data.IsAddedservices==1 &&data.TaskType==1">
+                                    <dd><label>货比三家主图</label></dd>
+                                    <dd>
+                                                <div class="imglist thumbnails">
+                                                    <span class="img">
+                                                        <img :src="data.ImgJson.ShopAroundlink1" v-if="data.ImgJson.ShopAroundlink1">
+                                                    </span>
+                                                </div>
+                                                <div class="imglist thumbnails">
+                                                    <span class="img">
+                                                        <img :src="data.ImgJson.ShopAroundlink2" v-if="data.ImgJson.ShopAroundlink2">
+                                                    </span>
+                                                </div>
+                                    </dd>
+								</block>
+                                <block v-if="data.IsPresaleTask==1&&data.ImgJson">
+                                    <dd><label>隔天收藏加购图</label></dd>
+                                    <dd>
+                                                <div class="imglist thumbnails">
+                                                    <span class="img">
+                                                        <img :src="data.ImgJson.AddAShoppingCart" v-if="data.ImgJson.AddAShoppingCart">
+                                                    </span>
+                                                    <span class="img">
+                                                        <img :src="data.ImgJson.CollectionOfGoods" v-if="data.ImgJson.CollectionOfGoods">
+                                                    </span>
+                                                </div>
+                                    </dd>
+								</block>
+
+                                <dd v-if="data.IsBrowseStore==1&&data.ImgJson"><label>浏览店铺</label></dd>
+                                <dd v-if="data.IsBrowseStore==1&&data.ImgJson">
                                     <div class="imglist thumbnails">
                                         <span class="img">
-                                        {{if(!isNullOrEmpty(it.ImgJson.ShouCandpimg)){ }}
-                                            <img src="{{=it.ImgJson.ShopCollectionImg}}">
-                                            {{} }}
+                                            <img :src="data.ImgJson.TargetProductTopImg" v-if="data.ImgJson.TargetProductTopImg">
+                                        </span>
+                                        <span class="img">
+                                            <img  :src="data.ImgJson.TargetProductBottomImg" v-if="data.ImgJson.TargetProductBottomImg">
+                                        </span>
+                                        <span class="img" v-if="data.ImgJson.ShopProductBottomImgA">
+                                            <img :src="data.ImgJson.ShopProductBottomImgA">
+                                        </span>
+                                        <span class="img" v-if="data.ImgJson.ShopProductBottomImgB">
+                                            <img :src="data.ImgJson.ShopProductBottomImgB">
+                                        </span>
+                                        <span class="img" v-if="data.TaskType==1&&(data.ProductName1||data.ProductName2)">
+                                            <img :src="data.ImgJson.AdditionalProductA1" v-if="data.ImgJson.AdditionalProductA1">
+                                        </span>
+                                        <span class="img" v-if="data.TaskType==1&&(data.ProductName1||data.ProductName2)">
+                                            <img :src="data.ImgJson.AdditionalProductB1" v-if="data.ImgJson.AdditionalProductB1">
+                                        </span>
+                                        <span class="img" v-if="data.ProductName2&&data.ImgJson.AdditionalProductA2">
+                                                <img :src="data.ImgJson.AdditionalProductA2" v-if="data.ImgJson.AdditionalProductA2">
+                                        </span>
+                                        <span class="img" v-if="data.ProductName2&&data.ImgJson.AdditionalProductB2">
+                                            <img :src="data.ImgJson.AdditionalProductB2">
                                         </span>
                                     </div>
                                 </dd>
-                                {{} }}
-                                {{if(it.Llshoucandp==1){ }}
-                                <dd><label>收藏店铺</label></dd>
-                                <dd>
+                                <dd v-if="data.ShouCandp==1"><label>收藏店铺</label></dd>
+                                <dd v-if="data.ShouCandp==1">
                                     <div class="imglist thumbnails">
                                         <span class="img">
-                                        {{if(!isNullOrEmpty(it.ImgJson.ShopCollectionImg)){ }}
-                                            <img src="{{=it.ImgJson.ShopCollectionImg}}">
-                                            {{} }}
+                                            <img :src="data.ImgJson.ShopCollectionImg" v-if="data.ImgJson.ShouCandpimg">
                                         </span>
                                     </div>
                                 </dd>
-                                {{} }}
-                                {{if(it.ShouCansp==1){ }}
-                                <dd><label>收藏商品</label></dd>
-                                <dd>
+                                <dd v-if="data.Llshoucandp==1"><label>收藏店铺</label></dd>
+                                <dd v-if="data.Llshoucandp==1">
                                     <div class="imglist thumbnails">
                                         <span class="img">
-                                        {{if(!isNullOrEmpty(it.ImgJson.ProductCollectionImg)){ }}
-                                            <img src="{{=it.ImgJson.ProductCollectionImg}}">
-                                            {{} }}
+                                            <img :src="data.ImgJson.ShopCollectionImg" v-if="data.ImgJson.ShopCollectionImg">
                                         </span>
                                     </div>
                                 </dd>
-                                {{} }} {{if(it.Jiarugouwu==1){ }}
-                                <dd><label>加入购物车</label></dd>
-                                <dd>
+                                <dd v-if="data.ShouCansp==1"><label>收藏商品</label></dd>
+                                <dd v-if="data.ShouCansp==1">
+                                    <div class="imglist thumbnails">
+                                        <span class="img">
+                                            <img :src="data.ImgJson.ProductCollectionImg" v-if="data.ImgJson.ProductCollectionImg">
+                                        </span>
+                                    </div>
+                                </dd>
+                                <dd v-if="data.Jiarugouwu==1"><label>加入购物车</label></dd>
+                                <dd v-if="data.Jiarugouwu==1">
                                     <div class="imglist">
                                         <span class="img">
-                                        {{if(!isNullOrEmpty(it.ImgJson.ShoppingCartImg)){ }}
-                                            <img src="{{=it.ImgJson.ShoppingCartImg}}">
-                                            {{} }}
+                                            <img :src="data.ImgJson.ShoppingCartImg" v-if="data.ImgJson.ShoppingCartImg">
                                         </span>
                                     </div>
                                 </dd>
-                                {{} }} {{if(it.ChatPlaceAnOrder>0||it.PlatName=='拼多多'){ }}
-                                <dd><label>订单详情截图</label></dd>
-                                <dd>
-                                    <div class="imglist thumbnails">
+                                <block v-if="data.ChatPlaceAnOrder>0&&data.ImgJson.OrderDetailsImg">
+								<dd><label>下单支付</label></dd>
+								<dd>
+									<div class="imglist thumbnails">
+										<span class="img">
+											<img :src="data.ImgJson.OrderDetailsImg">
+										</span>
+									</div>
+								</dd>
+								</block>
 
-                                        <span class="img">
-                                        {{if(!isNullOrEmpty(it.ImgJson.OrderDetailsImg)){ }}
-                                            <img src="{{=it.ImgJson.OrderDetailsImg}}">
-                                            {{} }}
-                                        </span>
+								<div class="from" style="margin-bottom:.1rem;" v-if="data.ShoparoundLink1">
+                                    <p class="text">货比三家链接1：{{data.ShoparoundLink1}}</p>
+								</div>
+								<div class="from" style="margin-bottom:.1rem;" v-if="data.ShoparoundLink2">
+                                    <p class="text">货比三家链接2：{{data.ShoparoundLink2}}</p>
+								</div>
+								<div class="from" style="margin-bottom:.1rem;" v-if="data.ShopProAlink">
+                                    <p class="text">副宝贝链接1：{{data.ShopProAlink}}</p>
+								</div>
+								<div class="from" style="margin-bottom:.1rem;" v-if="data.ShopProBlink">
+                                    <p class="text">副宝贝链接2：{{data.ShopProBlink}}</p>
+								</div>
+								<div class="from No" style="margin-bottom:.1rem;" v-if="data.PlatOrderNo">
+                                    <div>订单编号：{{data.PlatOrderNo}}
+                                        <p class="link_btn copybtn" style="display:inline-block" @click="copy(data.PlatOrderNo)">复制</p>
                                     </div>
-                                </dd>
-                                <dd class="text_r"><a class="link_btn blue">点击可查看图片</a></dd>
-                                {{} }}
+								</div>
+								<div class="from" style="margin-bottom:.1rem;" v-if="data.PayMoney">
+                                    <p>实付金额：{{data.PayMoney}}元</p>
+								</div>
+								<dd class="text_r"><p class="link_btn blue">点击可查看图片</p></dd>
                             </dl>
                         </li>
-                        {{if(it.TaskType==1){ }}
-                        <li class="no3 {{=it.AcceptTaskStatus>1&&it.AcceptTaskStatus!=4&&it.AcceptTaskStatus!=5&&it.AcceptTaskStatus!=6?" active ":" "}}">
+                        <block v-if="data.TaskType==1">
+                        <li  class="no3" :class="{'active':data.AcceptTaskStatus>1&&data.AcceptTaskStatus!=4&&data.AcceptTaskStatus!=5&&data.AcceptTaskStatus!=6}">
                             <i class="icon num">3</i>
                             <dl>
                                 <dt><label>商家确认订单</label></dt>
-                                <dd><label>任务类型</label><span>{{=it.PlatType}}</span></dd>
+                                <dd><label>任务类型</label><span>{{data.PlatType}}</span></dd>
                                 <dd><label>返款方式</label><span>平台返款</span></dd>
-                                <dd><label>返款金额</label><span class="c_Org">{{=it.Amount}}元</span></dd>
-                                <dd class="text_r"><span>平台规定商家24小时内返款</span>{{if(it.AcceptTaskStatus==1&&it.IsReminders==0&&it.IsAppeal!=1){ }}<a class="btn" onclick="urgeRebate()">催返款</a>{{} }}</dd>
+                                <dd><label>返款金额</label><span class="c_Org">{{data.Amount}}元</span></dd>
+                                <dd class="text_r"><span>平台规定商家24小时内返款</span>
+                                    <p class="btn" onclick="urgeRebate()" v-if="data.AcceptTaskStatus==1&&data.IsReminders==0&&data.IsAppeal!=1">催返款</p>
+                                </dd>
                             </dl>
                         </li>
-                        <li class="no4 {{=it.AcceptTaskStatus==7||it.AcceptTaskStatus==8?" active ":" "}}">
+                        <li :class="['no4',{'active':(data.AcceptTaskStatus==7||data.AcceptTaskStatus==8)}]">
                             <i class="icon num">4</i>
                             <dl>
-                                <dt><label>收货好评</label>{{if(it.AcceptTaskStatus==2 && it.EvaluationCountdown < 72){ }}<span class="text_r c_Org" style="float:right;" id="evaluation_Countdown"></span>{{} }}</dt>
-                                <dd><label>第一步：去{{=it.PlatName}}评价并截图</label> {{if(!isNullOrEmpty(it.EvaluationClaim)){ }}
-                                    <div class="evaluate_box">
+                                <dt><label>收货好评</label>
+                                    <span class="text_r c_Org" style="float:right;" id="evaluation_Countdown" v-if="data.AcceptTaskStatus==2 && data.EvaluationCountdown < 72"></span>
+                                </dt>
+                                <dd><label>第一步：去{{data.PlatName}}评价并截图</label> 
+                                    <div class="evaluate_box" v-if="data.EvaluationClaim">
                                         <p class="evaluateTit">文字要求<span class="c_Org">（评价必须粘贴一下文字）</span></p>
-                                        <textarea type="text" class="keybox" id="praiseText" readonly>{{=it.EvaluationClaim}}</textarea><a class="link_btn" onclick="CopyPraiseText()">复制评价文字</a>
+                                        <textarea type="text" class="keybox" id="praiseText" readonly v-model="data.EvaluationClaim"></textarea>
+                                        <p class="link_btn" onclick="CopyPraiseText()">复制评价文字</p>
                                     </div>
-                                    {{} }}
-                                    {{if(!isNullOrEmpty(it.EvaluationVideo)){ }}
-                                    <div class="evaluate_box" style="padding-bottom:.46rem">
-                                        <p style="width:3rem;color:#333;"><label>视频要求<label class="c_Org">（在评价里必须上传以下视频）</label></label></p>
-                                        <div class="imglist thumbnails evaluationImglst">
-                                                <video src="{{=it.EvaluationVideo}}" controls="controls" style="width:100%"></video>
-                                        </div>
-                                        <a class="link_btn" onclick="downVideo('{{=it.EvaluationVideo}}')">点击下载视频</a>
-                                    </div>
-                                    {{} }}
-                                    {{if(!isNullOrEmpty(it.EvaluationImg)||!isNullOrEmpty(it.EvaluationImg2)||!isNullOrEmpty(it.EvaluationImg2)){ }}
-                                    <div class="evaluate_box" style="margin-top:0.5rem;">
+                                    <div class="evaluate_box" style="margin-top:0.5rem;" v-if="data.EvaluationImg||data.EvaluationImg1||data.EvaluationImg2||data.EvaluationImg3||data.EvaluationImg4">
                                         <p class="evaluateTit">图片要求<span class="c_Org">（在评价里必须上传一下图片）</span></p>
                                         <div class="imglist thumbnails evaluationImglst">
-                                            {{if(!isNullOrEmpty(it.EvaluationImg)){ }}
-                                            <span class="img">
-                                            <img src="{{=it.EvaluationImg}}">
-                                        </span> {{} if(!isNullOrEmpty(it.EvaluationImg1)){ }}
-                                            <span class="img">
-                                            <img src="{{=it.EvaluationImg1}}">
-                                        </span> {{} if(!isNullOrEmpty(it.EvaluationImg2)){ }}
-                                            <span class="img">
-                                            <img src="{{=it.EvaluationImg3}}">
-                                        </span> {{} if(!isNullOrEmpty(it.EvaluationImg3)){ }}
-                                            <span class="img">
-                                            <img src="{{=it.EvaluationImg4}}">
-                                        </span> {{} if(!isNullOrEmpty(it.EvaluationImg4)){ }}
-                                            <span class="img">
-                                            <img src="{{=it.EvaluationImg2}}">
-                                        </span> {{} }}
+                                            <span class="img" v-if="data.EvaluationImg">
+                                                <img :src="data.EvaluationImg">
+                                            </span> 
+                                            <span class="img" v-if="data.EvaluationImg1">
+                                                <img :src="data.EvaluationImg1">
+                                            </span> 
+                                            <span class="img" v-if="data.EvaluationImg2">
+                                                <img :src="data.EvaluationImg2">
+                                            </span> 
+                                            <span class="img" v-if="data.EvaluationImg3">
+                                                <img :src="data.EvaluationImg3">
+                                            </span> 
+                                            <span class="img" v-if="data.EvaluationImg4">
+                                                <img :src="data.EvaluationImg4">
+                                            </span>
                                         </div>
-                                        <a class="link_btn" onclick="downEvaluationImg()">点击下载图片</a>
+                                        <p class="link_btn" onclick="downEvaluationImg()">点击下载图片</p>
                                     </div>
-                                    {{} }}
                                 </dd>
+                                <block v-if="data.EvaluationVideo">
+                                    <dd><label style="width:100%">第二步：上传视频好评</label></dd>
+                                    <dd>
+                                    </dd>
+                                    <dd class="text_r"><div class="evaluate_box"><p class="link_btn" onclick="downVideo()">点击下载视频</p></div></dd>
+								</block>
                                 <dd><label>第二步：上传物流签收与评价截图</label></dd>
                                 <dd>
                                     <div class="imglist thumbnails">
                                         <span class="img">
-                                        {{if(!isNullOrEmpty(it.OkImgJson.LogisticsReceiptImg)){ }}
-                                            <img src="{{=it.OkImgJson.LogisticsReceiptImg}}">
-                                            {{} }}
+                                            <img :src="data.OkImgJson.LogisticsReceiptImg" v-if="data.OkImgJson.LogisticsReceiptImg">
                                         </span>
                                         <span class="img">
-                                        {{if(!isNullOrEmpty(it.OkImgJson.EvaluationImg)){ }}
-                                            <img src="{{=it.OkImgJson.EvaluationImg}}">
-                                            {{} }}
+                                            <img :src="data.OkImgJson.EvaluationImg" v-if="data.OkImgJson.EvaluationImg">
                                         </span>
                                     </div>
                                 </dd>
-                                <dd class="text_r"><a class="link_btn blue">点击可查看图片</a></dd>
-                                <dd class="text_r"><span>{{=it.EvaluationTitle}}</span>{{if(it.AcceptTaskStatus==2){ }}<a class="btn" onclick="confirmTask({{=it.EvaluationCountdown}})">去收货</a>{{} }}</dd>
+                                <dd class="text_r"><p class="link_btn blue">点击可查看图片</p></dd>
+                                <dd class="text_r"><span>{{data.EvaluationTitle}}</span>
+                                    <p class="btn" @click="confirmTask(data.EvaluationCountdown)" v-if="data.AcceptTaskStatus==2">去收货</p>
+                                </dd>
                             </dl>
                         </li>
-                        <li class="no5 {{=it.AcceptTaskStatus==8?" active ":" "}}">
+                        <li :class="['no5',{'active':data.AcceptTaskStatus==8}]">
                             <i class="icon num">5</i>
                             <dl>
                                 <dt><label>任务完成</label></dt>
-                                <dd><label>获得佣金</label><span class="c_Org">{{=it.Commission}} 金</span></dd>
+                                <dd><label>获得佣金</label><span class="c_Org">{{data.Commission}} 金</span></dd>
                             </dl>
                         </li>
-                        {{} else { }}
-                        <li class="no3 {{=it.AcceptTaskStatus==8?" active ":" "}}">
-                            <i class="icon num">3</i>
-                            <dl>
-                                <dt><label>任务完成</label></dt>
-                                <dd><label>获得佣金</label><span class="c_Org">{{=it.Commission}} 金</span></dd>
-                            </dl>
-                        </li>
-                        {{} }}
+                        </block>
+                        <block v-else>
+                            <li :class="['no3',{'active':data.AcceptTaskStatus==8}]">
+                                <i class="icon num">3</i>
+                                <dl>
+                                    <dt><label>任务完成</label></dt>
+                                    <dd><label>获得佣金</label><span class="c_Org">{{data.Commission}} 金</span></dd>
+                                </dl>
+                            </li>
+                        </block>
                     </ul>
                 </div>
             </div>
-      </script> -->
+    </div>
+    <!-- 取消任务 -->
+    <div class="cancelTast" v-if="showCancelTask">
+        <div class="content">
+            <div class="top">
+                <p class="layer_tips">撤销次数超过10次后，再次撤销任务每次扣取0.1金币，确定取消任务？</p>
+                <div class="open-typebox">
+                    <ul>
+                        <li :class="{'active':cancelTastIndex==index}" @click="cancelTastIndex=index"
+                            v-for="(item,index) in cancelTastList" :key="index">{{item}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="btns">
+                <div class="confirm" @click="cancelTask_confirm">确认</div>
+                <div class="cancel" @click="showCancelTask = false">取消</div>
+            </div>
+        </div>
     </div>
   </div>
 </template>
 
 <script>
-import {} from "@/utils";
+import {post,toast,goUrl} from '@/utils';
+import h5Copy  from '@/utils/junyi-h5-copy';
 export default {
   data() {
-    return {};
+    return {
+        userId:'',
+        token:'',
+        TaskAcceptNo:'',
+        data:{},
+        cancelTastList:['找不到商品','不想做这个任务','达不到商家的要求','其他'],
+        cancelTastIndex:0,//取消任务的原因下标
+        showCancelTask:false,
+    };
   },
-  onLoad() {},
+  onLoad(options) {
+    this.userId = uni.getStorageSync('userId');
+    this.token = uni.getStorageSync('token');
+    this.TaskAcceptNo = options.TaskAcceptNo;
+    this.getData();
+  },
   onShow() {},
-  methods: {}
+  methods: {
+		getData(){
+			post('Task/LoadOperationalTask',{
+                UserId: this.userId,
+                Token: this.token,
+                TaskAcceptNo:this.TaskAcceptNo
+			}).then(res=>{
+				this.data = res.obj;
+			})
+        },
+        // 操作任务
+        operationTask(){
+            if(this.data.AcceptTaskStatus<1||(this.data.AcceptTaskStatus==9&&this.data.PayCountdown>0)||(this.data.AcceptTaskStatus==9&&this.data.CompetingGoodsCountdown>0)){
+                goUrl('task/operationtask',{
+                    TaskAcceptNo:this.TaskAcceptNo
+                })
+            }
+        },
+        // 显示取消任务
+        onShowCancelTask(){
+            if(this.data.AcceptTaskStatus==0||this.data.AcceptTaskStatus==9){
+               showCancelTask = true 
+            }
+        },
+        // 确认取消任务
+        cancelTask_confirm(){
+            post('Task/CancelTask',{
+                UserId: this.userId,
+                Token: this.token,
+                TaskAcceptNo:this.TaskAcceptNo,
+                TaskCancelReasons: this.cancelTastList[this.cancelTastIndex]
+            }).then(res=>{
+                goUrl('task/receivedtask')
+            })
+        },
+        copy(text){
+            const res = h5Copy(text);
+            if(res){
+                toast('复制成功',true)
+            }else{
+                toast('复制失败，请重试！')
+            }
+        }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 @import '../../css/fsgallery.css';
 @import '../../css/task.css';
+.main{
+    padding:10px;
+    .shopId{
+        .id{
+            color:#666;
+            line-height:2;
+        }
+    }
+    .topInfo{
+        .g-name{
+            line-height:2;
+        }
+        .clear{
+            .img{
+                margin-right:10px;
+                position:relative;
+                img{
+                    width:80px;
+                    height:80px;
+                }
+                .maskimg{
+                    position:absolute;
+                    top:0;
+                    left:0;
+                    width:100%;
+                    height:100%;
+                }
+            }
+        }
+    }
+}
+.stepInfo ul li dl dd, .stepInfo ul li dl dt{
+    font-size:13px;
+}
+.cancelTast{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,.6);
+    .content{
+        background:#fff;
+        width:90%;
+        border-radius:5px;
+        overflow:hidden;
+        .top{
+            padding:10px;
+            p{
+                line-height:1.5;
+                text-align:center;
+            }
+            .ul{
+                color:#5c91f1;
+                li{
+                    border-bottom:1px #f2f2f2 solid;
+                    line-height:2;
+                }
+            }
+        }
+        .btns{
+            display:flex;
+            align-items:center;
+            border-top:#e8e8e8 solid 1px;
+            text-align:center;
+            div{
+                width:50%;
+                line-height:3;
+                background:#f2f2f2;
+
+            }
+            .confirm{
+                border-right:1px #e8e8e8 solid;
+                color:#5c91f1;
+            }
+        }
+    }
+}
 </style>
