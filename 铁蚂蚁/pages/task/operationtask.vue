@@ -504,7 +504,7 @@
 									</div>
 								</div>
 							</div>
-
+							<!-- 浏览店铺 -->
 							<div class="Step Step-3" v-if="(data.IsBrowseStore==1||data.IsCollectionShop==1||data.IsCollectionProduct==1||data.IsAddCart==1)&&data.AcceptTaskStatus!=9">
 								<div class="No"><span>{{data.IsSearchList==1||data.IsComparisonShop==1?"第二步":"第一步"}}&nbsp;浏览店铺</span>
 									<!-- <a class="link_btn" onclick="showExamples(1)">点击查看示例</a> -->
@@ -560,6 +560,7 @@
 											</div>
 										</div>
 									</div>
+									<!-- 店内商品 -->
 									<div class="piclist Uploadimg" v-if="data.IsBrowseStore==1&&data.TaskType!=2">
 										<ul class="clear">
 											<block v-if="(data.IsNewPasswordTask==0)&&(data.IsCompetingGoodsTask==0)&&(data.IsPresaleTask==0)&&(data.IsGoodTask==0)">
@@ -600,6 +601,7 @@
 													<p class="text">店内商品B</p>
 												</li>
 											</block>
+											<!-- 附加商品 -->
 											<block v-if="data.TaskType==1&&(data.ProductName1||data.ProductName2)">
 												<block v-if="data.ProductName1">
 													<li>
@@ -770,10 +772,37 @@ export default {
 		comfirmOrderNo:'',
 		orderPrice:'',
 		ShoparoundLinkMain:[],//验证主宝贝链接
+
+		ScreenshotMerchantProductSearchImg:'',//下单搜索列表截图
+		CollectionCompetitiveProducts1Img:'',//藏竞品店铺截图
+		CollectionCompetitiveProducts2Img:'',//收藏竞品商品截图
+		CollectionCompetitiveProducts3Img:'',//加竞品购物车截图
+		AddAShoppingCartImg:'',//加购物车截图
+		CollectionOfGoodsImg:'',//收藏商品截图
+		//额外操作截图
+		scotherAImg:'',//收藏竞品1截图
+		scotherBImg:'',//收藏竞品2截图
+		jgotherAImg:'',//加购竞品1截图
+		jgotherBImg:'',//加购竞品2截图
+
+		scdpotherAImg:'',//收藏店铺截图
+		cartImgImg:'',//加入购物车截图
+		fbbotherAImg:'',//浏览副宝贝截图
+		dzotherAImg:'',//点赞好评截图
+		llwdjotherAImg:'',//浏览问大家截图
+		twwdjotherAImg:'',//提问问大家截图
+		// 店内商品
 		targetTopImg:'',//目标商品顶部截图
 		targetBottomImg:'',//目标商品底部截图
 		shopProAImg:'',//店内商品A截图
 		shopProBImg:'',//店内商品B截图
+		// 附加商品
+		AdditionalProductA1Img:'',//附加商品1顶部截图
+		AdditionalProductB1Img:'',//附加商品1底部截图
+		AdditionalProductA2Img:'',//附加商品2顶部截图
+		AdditionalProductB2Img:'',//附加商品2底部截图
+
+		collectionShopImg:'',//收藏店铺截图
     };
   },
   onLoad(options) {
@@ -898,367 +927,371 @@ export default {
 		},
 		// 提交
 		submitTask(){
-			var huobisanjiaJson={};
-				var imageJson = {};
-				if ($("#ScreenshotMerchantProductSearch")[0]) {
-					if (isNullOrEmpty($("#ScreenshotMerchantProductSearch").val())) {
-						toast("搜索结果截图不能为空");
-						return false;
-					}
-					imageJson["ScreenshotMerchantProductSearch"] = $("#ScreenshotMerchantProductSearch").val();
+			let huobisanjiaJson={};
+			let imageJson = {};
+			if(data.IsCompetingGoodsTask==1&&data.AcceptTaskStatus==9){
+				if(!this.ScreenshotMerchantProductSearchImg){
+					toast("下单搜索列表截图不能为空");
+					return false;
 				}
-				if ($("#CollectionCompetitiveProducts1")[0]) {
-					if (isNullOrEmpty($("#CollectionCompetitiveProducts1").val())) {
-						toast("收藏竞品店铺截图不能为空");
-						return false;
-					}
-					imageJson["CollectionCompetitiveProducts1"] = $("#CollectionCompetitiveProducts1").val();
+				imageJson["ScreenshotMerchantProductSearch"] = this.ScreenshotMerchantProductSearchImg;
+			}
+			
+			if(data.CollectionCompetitiveProducts1==1&&data.AcceptTaskStatus!=9){
+				if(!this.CollectionCompetitiveProducts1Img){
+					toast("收藏竞品店铺截图不能为空");
+					return false;
 				}
-				if ($("#CollectionCompetitiveProducts2")[0]) {
-					if (isNullOrEmpty($("#CollectionCompetitiveProducts2").val())) {
-						toast("收藏竞品商品截图不能为空");
-						return false;
-					}
-					imageJson["CollectionCompetitiveProducts2"] = $("#CollectionCompetitiveProducts2").val();
+				imageJson["CollectionCompetitiveProducts1"] = this.CollectionCompetitiveProducts1Img;
+			}
+			
+			if(data.CollectionCompetitiveProducts2==1&&data.AcceptTaskStatus!=9){
+				if(!this.CollectionCompetitiveProducts2Img){
+					toast("收藏竞品商品截图不能为空");
+					return false;
 				}
-				if ($("#CollectionCompetitiveProducts3")[0]) {
-					if (isNullOrEmpty($("#CollectionCompetitiveProducts3").val())) {
-						toast("加竞品购物车截图不能为空");
-						return false;
-					}
-					imageJson["CollectionCompetitiveProducts3"] = $("#CollectionCompetitiveProducts3").val();
+				imageJson["CollectionCompetitiveProducts2"] = this.CollectionCompetitiveProducts2Img;
+			}
+			if(data.CollectionCompetitiveProducts3==1&&data.AcceptTaskStatus!=9){
+				if(!this.CollectionCompetitiveProducts3Img){
+					toast("加竞品购物车截图不能为空");
+					return false;
 				}
-				if ($("#AddAShoppingCart")[0]) {
-					if (isNullOrEmpty($("#AddAShoppingCart").val())) {
-						toast("收藏商品截图不能为空");
-						return false;
-					}
-					imageJson["AddAShoppingCart"] = $("#AddAShoppingCart").val();
+				imageJson["CollectionCompetitiveProducts3"] = this.CollectionCompetitiveProducts3Img;
+			}
+			// 加购物车截图--收藏商品截图
+			if(data.IsPresaleTask==1&&data.AcceptTaskStatus!=9){
+				if(!this.AddAShoppingCartImg){
+					toast("加购物车截图不能为空");
+					return false;
 				}
-				if ($("#CollectionOfGoods")[0]) {
-					if (isNullOrEmpty($("#CollectionOfGoods").val())) {
-						toast("收藏商品截图不能为空");
-						return false;
-					}
-					imageJson["CollectionOfGoods"] = $("#CollectionOfGoods").val();
+				imageJson["AddAShoppingCart"] = this.AddAShoppingCartImg;
+				if(!this.CollectionOfGoodsImg){
+					toast("收藏商品截图不能为空");
+					return false;
 				}
-				//额外操作截图
-				if ($("#scotherA")[0]) {
-					if (isNullOrEmpty($("#scotherA").val())) {
-						toast("搜索结果截图不能为空");
-						return false;
-					}
-					imageJson["ShouCanjpimg1"] = $("#scotherA").val(); //收藏竞品1
+				imageJson["CollectionOfGoods"] = this.CollectionOfGoodsImg;
+				
+			}
+			// 货比三家
+			if(data.IsComparisonShop==1&& data.TaskType==1&& data.AcceptTaskStatus!=9){
+				
+				if(!data.ShoparoundLink1){
+					toast("货比三家链接不能为空");
+					return false;
 				}
-
-				if ($("#scotherB")[0]) {
-					if (isNullOrEmpty($("#scotherB").val())) {
-						toast("搜索结果截图不能为空");
-						return false;
-					}
-					imageJson["ShouCanjpimg2"] = $("#scotherB").val(); //收藏竞品2
+				if(data.ShoparoundLink1.indexOf("http")){
+					toast("请输入正确的货比三家链接地址");
+					return false;
 				}
-
-				if ($("#jgotherA")[0]) {
-					if (isNullOrEmpty($("#jgotherA").val())) {
-						toast("搜索结果截图不能为空");
-						return false;
-					}
-					imageJson["JiaGoujpimg1"] = $("#jgotherA").val(); //加购竞品1
+				huobisanjiaJson["ShopAroundlink1"] = data.ShoparoundLink1; 
+				
+				if(!data.ShoparoundLink2){
+					toast("货比三家链接不能为空");
+					return false;
 				}
-
-				if ($("#jgotherB")[0]) {
-					if (isNullOrEmpty($("#jgotherB").val())) {
-						toast("搜索结果截图不能为空");
-						return false;
-					}
-					imageJson["JiaGoujpimg2"] = $("#jgotherB").val(); //加购竞品2
+				if(data.ShoparoundLink2.indexOf("http")){
+					toast("请输入正确的货比三家链接地址");
+					return false;
 				}
-
-				if ($("#scdpotherA")[0]) {
-					if (isNullOrEmpty($("#scdpotherA").val())) {
-						toast("搜索结果截图不能为空");
+				huobisanjiaJson["ShopAroundlink2"] = data.ShoparoundLink2; 
+				
+			}
+			//额外操作截图
+			if((data.ShouCanjp1==1||data.ShouCanjp2==1)&&data.TaskType==1 && data.IsAddedservices==1){
+				if(data.ShouCanjp1==1){
+					if(!this.scotherAImg){
+						toast("收藏竞品1截图不能为空");
 						return false;
 					}
-					imageJson["ShouCandpimg"] = $("#scdpotherA").val(); //收藏店铺
+					imageJson["ShouCanjpimg1"] = this.scotherAImg;
 				}
-
-				if ($("#fbbotherA")[0]) {
-					if (isNullOrEmpty($("#fbbotherA").val())) {
-						toast("搜索结果截图不能为空");
+				if(data.ShouCanjp2==1){
+					if(!this.scotherBImg){
+						toast("收藏竞品2截图不能为空");
 						return false;
 					}
-					imageJson["LiuLanfbbimg"] = $("#fbbotherA").val(); //浏览副宝贝
+					imageJson["ShouCanjpimg2"] = this.scotherBImg;
 				}
-
-				if ($("#dzotherA")[0]) {
-					if (isNullOrEmpty($("#dzotherA").val())) {
-						toast("搜索结果截图不能为空");
+			}
+			if((data.JiaGoujp1==1||data.JiaGoujp2==1)&&data.TaskType==1 && data.IsAddedservices==1){
+				if(data.JiaGoujp1==1){
+					if(!this.jgotherAImg){
+						toast("加购竞品1截图不能为空");
 						return false;
 					}
-					imageJson["DianZanhpimg"] = $("#dzotherA").val(); //点赞好评
+					imageJson["JiaGoujpimg1"] = this.jgotherAImg;
 				}
-
-				if ($("#llwdjotherA")[0]) {
-					if (isNullOrEmpty($("#llwdjotherA").val())) {
-						toast("搜索结果截图不能为空");
+				if(data.JiaGoujp2==1){
+					if(!this.jgotherBImg){
+						toast("加购竞品2截图不能为空");
 						return false;
 					}
-					imageJson["LiuLanwdjimg"] = $("#llwdjotherA").val(); //浏览问大家
+					imageJson["JiaGoujpimg2"] = this.jgotherBImg;
 				}
-
-				if ($("#twwdjotherA")[0]) {
-					if (isNullOrEmpty($("#twwdjotherA").val())) {
-						toast("搜索结果截图不能为空");
-						return false;
-					}
-					imageJson["TiWendjimg"] = $("#twwdjotherA").val(); //提问问大家
+			}
+			// 收藏店铺
+			if(data.ShouCandp==1  && data.IsAddedservices==1){
+				if(!this.scdpotherAImg){
+					toast("收藏店铺截图不能为空");
+					return false;
 				}
-
-				if ($("#huobisanj1")[0]) {
-					if (isNullOrEmpty($("#huobisanj1").val())) {
-						toast("货比三家链接不能为空");
-						return false;
-					}
-					var link=$("#huobisanj1").val().indexOf("http")
-					if(link==-1){
+				imageJson["ShouCandpimg"] = this.scdpotherAImg;
+			}
+			// 加入购物车截图
+			if(data.Jiarugouwu==1  && data.IsAddedservices==1){
+				if(!this.cartImgImg){
+					toast("加入购物车截图不能为空");
+					return false;
+				}
+				imageJson["ShoppingCartImg"] = this.cartImgImg;
+			}
+			// 浏览副宝贝截图
+			if(data.LiuLanfbb==1 && data.TaskType==2 && data.IsAddedservices==1){
+				if(!this.fbbotherAImg){
+					toast("浏览副宝贝截图不能为空");
+					return false;
+				}
+				imageJson["LiuLanfbbimg"] = this.fbbotherAImg;
+			}
+			// 点赞好评截图
+			if(data.DianZanhp==1 && data.TaskType==2 && data.IsAddedservices==1){
+				if(!this.dzotherAImg){
+					toast("点赞好评截图不能为空");
+					return false;
+				}
+				imageJson["DianZanhpimg"] = this.dzotherAImg;
+			}
+			// 浏览问大家截图
+			if(data.LiuLanwdj==1 && data.TaskType==2 && data.IsAddedservices==1){
+				if(!this.llwdjotherAImg){
+					toast("浏览问大家截图不能为空");
+					return false;
+				}
+				imageJson["LiuLanwdjimg"] = this.llwdjotherAImg;
+			}
+			// 提问问大家截图
+			if(data.TiWendj==1 && data.TaskType==2 && data.IsAddedservices==1){
+				if(!this.twwdjotherAImg){
+					toast("提问问大家截图不能为空");
+					return false;
+				}
+				imageJson["twwdjotherA"] = this.twwdjotherAImg;
+			}
+			// 浏览店铺
+			if((data.IsBrowseStore==1||data.IsCollectionShop==1||data.IsCollectionProduct==1||data.IsAddCart==1)&&data.AcceptTaskStatus!=9){
+				
+				if(!data.ShoparoundLink1){
+					toast("店内宝贝链接不能为空");
+					return false;
+				}
+				if(data.ShoparoundLink1.indexOf("http")){
 					toast("请输入正确的链接地址");
 					return false;
-					}
-					huobisanjiaJson["ShopAroundlink1"] = $("#huobisanj1").val(); //货比三家链接
 				}
+				huobisanjiaJson["ShopProAlink"] = data.ShoparoundLink1; 
 
-				if ($("#huobisanj2")[0]) {
-					if (isNullOrEmpty($("#huobisanj2").val())) {
-						toast("货比三家链接不能为空");
-						return false;
-					}
-					var link=$("#huobisanj2").val().indexOf("http")
-					if(link==-1){
+				if(!data.ShoparoundLink2){
+					toast("店内宝贝链接不能为空");
+					return false;
+				}
+				if(data.ShoparoundLink2.indexOf("http")){
 					toast("请输入正确的链接地址");
 					return false;
-					}
-					huobisanjiaJson["ShopAroundlink2"] = $("#huobisanj2").val(); //货比三家链接
 				}
-				// 浏览店铺
-				if((data.IsBrowseStore==1||data.IsCollectionShop==1||data.IsCollectionProduct==1||data.IsAddCart==1)&&data.AcceptTaskStatus!=9){
+				huobisanjiaJson["ShopProBlink"] = data.ShoparoundLink2; 
+
+				// if ($("#otherA")[0]) {
+				// 	if (isNullOrEmpty($("#otherA").val())) {
+				// 		toast("其他商家A截图不能为空");
+				// 		return false;
+				// 	}
+				// 	imageJson["OtherShopProBottomImgA"] = $("#otherA").val();
+				// }
+				// if ($("#otherB")[0]) {
+				// 	if (isNullOrEmpty($("#otherB").val())) {
+				// 		toast("其他商家B截图不能为空");
+				// 		return false;
+				// 	}
+				// 	imageJson["OtherShopProBottomImgB"] = $("#otherB").val();
+				// }
+				// 店内商品
+				if((data.IsNewPasswordTask==0)&&(data.IsCompetingGoodsTask==0)&&(data.IsPresaleTask==0)&&(data.IsGoodTask==0)){
 					
-					if ($("#ShopProAlink")[0]) {
-						if (isNullOrEmpty($("#ShopProAlink").val())) {
-							toast("店内宝贝链接不能为空");
-							return false;
-						}
-						var link=$("#ShopProAlink").val().indexOf("http")
-						if(link==-1){
-						toast("请输入正确的链接地址");
+					if(!this.targetTopImg){
+						toast("目标商品顶部截图不能为空");
 						return false;
-						}
-						huobisanjiaJson["ShopProAlink"] = $("#ShopProAlink").val(); //货比三家链接
 					}
-					if(!data.ShoparoundLink1){
-						toast("店内宝贝链接不能为空");
-					}
-					if ($("#ShopProBlink")[0]) {
-						if (isNullOrEmpty($("#ShopProBlink").val())) {
-							toast("店内宝贝链接不能为空");
-							return false;
-						}
-						var link=$("#ShopProBlink").val().indexOf("http")
-						if(link==-1){
-						toast("请输入正确的链接地址");
+					imageJson["TargetProductTopImg"] = this.targetTopImg;
+
+					if(!this.targetBottomImg){
+						toast("目标商品底部截图不能为空");
 						return false;
-						}
-						huobisanjiaJson["ShopProBlink"] = $("#ShopProBlink").val(); //货比三家链接
 					}
+					imageJson["TargetProductBottomImg"] = this.targetBottomImg;
 
-					// if ($("#otherA")[0]) {
-					// 	if (isNullOrEmpty($("#otherA").val())) {
-					// 		toast("其他商家A截图不能为空");
-					// 		return false;
-					// 	}
-					// 	imageJson["OtherShopProBottomImgA"] = $("#otherA").val();
-					// }
-					// if ($("#otherB")[0]) {
-					// 	if (isNullOrEmpty($("#otherB").val())) {
-					// 		toast("其他商家B截图不能为空");
-					// 		return false;
-					// 	}
-					// 	imageJson["OtherShopProBottomImgB"] = $("#otherB").val();
-					// }
-					if((data.IsNewPasswordTask==0)&&(data.IsCompetingGoodsTask==0)&&(data.IsPresaleTask==0)&&(data.IsGoodTask==0)){
-						
-						if(!this.targetTopImg){
-							toast("目标商品顶部截图不能为空");
-							return false;
-						}
-						imageJson["TargetProductTopImg"] = this.targetTopImg;
-
-						if(!this.targetBottomImg){
-							toast("目标商品底部截图不能为空");
-							return false;
-						}
-						imageJson["TargetProductBottomImg"] = this.targetBottomImg;
-
-						if(!this.shopProAImg){
-							toast("店内商品A截图不能为空");
-							return false;
-						}
-						imageJson["ShopProductBottomImgA"] = this.shopProAImg;
-
-						if(!this.shopProBImg){
-							toast("店内商品B截图不能为空");
-							return false;
-						}
-						imageJson["ShopProductBottomImgB"] = this.shopProBImg;
+					if(!this.shopProAImg){
+						toast("店内商品A截图不能为空");
+						return false;
 					}
-					
+					imageJson["ShopProductBottomImgA"] = this.shopProAImg;
+
+					if(!this.shopProBImg){
+						toast("店内商品B截图不能为空");
+						return false;
+					}
+					imageJson["ShopProductBottomImgB"] = this.shopProBImg;
 				}
-				//浏览店铺end
-				if ($("#AdditionalProductA1")[0]) {
-					if (isNullOrEmpty($("#AdditionalProductA1").val())) {
+				// 附加商品
+				if(data.TaskType==1&&(data.ProductName1||data.ProductName2)){
+					if(!this.AdditionalProductA1Img){
 						toast("附加商品1顶部截图不能为空");
 						return false;
 					}
-					imageJson["AdditionalProductA1"] = $("#AdditionalProductA1").val();
-				}
-				if ($("#AdditionalProductB1")[0]) {
-					if (isNullOrEmpty($("#AdditionalProductB1").val())) {
+					imageJson["AdditionalProductA1"] = this.AdditionalProductA1Img;
+					
+					if(!this.AdditionalProductB1Img){
 						toast("附加商品1底部截图不能为空");
 						return false;
 					}
-					imageJson["AdditionalProductB1"] = $("#AdditionalProductB1").val();
-				}
-				if ($("#AdditionalProductA2")[0]) {
-					if (isNullOrEmpty($("#AdditionalProductA2").val())) {
+					imageJson["AdditionalProductB1"] = this.AdditionalProductB1Img;
+					
+					if(!this.AdditionalProductA2Img){
 						toast("附加商品2顶部截图不能为空");
 						return false;
 					}
-					imageJson["AdditionalProductA2"] = $("#AdditionalProductA2").val();
-				}
-				if ($("#AdditionalProductB2")[0]) {
-					if (isNullOrEmpty($("#AdditionalProductB2").val())) {
+					imageJson["AdditionalProductA2"] = this.AdditionalProductA2Img;
+					
+					if(!this.AdditionalProductB2Img){
 						toast("附加商品2底部截图不能为空");
 						return false;
 					}
-					imageJson["AdditionalProductB2"] = $("#AdditionalProductB2").val();
+					imageJson["AdditionalProductB2"] = this.AdditionalProductB2Img;
 				}
-				if ($("#collectionShop")[0]) {
-					if (isNullOrEmpty($("#collectionShop").val())) {
+				if(data.Llshoucandp==1){
+					if(!this.collectionShopImg){
 						toast("收藏店铺截图不能为空");
 						return false;
 					}
-					imageJson["ShopCollectionImg"] = $("#collectionShop").val();
+					imageJson["ShopCollectionImg"] = this.collectionShopImg;
 				}
-				if ($("#collectionProduct")[0]) {
-					if (isNullOrEmpty($("#collectionProduct").val())) {
-						toast("收藏商品截图不能为空");
-						return false;
-					}
-					imageJson["ProductCollectionImg"] = $("#collectionProduct").val();
-				}
-				if ($("#cartImg")[0]) {
-					if (isNullOrEmpty($("#cartImg").val())) {
-						toast("加入购物车截图不能为空");
-						return false;
-					}
-					imageJson["ShoppingCartImg"] = $("#cartImg").val();
-				}
-				if ($("#merchantChatImg")[0]) {
-					if (isNullOrEmpty($("#merchantChatImg").val())) {
-						toast("商家聊天截图不能为空");
-						return false;
-					}
-					imageJson["MerchantChatImg"] = $("#merchantChatImg").val();
-				}
-				if ($("#orderDetailsImg")[0]) {
-					if (isNullOrEmpty($("#orderDetailsImg").val())) {
-						toast("订单详情截图不能为空");
-						return false;
-					}
-					imageJson["OrderDetailsImg"] = $("#orderDetailsImg").val();
-				}
-				if (!isCheckgoods && acceptTaskStatus != 9) {
-					toast("请核对商品链接");
+				
+			}
+			//浏览店铺end
+			// if(data.TaskType==1){
+			// 	// 下单核对
+			// 	if((data.ChatPlaceAnOrder>0&&(data.IsPresaleTask==0||(data.IsPresaleTask==1&&data.AcceptTaskStatus==9)))&&(data.IsCompetingGoodsTask==0||(data.IsCompetingGoodsTask==1&&data.AcceptTaskStatus==9))){
+
+			// 	}
+			// }
+			// 下单核对end
+			// 收藏商品截图
+			if(data.ShouCansp==1  && data.IsAddedservices==1){
+				if(!this.collectionProductImg){
+					toast("收藏商品截图不能为空");
 					return false;
 				}
-				if (!isCheckShop && acceptTaskStatus != 9) {
-					toast("请核对店铺名称");
-					return false;
-				}
-				if (!isCheckKeywords && acceptTaskStatus != 9) {
-					toast("请核对关键词");
-					return false;
-				}
-				// if (!isCheckProduct) {
-				//     toast("请核对商品链接地址");
-				//     return false;
-				// }
-				if(!hasverifyTask&&isPresaleTask==1&&acceptTaskStatus == 9){
-				toast("订单未通过验证无法提交审核");
-				return false
-				}
-				var consigneeName = $("#consignee").val();
-				var consigneeMobile = $("#consigneeMobile").val();
-				var province = $("#provinceCode").val();
-				var city = $("#cityCode").val();
-				var district = $("#districtCode").val();
-				var addressInfo = $("#xiangxidizhi").val();
-				if (taskType > 0 && (isPresaleTask == 0 || (isPresaleTask == 1 && acceptTaskStatus == 9)) && (IsCompetingGoodsTask == 0 || (IsCompetingGoodsTask == 1 && acceptTaskStatus == 9))) {
-					if (taskType == 1 && (isPresaleTask == 0 || (isPresaleTask == 1 && acceptTaskStatus == 9)) && (IsCompetingGoodsTask == 0 || (IsCompetingGoodsTask == 1 && acceptTaskStatus == 9))) {
-						orderMoney = $("#orderMoney").val();
-						if (isNullOrEmpty(orderMoney)) {
-							toast("任务为垫付任务，请输入平台下单的订单金额");
+				imageJson["ProductCollectionImg"] = this.collectionProductImg;
+			}
+			// if ($("#merchantChatImg")[0]) {
+			// 	if (isNullOrEmpty($("#merchantChatImg").val())) {
+			// 		toast("商家聊天截图不能为空");
+			// 		return false;
+			// 	}
+			// 	imageJson["MerchantChatImg"] = $("#merchantChatImg").val();
+			// }
+			// if ($("#orderDetailsImg")[0]) {
+			// 	if (isNullOrEmpty($("#orderDetailsImg").val())) {
+			// 		toast("订单详情截图不能为空");
+			// 		return false;
+			// 	}
+			// 	imageJson["OrderDetailsImg"] = $("#orderDetailsImg").val();
+			// }
+
+
+			
+			if (!isCheckgoods && acceptTaskStatus != 9) {
+				toast("请核对商品链接");
+				return false;
+			}
+			if (!isCheckShop && acceptTaskStatus != 9) {
+				toast("请核对店铺名称");
+				return false;
+			}
+			if (!isCheckKeywords && acceptTaskStatus != 9) {
+				toast("请核对关键词");
+				return false;
+			}
+			// if (!isCheckProduct) {
+			//     toast("请核对商品链接地址");
+			//     return false;
+			// }
+			if(!hasverifyTask&&isPresaleTask==1&&acceptTaskStatus == 9){
+			toast("订单未通过验证无法提交审核");
+			return false
+			}
+			var consigneeName = $("#consignee").val();
+			var consigneeMobile = $("#consigneeMobile").val();
+			var province = $("#provinceCode").val();
+			var city = $("#cityCode").val();
+			var district = $("#districtCode").val();
+			var addressInfo = $("#xiangxidizhi").val();
+			if (taskType > 0 && (isPresaleTask == 0 || (isPresaleTask == 1 && acceptTaskStatus == 9)) && (IsCompetingGoodsTask == 0 || (IsCompetingGoodsTask == 1 && acceptTaskStatus == 9))) {
+				if (taskType == 1 && (isPresaleTask == 0 || (isPresaleTask == 1 && acceptTaskStatus == 9)) && (IsCompetingGoodsTask == 0 || (IsCompetingGoodsTask == 1 && acceptTaskStatus == 9))) {
+					orderMoney = $("#orderMoney").val();
+					if (isNullOrEmpty(orderMoney)) {
+						toast("任务为垫付任务，请输入平台下单的订单金额");
+						return false;
+					}
+					var reg = /^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,4})?$/;
+					if (!reg.test(orderMoney) || orderMoney > 1000000000000) {
+						toast("请输入正确的订单金额");
+						return false;
+					}
+					if (isNullOrEmpty($(".orderNo").eq(1).val())) {
+						toast("任务为垫付任务，请输入平台下单的订单号");
+						return false;
+					}
+					if (taskExpressId > 0) {
+						if (isNullOrEmpty(consigneeName)) {
+							toast("请填写平台下单的收货人名字");
 							return false;
 						}
-						var reg = /^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,4})?$/;
-						if (!reg.test(orderMoney) || orderMoney > 1000000000000) {
-							toast("请输入正确的订单金额");
+						if (!telePhone(consigneeMobile)) {
+							toast("请填写正确的收货人联系电话");
 							return false;
 						}
-						if (isNullOrEmpty($(".orderNo").eq(1).val())) {
-							toast("任务为垫付任务，请输入平台下单的订单号");
+						if (isNullOrEmpty(province) || isNullOrEmpty(city) || isNullOrEmpty(district)) {
+							toast("请选择平台下单的收货地址省市区");
 							return false;
 						}
-						if (taskExpressId > 0) {
-							if (isNullOrEmpty(consigneeName)) {
-								toast("请填写平台下单的收货人名字");
-								return false;
-							}
-							if (!telePhone(consigneeMobile)) {
-								toast("请填写正确的收货人联系电话");
-								return false;
-							}
-							if (isNullOrEmpty(province) || isNullOrEmpty(city) || isNullOrEmpty(district)) {
-								toast("请选择平台下单的收货地址省市区");
-								return false;
-							}
-							if (isNullOrEmpty(addressInfo)) {
-								toast("请输入平台下单的收货详细地址");
-								return false;
-							}
+						if (isNullOrEmpty(addressInfo)) {
+							toast("请输入平台下单的收货详细地址");
+							return false;
 						}
 					}
 				}
-				post('Task/SubmitTask',{
-					UserId: userId,
-					Token: userToKen,
-					TaskAcceptNo: api.pageParam.taskAcceptNo,
-					ImgJson: JSON.stringify(imageJson),
-					PlatOrderNo: $(".orderNo").eq(1).val(),
-					PlatOrderMoney: orderMoney,
-					ConsigneeName: consigneeName,
-					ConsigneeMobile: consigneeMobile,
-					ProvinceCode: province,
-					CityCode: city,
-					DistrictCode: district,
-					AddressInfo: addressInfo,
-					ShopAroundjson:huobisanjiaJson
-				}).then(res=>{
-					toast(res.msg);
-					setTimeout(()=>{
-						goUrl('task/receivedtask');
-					},1500);
-				})
+			}
+			post('Task/SubmitTask',{
+				UserId: userId,
+				Token: userToKen,
+				TaskAcceptNo: api.pageParam.taskAcceptNo,
+				ImgJson: JSON.stringify(imageJson),
+				PlatOrderNo: $(".orderNo").eq(1).val(),
+				PlatOrderMoney: orderMoney,
+				ConsigneeName: consigneeName,
+				ConsigneeMobile: consigneeMobile,
+				ProvinceCode: province,
+				CityCode: city,
+				DistrictCode: district,
+				AddressInfo: addressInfo,
+				ShopAroundjson:huobisanjiaJson
+			}).then(res=>{
+				toast(res.msg);
+				setTimeout(()=>{
+					goUrl('task/receivedtask');
+				},1500);
+			})
 		},
 		back(){
 			uni.navigateBack();
