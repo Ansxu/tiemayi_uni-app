@@ -16,7 +16,8 @@
 						<span class="fr" v-if="data.TaskType==1">垫付总金额：<em class="c_Org">{{data.Amount}}元</em></span>
 					</div>
 					<div class="dl clear">
-						<div class="img fl porelative"><img :src="data.ProductImg"><img class="maskimg maskpic" src="/static/image/icons/maskBg.png" /></div>
+						<div class="img fl porelative"><img :src="data.ProductImg">
+						<img class="maskimg maskpic" src="/static/image/icons/maskBg.png" /></div>
 						<div class="box_r">
 							<p class="text">{{data.ProductName}}</p>
 							<p class="text">单件商品单价：<span class="c_Org">{{data.ProductPrice}}元</span></p>
@@ -79,14 +80,17 @@
 						<ul class="ul-list">
 							<li>
 								<label>任务类型</label>
-								<div class="txt-r"><span class="blue">{{(data.PlatType+data.AttachClaimImg1)||data.AttachClaimImg2?"(多商品任务)":""}}</span></div>
+								<div class="txt-r">
+									<!-- <span class="blue">{{(data.PlatType+data.AttachClaimImg1)||data.AttachClaimImg2?"(多商品任务)":""}}</span> -->
+									<span class="blue">{{data.PlatType}}</span>
+								</div>
 							</li>
 							<li style="height:auto;">
 								<label>{{data.IsNewPasswordTask==1?"搜索淘口令":"搜索关键词"}}</label>
 								<div class="txt-r">
 									<span class="keytext" id="proKeyWord">{{data.IsNewPasswordTask==1?data.OriginalPassword:data.KeyWord}}</span>
 									<!-- onclick="CopyContent()" -->
-									<a class="link_btn" >{{data.IsNewPasswordTask==1?"复制淘口令":"复制关键词"}}</a></div>
+									<p class="link_btn" @click="copyWord()">{{data.IsNewPasswordTask==1?"复制淘口令":"复制关键词"}}</p></div>
 							</li>
 							<block v-if="data.TaskType==1">
 							<li>
@@ -182,12 +186,11 @@
 									<div style="text-align:center;">店铺名认证：{{data.ShopName}}</div>
 									<div class="inputbox_group">
 										<block v-for="(item,index) in data.ShopName" :key="index">
-											<input v-if="item=='*'" class="input" name="shopname" type="text" placeholder="补全" maxlength="1" onblur="validationInput(this)" /> 
+											<input v-if="item=='*'" v-model="ShopNameArr[index]"  class="input" name="shopname" type="text" placeholder="补全" maxlength="1" /> 
 											<input v-else class="input" name="shopname" type="text" :value="item" readonly /> 
 										</block>
 									</div>
-									 <!-- onclick="checkShop()" -->
-									<a class="btn_100">补全后点我核对</a>
+									<p class="btn_100" @click="checkShopName">补全后点我核对</p>
 								</div>
 							</div>
 							<div class="Step Step-2" v-if="data.SetCommodityKeywords">
@@ -199,12 +202,11 @@
 									<div style="text-align:center;">关键词认证：{{data.SetCommodityKeywords}}</div>
 									<div class="inputbox_group">
 										<block v-for="(item,index) in data.SetCommodityKeywords" :key="index">
-											<input v-if="item=='*'" class="input" name="Keywords" type="text" placeholder="补全" maxlength="1" onblur="validationInput(this)" />
+											<input v-if="item=='*'" v-model="SetCommodityKeywordsArr[index]"  class="input"  type="text" placeholder="补全" maxlength="1" />
 											<input v-else class="input" name="Keywords" type="text" :value="item" readonly />
 										</block>
 									</div>
-									<a class="btn_100" >补全后点我核对</a>
-									<!-- <a class="btn_100" onclick="checkKeywords()">补全后点我核对</a> -->
+									<p class="btn_100" @click="checkKeywords">补全后点我核对</p>
 								</div>
 							</div>
 						</block>
@@ -521,7 +523,7 @@
 												<div class="from">
 													<p>验证主宝贝链接</p>
 													<div class="from-item mt10">
-														<input class="input" name="goodslink" id="goodslink"  style="width:98%" :value="data.ShoparoundLink1" type="text" placeholder="商品链接" />
+														<input class="input" name="goodslink" id="goodslink"  style="width:98%" v-model="ShoparoundLinkMain[0]" type="text" placeholder="商品链接" />
 													</div>
 												</div>
 												<div class="from" v-if="data.ProductName2">
@@ -536,8 +538,7 @@
 													<input class="input" name="goodslink" id="goodslink2" style="width:100%" :value="data.ShoparoundLink2" type="text" placeholder="附加商品链接2" />
 													</div>
 												</div>
-												<a class="btn_100">点我核对</a>
-												<!-- <a class="btn_100" onclick="checkgoods()">点我核对</a> -->
+												<p class="btn_100 cfff" @click="checkGoodLink">点我核对</p>
 											</div>
 										</div>
 									</block>
@@ -549,13 +550,13 @@
 										<div class="from">
 											<p>店内宝贝链接1</p>
 											<div class="from-item mt10">
-												<input class="input" id="ShopProAlink" style="width:300px" :value="data.ShoparoundLink1" type="text" placeholder="店内宝贝链接1" />
+												<input class="input" id="ShopProAlink" style="width:300px" v-model="data.ShoparoundLink1" type="text" placeholder="店内宝贝链接1" />
 											</div>
 										</div>
 										<div class="from">
 											<p>店内宝贝链接2</p>
 											<div class="from-item mt10">
-												<input class="input" id="ShopProBlink" style="width:300px" :value="data.ShoparoundLink2" type="text" placeholder="店内宝贝链接2" />
+												<input class="input" id="ShopProBlink" style="width:300px" v-model="data.ShoparoundLink2" type="text" placeholder="店内宝贝链接2" />
 											</div>
 										</div>
 									</div>
@@ -671,10 +672,12 @@
 										<p class="red">2、拍下订单后先不要付款，复制订单进行验证后，再付款</p>
 										<div class="from">
 											<p>订单编号：（订单详情中复制）</p>
-											<div class="from-item mt10"><input class="input orderNo" type="text" placeholder="请输入下单单号" /></div>
+											<div class="from-item mt10">
+												<input class="input orderNo" v-model="playOrderNo" type="text" placeholder="请输入下单单号" />
+											</div>
 										</div>
 										<div class="ftbtn mb10 mt10">
-											<a class="btn" id="heduiBtn" >点我核对</a>
+											<a class="btn" id="heduiBtn" @click="checkPlayOrderNo">点我核对</a>
 											<!-- <a class="btn" id="heduiBtn" onclick="verifyTask({{data.IsAmoy}},{{data.isYanOrder}})">点我核对</a> -->
 										</div>
 									</div>
@@ -690,11 +693,11 @@
 									<block v-if="data.isYanOrder">
 										<div class="from">
 											<p>订单编号：（订单详情中复制）</p>
-											<div class="from-item mt10"><input class="input orderNo" type="text" placeholder="请输入下单单号"  readonly/></div>
+											<div class="from-item mt10"><input class="input orderNo" v-model="comfirmOrderNo" type="text" placeholder="请输入下单单号"  readonly/></div>
 										</div>
 										<div class="from">
 											<p>订单金额：（订单付款金额）</p>
-											<div class="from-item mt10"><input class="input" id="orderMoney" type="text" placeholder="请输入订单支付金额" readonly/></div>
+											<div class="from-item mt10"><input class="input" id="orderMoney" v-model="orderPrice" type="text" placeholder="请输入订单支付金额" readonly/></div>
 										</div>
 									</block>
 									<block v-else>
@@ -743,8 +746,7 @@
 				</div>
 				<p style="font-size:0.16rem;font-weight:bold;color:red;" v-if="((data.IsPresaleTask==1&&data.AcceptTaskStatus!=9))||(data.IsCompetingGoodsTask==1&&data.AcceptTaskStatus!=9)">不到订单支付时间不能拍下付款，否则该笔订单任务撤销（处罚10金一单）</p>
 				<div class="ftbtn mb10 mt10">
-					<!-- onclick="submitTask()" -->
-					<a class="btn" id="submitBtn" >提交审核</a>
+					<p class="btn" id="submitBtn" @click="submitTask">提交审核</p>
 				</div>
 			</div>
 		</div>
@@ -761,7 +763,17 @@ export default {
         userId:'',
         token:'',
         TaskAcceptNo:'',
-        data:{},
+		data:{},
+		ShopNameArr:[],//补全店铺名称
+		SetCommodityKeywordsArr:[],//补全关键词
+		playOrderNo:'',//下单的订单编号
+		comfirmOrderNo:'',
+		orderPrice:'',
+		ShoparoundLinkMain:[],//验证主宝贝链接
+		targetTopImg:'',//目标商品顶部截图
+		targetBottomImg:'',//目标商品底部截图
+		shopProAImg:'',//店内商品A截图
+		shopProBImg:'',//店内商品B截图
     };
   },
   onLoad(options) {
@@ -778,12 +790,492 @@ export default {
                 Token: this.token,
                 TaskAcceptNo:this.TaskAcceptNo
 			}).then(res=>{
-				this.data = res.obj;
+				const data = res.obj;
+				this.data = data;
+
 			})
+		},
+		// 核对店铺名称
+		checkShopName(){
+			const arrVal = this.ShopNameArr;
+			let strArr = this.data.ShopName.split('');
+			strArr.map((item,i)=>{
+				if(item=='*'&&arrVal[i]){
+					strArr[i] = arrVal[i];
+				}
+			})
+			post('Task/VerifyShopName',{
+                UserId: this.userId,
+                Token: this.token,
+                TaskAcceptNo:this.TaskAcceptNo,
+                ShopName: strArr.join('')
+			}).then(res=>{
+				toast(res.msg);
+			})
+			console.log(strArr.join(''),'val')
+		},
+		// 核对关键词
+		checkKeywords(){
+			const arrVal = this.SetCommodityKeywordsArr;
+			let strArr = this.data.SetCommodityKeywords.split('');
+			strArr.map((item,i)=>{
+				if(item=='*'&&arrVal[i]){
+					strArr[i] = arrVal[i];
+				}
+			})
+			post('Task/VerifyShopSetKeyWords',{
+                UserId: this.userId,
+                Token: this.token,
+                TaskAcceptNo:this.TaskAcceptNo,
+                SetCommodityKeywords: strArr.join('')
+			}).then(res=>{
+				toast(res.msg);
+			})
+			console.log(strArr.join(''),'val')
+		},
+		// 核对商品链接
+		checkGoodLink(){
+			if(!this.ShoparoundLinkMain[0]){
+				toast('请输入商品链接！');
+				return;
+			}
+			const data= this.data;
+			post('Task/VerifyProductId',{
+                UserId: this.userId,
+                Token: this.token,
+                TaskAcceptNo:this.TaskAcceptNo,
+                ProductUrl: this.ShoparoundLinkMain[0],
+                ProductUrl1: data.ShoparoundLink2,
+                ProductUrl2: data.ShoparoundLink2
+			}).then(res=>{
+				toast(res.msg);
+			})
+		},
+		// 核对订单编号
+		checkPlayOrderNo(){
+			const data = this.data;
+			if(data.IsAmoy==0&&data.isYanOrder==0){
+				toast('商家没有开通自动核对功能，请忽略')
+				return false
+			}else {
+				if(!this.playOrderNo){
+				toast('订单编号不能为空')
+				return false
+				}
+				if(data.IsAmoy==1){
+				this.IsAmoyOrder()
+				}
+				if(data.isYanOrder==1){
+				this.IsTaoOrder()
+				}
+			}
+		},
+		IsAmoyOrder(){
+			const data = this.dta;
+			post('Task/IsAmoyOrderFun',{
+                UserId: this.userId,
+                Token: this.token,
+                TaskAcceptNo:this.TaskAcceptNo,
+                PlatOrderNo: this.playOrderNo,
+			}).then(res=>{
+              if(data.isYanOrder==0){
+                toast(res.msg);
+              }
+			})
+		},
+		IsTaoOrder(){
+			const data = this.dta;
+			post('Task/IsAmoyOrderFun',{
+                UserId: this.userId,
+                Token: this.token,
+                TaskAcceptNo:this.TaskAcceptNo,
+                PlatOrderNo: this.playOrderNo,
+			}).then(res=>{
+			 	this.comfirmOrderNo = this.playOrderNo;
+			 	this.orderPrice = res.obj;
+				toast(res.msg);
+			})
+		},
+		// 提交
+		submitTask(){
+			var huobisanjiaJson={};
+				var imageJson = {};
+				if ($("#ScreenshotMerchantProductSearch")[0]) {
+					if (isNullOrEmpty($("#ScreenshotMerchantProductSearch").val())) {
+						toast("搜索结果截图不能为空");
+						return false;
+					}
+					imageJson["ScreenshotMerchantProductSearch"] = $("#ScreenshotMerchantProductSearch").val();
+				}
+				if ($("#CollectionCompetitiveProducts1")[0]) {
+					if (isNullOrEmpty($("#CollectionCompetitiveProducts1").val())) {
+						toast("收藏竞品店铺截图不能为空");
+						return false;
+					}
+					imageJson["CollectionCompetitiveProducts1"] = $("#CollectionCompetitiveProducts1").val();
+				}
+				if ($("#CollectionCompetitiveProducts2")[0]) {
+					if (isNullOrEmpty($("#CollectionCompetitiveProducts2").val())) {
+						toast("收藏竞品商品截图不能为空");
+						return false;
+					}
+					imageJson["CollectionCompetitiveProducts2"] = $("#CollectionCompetitiveProducts2").val();
+				}
+				if ($("#CollectionCompetitiveProducts3")[0]) {
+					if (isNullOrEmpty($("#CollectionCompetitiveProducts3").val())) {
+						toast("加竞品购物车截图不能为空");
+						return false;
+					}
+					imageJson["CollectionCompetitiveProducts3"] = $("#CollectionCompetitiveProducts3").val();
+				}
+				if ($("#AddAShoppingCart")[0]) {
+					if (isNullOrEmpty($("#AddAShoppingCart").val())) {
+						toast("收藏商品截图不能为空");
+						return false;
+					}
+					imageJson["AddAShoppingCart"] = $("#AddAShoppingCart").val();
+				}
+				if ($("#CollectionOfGoods")[0]) {
+					if (isNullOrEmpty($("#CollectionOfGoods").val())) {
+						toast("收藏商品截图不能为空");
+						return false;
+					}
+					imageJson["CollectionOfGoods"] = $("#CollectionOfGoods").val();
+				}
+				//额外操作截图
+				if ($("#scotherA")[0]) {
+					if (isNullOrEmpty($("#scotherA").val())) {
+						toast("搜索结果截图不能为空");
+						return false;
+					}
+					imageJson["ShouCanjpimg1"] = $("#scotherA").val(); //收藏竞品1
+				}
+
+				if ($("#scotherB")[0]) {
+					if (isNullOrEmpty($("#scotherB").val())) {
+						toast("搜索结果截图不能为空");
+						return false;
+					}
+					imageJson["ShouCanjpimg2"] = $("#scotherB").val(); //收藏竞品2
+				}
+
+				if ($("#jgotherA")[0]) {
+					if (isNullOrEmpty($("#jgotherA").val())) {
+						toast("搜索结果截图不能为空");
+						return false;
+					}
+					imageJson["JiaGoujpimg1"] = $("#jgotherA").val(); //加购竞品1
+				}
+
+				if ($("#jgotherB")[0]) {
+					if (isNullOrEmpty($("#jgotherB").val())) {
+						toast("搜索结果截图不能为空");
+						return false;
+					}
+					imageJson["JiaGoujpimg2"] = $("#jgotherB").val(); //加购竞品2
+				}
+
+				if ($("#scdpotherA")[0]) {
+					if (isNullOrEmpty($("#scdpotherA").val())) {
+						toast("搜索结果截图不能为空");
+						return false;
+					}
+					imageJson["ShouCandpimg"] = $("#scdpotherA").val(); //收藏店铺
+				}
+
+				if ($("#fbbotherA")[0]) {
+					if (isNullOrEmpty($("#fbbotherA").val())) {
+						toast("搜索结果截图不能为空");
+						return false;
+					}
+					imageJson["LiuLanfbbimg"] = $("#fbbotherA").val(); //浏览副宝贝
+				}
+
+				if ($("#dzotherA")[0]) {
+					if (isNullOrEmpty($("#dzotherA").val())) {
+						toast("搜索结果截图不能为空");
+						return false;
+					}
+					imageJson["DianZanhpimg"] = $("#dzotherA").val(); //点赞好评
+				}
+
+				if ($("#llwdjotherA")[0]) {
+					if (isNullOrEmpty($("#llwdjotherA").val())) {
+						toast("搜索结果截图不能为空");
+						return false;
+					}
+					imageJson["LiuLanwdjimg"] = $("#llwdjotherA").val(); //浏览问大家
+				}
+
+				if ($("#twwdjotherA")[0]) {
+					if (isNullOrEmpty($("#twwdjotherA").val())) {
+						toast("搜索结果截图不能为空");
+						return false;
+					}
+					imageJson["TiWendjimg"] = $("#twwdjotherA").val(); //提问问大家
+				}
+
+				if ($("#huobisanj1")[0]) {
+					if (isNullOrEmpty($("#huobisanj1").val())) {
+						toast("货比三家链接不能为空");
+						return false;
+					}
+					var link=$("#huobisanj1").val().indexOf("http")
+					if(link==-1){
+					toast("请输入正确的链接地址");
+					return false;
+					}
+					huobisanjiaJson["ShopAroundlink1"] = $("#huobisanj1").val(); //货比三家链接
+				}
+
+				if ($("#huobisanj2")[0]) {
+					if (isNullOrEmpty($("#huobisanj2").val())) {
+						toast("货比三家链接不能为空");
+						return false;
+					}
+					var link=$("#huobisanj2").val().indexOf("http")
+					if(link==-1){
+					toast("请输入正确的链接地址");
+					return false;
+					}
+					huobisanjiaJson["ShopAroundlink2"] = $("#huobisanj2").val(); //货比三家链接
+				}
+				// 浏览店铺
+				if((data.IsBrowseStore==1||data.IsCollectionShop==1||data.IsCollectionProduct==1||data.IsAddCart==1)&&data.AcceptTaskStatus!=9){
+					
+					if ($("#ShopProAlink")[0]) {
+						if (isNullOrEmpty($("#ShopProAlink").val())) {
+							toast("店内宝贝链接不能为空");
+							return false;
+						}
+						var link=$("#ShopProAlink").val().indexOf("http")
+						if(link==-1){
+						toast("请输入正确的链接地址");
+						return false;
+						}
+						huobisanjiaJson["ShopProAlink"] = $("#ShopProAlink").val(); //货比三家链接
+					}
+					if(!data.ShoparoundLink1){
+						toast("店内宝贝链接不能为空");
+					}
+					if ($("#ShopProBlink")[0]) {
+						if (isNullOrEmpty($("#ShopProBlink").val())) {
+							toast("店内宝贝链接不能为空");
+							return false;
+						}
+						var link=$("#ShopProBlink").val().indexOf("http")
+						if(link==-1){
+						toast("请输入正确的链接地址");
+						return false;
+						}
+						huobisanjiaJson["ShopProBlink"] = $("#ShopProBlink").val(); //货比三家链接
+					}
+
+					// if ($("#otherA")[0]) {
+					// 	if (isNullOrEmpty($("#otherA").val())) {
+					// 		toast("其他商家A截图不能为空");
+					// 		return false;
+					// 	}
+					// 	imageJson["OtherShopProBottomImgA"] = $("#otherA").val();
+					// }
+					// if ($("#otherB")[0]) {
+					// 	if (isNullOrEmpty($("#otherB").val())) {
+					// 		toast("其他商家B截图不能为空");
+					// 		return false;
+					// 	}
+					// 	imageJson["OtherShopProBottomImgB"] = $("#otherB").val();
+					// }
+					if((data.IsNewPasswordTask==0)&&(data.IsCompetingGoodsTask==0)&&(data.IsPresaleTask==0)&&(data.IsGoodTask==0)){
+						
+						if(!this.targetTopImg){
+							toast("目标商品顶部截图不能为空");
+							return false;
+						}
+						imageJson["TargetProductTopImg"] = this.targetTopImg;
+
+						if(!this.targetBottomImg){
+							toast("目标商品底部截图不能为空");
+							return false;
+						}
+						imageJson["TargetProductBottomImg"] = this.targetBottomImg;
+
+						if(!this.shopProAImg){
+							toast("店内商品A截图不能为空");
+							return false;
+						}
+						imageJson["ShopProductBottomImgA"] = this.shopProAImg;
+
+						if(!this.shopProBImg){
+							toast("店内商品B截图不能为空");
+							return false;
+						}
+						imageJson["ShopProductBottomImgB"] = this.shopProBImg;
+					}
+					
+				}
+				//浏览店铺end
+				if ($("#AdditionalProductA1")[0]) {
+					if (isNullOrEmpty($("#AdditionalProductA1").val())) {
+						toast("附加商品1顶部截图不能为空");
+						return false;
+					}
+					imageJson["AdditionalProductA1"] = $("#AdditionalProductA1").val();
+				}
+				if ($("#AdditionalProductB1")[0]) {
+					if (isNullOrEmpty($("#AdditionalProductB1").val())) {
+						toast("附加商品1底部截图不能为空");
+						return false;
+					}
+					imageJson["AdditionalProductB1"] = $("#AdditionalProductB1").val();
+				}
+				if ($("#AdditionalProductA2")[0]) {
+					if (isNullOrEmpty($("#AdditionalProductA2").val())) {
+						toast("附加商品2顶部截图不能为空");
+						return false;
+					}
+					imageJson["AdditionalProductA2"] = $("#AdditionalProductA2").val();
+				}
+				if ($("#AdditionalProductB2")[0]) {
+					if (isNullOrEmpty($("#AdditionalProductB2").val())) {
+						toast("附加商品2底部截图不能为空");
+						return false;
+					}
+					imageJson["AdditionalProductB2"] = $("#AdditionalProductB2").val();
+				}
+				if ($("#collectionShop")[0]) {
+					if (isNullOrEmpty($("#collectionShop").val())) {
+						toast("收藏店铺截图不能为空");
+						return false;
+					}
+					imageJson["ShopCollectionImg"] = $("#collectionShop").val();
+				}
+				if ($("#collectionProduct")[0]) {
+					if (isNullOrEmpty($("#collectionProduct").val())) {
+						toast("收藏商品截图不能为空");
+						return false;
+					}
+					imageJson["ProductCollectionImg"] = $("#collectionProduct").val();
+				}
+				if ($("#cartImg")[0]) {
+					if (isNullOrEmpty($("#cartImg").val())) {
+						toast("加入购物车截图不能为空");
+						return false;
+					}
+					imageJson["ShoppingCartImg"] = $("#cartImg").val();
+				}
+				if ($("#merchantChatImg")[0]) {
+					if (isNullOrEmpty($("#merchantChatImg").val())) {
+						toast("商家聊天截图不能为空");
+						return false;
+					}
+					imageJson["MerchantChatImg"] = $("#merchantChatImg").val();
+				}
+				if ($("#orderDetailsImg")[0]) {
+					if (isNullOrEmpty($("#orderDetailsImg").val())) {
+						toast("订单详情截图不能为空");
+						return false;
+					}
+					imageJson["OrderDetailsImg"] = $("#orderDetailsImg").val();
+				}
+				if (!isCheckgoods && acceptTaskStatus != 9) {
+					toast("请核对商品链接");
+					return false;
+				}
+				if (!isCheckShop && acceptTaskStatus != 9) {
+					toast("请核对店铺名称");
+					return false;
+				}
+				if (!isCheckKeywords && acceptTaskStatus != 9) {
+					toast("请核对关键词");
+					return false;
+				}
+				// if (!isCheckProduct) {
+				//     toast("请核对商品链接地址");
+				//     return false;
+				// }
+				if(!hasverifyTask&&isPresaleTask==1&&acceptTaskStatus == 9){
+				toast("订单未通过验证无法提交审核");
+				return false
+				}
+				var consigneeName = $("#consignee").val();
+				var consigneeMobile = $("#consigneeMobile").val();
+				var province = $("#provinceCode").val();
+				var city = $("#cityCode").val();
+				var district = $("#districtCode").val();
+				var addressInfo = $("#xiangxidizhi").val();
+				if (taskType > 0 && (isPresaleTask == 0 || (isPresaleTask == 1 && acceptTaskStatus == 9)) && (IsCompetingGoodsTask == 0 || (IsCompetingGoodsTask == 1 && acceptTaskStatus == 9))) {
+					if (taskType == 1 && (isPresaleTask == 0 || (isPresaleTask == 1 && acceptTaskStatus == 9)) && (IsCompetingGoodsTask == 0 || (IsCompetingGoodsTask == 1 && acceptTaskStatus == 9))) {
+						orderMoney = $("#orderMoney").val();
+						if (isNullOrEmpty(orderMoney)) {
+							toast("任务为垫付任务，请输入平台下单的订单金额");
+							return false;
+						}
+						var reg = /^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,4})?$/;
+						if (!reg.test(orderMoney) || orderMoney > 1000000000000) {
+							toast("请输入正确的订单金额");
+							return false;
+						}
+						if (isNullOrEmpty($(".orderNo").eq(1).val())) {
+							toast("任务为垫付任务，请输入平台下单的订单号");
+							return false;
+						}
+						if (taskExpressId > 0) {
+							if (isNullOrEmpty(consigneeName)) {
+								toast("请填写平台下单的收货人名字");
+								return false;
+							}
+							if (!telePhone(consigneeMobile)) {
+								toast("请填写正确的收货人联系电话");
+								return false;
+							}
+							if (isNullOrEmpty(province) || isNullOrEmpty(city) || isNullOrEmpty(district)) {
+								toast("请选择平台下单的收货地址省市区");
+								return false;
+							}
+							if (isNullOrEmpty(addressInfo)) {
+								toast("请输入平台下单的收货详细地址");
+								return false;
+							}
+						}
+					}
+				}
+				post('Task/SubmitTask',{
+					UserId: userId,
+					Token: userToKen,
+					TaskAcceptNo: api.pageParam.taskAcceptNo,
+					ImgJson: JSON.stringify(imageJson),
+					PlatOrderNo: $(".orderNo").eq(1).val(),
+					PlatOrderMoney: orderMoney,
+					ConsigneeName: consigneeName,
+					ConsigneeMobile: consigneeMobile,
+					ProvinceCode: province,
+					CityCode: city,
+					DistrictCode: district,
+					AddressInfo: addressInfo,
+					ShopAroundjson:huobisanjiaJson
+				}).then(res=>{
+					toast(res.msg);
+					setTimeout(()=>{
+						goUrl('task/receivedtask');
+					},1500);
+				})
 		},
 		back(){
 			uni.navigateBack();
-		}
+		},
+		// 复制关键词或者淘口令
+		copyWord(){
+			const text = this.data.IsNewPasswordTask==1?this.data.OriginalPassword:this.data.KeyWord;
+			this.copy(text);
+		},
+        copy(text){
+            const res = h5Copy(text);
+            if(res){
+                toast('复制成功',true)
+            }else{
+                toast('复制失败，请重试！')
+            }
+        }
   }
 }
 </script>
@@ -798,5 +1290,12 @@ export default {
 	border-radius: 2px;
 	height: .4rem;
 	line-height: .4rem;
+	}
+	.titleHd{
+		margin:0;
+		margin-bottom:10px;
+	}
+	.cfff{
+		color:#fff!important;
 	}
 </style>

@@ -409,7 +409,7 @@ export default {
         // 显示取消任务
         onShowCancelTask(){
             if(this.data.AcceptTaskStatus==0||this.data.AcceptTaskStatus==9){
-               showCancelTask = true 
+               this.showCancelTask = true 
             }
         },
         // 确认取消任务

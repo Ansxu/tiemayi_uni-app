@@ -60,10 +60,9 @@ export default {
 		this.PlatformId= options.PlatformId;
 		this.AccountId=options.AccountId;
 		this.TaskType=  options.TaskType;
-		this.init();
     },
     onShow(){
-
+		this.init();
     },
     methods:{
 		init(){
@@ -101,7 +100,8 @@ export default {
                 UserId: this.userId,
                 Token: this.token,
                 AccountId: this.AccountId,
-                TaskListNo
+				TaskListNo,
+				VersionControl:'1.3.57'
 			}).then(res=>{
 				this.newTask = res.obj;
 			})
