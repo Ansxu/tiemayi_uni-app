@@ -54,7 +54,7 @@
                             <div @click="goUrl('task/receivedtask')" class="outside">
                                 <div class="icon-img">
                                     <img src="/static/image/nav/memberindex_nav1_1.png" alt="">
-                                    <span class="circleNum" id="OrderUndone">{{userInfo.OrderUndone||0}}</span>
+                                    <span class="circleNum" id="OrderUndone" v-if="userInfo.OrderUndone">{{userInfo.OrderUndone}}</span>
                                 </div>
                                 <p class="title" style="color:#7A7A7A">未完成</p>
                             </div>
@@ -63,7 +63,7 @@
                             <div @click="goUrl('task/receivedtask')" class="outside">
                                 <div class="icon-img">
                                     <img src="/static/image/nav/memberindex_nav1_2.png" alt="">
-                                    <span class="circleNum" id="OrderCompleted">{{userInfo.OrderCompleted||0}}</span>
+                                    <span class="circleNum" id="OrderCompleted" v-if="userInfo.OrderCompleted">{{userInfo.OrderCompleted}}</span>
                                 </div>
                                 <p class="title" style="color:#7A7A7A">已完成</p>
                             </div>
@@ -73,7 +73,7 @@
                             <div @click="goUrl('task/receivedtask')" class="outside">
                                 <div class="icon-img">
                                     <img src="/static/image/nav/memberindex_nav1_3.png" alt="">
-                                    <span class="circleNum" id="OrderRevoked">{{userInfo.OrderRevoked||0}}</span>
+                                    <span class="circleNum" id="OrderRevoked" v-if="userInfo.OrderRevoked">{{userInfo.OrderRevoked}}</span>
                                 </div>
                                 <p class="title" style="color:#7A7A7A">已撤销</p>
                             </div>
@@ -82,7 +82,7 @@
                             <div @click="goUrl('task/receivedtask')" class="outside">
                                 <div class="icon-img">
                                     <img src="/static/image/nav/memberindex_nav1_4.png" alt="">
-                                    <span class="circleNum" id="OrderAppeal">{{userInfo.OrderAppeal||0}}</span>
+                                    <span class="circleNum" id="OrderAppeal" v-if="userInfo.OrderAppeal">{{userInfo.OrderAppeal}}</span>
                                 </div>
                                 <p class="title" style="color:#7A7A7A">申诉中</p>
                             </div>

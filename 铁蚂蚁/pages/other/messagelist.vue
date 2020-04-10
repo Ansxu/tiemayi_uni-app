@@ -1,66 +1,37 @@
 <template>
 	<div>
-		<div class="h45">
-			<div class="head bb_border">
-				<a href="../../index.html" class="btn_back"></a>
-				<div class="title center">系统消息</div>
-			</div>
-		</div>
+		<headers>系统消息</headers>
 		<div class="main mt10">
 			<div class="tabNav tabList">
 				<ul class="clear">
-					<li class="active" onclick="GetMessageList(0,this)">系统消息</li>
-					<li onclick="GetMessageList(1,this)">用户消息</li>
+					<li :class="{'active':tab==0}" @click="getData(0)">系统消息</li>
+					<li :class="{'active':tab==1}" @click="getData(1)">用户消息</li>
 				</ul>
 			</div>
-	     <!--  循环 -->
-	      <!-- <script id="messageListTemp" type="text/x-dot-template">
-	          {{~it:value:index}}
-				<li class="box">
-	              <div class="time"><span>{{=getDateText(value.PubTime).Format("yyyy-MM-dd hh:mm")}}</span></div>
-	              <div class="messagecon">
-	                <div class="title text">
-										<span>
-										{{? value.IsRead === 0}}
-											<i class="icon"></i>
-										{{??}}
-											<i class=""></i>
-										{{?}}
-										{{=value.Title}}
-										</span>
-									</div>
-	                <div class="desc">
-	                  {{=value.Memo}}
-	                </div>
-	              </div>
-	              <div class="box_ft"><a class="link_btn arrow_r" >查看详情</a></div>
-				 <div class="messageId" style="display:none">{{=value.Id}}</div>
-	           </li>
-	          {{~}}
-	      </script> -->
 			<div class="messageList">
 				<ul>
-					<li class="box" v-for="(item,index) in 8" :key="index">
-					   <div class="time"><span>2020-03-22</span></div>
-					   <div class="messagecon">
-					     <div class="title text">
-							<span>
-								<i class="icon" v-if="item.isRed"></i>
-								<i class=""></i>
-							这个是标题
-							</span>
+					<li class="box" v-for="(item,index) in list" :key="index">
+						<div class="time"><span>{{editTime(item.PubTime,'time')}}</span></div>
+						<div class="messagecon">
+							<div class="title text">
+												<span>
+													<i class="icon" v-if="item.IsRead === 0"></i>
+													<i class="" v-else></i>
+													{{item.Title}}
+												</span>
+											</div>
+							<div class="desc">
+							{{item.Memo}}
+							</div>
 						</div>
-					     <div class="desc">
-					       这是内容哈哈哈 哈哈哈哈哈哈哈哈哈哈哈哈哈
-					     </div>
-					   </div>
-					   <div class="box_ft"><a class="link_btn arrow_r" >查看详情</a></div>
-					   <div class="messageId" style="display:none">233</div>
+						<div class="box_ft"><p class="link_btn arrow_r" @click="goUrl('other/messagedetail',{id:item.Id})">查看详情</p></div>
+						<div class="messageId" style="display:none">{{item.Id}}</div>
 					</li>
 				</ul>
 			</div>
+			<div style="color:#999;line-height:3;text-align:center;">已经到底了哦~</div>
 				<!--暂无消息时显示-->
-			<div class="empty" style="display: none;">
+			<div class="empty" v-if="list.length<1">
 				<i class="icon icon_message"></i>
 				<p>暂时没有消息哦！</p>
 			</div>
@@ -69,6 +40,59 @@
 </template>
 
 <script>
+import {post,toast,goUrl,editTime} from '@/utils';
+import h5Copy  from '@/utils/junyi-h5-copy';
+export default {
+  data() {
+    return {
+		goUrl,
+		editTime,
+        userId:'',
+		token:'',
+		page:1,
+		pageSize:10,
+		tab:0,//0-系统消息；1-用户消息
+		list:[],
+		notData:false,
+    };
+  },
+  onLoad(options) {
+    this.userId = uni.getStorageSync('userId');
+    this.token = uni.getStorageSync('token');
+    this.getData();
+  },
+  onShow() {},
+  methods: {
+	  getData(tab){
+		  if(tab!==undefined&&tab!=this.tab){
+			  this.tab = tab;
+			  this.notData = false;
+			  this.page=1;
+			  this.list=[];
+		  }
+		  post('Notice/GetNoticeByMember',{
+				UserId: this.userId,
+				Token: this.token,
+                Page: this.page,
+                PageSize: this.pageSize,
+                SendType: 1,
+                UserType: tab||this.tab
+		  }).then(res=>{
+			  const list = res.obj;
+			  if(list.NoticeList.length<this.pageSize){
+				  this.notData = true;
+			  }
+			  this.list.push(...list.NoticeList);
+		  })
+	  }
+  },
+	onReachBottom(){
+		if(!this.notData){
+			this.page+=1;
+			this.getData();
+		}
+	}
+}
 </script>
 
 <style lang="scss" scoped>

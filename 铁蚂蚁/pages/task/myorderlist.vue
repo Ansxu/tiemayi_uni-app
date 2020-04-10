@@ -138,9 +138,9 @@
 			uni.stopPullDownRefresh();//得到数据后停止下拉刷新
 		},
 		onReachBottom(){
-			if(this.notData){
+			if(!this.notData){
 				this.page+=1;
-				this.getData();
+				this.getList();
 			}
 		}
 	}

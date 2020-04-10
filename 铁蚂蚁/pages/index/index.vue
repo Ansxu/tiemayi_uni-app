@@ -284,8 +284,7 @@ export default {
         Token: this.token,
         SendType: 1
       }).then(res => {
-        const data = res.obj;
-        this.unreadCount = data.obj;
+        this.unreadCount = res.obj;
       });
     }
   }
@@ -299,7 +298,9 @@ export default {
   align-items: center;
   justify-content: center;
 }
-
+.outside{
+  display:flex;
+}
 .logo {
   height: 200rpx;
   width: 200rpx;

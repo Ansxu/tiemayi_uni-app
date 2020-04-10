@@ -357,9 +357,8 @@ a.box {
     position: absolute;
     left: 0;
     top: 5px;
-    display: none;
     height: 20px;
-    width: 20px;
+    padding: 0 5px;
     line-height: 20px;
     text-align: center;
     font-size: 10px;

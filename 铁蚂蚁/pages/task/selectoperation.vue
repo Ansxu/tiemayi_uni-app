@@ -41,7 +41,7 @@
                         <!-- href="{{=(data.AcceptTaskStatus<=1||(data.AcceptTaskStatus==9&&data.PayCountdown>0))&&(data.IsTrialStatus==0||data.IsTrialStatus==2)?" javascript:operationTask(); ":"javascript:; "}}"> -->
                         {{data.AcceptTaskStatus==1?"重新提交":data.AcceptTaskStatus==9&&data.PayCountdown>0?"下单提交":"操作任务"}}
                     </p>
-                    <p :class="['btn',{'cur':(data.AcceptTaskStatus==4||data.AcceptTaskStatus==2)&&data.IsAppeal==0}]" >
+                    <p :class="['btn',{'cur':(data.AcceptTaskStatus==4||data.AcceptTaskStatus==2)&&data.IsAppeal==0}]" @click="showAppeal">
                     <!-- href="{{=(data.AcceptTaskStatus==4||data.AcceptTaskStatus==2)&&data.IsAppeal==0?" javascript:showAppeal(); ":"javascript:; "}}"> -->
                     申诉任务</p>
                     <p :class="['btn',{'cur':data.AcceptTaskStatus==0||data.AcceptTaskStatus==9}]" 
@@ -409,6 +409,14 @@ export default {
         operationTask(){
             if(this.data.AcceptTaskStatus<1||(this.data.AcceptTaskStatus==9&&this.data.PayCountdown>0)||(this.data.AcceptTaskStatus==9&&this.data.CompetingGoodsCountdown>0)){
                 goUrl('task/operationtask',{
+                    TaskAcceptNo:this.TaskAcceptNo
+                })
+            }
+        },
+        // 申述任务
+        showAppeal(){
+            if((this.data.AcceptTaskStatus==4||this.data.AcceptTaskStatus==2)&&this.data.IsAppeal==0){
+                goUrl('task/initiateappeal',{
                     TaskAcceptNo:this.TaskAcceptNo
                 })
             }

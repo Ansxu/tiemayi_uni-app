@@ -1,17 +1,10 @@
 <template>
 	<div>
-		<div class="h45">
-			<div class="head bb_border">
-				<a href="javascript:history.go(-1);" class="btn_back"></a>
-				<div class="title center">系统消息</div>
-			</div>
-		</div>
-
+		<headers>系统消息</headers>
 		<div class="main" id="messageDetailTempMain">
 			<div class="messagedetail">
-					<div class="title mb10">这是个标题</div>
-					<div class="con">
-						这个我也不知道是个什么东东
+					<div class="title mb10">{{data.Title}}</div>
+					<div class="con" v-html="data.Memo">
 					</div>
 			</div>
 		</div>
@@ -28,10 +21,54 @@
 </template>
 
 <script>
+import {post,toast,goUrl,editTime} from '@/utils';
+import h5Copy  from '@/utils/junyi-h5-copy';
+export default {
+  data() {
+    return {
+		goUrl,
+		editTime,
+        userId:'',
+		token:'',
+		data:[],
+		id:'',
+    };
+  },
+  onLoad(options) {
+    this.userId = uni.getStorageSync('userId');
+	this.token = uni.getStorageSync('token');
+	this.id = options.id;
+    this.getData();
+  },
+  onShow() {},
+  methods: {
+	  getData(){
+		  post('Notice/ReadNoticeInfo',{
+				UserId: this.userId,
+				Token: this.token,
+                NoticeId: this.id
+		  }).then(res=>{
+			  this.data = res.obj;
+		  })
+	  }
+  },
+}
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 	.main{
 		padding:20upx;
+	}
+	.title{
+		color:#333;
+		font-size:16px;
+		border-bottom:1px #f2f2f2 solid;
+		line-height:1.5;
+		padding-bottom:10px;
+		text-align:center;
+	}
+	.con{
+		color:#555;
+		font-size:14px;
 	}
 </style>
