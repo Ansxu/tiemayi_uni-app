@@ -132,7 +132,7 @@
             <!-- <li><a href="#" class="task_cj">积分抽奖</a></li> -->
             <!--<li><a href="html/user/shareqrcode.html" class="task_qrcode">分享二维码</a></li>-->
             <li>
-              <a class="task_qrcode" id="lottery" onclick="lotteryUrl()">积分抽奖</a>
+              <a class="task_qrcode" id="lottery" @click="goUrl('')">积分抽奖</a>
             </li>
             <li>
               <div @click="goUrl('other/invite')" class="task_yq">邀请好友</div>
@@ -143,7 +143,7 @@
       <!--底部广告-->
       <div class="ft_gg mb10">
         <div class="img">
-          <div @click="goUrl('other/inviterlist')">
+          <div @click="goUrl('other/invitelist')">
             <img src="/static/image/banner/guanggao.jpg" />
           </div>
         </div>
@@ -192,6 +192,7 @@ export default {
   },
   methods: {
     getBanner() {
+		console.log(123)
       get("Advertisement/GetHomeBanners",{},{isLogin:true}).then(res => {
         this.banner = res.obj;
       });
