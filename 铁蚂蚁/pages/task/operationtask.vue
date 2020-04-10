@@ -705,11 +705,11 @@
 									<block v-else>
 										<div class="from">
 											<p>订单编号：（订单详情中复制）</p>
-											<div class="from-item mt10"><input class="input orderNo" type="text" placeholder="请输入下单单号"/></div>
+											<div class="from-item mt10"><input class="input orderNo"  v-model="comfirmOrderNo" type="text" placeholder="请输入下单单号"/></div>
 										</div>
 										<div class="from">
 											<p>订单金额：（订单付款金额）</p>
-											<div class="from-item mt10"><input class="input" id="orderMoney" type="text" placeholder="请输入订单支付金额"/></div>
+											<div class="from-item mt10"><input class="input" id="orderMoney" v-model="orderPrice" type="text" placeholder="请输入订单支付金额"/></div>
 										</div>
 									</block>
 									<block v-if="data.TaskExpressId>0">
@@ -766,12 +766,17 @@ export default {
         token:'',
         TaskAcceptNo:'',
 		data:{},
-		ShopNameArr:[],//补全店铺名称
-		SetCommodityKeywordsArr:[],//补全关键词
+		isPresaleTask:0,//是否1-预售任务
 		playOrderNo:'',//下单的订单编号
-		comfirmOrderNo:'',
-		orderPrice:'',
+		comfirmOrderNo:'',//完成的单号
+		orderPrice:'',//订单价格
+		checkShopNameStatus:false,//是否已核对店铺名称
+		ShopNameArr:[],//补全店铺名称
+		checkKeywordStatus:false,//是否已核对补全关键词
+		SetCommodityKeywordsArr:[],//补全关键词
+		checkProLinkMainStatus:false,//是否已核对宝贝链接
 		ShoparoundLinkMain:[],//验证主宝贝链接
+		checkOrderNoStatus:false,//是否已核对订单号
 
 		ScreenshotMerchantProductSearchImg:'',//下单搜索列表截图
 		CollectionCompetitiveProducts1Img:'',//藏竞品店铺截图
@@ -820,6 +825,23 @@ export default {
                 TaskAcceptNo:this.TaskAcceptNo
 			}).then(res=>{
 				const data = res.obj;
+				if(data.IsAmoy==0&&data.isYanOrder==0){
+					this.checkOrderNoStatus=true;
+				}
+				this.isPresaleTask = data.IsPresaleTask;
+				if(data.IsPresaleTask==1){
+                    // api.alert({
+                    //     title: "注意！",
+                    //     msg: "预售任务，付款时间：" + json.obj.PaymentStartTime + "-" + json.obj.PaymentEndTime + "。请完全按照商家要求操作，确认每一步都间隔足够时间，不按照要求做的，平台有权封停账号",
+                    //     buttons: ["我知道了"]
+                    // });
+				}else{
+                    // api.alert({
+                    //     title: "注意！",
+                    //     msg: "请完全按照商家要求操作，确认每一步都间隔足够时间，不按照要求做的，平台有权封停账号",
+                    //     buttons: ["我知道了"]
+                    // });
+				}
 				this.data = data;
 
 			})
@@ -840,8 +862,8 @@ export default {
                 ShopName: strArr.join('')
 			}).then(res=>{
 				toast(res.msg);
+				this.checkShopNameStatus = true;
 			})
-			console.log(strArr.join(''),'val')
 		},
 		// 核对关键词
 		checkKeywords(){
@@ -859,8 +881,8 @@ export default {
                 SetCommodityKeywords: strArr.join('')
 			}).then(res=>{
 				toast(res.msg);
+				this.checkKeywordStatus = true;
 			})
-			console.log(strArr.join(''),'val')
 		},
 		// 核对商品链接
 		checkGoodLink(){
@@ -878,6 +900,7 @@ export default {
                 ProductUrl2: data.ShoparoundLink2
 			}).then(res=>{
 				toast(res.msg);
+				this.checkProLinkMainStatus = true;
 			})
 		},
 		// 核对订单编号
@@ -907,6 +930,7 @@ export default {
                 TaskAcceptNo:this.TaskAcceptNo,
                 PlatOrderNo: this.playOrderNo,
 			}).then(res=>{
+				this.checkOrderNoStatus=true;
               if(data.isYanOrder==0){
                 toast(res.msg);
               }
@@ -921,6 +945,7 @@ export default {
                 PlatOrderNo: this.playOrderNo,
 			}).then(res=>{
 			 	this.comfirmOrderNo = this.playOrderNo;
+				this.checkOrderNoStatus=true;
 			 	this.orderPrice = res.obj;
 				toast(res.msg);
 			})
@@ -929,6 +954,7 @@ export default {
 		submitTask(){
 			let huobisanjiaJson={};
 			let imageJson = {};
+			const data = this.data;
 			if(data.IsCompetingGoodsTask==1&&data.AcceptTaskStatus==9){
 				if(!this.ScreenshotMerchantProductSearchImg){
 					toast("下单搜索列表截图不能为空");
@@ -1210,15 +1236,15 @@ export default {
 
 
 			
-			if (!isCheckgoods && acceptTaskStatus != 9) {
+			if (!this.checkProLinkMain && data.AcceptTaskStatus != 9) {
 				toast("请核对商品链接");
 				return false;
 			}
-			if (!isCheckShop && acceptTaskStatus != 9) {
+			if (!this.checkShopNameStatus && data.AcceptTaskStatus != 9) {
 				toast("请核对店铺名称");
 				return false;
 			}
-			if (!isCheckKeywords && acceptTaskStatus != 9) {
+			if (!this.checkKeyword && data.AcceptTaskStatus != 9) {
 				toast("请核对关键词");
 				return false;
 			}
@@ -1226,20 +1252,13 @@ export default {
 			//     toast("请核对商品链接地址");
 			//     return false;
 			// }
-			if(!hasverifyTask&&isPresaleTask==1&&acceptTaskStatus == 9){
-			toast("订单未通过验证无法提交审核");
-			return false
+			if(!this.checkOrderNoStatus&&data.IsPresaleTask==1&&data.AcceptTaskStatus == 9){
+				toast("订单未通过验证无法提交审核");
+				return false
 			}
-			var consigneeName = $("#consignee").val();
-			var consigneeMobile = $("#consigneeMobile").val();
-			var province = $("#provinceCode").val();
-			var city = $("#cityCode").val();
-			var district = $("#districtCode").val();
-			var addressInfo = $("#xiangxidizhi").val();
-			if (taskType > 0 && (isPresaleTask == 0 || (isPresaleTask == 1 && acceptTaskStatus == 9)) && (IsCompetingGoodsTask == 0 || (IsCompetingGoodsTask == 1 && acceptTaskStatus == 9))) {
-				if (taskType == 1 && (isPresaleTask == 0 || (isPresaleTask == 1 && acceptTaskStatus == 9)) && (IsCompetingGoodsTask == 0 || (IsCompetingGoodsTask == 1 && acceptTaskStatus == 9))) {
-					orderMoney = $("#orderMoney").val();
-					if (isNullOrEmpty(orderMoney)) {
+			if (data.TaskType > 0 && (data.IsPresaleTask == 0 || (data.IsPresaleTask == 1 && data.AcceptTaskStatus == 9)) && (data.IsCompetingGoodsTask == 0 || (data.IsCompetingGoodsTask == 1 && data.AcceptTaskStatus == 9))) {
+				if (data.TaskType == 1 && (data.IsPresaleTask == 0 || (data.IsPresaleTask == 1 && data.AcceptTaskStatus == 9)) && (data.IsCompetingGoodsTask == 0 || (data.IsCompetingGoodsTask == 1 && data.AcceptTaskStatus == 9))) {
+					if (!this.orderPrice) {
 						toast("任务为垫付任务，请输入平台下单的订单金额");
 						return false;
 					}
@@ -1248,24 +1267,24 @@ export default {
 						toast("请输入正确的订单金额");
 						return false;
 					}
-					if (isNullOrEmpty($(".orderNo").eq(1).val())) {
+					if (!this.comfirmOrderNo) {
 						toast("任务为垫付任务，请输入平台下单的订单号");
 						return false;
 					}
-					if (taskExpressId > 0) {
-						if (isNullOrEmpty(consigneeName)) {
+					if (data.TaskExpressId > 0) {
+						if (!data.ConsigneeName) {
 							toast("请填写平台下单的收货人名字");
 							return false;
 						}
-						if (!telePhone(consigneeMobile)) {
+						if (!data.ConsigneeMobile) {
 							toast("请填写正确的收货人联系电话");
 							return false;
 						}
-						if (isNullOrEmpty(province) || isNullOrEmpty(city) || isNullOrEmpty(district)) {
+						if (!data.AccountProvinceCode || !data.AccountCityCode || !data.AccountDistrictCode) {
 							toast("请选择平台下单的收货地址省市区");
 							return false;
 						}
-						if (isNullOrEmpty(addressInfo)) {
+						if (!data.AccountAddress) {
 							toast("请输入平台下单的收货详细地址");
 							return false;
 						}
