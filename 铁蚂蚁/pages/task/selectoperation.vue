@@ -19,7 +19,7 @@
                         <p class="text">{{data.ProductName}}</p>
                         <p class="text">商品价格 <span class="c_Org">{{data.ProductPrice}}元</span></p>
                         <p class="text" v-if="data.TaskType==1">件数 <span class="c_Org">{{data.ProductNum}}</span></p>
-                        <p class="text" v-if="data.AcceptTaskStatus==0"><span id="count_down" class="c_Org"></span>
+                        <p class="text" v-if="data.AcceptTaskStatus==0"><span id="count_down" class="c_Org">{{timeEnd}}</span>
                         </p>
                     </div>
                     <div class="img fr presale-img" v-if="data.IsPresaleTask==1">
@@ -298,7 +298,7 @@
                                                 <img :src="data.EvaluationImg4">
                                             </span>
                                         </div>
-                                        <p class="link_btn" onclick="downEvaluationImg()">点击下载图片</p>
+                                        <p class="link_btn" @click="saveImg">点击下载图片</p>
                                     </div>
                                 </dd>
                                 <block v-if="data.EvaluationVideo">
@@ -367,7 +367,7 @@
 </template>
 
 <script>
-import {post,toast,goUrl,previewImage} from '@/utils';
+import {post,toast,goUrl,previewImage,saveFile} from '@/utils';
 import h5Copy  from '@/utils/junyi-h5-copy';
 export default {
   data() {
@@ -380,6 +380,8 @@ export default {
         cancelTastList:['找不到商品','不想做这个任务','达不到商家的要求','其他'],
         cancelTastIndex:0,//取消任务的原因下标
         showCancelTask:false,
+        timeEnd:'',//倒计时
+        timeFn:null,
     };
   },
   onLoad(options) {
@@ -396,7 +398,11 @@ export default {
                 Token: this.token,
                 TaskAcceptNo:this.TaskAcceptNo
 			}).then(res=>{
-				this.data = res.obj;
+                const data =res.obj;
+                if (data.AcceptTaskStatus == 0) {
+                    this.timerStart(data.OperationCountdown);
+                }
+                this.data = data;
 			})
         },
         // 操作任务
@@ -431,7 +437,54 @@ export default {
             }else{
                 toast('复制失败，请重试！')
             }
-        }
+        },
+        saveImg(){
+            const data =this.data;
+            saveFile(data.EvaluationImg);
+            saveFile(data.EvaluationImg1);
+            saveFile(data.EvaluationImg2);
+            saveFile(data.EvaluationImg3);
+            saveFile(data.EvaluationImg4);
+        },
+        timerStart(countdown) {
+            const that = this;
+            let i = parseInt(countdown);
+            let alls = 60 * i;
+            let h = parseInt(i / 60);
+            let m = i - (h * 60);
+            if (m == 0) {
+                --h;
+                m = 59;
+            } else
+                --m
+            let s = 59;
+            that.timeFn = setInterval(function() {
+                if (alls <= 0) {
+                    has_click = false;
+                    clearInterval(that.timeFn);
+                    that.timeEnd="提交倒计时 00:00:00"
+                    toast("任务超时未处理，系统已取消");
+                    setTimeout(()=>{
+                        uni.navigateBack();
+                    },1500)
+                } else {
+                    let str = "";
+                    str = (h > 0 ? h >= 10 ? h : "0" + h : "00") + ":" + (m > 0 ? m >= 10 ? m : "0" + m : "00") + ":" + (s > 0 ? s >= 10 ? s : "0" + s : "00");
+                    that.timeEnd = "提交倒计时 " + str;
+                    --s;
+                    --alls;
+                    if (m == 0 && h > 0 && alls > 0) {
+                        --h;
+                        m = 59
+                    }
+                    if (s == 0) {
+                        --m;
+                        s = 60;
+                    }
+
+                }
+            }, 1000);
+        },
   }
 };
 </script>

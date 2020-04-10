@@ -6,7 +6,6 @@ import md5 from 'js-md5';
 // const filePath = 'http://xcx.gllgyz.com';
 const host = 'http://hnapi.wtvxin.com/api/';// 红鸟  旺店宝测试
 // const host = 'http://xmyapi.wtvxin.com/api/';// 铁蚂蚁测试
-// const website = 'http://www.3318pk.com';
 const website = 'http://hn.wtvxin.com';
 const wssPath = 'wss://hxapia.com/WebSocketServer.ashx';// wss地址
 const filePath = 'http://www.hxapia.com';// 测试后台地址
@@ -395,6 +394,33 @@ export function upFile(filePath) {
       }
     })
   })
+}
+// 保存文件
+export function saveFile(filePath){
+  // downloadFile下载文件，然后saveFile保存
+  uni.downloadFile({   
+     url: filePath,   
+     success: (res) => {  
+        if (res.statusCode === 200) { 
+          // h5端
+		      if (typeof window === 'object' && 'document' in window) {
+            var oA = document.createElement("a");
+            oA.download = '';// 设置下载的文件名，默认是'下载'
+            oA.href = res.tempFilePath;
+            document.body.appendChild(oA);
+            oA.click();
+            oA.remove(); // 下载之后把创建的元素删除
+          }else{
+            uni.saveFile({  
+                 tempFilePath: res.tempFilePath,  
+                 complete(res) {  
+                   console.log(res)  
+                 }  
+               });
+          }  
+        }  
+     }  
+ });
 }
 // 时间格式化工具
 function formatNumber(n) {
