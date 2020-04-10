@@ -140,34 +140,34 @@
 								<div class="piclist Uploadimg">
 									<ul class="clear">
 									<li v-if="data.IsCompetingGoodsTask==1&&data.AcceptTaskStatus==9">
-										<div class="img">
-											 <!-- onclick="getpic(this,'ScreenshotMerchantProductSearch',20)" -->
-											<div class="upimg"><img class="uploadImg" /></div>
-											<input type="hidden" id="ScreenshotMerchantProductSearch" readonly="true" />
+										<div class="img" @click="upImg('ScreenshotMerchantProductSearch')">
+											<div class="upimg">
+												<img class="uploadImg" :src="screenshot.ScreenshotMerchantProductSearch"/>
+											</div>
 										</div>
 										<p class="text">下单搜索列表</p>
 									</li>
 									<li v-if="data.CollectionCompetitiveProducts1==1&&data.AcceptTaskStatus!=9">
-										<div class="img">
-											<!-- onclick="getpic(this,'CollectionCompetitiveProducts1',20)" -->
-											<div class="upimg" ><img class="uploadImg" /></div>
-											<input type="hidden" id="CollectionCompetitiveProducts1" readonly="true" />
+										<div class="img" @click="upImg('CollectionCompetitiveProducts1')">
+											<div class="upimg">
+												<img class="uploadImg" :src="screenshot.CollectionCompetitiveProducts1"/>
+											</div>
 										</div>
 										<p class="text">收藏竞品店铺</p>
 									</li>
 									<li v-if="data.CollectionCompetitiveProducts2==1&&data.AcceptTaskStatus!=9">
-										<div class="img">
-											 <!-- onclick="getpic(this,'CollectionCompetitiveProducts2',20)" -->
-											<div class="upimg"><img class="uploadImg" /></div>
-											<input type="hidden" id="CollectionCompetitiveProducts2" readonly="true" />
+										<div class="img" @click="upImg('CollectionCompetitiveProducts2')">
+											<div class="upimg">
+												<img class="uploadImg" :src="screenshot.CollectionCompetitiveProducts2"/>
+											</div>
 										</div>
 										<p class="text">收藏竞品商品</p>
 									</li>
 									<li v-if="data.CollectionCompetitiveProducts3==1&&data.AcceptTaskStatus!=9">
-										<div class="img">
-											 <!-- onclick="getpic(this,'CollectionCompetitiveProducts3',20)" -->
-											<div class="upimg"><img class="uploadImg" /></div>
-											<input type="hidden" id="CollectionCompetitiveProducts3" readonly="true" />
+										<div class="img" @click="upImg('CollectionCompetitiveProducts3')">
+											<div class="upimg">
+												<img class="uploadImg" :src="screenshot.CollectionCompetitiveProducts3"/>
+											</div>
 										</div>
 										<p class="text">加竞品购物车</p>
 									</li>
@@ -565,38 +565,34 @@
 										<ul class="clear">
 											<block v-if="(data.IsNewPasswordTask==0)&&(data.IsCompetingGoodsTask==0)&&(data.IsPresaleTask==0)&&(data.IsGoodTask==0)">
 												<li>
-													<div class="img">
+													<div class="img" @click="upImg('targetTop')">
 														<div class="upimg">
-														<!-- <div class="upimg" onclick="getpic(this,'targetTop',20)"> -->
-															<img class="uploadImg" /></div>
-														<input type="hidden" id="targetTop" readonly="true" />
+															<img class="uploadImg" :src="screenshot.targetTop"/>
+														</div>
 													</div>
 													<p class="text">目标商品顶部</p>
 												</li>
 												<li>
-													<div class="img">
+													<div class="img" @click="upImg('targetBottom')">
 														<div class="upimg">
-														<!-- <div class="upimg" onclick="getpic(this,'targetBottom',20)"> -->
-															<img class="uploadImg" /></div>
-														<input type="hidden" id="targetBottom" readonly="true" />
+															<img class="uploadImg" :src="screenshot.targetBottom"/>
+														</div>
 													</div>
 													<p class="text">目标商品底部</p>
 												</li>
 												<li>
-													<div class="img">
+													<div class="img" @click="upImg('shopProA')">
 														<div class="upimg">
-														<!-- <div class="upimg" onclick="getpic(this,'shopProA',20)"> -->
-															<img class="uploadImg" /></div>
-														<input type="hidden" id="shopProA" readonly="true" />
+															<img class="uploadImg" :src="screenshot.shopProA"/>
+														</div>
 													</div>
 													<p class="text">店内商品A</p>
 												</li>
 												<li>
-													<div class="img">
+													<div class="img" @click="upImg('shopProB')">
 														<div class="upimg">
-														<!-- <div class="upimg" onclick="getpic(this,'shopProB',20)"> -->
-															<img class="uploadImg" /></div>
-														<input type="hidden" id="shopProB" readonly="true" />
+															<img class="uploadImg" :src="screenshot.shopProB"/>
+														</div>
 													</div>
 													<p class="text">店内商品B</p>
 												</li>
@@ -726,9 +722,9 @@
 										</div>
 										<div class="from">
 											<p>订单收货地址：</p>
-											<div class="from-item mt10">
+											<div class="from-item mt10" @click="showAreaSelect">
 												<!-- onclick="picker3()" -->
-												<input type="text" class="input" id="area" :value="data.AccountAreaText" placeholder="请选择城市"  />
+												<input type="text" class="input" id="area" :value="data.AccountAreaText" placeholder="请选择城市" disabled />
 												<span class="icon-arrow icon-arrowRight"></span>
 											</div>
 											<input type="hidden" id="provinceCode" :value="data.AccountProvinceCode" readonly="true" />
@@ -748,17 +744,45 @@
 				</div>
 				<p style="font-size:0.16rem;font-weight:bold;color:red;" v-if="((data.IsPresaleTask==1&&data.AcceptTaskStatus!=9))||(data.IsCompetingGoodsTask==1&&data.AcceptTaskStatus!=9)">不到订单支付时间不能拍下付款，否则该笔订单任务撤销（处罚10金一单）</p>
 				<div class="ftbtn mb10 mt10">
-					<p class="btn" id="submitBtn" @click="submitTask">提交审核</p>
+					<p class="btn" id="submitBtn" @click="base64Img">提交审核</p>
+					<!-- <p class="btn" id="submitBtn" @click="submitTask">提交审核</p> -->
 				</div>
 			</div>
 		</div>
+		
+        <!-- 地区联动 -->
+        <w-picker 
+			mode="linkage"
+			:level="3"
+			@confirm="onAreaConfirm"
+			ref="linkage"
+            :defaultVal="defaultArea"
+            :linkList="areaList"
+            themeColor="#5c91f0"
+            v-if="areaList.length>0"
+            >
+        </w-picker>
+        <!-- 单项联动选择 -->
+        <!-- <w-picker 
+			mode="selector"
+			:level="1"
+			@confirm="onConfirm"
+			ref="pickerList"
+            :defaultVal="defaultPicker"
+            :selectList="pickerList"
+            themeColor="#5c91f0"
+            >
+        </w-picker> -->
 	</div>
 
 </template>
 
 <script>
-import {post,toast,goUrl} from '@/utils';
+import {post,toast,goUrl,getImgPath} from '@/utils';
 import h5Copy  from '@/utils/junyi-h5-copy';
+import GetAreaList from '@/utils/areaList';
+import wPicker from "@/components/w-picker/w-picker.vue";
+import {pathToBase64} from '@/utils/image-tools';
 export default {
   data() {
     return {
@@ -777,37 +801,41 @@ export default {
 		checkProLinkMainStatus:false,//是否已核对宝贝链接
 		ShoparoundLinkMain:[],//验证主宝贝链接
 		checkOrderNoStatus:false,//是否已核对订单号
+		// 截图
+		screenshot:{
+			ScreenshotMerchantProductSearch:'',//下单搜索列表截图
+			CollectionCompetitiveProducts1:'',//藏竞品店铺截图
+			CollectionCompetitiveProducts2:'',//收藏竞品商品截图
+			CollectionCompetitiveProducts3:'',//加竞品购物车截图
+			AddAShoppingCart:'',//加购物车截图
+			CollectionOfGoods:'',//收藏商品截图
+			collectionShop:'',//收藏店铺截图
+			//额外操作截图
+			scotherA:'',//收藏竞品1截图
+			scotherB:'',//收藏竞品2截图
+			jgotherA:'',//加购竞品1截图
+			jgotherB:'',//加购竞品2截图
 
-		ScreenshotMerchantProductSearchImg:'',//下单搜索列表截图
-		CollectionCompetitiveProducts1Img:'',//藏竞品店铺截图
-		CollectionCompetitiveProducts2Img:'',//收藏竞品商品截图
-		CollectionCompetitiveProducts3Img:'',//加竞品购物车截图
-		AddAShoppingCartImg:'',//加购物车截图
-		CollectionOfGoodsImg:'',//收藏商品截图
-		//额外操作截图
-		scotherAImg:'',//收藏竞品1截图
-		scotherBImg:'',//收藏竞品2截图
-		jgotherAImg:'',//加购竞品1截图
-		jgotherBImg:'',//加购竞品2截图
-
-		scdpotherAImg:'',//收藏店铺截图
-		cartImgImg:'',//加入购物车截图
-		fbbotherAImg:'',//浏览副宝贝截图
-		dzotherAImg:'',//点赞好评截图
-		llwdjotherAImg:'',//浏览问大家截图
-		twwdjotherAImg:'',//提问问大家截图
-		// 店内商品
-		targetTopImg:'',//目标商品顶部截图
-		targetBottomImg:'',//目标商品底部截图
-		shopProAImg:'',//店内商品A截图
-		shopProBImg:'',//店内商品B截图
-		// 附加商品
-		AdditionalProductA1Img:'',//附加商品1顶部截图
-		AdditionalProductB1Img:'',//附加商品1底部截图
-		AdditionalProductA2Img:'',//附加商品2顶部截图
-		AdditionalProductB2Img:'',//附加商品2底部截图
-
-		collectionShopImg:'',//收藏店铺截图
+			scdpotherA:'',//收藏店铺截图
+			cartImg:'',//加入购物车截图
+			fbbotherA:'',//浏览副宝贝截图
+			dzotherA:'',//点赞好评截图
+			llwdjotherA:'',//浏览问大家截图
+			twwdjotherA:'',//提问问大家截图
+			// 店内商品
+			targetTop:'',//目标商品顶部截图
+			targetBottom:'',//目标商品底部截图
+			shopProA:'',//店内商品A截图
+			shopProB:'',//店内商品B截图
+			// 附加商品
+			AdditionalProductA1:'',//附加商品1顶部截图
+			AdditionalProductB1:'',//附加商品1底部截图
+			AdditionalProductA2:'',//附加商品2顶部截图
+			AdditionalProductB2:'',//附加商品2底部截图
+		},
+		areaText:'',//地区显示的值
+		areaList:[],//地区列表
+		defaultArea:['广东省','深圳市','龙华新区'],//默认地址
     };
   },
   onLoad(options) {
@@ -815,6 +843,7 @@ export default {
     this.token = uni.getStorageSync('token');
     this.TaskAcceptNo = options.TaskAcceptNo;
     this.getData();
+	this.getAreaList();//获取地址列表
   },
   onShow() {},
   methods: {
@@ -951,52 +980,53 @@ export default {
 			})
 		},
 		// 提交
-		submitTask(){
+		async submitTask(){
 			let huobisanjiaJson={};
 			let imageJson = {};
 			const data = this.data;
+			const screenshot = this.screenshot;
 			if(data.IsCompetingGoodsTask==1&&data.AcceptTaskStatus==9){
-				if(!this.ScreenshotMerchantProductSearchImg){
+				if(!screenshot.ScreenshotMerchantProductSearch){
 					toast("下单搜索列表截图不能为空");
 					return false;
 				}
-				imageJson["ScreenshotMerchantProductSearch"] = this.ScreenshotMerchantProductSearchImg;
+				imageJson["ScreenshotMerchantProductSearch"] = screenshot.ScreenshotMerchantProductSearch;
 			}
 			
 			if(data.CollectionCompetitiveProducts1==1&&data.AcceptTaskStatus!=9){
-				if(!this.CollectionCompetitiveProducts1Img){
+				if(!screenshot.CollectionCompetitiveProducts1){
 					toast("收藏竞品店铺截图不能为空");
 					return false;
 				}
-				imageJson["CollectionCompetitiveProducts1"] = this.CollectionCompetitiveProducts1Img;
+				imageJson["CollectionCompetitiveProducts1"] = screenshot.CollectionCompetitiveProducts1;
 			}
 			
 			if(data.CollectionCompetitiveProducts2==1&&data.AcceptTaskStatus!=9){
-				if(!this.CollectionCompetitiveProducts2Img){
+				if(!screenshot.CollectionCompetitiveProducts2){
 					toast("收藏竞品商品截图不能为空");
 					return false;
 				}
-				imageJson["CollectionCompetitiveProducts2"] = this.CollectionCompetitiveProducts2Img;
+				imageJson["CollectionCompetitiveProducts2"] = screenshot.CollectionCompetitiveProducts2;
 			}
 			if(data.CollectionCompetitiveProducts3==1&&data.AcceptTaskStatus!=9){
-				if(!this.CollectionCompetitiveProducts3Img){
+				if(!screenshot.CollectionCompetitiveProducts3){
 					toast("加竞品购物车截图不能为空");
 					return false;
 				}
-				imageJson["CollectionCompetitiveProducts3"] = this.CollectionCompetitiveProducts3Img;
+				imageJson["CollectionCompetitiveProducts3"] = screenshot.CollectionCompetitiveProducts3;
 			}
 			// 加购物车截图--收藏商品截图
 			if(data.IsPresaleTask==1&&data.AcceptTaskStatus!=9){
-				if(!this.AddAShoppingCartImg){
+				if(!screenshot.AddAShoppingCart){
 					toast("加购物车截图不能为空");
 					return false;
 				}
-				imageJson["AddAShoppingCart"] = this.AddAShoppingCartImg;
-				if(!this.CollectionOfGoodsImg){
+				imageJson["AddAShoppingCart"] = screenshot.AddAShoppingCart;
+				if(!screenshot.CollectionOfGoods){
 					toast("收藏商品截图不能为空");
 					return false;
 				}
-				imageJson["CollectionOfGoods"] = this.CollectionOfGoodsImg;
+				imageJson["CollectionOfGoods"] = screenshot.CollectionOfGoods;
 				
 			}
 			// 货比三家
@@ -1026,83 +1056,83 @@ export default {
 			//额外操作截图
 			if((data.ShouCanjp1==1||data.ShouCanjp2==1)&&data.TaskType==1 && data.IsAddedservices==1){
 				if(data.ShouCanjp1==1){
-					if(!this.scotherAImg){
+					if(!screenshot.scotherA){
 						toast("收藏竞品1截图不能为空");
 						return false;
 					}
-					imageJson["ShouCanjpimg1"] = this.scotherAImg;
+					imageJson["ShouCanjpimg1"] = screenshot.scotherA;
 				}
 				if(data.ShouCanjp2==1){
-					if(!this.scotherBImg){
+					if(!screenshot.scotherB){
 						toast("收藏竞品2截图不能为空");
 						return false;
 					}
-					imageJson["ShouCanjpimg2"] = this.scotherBImg;
+					imageJson["ShouCanjpimg2"] = screenshot.scotherB;
 				}
 			}
 			if((data.JiaGoujp1==1||data.JiaGoujp2==1)&&data.TaskType==1 && data.IsAddedservices==1){
 				if(data.JiaGoujp1==1){
-					if(!this.jgotherAImg){
+					if(!screenshot.jgotherA){
 						toast("加购竞品1截图不能为空");
 						return false;
 					}
-					imageJson["JiaGoujpimg1"] = this.jgotherAImg;
+					imageJson["JiaGoujpimg1"] = screenshot.jgotherA;
 				}
 				if(data.JiaGoujp2==1){
-					if(!this.jgotherBImg){
+					if(!screenshot.jgotherB){
 						toast("加购竞品2截图不能为空");
 						return false;
 					}
-					imageJson["JiaGoujpimg2"] = this.jgotherBImg;
+					imageJson["JiaGoujpimg2"] = screenshot.jgotherB;
 				}
 			}
 			// 收藏店铺
 			if(data.ShouCandp==1  && data.IsAddedservices==1){
-				if(!this.scdpotherAImg){
+				if(!screenshot.scdpotherA){
 					toast("收藏店铺截图不能为空");
 					return false;
 				}
-				imageJson["ShouCandpimg"] = this.scdpotherAImg;
+				imageJson["ShouCandpimg"] = screenshot.scdpotherA;
 			}
 			// 加入购物车截图
 			if(data.Jiarugouwu==1  && data.IsAddedservices==1){
-				if(!this.cartImgImg){
+				if(!screenshot.cartImg){
 					toast("加入购物车截图不能为空");
 					return false;
 				}
-				imageJson["ShoppingCartImg"] = this.cartImgImg;
+				imageJson["ShoppingCartImg"] = screenshot.cartImg;
 			}
 			// 浏览副宝贝截图
 			if(data.LiuLanfbb==1 && data.TaskType==2 && data.IsAddedservices==1){
-				if(!this.fbbotherAImg){
+				if(!screenshot.fbbotherA){
 					toast("浏览副宝贝截图不能为空");
 					return false;
 				}
-				imageJson["LiuLanfbbimg"] = this.fbbotherAImg;
+				imageJson["LiuLanfbbimg"] = screenshot.fbbotherA;
 			}
 			// 点赞好评截图
 			if(data.DianZanhp==1 && data.TaskType==2 && data.IsAddedservices==1){
-				if(!this.dzotherAImg){
+				if(!screenshot.dzotherA){
 					toast("点赞好评截图不能为空");
 					return false;
 				}
-				imageJson["DianZanhpimg"] = this.dzotherAImg;
+				imageJson["DianZanhpimg"] = screenshot.dzotherA;
 			}
 			// 浏览问大家截图
 			if(data.LiuLanwdj==1 && data.TaskType==2 && data.IsAddedservices==1){
-				if(!this.llwdjotherAImg){
+				if(!screenshot.llwdjotherA){
 					toast("浏览问大家截图不能为空");
 					return false;
 				}
-				imageJson["LiuLanwdjimg"] = this.llwdjotherAImg;
+				imageJson["LiuLanwdjimg"] = screenshot.llwdjotherA;
 			}
 			// 提问问大家截图
 			if(data.TiWendj==1 && data.TaskType==2 && data.IsAddedservices==1){
-				if(!this.twwdjotherAImg){
+				if(!screenshot.twwdjotherA){
 					toast("提问问大家截图不能为空");
 					return false;
 				}
-				imageJson["twwdjotherA"] = this.twwdjotherAImg;
+				imageJson["twwdjotherA"] = screenshot.twwdjotherA;
 			}
 			// 浏览店铺
 			if((data.IsBrowseStore==1||data.IsCollectionShop==1||data.IsCollectionProduct==1||data.IsAddCart==1)&&data.AcceptTaskStatus!=9){
@@ -1144,62 +1174,62 @@ export default {
 				// 店内商品
 				if((data.IsNewPasswordTask==0)&&(data.IsCompetingGoodsTask==0)&&(data.IsPresaleTask==0)&&(data.IsGoodTask==0)){
 					
-					if(!this.targetTopImg){
+					if(!screenshot.targetTop){
 						toast("目标商品顶部截图不能为空");
 						return false;
 					}
-					imageJson["TargetProductTopImg"] = this.targetTopImg;
+					imageJson["TargetProductTopImg"] = screenshot.targetTop;
 
-					if(!this.targetBottomImg){
+					if(!screenshot.targetBottom){
 						toast("目标商品底部截图不能为空");
 						return false;
 					}
-					imageJson["TargetProductBottomImg"] = this.targetBottomImg;
+					imageJson["TargetProductBottomImg"] = screenshot.targetBottom;
 
-					if(!this.shopProAImg){
+					if(!screenshot.shopProA){
 						toast("店内商品A截图不能为空");
 						return false;
 					}
-					imageJson["ShopProductBottomImgA"] = this.shopProAImg;
+					imageJson["ShopProductBottomImgA"] = screenshot.shopProA;
 
-					if(!this.shopProBImg){
+					if(!screenshot.shopProB){
 						toast("店内商品B截图不能为空");
 						return false;
 					}
-					imageJson["ShopProductBottomImgB"] = this.shopProBImg;
+					imageJson["ShopProductBottomImgB"] = screenshot.shopProB;
 				}
 				// 附加商品
 				if(data.TaskType==1&&(data.ProductName1||data.ProductName2)){
-					if(!this.AdditionalProductA1Img){
+					if(!screenshot.AdditionalProductA1){
 						toast("附加商品1顶部截图不能为空");
 						return false;
 					}
-					imageJson["AdditionalProductA1"] = this.AdditionalProductA1Img;
+					imageJson["AdditionalProductA1"] = screenshot.AdditionalProductA1;
 					
-					if(!this.AdditionalProductB1Img){
+					if(!screenshot.AdditionalProductB1){
 						toast("附加商品1底部截图不能为空");
 						return false;
 					}
-					imageJson["AdditionalProductB1"] = this.AdditionalProductB1Img;
+					imageJson["AdditionalProductB1"] = screenshot.AdditionalProductB1;
 					
-					if(!this.AdditionalProductA2Img){
+					if(!screenshot.AdditionalProductA2){
 						toast("附加商品2顶部截图不能为空");
 						return false;
 					}
-					imageJson["AdditionalProductA2"] = this.AdditionalProductA2Img;
+					imageJson["AdditionalProductA2"] = screenshot.AdditionalProductA2;
 					
-					if(!this.AdditionalProductB2Img){
+					if(!screenshot.AdditionalProductB2){
 						toast("附加商品2底部截图不能为空");
 						return false;
 					}
-					imageJson["AdditionalProductB2"] = this.AdditionalProductB2Img;
+					imageJson["AdditionalProductB2"] = screenshot.AdditionalProductB2;
 				}
 				if(data.Llshoucandp==1){
-					if(!this.collectionShopImg){
+					if(!screenshot.collectionShop){
 						toast("收藏店铺截图不能为空");
 						return false;
 					}
-					imageJson["ShopCollectionImg"] = this.collectionShopImg;
+					imageJson["ShopCollectionImg"] = screenshot.collectionShop;
 				}
 				
 			}
@@ -1213,11 +1243,11 @@ export default {
 			// 下单核对end
 			// 收藏商品截图
 			if(data.ShouCansp==1  && data.IsAddedservices==1){
-				if(!this.collectionProductImg){
+				if(!screenshot.collectionProductImg){
 					toast("收藏商品截图不能为空");
 					return false;
 				}
-				imageJson["ProductCollectionImg"] = this.collectionProductImg;
+				imageJson["ProductCollectionImg"] = screenshot.collectionProductImg;
 			}
 			// if ($("#merchantChatImg")[0]) {
 			// 	if (isNullOrEmpty($("#merchantChatImg").val())) {
@@ -1291,19 +1321,20 @@ export default {
 					}
 				}
 			}
+			const imageBase64 = await this.base64Img();
 			post('Task/SubmitTask',{
-				UserId: userId,
-				Token: userToKen,
-				TaskAcceptNo: api.pageParam.taskAcceptNo,
-				ImgJson: JSON.stringify(imageJson),
-				PlatOrderNo: $(".orderNo").eq(1).val(),
-				PlatOrderMoney: orderMoney,
-				ConsigneeName: consigneeName,
-				ConsigneeMobile: consigneeMobile,
-				ProvinceCode: province,
-				CityCode: city,
-				DistrictCode: district,
-				AddressInfo: addressInfo,
+				UserId: this.userId,
+				Token: this.token,
+				TaskAcceptNo: this.TaskAcceptNo,
+				ImgJson: JSON.stringify(imageBase64),
+				PlatOrderNo: this.playOrderNo,
+				PlatOrderMoney: this.orderPrice,
+				ConsigneeName: data.ConsigneeName,
+				ConsigneeMobile: data.ConsigneeMobile,
+				ProvinceCode: data.AccountProvinceCode,
+				CityCode: data.AccountCityCode,
+				DistrictCode: data.AccountDistrictCode,
+				AddressInfo: data.AccountAddress,
 				ShopAroundjson:huobisanjiaJson
 			}).then(res=>{
 				toast(res.msg);
@@ -1312,6 +1343,56 @@ export default {
 				},1500);
 			})
 		},
+        // 获取地区列表
+        getAreaList(){
+            GetAreaList().then(res=>{
+                this.areaList = res;
+            });
+        },
+        // 显示城市选择
+        showAreaSelect(){
+            if(this.areaList.length<1){
+                toast('获取地区失败，请重试！')
+                return;
+            } 
+            this.$refs['linkage'].show()
+        },
+        // 确认地区选择
+        onAreaConfirm(e){
+			this.defaultArea = e.checkArr;
+			const data = this.data;
+			data.AccountProvinceCode = e.checkValue[0];
+			data.AccountCityCode = e.checkValue[1];
+			e.checkValue[2]&&(data.AccountDistrictCode = e.checkValue[2]);
+            this.areaText = e.checkArr.join(' ');
+		},
+	  	// 上传图片
+        upImg(obj){
+            getImgPath(1,[],['compressed']).then(path=>{
+                this.screenshot[obj] = path[0]; 
+            })
+		},
+		// 转base64图片
+        async base64Img(){
+            return new Promise(async (resolve,reject)=>{
+				let base64Obj = {};
+				const screenshot =  this.screenshot;
+				let key = Object.keys(this.screenshot);
+                for(let i = 0;i < key.length;i++){
+					let res = '';
+					const val = screenshot[key[i]];
+					if(val){
+						if(/https?:\/\/(?:[^/]+\.)?([^./]+\.\w*.(?:cn|com|top|com\.tw))(?:$|\/)/.test(val)){
+							res=val
+						}else{
+							res = await pathToBase64(val);
+						}
+					}
+					base64Obj[key[i]]=res;
+				}
+                resolve(base64Obj)
+            })
+        },
 		back(){
 			uni.navigateBack();
 		},
