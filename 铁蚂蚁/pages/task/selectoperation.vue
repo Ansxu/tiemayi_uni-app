@@ -102,7 +102,7 @@
                                     <dd>
                                         <div class="imglist thumbnails">
                                             <span class="img">}
-                                                <img :src="data.ImgJson.SearchPageImg">
+                                                <img :src="data.ImgJson.SearchPageImg" @click="previewImage([data.ImgJson.SearchPageImg])">
                                             </span>
                                         </div>
                                     </dd>
@@ -112,7 +112,7 @@
 								<dd>
 											<div class="imglist thumbnails">
 												<span class="img">
-													<img :src="data.ImgJson.CollectionCompetitiveProducts2">
+													<img :src="data.ImgJson.CollectionCompetitiveProducts2" @click="previewImage([data.ImgJson.CollectionCompetitiveProducts2])">
 												</span>
 											</div>
 								</dd>
@@ -122,7 +122,7 @@
 								<dd>
 											<div class="imglist thumbnails">
 												<span class="img">
-													<img :src="data.ImgJson.CollectionCompetitiveProducts3">
+													<img :src="data.ImgJson.CollectionCompetitiveProducts3" @click="previewImage([data.ImgJson.CollectionCompetitiveProducts3])">
 												</span>
 											</div>
 								</dd>
@@ -135,12 +135,12 @@
                                     <dd>
                                                 <div class="imglist thumbnails">
                                                     <span class="img">
-                                                        <img :src="data.ImgJson.ShopAroundlink1" v-if="data.ImgJson.ShopAroundlink1">
+                                                        <img :src="data.ImgJson.ShopAroundlink1" v-if="data.ImgJson.ShopAroundlink1" @click="previewImage([data.ImgJson.ShopAroundlink1])">
                                                     </span>
                                                 </div>
                                                 <div class="imglist thumbnails">
                                                     <span class="img">
-                                                        <img :src="data.ImgJson.ShopAroundlink2" v-if="data.ImgJson.ShopAroundlink2">
+                                                        <img :src="data.ImgJson.ShopAroundlink2" v-if="data.ImgJson.ShopAroundlink2" @click="previewImage([data.ImgJson.ShopAroundlink2])">
                                                     </span>
                                                 </div>
                                     </dd>
@@ -150,10 +150,10 @@
                                     <dd>
                                                 <div class="imglist thumbnails">
                                                     <span class="img">
-                                                        <img :src="data.ImgJson.AddAShoppingCart" v-if="data.ImgJson.AddAShoppingCart">
+                                                        <img :src="data.ImgJson.AddAShoppingCart" v-if="data.ImgJson.AddAShoppingCart" @click="previewImage([data.ImgJson.AddAShoppingCart])">
                                                     </span>
                                                     <span class="img">
-                                                        <img :src="data.ImgJson.CollectionOfGoods" v-if="data.ImgJson.CollectionOfGoods">
+                                                        <img :src="data.ImgJson.CollectionOfGoods" v-if="data.ImgJson.CollectionOfGoods" @click="previewImage([data.ImgJson.CollectionOfGoods])">
                                                     </span>
                                                 </div>
                                     </dd>
@@ -163,28 +163,28 @@
                                 <dd v-if="data.IsBrowseStore==1&&data.ImgJson">
                                     <div class="imglist thumbnails">
                                         <span class="img">
-                                            <img :src="data.ImgJson.TargetProductTopImg" v-if="data.ImgJson.TargetProductTopImg">
+                                            <img :src="data.ImgJson.TargetProductTopImg" v-if="data.ImgJson.TargetProductTopImg"  @click="previewImage([data.ImgJson.TargetProductTopImg])">
                                         </span>
                                         <span class="img">
-                                            <img  :src="data.ImgJson.TargetProductBottomImg" v-if="data.ImgJson.TargetProductBottomImg">
+                                            <img  :src="data.ImgJson.TargetProductBottomImg" v-if="data.ImgJson.TargetProductBottomImg"  @click="previewImage([data.ImgJson.TargetProductBottomImg])">
                                         </span>
                                         <span class="img" v-if="data.ImgJson.ShopProductBottomImgA">
-                                            <img :src="data.ImgJson.ShopProductBottomImgA">
+                                            <img :src="data.ImgJson.ShopProductBottomImgA"  @click="previewImage([data.ImgJson.ShopProductBottomImgA])">
                                         </span>
                                         <span class="img" v-if="data.ImgJson.ShopProductBottomImgB">
-                                            <img :src="data.ImgJson.ShopProductBottomImgB">
+                                            <img :src="data.ImgJson.ShopProductBottomImgB"  @click="previewImage([data.ImgJson.ShopProductBottomImgB])">
                                         </span>
                                         <span class="img" v-if="data.TaskType==1&&(data.ProductName1||data.ProductName2)">
-                                            <img :src="data.ImgJson.AdditionalProductA1" v-if="data.ImgJson.AdditionalProductA1">
+                                            <img :src="data.ImgJson.AdditionalProductA1" v-if="data.ImgJson.AdditionalProductA1"  @click="previewImage([data.ImgJson.AdditionalProductA1])">
                                         </span>
                                         <span class="img" v-if="data.TaskType==1&&(data.ProductName1||data.ProductName2)">
-                                            <img :src="data.ImgJson.AdditionalProductB1" v-if="data.ImgJson.AdditionalProductB1">
+                                            <img :src="data.ImgJson.AdditionalProductB1" v-if="data.ImgJson.AdditionalProductB1"  @click="previewImage([data.ImgJson.AdditionalProductB1])">
                                         </span>
                                         <span class="img" v-if="data.ProductName2&&data.ImgJson.AdditionalProductA2">
-                                                <img :src="data.ImgJson.AdditionalProductA2" v-if="data.ImgJson.AdditionalProductA2">
+                                                <img :src="data.ImgJson.AdditionalProductA2" v-if="data.ImgJson.AdditionalProductA2"  @click="previewImage([data.ImgJson.AdditionalProductA2])">
                                         </span>
                                         <span class="img" v-if="data.ProductName2&&data.ImgJson.AdditionalProductB2">
-                                            <img :src="data.ImgJson.AdditionalProductB2">
+                                            <img :src="data.ImgJson.AdditionalProductB2"  @click="previewImage([data.ImgJson.AdditionalProductB2])">
                                         </span>
                                     </div>
                                 </dd>
@@ -192,7 +192,7 @@
                                 <dd v-if="data.ShouCandp==1">
                                     <div class="imglist thumbnails">
                                         <span class="img">
-                                            <img :src="data.ImgJson.ShopCollectionImg" v-if="data.ImgJson.ShouCandpimg">
+                                            <img :src="data.ImgJson.ShopCollectionImg" v-if="data.ImgJson.ShouCandpimg" @click="previewImage([data.ImgJson.ShouCandpimg])">
                                         </span>
                                     </div>
                                 </dd>
@@ -200,7 +200,7 @@
                                 <dd v-if="data.Llshoucandp==1">
                                     <div class="imglist thumbnails">
                                         <span class="img">
-                                            <img :src="data.ImgJson.ShopCollectionImg" v-if="data.ImgJson.ShopCollectionImg">
+                                            <img :src="data.ImgJson.ShopCollectionImg" v-if="data.ImgJson.ShopCollectionImg" @click="previewImage([data.ImgJson.ShopCollectionImg])">
                                         </span>
                                     </div>
                                 </dd>
@@ -208,7 +208,7 @@
                                 <dd v-if="data.ShouCansp==1">
                                     <div class="imglist thumbnails">
                                         <span class="img">
-                                            <img :src="data.ImgJson.ProductCollectionImg" v-if="data.ImgJson.ProductCollectionImg">
+                                            <img :src="data.ImgJson.ProductCollectionImg" v-if="data.ImgJson.ProductCollectionImg" @click="previewImage([data.ImgJson.ProductCollectionImg])">
                                         </span>
                                     </div>
                                 </dd>
@@ -216,7 +216,7 @@
                                 <dd v-if="data.Jiarugouwu==1">
                                     <div class="imglist">
                                         <span class="img">
-                                            <img :src="data.ImgJson.ShoppingCartImg" v-if="data.ImgJson.ShoppingCartImg">
+                                            <img :src="data.ImgJson.ShoppingCartImg" v-if="data.ImgJson.ShoppingCartImg" @click="previewImage([data.ImgJson.ShoppingCartImg])">
                                         </span>
                                     </div>
                                 </dd>
@@ -225,7 +225,7 @@
 								<dd>
 									<div class="imglist thumbnails">
 										<span class="img">
-											<img :src="data.ImgJson.OrderDetailsImg">
+											<img :src="data.ImgJson.OrderDetailsImg" @click="previewImage([data.ImgJson.OrderDetailsImg])">
 										</span>
 									</div>
 								</dd>
@@ -276,25 +276,25 @@
                                 <dd><label>第一步：去{{data.PlatName}}评价并截图</label> 
                                     <div class="evaluate_box" v-if="data.EvaluationClaim">
                                         <p class="evaluateTit">文字要求<span class="c_Org">（评价必须粘贴一下文字）</span></p>
-                                        <textarea type="text" class="keybox" id="praiseText" readonly v-model="data.EvaluationClaim"></textarea>
-                                        <p class="link_btn" onclick="CopyPraiseText()">复制评价文字</p>
+                                        <textarea type="text" class="keybox" id="praiseText" readonly :value="data.EvaluationClaim" disabled></textarea>
+                                        <p class="link_btn" @click="copy(data.EvaluationClaim)">复制评价文字</p>
                                     </div>
                                     <div class="evaluate_box" style="margin-top:0.5rem;" v-if="data.EvaluationImg||data.EvaluationImg1||data.EvaluationImg2||data.EvaluationImg3||data.EvaluationImg4">
                                         <p class="evaluateTit">图片要求<span class="c_Org">（在评价里必须上传一下图片）</span></p>
                                         <div class="imglist thumbnails evaluationImglst">
-                                            <span class="img" v-if="data.EvaluationImg">
+                                            <span class="img" v-if="data.EvaluationImg" @click="previewImage([data.EvaluationImg])">
                                                 <img :src="data.EvaluationImg">
                                             </span> 
-                                            <span class="img" v-if="data.EvaluationImg1">
+                                            <span class="img" v-if="data.EvaluationImg1"  @click="previewImage([data.EvaluationImg1])">
                                                 <img :src="data.EvaluationImg1">
                                             </span> 
-                                            <span class="img" v-if="data.EvaluationImg2">
+                                            <span class="img" v-if="data.EvaluationImg2"  @click="previewImage([data.EvaluationImg2])">
                                                 <img :src="data.EvaluationImg2">
                                             </span> 
-                                            <span class="img" v-if="data.EvaluationImg3">
+                                            <span class="img" v-if="data.EvaluationImg3"  @click="previewImage([data.EvaluationImg3])">
                                                 <img :src="data.EvaluationImg3">
                                             </span> 
-                                            <span class="img" v-if="data.EvaluationImg4">
+                                            <span class="img" v-if="data.EvaluationImg4"  @click="previewImage([data.EvaluationImg4])">
                                                 <img :src="data.EvaluationImg4">
                                             </span>
                                         </div>
@@ -310,11 +310,11 @@
                                 <dd><label>第二步：上传物流签收与评价截图</label></dd>
                                 <dd>
                                     <div class="imglist thumbnails">
-                                        <span class="img">
-                                            <img :src="data.OkImgJson.LogisticsReceiptImg" v-if="data.OkImgJson.LogisticsReceiptImg">
+                                        <span class="img" v-if="data.OkImgJson.LogisticsReceiptImg" @click="previewImage([data.OkImgJson.LogisticsReceiptImg])">
+                                            <img :src="data.OkImgJson.LogisticsReceiptImg">
                                         </span>
-                                        <span class="img">
-                                            <img :src="data.OkImgJson.EvaluationImg" v-if="data.OkImgJson.EvaluationImg">
+                                        <span class="img" v-if="data.OkImgJson.EvaluationImg" @click="previewImage([data.OkImgJson.EvaluationImg])">
+                                            <img :src="data.OkImgJson.EvaluationImg">
                                         </span>
                                     </div>
                                 </dd>
@@ -367,11 +367,12 @@
 </template>
 
 <script>
-import {post,toast,goUrl} from '@/utils';
+import {post,toast,goUrl,previewImage} from '@/utils';
 import h5Copy  from '@/utils/junyi-h5-copy';
 export default {
   data() {
     return {
+        previewImage,
         userId:'',
         token:'',
         TaskAcceptNo:'',
@@ -517,6 +518,11 @@ export default {
                 color:#5c91f1;
             }
         }
+    }
+}
+.img{
+    img{
+        height:100%;
     }
 }
 </style>
