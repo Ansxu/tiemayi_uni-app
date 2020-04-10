@@ -368,6 +368,12 @@ export function upImgBase64(base64) {
     })
   })
 }
+// 全屏浏览图片
+export function previewImage(url){
+  uni.previewImage({
+    urls:url
+  })
+}
 // 上传文件
 export function upFile(filePath) {
   return new Promise((resolve, reject) => {

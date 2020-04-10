@@ -4,7 +4,7 @@
 			<div class="head bb_border">
 				<p @click="back" class="btn_back"></p>
 				<div class="title center">操作任务</div>
-				<p href="#" class="icon_r txt">佣金 <span style="color: #ee7818;" id="taskCommission">0.00金</span></p>
+				<p href="#" class="icon_r txt">佣金 <span style="color: #ee7818;" id="taskCommission">{{data.Commission}}金</span></p>
 			</div>
 		</div>
 		<div class="main mt10">
@@ -70,9 +70,16 @@
 					<p style="font-size:0.2rem; color:red;" v-if="data.Remark">说明：{{data.Remark}}</p>
 					<div class="attachClaimImg">
 						<p style="font-size:0.2rem; color:red;" v-if="data.AttachClaimImg||data.AttachClaimImg1||data.AttachClaimImg2">备注图片：</p>
-						<div class="img_div" v-if="data.AttachClaimImg"><img :src="data.attachClaimImg" /></div> 
-						<div class="img_div" v-if="data.AttachClaimImg1"><img :src="data.AttachClaimImg1" /></div> 
-						<div class="img_div" v-if="data.AttachClaimImg2"><img :src="data.AttachClaimImg2" /></div> 
+						<!-- 查看备注图片 -->
+						<div class="img_div" v-if="data.AttachClaimImg" @click="previewImage(data.attachClaimImg)">
+							<img :src="data.attachClaimImg" />
+						</div> 
+						<div class="img_div" v-if="data.AttachClaimImg1" @click="previewImage(data.AttachClaimImg1)">
+							<img :src="data.AttachClaimImg1" />
+						</div> 
+						<div class="img_div" v-if="data.AttachClaimImg2" @click="previewImage(data.AttachClaimImg2)">
+							<img :src="data.AttachClaimImg2" />
+						</div> 
 						<div style="clear:both;"></div>
 					</div>
 					<div class="itembox">
@@ -179,8 +186,7 @@
 						<block v-if="data.AcceptTaskStatus!=9">
 							<div class="Step Step-2">
 								<div class="No"><span>核对店铺是否正确 </span>
-									<a class="link_btn">点击查看示例</a>
-									<!-- <a class="link_btn" onclick="showExamples(4)">点击查看示例</a> -->
+									<p class="link_btn" @click="showExamples(4)">点击查看示例</p>
 								</div>
 								<div class="Examine">
 									<div style="text-align:center;">店铺名认证：{{data.ShopName}}</div>
@@ -195,8 +201,7 @@
 							</div>
 							<div class="Step Step-2" v-if="data.SetCommodityKeywords">
 								<div class="No"><span>核对关键词是否正确  </span>
-									<a class="link_btn">点击查看示例</a>
-									<!-- <a class="link_btn" onclick="showExamples(5)">点击查看示例</a> -->
+									<p class="link_btn" @click="showExamples(5)">点击查看示例</p>
 								</div>
 								<div class="Examine">
 									<div style="text-align:center;">关键词认证：{{data.SetCommodityKeywords}}</div>
@@ -238,8 +243,7 @@
 
 						<div class="Step Step-1" v-if="data.IsComparisonShop==1&& data.TaskType==1&& data.AcceptTaskStatus!=9">
 							<div class="No"><span>第一步&nbsp;货比三家</span>
-								<!-- <a class="link_btn" onclick="showExamples(0)">点击查看示例</a> -->
-								<a class="link_btn">点击查看示例</a>
+								<p class="link_btn" @click="showExamples(0)">点击查看示例</p>
 							</div>
 							<div class="txtbox">
 								<p>1、请确认使用接单账号登录{{data.PlatName}}应用</p>
@@ -252,13 +256,13 @@
 									<div class="from">
 										<p>货比三家链接1</p>
 										<div class="from-item mt10">
-											<input class="input" id="huobisanj1" style="width:300px" :value="data.ShoparoundLink1" type="text" placeholder="货比商品链接1" />
+											<input class="input" id="huobisanj1" style="width:300px" v-model="data.ShoparoundLink1" type="text" placeholder="货比商品链接1" />
 										</div>
 									</div>
 									<div class="from">
 										<p>货比三家链接2</p>
 										<div class="from-item mt10">
-											<input class="input" id="huobisanj2" style="width:300px" :value="data.ShoparoundLink2" type="text" placeholder="货比商品链接2" />
+											<input class="input" id="huobisanj2" style="width:300px" v-model="data.ShoparoundLink2" type="text" placeholder="货比商品链接2" />
 										</div>
 									</div>
 								</div>
@@ -493,16 +497,14 @@
 							<!-- 浏览店铺 -->
 							<div class="Step Step-3" v-if="(data.IsBrowseStore==1||data.IsCollectionShop==1||data.IsCollectionProduct==1||data.IsAddCart==1)&&data.AcceptTaskStatus!=9">
 								<div class="No"><span>{{data.IsSearchList==1||data.IsComparisonShop==1?"第二步":"第一步"}}&nbsp;浏览店铺</span>
-									<!-- <a class="link_btn" onclick="showExamples(1)">点击查看示例</a> -->
-									<a class="link_btn">点击查看示例</a>
+									<p class="link_btn" @click="showExamples(1)">点击查看示例</p>
 								</div>
 								<div class="txtbox">
 									<p>1、根据商品主图、价格、名称等条件找到目标商品，从头到尾慢慢 浏览，停留至少5分钟 ，并上传宝贝链接核对
 									</p>
 									<block v-if="data.AcceptTaskStatus!=9">
 										<div class="No"><span>核对主宝贝是否正确  </span>
-											<!-- <a class="link_btn" onclick="showExamples(6)">点击查看示例</a> -->
-											<a class="link_btn">点击查看示例</a>
+											<p class="link_btn" @click="showExamples(6)">点击查看示例</p>
 										</div>
 										<div class="Examine">
 											<div class="piclist Uploadimg">
@@ -515,13 +517,13 @@
 												<div class="from" v-if="data.ProductName2">
 													<p>验证附加商品1链接</p>
 													<div class="from-item mt10">
-													<input class="input" name="goodslink" id="goodslink1" style="width:300px" :value="data.ShoparoundLink2" type="text" placeholder="附加商品链接1" />
+													<input class="input" name="goodslink" id="goodslink1" style="width:300px" v-model="data.ShoparoundLink2" type="text" placeholder="附加商品链接1" />
 													</div>
 												</div>
 												<div class="from" v-if="data.ProductName2">
 													<p>验证附加商品2链接</p>
 													<div class="from-item mt10">
-													<input class="input" name="goodslink" id="goodslink2" style="width:100%" :value="data.ShoparoundLink2" type="text" placeholder="附加商品链接2" />
+													<input class="input" name="goodslink" id="goodslink2" style="width:100%" v-model="data.ShoparoundLink2" type="text" placeholder="附加商品链接2" />
 													</div>
 												</div>
 												<p class="btn_100 cfff" @click="checkGoodLink">点我核对</p>
@@ -643,8 +645,9 @@
 							</div>
 							<block v-if="data.TaskType==1">
 								<div class="Step Step-4" v-if="(data.ChatPlaceAnOrder>0&&(data.IsPresaleTask==0||(data.IsPresaleTask==1&&data.AcceptTaskStatus==9)))&&(data.IsCompetingGoodsTask==0||(data.IsCompetingGoodsTask==1&&data.AcceptTaskStatus==9))">
-									 <!-- onclick="showExamples(2)" -->
-									<div class="No"><span>{{(data.IsSearchList==1||data.IsComparisonShop==1)?(data.IsBrowseStore==1||data.IsCollectionShop==1||data.IsCollectionProduct==1||data.IsAddCart==1)?"第三步":"第二步":"第一步"}}&nbsp;下单核对</span><a style="display:none" class="link_btn">点击查看示例</a></div>
+									<div class="No"><span>{{(data.IsSearchList==1||data.IsComparisonShop==1)?(data.IsBrowseStore==1||data.IsCollectionShop==1||data.IsCollectionProduct==1||data.IsAddCart==1)?"第三步":"第二步":"第一步"}}&nbsp;下单核对</span>
+										<p style="display:none" class="link_btn" @click="showExamples(2)">点击查看示例</p>
+									</div>
 									<div class="txtbox">
 										<p>1、把商品加入购物车，确认件数，颜色尺码，如需留言按要求留言，拍下订单
 										</p>
@@ -656,8 +659,7 @@
 											</div>
 										</div>
 										<div class="ftbtn mb10 mt10">
-											<a class="btn" id="heduiBtn" @click="checkPlayOrderNo">点我核对</a>
-											<!-- <a class="btn" id="heduiBtn" onclick="verifyTask({{data.IsAmoy}},{{data.isYanOrder}})">点我核对</a> -->
+											<p class="btn" id="heduiBtn" @click="checkPlayOrderNo">点我核对</p>
 										</div>
 									</div>
 								</div>
@@ -666,8 +668,7 @@
 										<span>
 										{{(data.IsSearchList==1||data.IsComparisonShop==1)?(data.IsBrowseStore==1||data.IsCollectionShop==1||data.IsCollectionProduct==1||data.IsAddCart==1)?data.ChatPlaceAnOrder>0?"第四步":"第三步":"第二步":"第一步"}}&nbsp;平台下单信息
 										</span>
-										<a style="display:none" class="link_btn">点击查看示例</a>
-										<!-- <a style="display:none" class="link_btn"onclick="showExamples(3)">点击查看示例</a> -->
+										<p style="display:none" class="link_btn" @click="showExamples(3)">点击查看示例</p>
 											</div>
 									<block v-if="data.isYanOrder">
 										<div class="from">
@@ -695,26 +696,26 @@
 										<div id="userinfo" style="display:none">
 										<div class="from">
 											<p>订单收货联系人：</p>
-											<div class="from-item mt10"><input class="input" id="consignee" :value="data.ConsigneeName" type="text" placeholder="请输入联系人名字" /></div>
+											<div class="from-item mt10"><input class="input" id="consignee" v-model="data.ConsigneeName" type="text" placeholder="请输入联系人名字" /></div>
 										</div>
 										<div class="from">
 											<p>订单收货联系电话：</p>
-											<div class="from-item mt10"><input class="input" id="consigneeMobile" :value="data.ConsigneeMobile" type="text" placeholder="请输入联系电话" /></div>
+											<div class="from-item mt10"><input class="input" id="consigneeMobile" v-model="data.ConsigneeMobile" type="text" placeholder="请输入联系电话" /></div>
 										</div>
 										<div class="from">
 											<p>订单收货地址：</p>
 											<div class="from-item mt10" @click="showAreaSelect">
 												<!-- onclick="picker3()" -->
-												<input type="text" class="input" id="area" :value="data.AccountAreaText" placeholder="请选择城市" disabled />
+												<input type="text" class="input" id="area" v-model="data.AccountAreaText" placeholder="请选择城市" disabled />
 												<span class="icon-arrow icon-arrowRight"></span>
 											</div>
-											<input type="hidden" id="provinceCode" :value="data.AccountProvinceCode" readonly="true" />
+											<!-- <input type="hidden" id="provinceCode" :value="data.AccountProvinceCode" readonly="true" />
 											<input type="hidden" id="cityCode" :value="data.AccountCityCode" readonly="true" />
-											<input type="hidden" id="districtCode" :value="data.AccountDistrictCode" readonly="true" />
+											<input type="hidden" id="districtCode" :value="data.AccountDistrictCode" readonly="true" /> -->
 										</div>
 										<div class="from">
 											<p>订单收货详细地址：</p>
-											<div class="from-item mt10"><input class="input" id="xiangxidizhi" :value="data.AccountAddress" type="text" placeholder="请输入详细地址" /></div>
+											<div class="from-item mt10"><input class="input" id="xiangxidizhi" v-model="data.AccountAddress" type="text" placeholder="请输入详细地址" /></div>
 										</div>
 										</div>
 									</block>
@@ -725,8 +726,7 @@
 				</div>
 				<p style="font-size:0.16rem;font-weight:bold;color:red;" v-if="((data.IsPresaleTask==1&&data.AcceptTaskStatus!=9))||(data.IsCompetingGoodsTask==1&&data.AcceptTaskStatus!=9)">不到订单支付时间不能拍下付款，否则该笔订单任务撤销（处罚10金一单）</p>
 				<div class="ftbtn mb10 mt10">
-					<p class="btn" id="submitBtn" @click="base64Img">提交审核</p>
-					<!-- <p class="btn" id="submitBtn" @click="submitTask">提交审核</p> -->
+					<p class="btn" id="submitBtn" @click="submitTask">提交审核</p>
 				</div>
 			</div>
 		</div>
@@ -759,7 +759,7 @@
 </template>
 
 <script>
-import {post,toast,goUrl,getImgPath} from '@/utils';
+import {post,toast,goUrl,getImgPath,previewImage} from '@/utils';
 import h5Copy  from '@/utils/junyi-h5-copy';
 import GetAreaList from '@/utils/areaList';
 import wPicker from "@/components/w-picker/w-picker.vue";
@@ -767,6 +767,7 @@ import {pathToBase64} from '@/utils/image-tools';
 export default {
   data() {
     return {
+		previewImage,
         userId:'',
         token:'',
         TaskAcceptNo:'',
@@ -817,6 +818,7 @@ export default {
 		areaText:'',//地区显示的值
 		areaList:[],//地区列表
 		defaultArea:['广东省','深圳市','龙华新区'],//默认地址
+		OperationCountdown:null,//操作倒计时
     };
   },
   onLoad(options) {
@@ -840,18 +842,24 @@ export default {
 				}
 				this.isPresaleTask = data.IsPresaleTask;
 				if(data.IsPresaleTask==1){
-                    // api.alert({
-                    //     title: "注意！",
-                    //     msg: "预售任务，付款时间：" + json.obj.PaymentStartTime + "-" + json.obj.PaymentEndTime + "。请完全按照商家要求操作，确认每一步都间隔足够时间，不按照要求做的，平台有权封停账号",
-                    //     buttons: ["我知道了"]
-                    // });
+					uni.showModal({
+						title:'注意！',
+						content:`预售任务，付款时间：${data.PaymentStartTime}-${data.PaymentEndTime}。请完全按照商家要求操作，确认每一步都间隔足够时间，不按照要求做的，平台有权封停账号`,
+						showCancel:false,
+						confirmText:'我知道了'
+					})
 				}else{
-                    // api.alert({
-                    //     title: "注意！",
-                    //     msg: "请完全按照商家要求操作，确认每一步都间隔足够时间，不按照要求做的，平台有权封停账号",
-                    //     buttons: ["我知道了"]
-                    // });
+					uni.showModal({
+						title:'注意！',
+						content:`请完全按照商家要求操作，确认每一步都间隔足够时间，不按照要求做的，平台有权封停账`,
+						showCancel:false,
+						confirmText:'我知道了'
+					})
 				}
+				// 操作倒计时
+				if (data.AcceptTaskStatus == 0) {
+                    this.timerStart(data.OperationCountdown);
+                }
 				this.data = data;
 
 			})
@@ -1373,7 +1381,69 @@ export default {
 				}
                 resolve(base64Obj)
             })
-        },
+		},
+		// 操作剩余时间倒计时
+		timerStart(countdown) {
+			if(this.OperationCountdown) return;
+			var i = parseInt(countdown);
+			var alls = 60 * i;
+			var h = parseInt(i / 60);
+			var m = i - (h * 60);
+			if (m == 0) {
+				--h;
+				m = 59;
+			} else
+				--m
+			var s = 59;
+			this.OperationCountdown = setInterval(function() {
+				if (alls <= 0) {
+					clearInterval(this.OperationCountdown);
+					toast("任务超时未处理，系统已取消");
+					uni.navigateBack();
+				} else {
+					--s;
+					--alls;
+					if (m == 0 && h > 0 && alls > 0) {
+						--h;
+						m = 59
+					}
+					if (s == 0) {
+						--m;
+						s = 59;
+					}
+
+				}
+			}, 1000);
+		},
+		// 查看示例
+		showExamples(index){
+			let img ='';
+			switch(index){
+				case 0:
+					img = '/static/image/examplespic/firststep.jpg';
+					break;
+				case 1:
+					img = '/static/image/examplespic/secondsteps.jpg';
+					break;
+				case 2:
+					img = '/static/image/examplespic/thirdsteps.jpg';
+					break;
+				case 3:
+					img = '/static/image/examplespic/fourthsteps.jpg';
+					break;
+				case 4:
+					img = '/static/image/examplespic/exampleshop.jpg';
+					break;
+				case 5:
+					img = 'http://www.mu352.com/images/shili.jpg';
+					break;
+				case 6:
+					img = '/static/image/examplespic/hedui.jpg';
+					break;
+
+			}
+			previewImage([img]);
+		},
 		back(){
 			uni.navigateBack();
 		},
