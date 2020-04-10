@@ -216,22 +216,18 @@
 								<div class="piclist Uploadimg">
 									<ul class="clear">
 									<li v-if="(data.ShootTheNextDay==0||data.ShootTheNextDay==2)&&data.IsPresaleTask==1">
-										<div class="img">
-											<!-- <div class="upimg" onclick="getpic(this,'AddAShoppingCart',20)"> -->
+										<div class="img" @click="upImg('AddAShoppingCart')">
 											<div class="upimg">
-												<img class="uploadImg" />
+												<img class="uploadImg" :src="screenshot.AddAShoppingCart"/>
 											</div>
-											<input type="hidden" id="AddAShoppingCart" readonly="true" />
 										</div>
 										<p class="text">加购物车</p>
 									</li>
 									<li v-if="(data.ShootTheNextDay==1||data.ShootTheNextDay==2)&&data.IsPresaleTask==1">
-										<div class="img">
-											<!-- <div class="upimg" onclick="getpic(this,'CollectionOfGoods',20)"> -->
+										<div class="img" @click="upImg('CollectionOfGoods')">
 											<div class="upimg">
-												<img class="uploadImg" />
+												<img class="uploadImg" :src="screenshot.CollectionOfGoods"/>
 											</div>
-											<input type="hidden" id="CollectionOfGoods" readonly="true" />
 										</div>
 										<p class="text">收藏商品</p>
 									</li>
@@ -315,21 +311,18 @@
 									<div class="piclist Uploadimg">
 										<ul class="clear">
 											<li v-if="data.JiaGoujp1==1">
-												<div class="img">
-												<!-- <div class="upimg" onclick="getpic(this,'jgotherA',20)"> -->
-												<div class="upimg">
-													<img class="uploadImg" />
-												</div>
-												<input type="hidden" id="jgotherA" readonly="true" />
+												<div class="img" @click="upImg('jgotherA')">
+													<div class="upimg">
+														<img class="uploadImg" :src="screenshot.jgotherA"/>
+													</div>
 												</div>
 												<p class="text">加购竞品1</p>
 											</li>
 											<li v-if="data.JiaGoujp2==1">
-												<div class="img">
+												<div class="img" @click="upImg('jgotherB')">
 													<div class="upimg">
-													<!-- <div class="upimg" onclick="getpic(this,'jgotherB',20)"> -->
-													<img class="uploadImg" /></div>
-													<input type="hidden" id="jgotherB" readonly="true" />
+														<img class="uploadImg" :src="screenshot.jgotherB"/>
+													</div>
 												</div>
 												<p class="text">加购竞品2</p>
 											</li>
@@ -348,11 +341,10 @@
 										<ul class="clear">
 
 											<li>
-												<div class="img">
-												<div class="upimg">
-												<!-- <div class="upimg" onclick="getpic(this,'scdpotherA',20)"> -->
-												<img class="uploadImg" /></div>
-												<input type="hidden" id="scdpotherA" readonly="true" />
+												<div class="img" @click="upImg('scdpotherA')">
+													<div class="upimg">
+														<img class="uploadImg" :src="screenshot.scdpotherA"/>
+													</div>
 												</div>
 												<p class="text">收藏店铺</p>
 											</li>
@@ -372,12 +364,11 @@
 										<ul class="clear">
 
 											<li>
-											<div class="img">
-												<div class="upimg">
-												<!-- <div class="upimg" onclick="getpic(this,'collectionProduct',20)"> -->
-												<img class="uploadImg" /></div>
-												<input type="hidden" id="collectionProduct" readonly="true" />
-											</div>
+												<div class="img" @click="upImg('collectionProduct')">
+													<div class="upimg">
+														<img class="uploadImg" :src="screenshot.collectionProduct"/>
+													</div>
+												</div>
 												<p class="text">收藏商品</p>
 											</li>
 										</ul>
@@ -396,12 +387,11 @@
 										<ul class="clear">
 
 											<li>
-											<div class="img">
-												<div class="upimg">
-												<!-- <div class="upimg" onclick="getpic(this,'cartImg',20)"> -->
-													<img class="uploadImg" /></div>
-												<input type="hidden" id="cartImg" readonly="true" />
-											</div>
+												<div class="img" @click="upImg('cartImg')">
+													<div class="upimg">
+														<img class="uploadImg" :src="screenshot.cartImg"/>
+													</div>
+												</div>
 												<p class="text">加入购物车</p>
 											</li>
 										</ul>
@@ -420,11 +410,10 @@
 										<ul class="clear">
 
 											<li>
-												<div class="img">
-												<div class="upimg">
-												<!-- <div class="upimg" onclick="getpic(this,'fbbotherA',20)"> -->
-												<img class="uploadImg" /></div>
-												<input type="hidden" id="fbbotherA" readonly="true" />
+												<div class="img" @click="upImg('fbbotherA')">
+													<div class="upimg">
+														<img class="uploadImg" :src="screenshot.fbbotherA"/>
+													</div>
 												</div>
 												<p class="text">浏览副宝贝</p>
 											</li>
@@ -444,11 +433,10 @@
 										<ul class="clear">
 
 											<li>
-												<div class="img">
-												<div class="upimg">
-												<!-- <div class="upimg" onclick="getpic(this,'dzotherA',20)"> -->
-												<img class="uploadImg" /></div>
-												<input type="hidden" id="dzotherA" readonly="true" />
+												<div class="img" @click="upImg('dzotherA')">
+													<div class="upimg">
+														<img class="uploadImg" :src="screenshot.dzotherA"/>
+													</div>
 												</div>
 												<p class="text">点赞好评</p>
 											</li>
@@ -468,11 +456,10 @@
 										<ul class="clear">
 
 											<li>
-												<div class="img">
-												<div class="upimg">
-												<!-- <div class="upimg" onclick="getpic(this,'llwdjotherA',20)"> -->
-												<img class="uploadImg" /></div>
-												<input type="hidden" id="llwdjotherA" readonly="true" />
+												<div class="img" @click="upImg('llwdjotherA')">
+													<div class="upimg">
+														<img class="uploadImg" :src="screenshot.llwdjotherA"/>
+													</div>
 												</div>
 												<p class="text">浏览“问大家”</p>
 											</li>
@@ -492,11 +479,10 @@
 										<ul class="clear">
 
 											<li>
-												<div class="img">
-												<div class="upimg">
-												<!-- <div class="upimg" onclick="getpic(this,'twwdjotherA',20)"> -->
-												<img class="uploadImg" /></div>
-												<input type="hidden" id="twwdjotherA" readonly="true" />
+												<div class="img" @click="upImg('twwdjotherA')">
+													<div class="upimg">
+														<img class="uploadImg" :src="screenshot.twwdjotherA"/>
+													</div>
 												</div>
 												<p class="text">提问“问大家”</p>
 											</li>
@@ -601,40 +587,36 @@
 											<block v-if="data.TaskType==1&&(data.ProductName1||data.ProductName2)">
 												<block v-if="data.ProductName1">
 													<li>
-														<div class="img">
+														<div class="img" @click="upImg('AdditionalProductA1')">
 															<div class="upimg">
-															<!-- <div class="upimg" onclick="getpic(this,'AdditionalProductA1',20)"> -->
-																<img class="uploadImg" /></div>
-															<input type="hidden" id="AdditionalProductA1" readonly="true" />
+																<img class="uploadImg" :src="screenshot.AdditionalProductA1"/>
+															</div>
 														</div>
 														<p class="text">附加商品1顶部</p>
 													</li>
 													<li>
-														<div class="img">
+														<div class="img" @click="upImg('AdditionalProductB1')">
 															<div class="upimg">
-															<!-- <div class="upimg" onclick="getpic(this,'AdditionalProductB1',20)"> -->
-																<img class="uploadImg" /></div>
-															<input type="hidden" id="AdditionalProductB1" readonly="true" />
+																<img class="uploadImg" :src="screenshot.AdditionalProductB1"/>
+															</div>
 														</div>
 														<p class="text">附加商品1底部</p>
 													</li>
 												</block>
 												<block v-if="data.ProductName2">
 													<li>
-														<div class="img">
+														<div class="img" @click="upImg('AdditionalProductA2')">
 															<div class="upimg">
-															<!-- <div class="upimg" onclick="getpic(this,'AdditionalProductA2',20)"> -->
-																<img class="uploadImg" /></div>
-															<input type="hidden" id="AdditionalProductA2" readonly="true" />
+																<img class="uploadImg" :src="screenshot.AdditionalProductA2"/>
+															</div>
 														</div>
 														<p class="text">附加商品2顶部</p>
 													</li>
 													<li>
-														<div class="img">
+														<div class="img" @click="upImg('AdditionalProductB2')">
 															<div class="upimg">
-															<!-- <div class="upimg" onclick="getpic(this,'AdditionalProductB2',20)"> -->
-																<img class="uploadImg" /></div>
-															<input type="hidden" id="AdditionalProductB2" readonly="true" />
+																<img class="uploadImg" :src="screenshot.AdditionalProductB2"/>
+															</div>
 														</div>
 														<p class="text">附加商品2底部</p>
 													</li>
@@ -647,11 +629,10 @@
 										<div class="piclist Uploadimg">
 											<ul class="clear">
 												<li>
-													<div class="img">
+													<div class="img" @click="upImg('collectionShop')">
 														<div class="upimg">
-														<!-- <div class="upimg" onclick="getpic(this,'collectionShop',20)"> -->
-															<img class="uploadImg" /></div>
-														<input type="hidden" id="collectionShop" readonly="true" />
+															<img class="uploadImg" :src="screenshot.collectionShop"/>
+														</div>
 													</div>
 												</li>
 											</ul>
