@@ -9,45 +9,59 @@
 		<div class="main bg_fff">
 			<div class="noticeList">
 				<ul>
-					<li v-for="(item,oll) in 7" :key="oll">
-						<div id="noticeId" style="display:none">34mgjkk</div>
-						<a href="./noticedetail.html" class="box">
+					<li v-for="(item,oll) in list" :key="oll">
+						<div @click="goUrl('other/noticedetail',{id:item.Id})" class="box">
 							<div class="title">
-								<p class="text">标题大概</p>
-								<i class="icon icon_txt" v-if="item.isRead==0">NEW</i>
-								<i class="icon icon_txt"></i>
+								<p class="text">{{item.Title}}</p>
+								<i class="icon icon_txt" v-if="item.IsRead === 0">NEW</i>
+								<i class="icon icon_txt" v-else></i>
 							</div>
-							<span class="time">2020-04</span>
-						</a>
+							<span class="time">{{item.PubTime.split('T')[0]}}</span>
+						</div>
 					</li>
 				</ul>
 			</div>
-					<!--  循环 -->
-			<!-- <script id="noticeListTemp" type="text/x-dot-template">
-			  {{~it:value:index}}
-			  <li>
-				<div id="noticeId" style="display:none">{{=value.Id}}</div>
-				<a href="./noticedetail.html" class="box">
-					<div class="title">
-						<p class="text">{{=value.Title}}</p>
-						{{? value.IsRead === 0}}
-						<i class="icon icon_txt">NEW</i>
-						{{??}}
-						<i class="icon icon_txt"></i>
-						{{?}}
-					</div>
-					<span class="time">{{=value.PubTime.split('T')[0]}}</span>
-				</a>
-			  </li>
-			  {{~}}
-			</script> -->
 		
 		</div>
 	</div>
 </template>
 
 <script>
+import {post,toast,goUrl,editTime} from '@/utils';
+import h5Copy  from '@/utils/junyi-h5-copy';
+export default {
+  data() {
+    return {
+		goUrl,
+		editTime,
+        userId:'',
+		token:'',
+		list:[],
+    };
+  },
+  onLoad(options) {
+    this.userId = uni.getStorageSync('userId');
+    this.token = uni.getStorageSync('token');
+    this.getData();
+  },
+  onShow() {},
+  methods: {
+	  getData(){
+		  post('Notice/GetNoticeByMember',{
+				UserId: this.userId,
+				Token: this.token,
+				Page: 1,
+				PageSize: 10,
+                SendType: 0
+		  }).then(res=>{
+			  const list = res.obj;
+			  this.list=list.NoticeList;
+		  })
+	  }
+  }
+}
 </script>
+
 
 <style lang="scss" scoped>
 	@import '../../css/style_other.css';

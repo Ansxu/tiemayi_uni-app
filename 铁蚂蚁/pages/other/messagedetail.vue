@@ -8,15 +8,6 @@
 					</div>
 			</div>
 		</div>
-		<!--dot.js赋值-->
-		<!-- <script id="messageDetailTemp" type="text/x-dot-template">
-				<div class="messagedetail">
-						<div class="title mb10">{{=it.Title}}</div>
-						<div class="con">
-							{{=it.Memo}}
-						</div>
-				</div>
-		</script> -->
 	</div>
 </template>
 
