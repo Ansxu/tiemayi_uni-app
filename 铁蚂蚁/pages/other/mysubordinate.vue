@@ -2,15 +2,15 @@
 	<div class="bg_gray">
 		<div class="h45">
 	        <div class="head bb_border">
-	            <a href="javascript:api.closeWin();" class="btn_back"></a>
+	            <view @click="back" class="btn_back"></view>
 	            <div class="title center">我的推广</div>
 	        </div>
 	    </div>
 	    <div class="main app_tg">
 	        <div class="tab-hd tabList">
 	            <ul class="li50 clear">
-	                <li class="active">全部</li>
-	                <li>已认证</li>
+	                <li :class="selectval==0? 'active':''" @click.stop="seltab(0)">徒弟</li>
+	                <li :class="selectval==1? 'active':''" @click.stop="seltab(1)">徒孙</li>
 	            </ul>
 	        </div>
 	        <!-- <script id="subordinateListTemp" type="text/x-dot-template">
@@ -31,10 +31,10 @@
 	                        <th>注册时间</th>
 	                    </tr>
 	                    <tbody id="subordinateList">
-							<tr v-for="(item,index) in 5" :key="index">
-								<td><p style="color:#0094ff;">张三</p><p>13545676545</p></td>
-								<td>10 金</td>
-								<td>2019-03-23</td>
+							<tr v-for="(item,index) in data.SubordinateList" :key="index">
+								<td><p style="color:#0094ff;">{{item.UserRName}}</p><p>{{item.Mobile}}</p></td>
+								<td>{{item.Income}} 金</td>
+								<td>{{item.CreateTime}}</td>
 							</tr>
 	                    </tbody>
 	                </table>
@@ -50,6 +50,89 @@
 </template>
 
 <script>
+	import {post} from '@/utils'
+	export default {
+		data(){
+			return {
+					userId:'',
+					token:'',
+					pageNo:1,
+					selectval:0,
+					stop:true,
+					data:{},
+					sel:true
+				}
+			},
+			onLoad(e){
+				this.userId = uni.getStorageSync("userId");
+				this.token = uni.getStorageSync("token");
+				// console.log(this.data)
+				this.selectval=e.clickval
+				console.log(e)
+				this.init()
+			},
+			onShow(){
+				  if (
+					  this.userId !== uni.getStorageSync("userId") ||
+					  this.token !== uni.getStorageSync("token")
+					) {
+					  this.userId = uni.getStorageSync("userId");
+					  this.token = uni.getStorageSync("token");
+					}
+			},
+			onReachBottom: function() {
+				this.pageNo++
+				this.init() //
+				// console.log(this.RecordDetail)
+			},
+			methods:{
+				seltab(e){
+					this.pageNo=1
+					console.log(e)
+					if(this.selectval==e==0){
+						this.selectval=e
+						
+						this.init()
+					}else if(this.selectval==e==1){
+						this.selectval=e
+						
+						this.init()
+					}
+				},
+				back(){
+					uni.navigateBack({
+						delta:1
+					})
+				},
+				init(){
+					let that=this
+					post('Member/GetMemberSubordinate',{
+						UserId:  this.userId,
+						Token: this.token,
+						Page: this.pageNo,
+						PageSize: 15,
+						IsDisciple: this.selectval,
+					}).then(res => {
+						// console.log(res)
+						this.data=res.obj
+						if(that.pageNo>1){
+							if(res.obj.SubordinateList.length==0){
+								// console.log(1231321)
+								uni.showToast({
+									title:'全部加载完成',
+									icon:'none'
+								})
+								return
+							}else{
+							that.data.SubordinateList=that.data.SubordinateList.concat(res.obj.SubordinateList)
+							}
+						}else if(that.pageNo==1){
+							that.data.SubordinateList=res.obj.SubordinateList
+						}
+					})
+				}
+			}
+	}
 </script>
 
 <style scoped>

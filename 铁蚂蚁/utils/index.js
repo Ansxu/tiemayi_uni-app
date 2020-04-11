@@ -1,4 +1,5 @@
 import md5 from 'js-md5';
+
 //API接口地址
 // 线上
 // const host = 'https://api.damingduo.cn/api/';
@@ -31,6 +32,7 @@ const code={
   notRegister:-3,//未注册
   resCode1:200,//成功特别方式
 }
+
 // 请求封装
 function request(url, data,method, loginFn) {
   uni.showLoading({
