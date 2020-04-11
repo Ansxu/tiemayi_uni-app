@@ -66,7 +66,6 @@
 </template>
 <script>
 import {post,toast,goUrl} from '@/utils';
-import h5Copy  from '@/utils/junyi-h5-copy';
 export default {
   data() {
     return {
@@ -78,7 +77,7 @@ export default {
   onLoad(options) {
     this.userId = uni.getStorageSync('userId');
     this.token = uni.getStorageSync('token');
-    this.TaskAcceptNo = options.TaskAcceptNo||'TB20040911452552195668';
+    this.TaskAcceptNo = options.TaskAcceptNo||'TB20041110402748192040';
     this.getData();
   },
   onShow() {},
@@ -97,7 +96,7 @@ export default {
 
 <style lang="scss">
 	@import '../../css/task.css';
-	.flexbox{
+	 .flexbox{
       display: flex;
       justify-content: center;
       align-items: center;

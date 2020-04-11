@@ -71,13 +71,13 @@
 					<div class="attachClaimImg">
 						<p style="font-size:0.2rem; color:red;" v-if="data.AttachClaimImg||data.AttachClaimImg1||data.AttachClaimImg2">备注图片：</p>
 						<!-- 查看备注图片 -->
-						<div class="img_div" v-if="data.AttachClaimImg" @click="previewImage(data.attachClaimImg)">
-							<img :src="data.attachClaimImg" />
+						<div class="img_div" v-if="data.AttachClaimImg" @click="previewImage([data.AttachClaimImg])">
+							<img :src="data.AttachClaimImg" />
 						</div> 
-						<div class="img_div" v-if="data.AttachClaimImg1" @click="previewImage(data.AttachClaimImg1)">
+						<div class="img_div" v-if="data.AttachClaimImg1" @click="previewImage([data.AttachClaimImg1])">
 							<img :src="data.AttachClaimImg1" />
 						</div> 
-						<div class="img_div" v-if="data.AttachClaimImg2" @click="previewImage(data.AttachClaimImg2)">
+						<div class="img_div" v-if="data.AttachClaimImg2" @click="previewImage([data.AttachClaimImg2])">
 							<img :src="data.AttachClaimImg2" />
 						</div> 
 						<div style="clear:both;"></div>
@@ -108,7 +108,7 @@
 								<label>购买数量</label>
 								<div class="txt-r"><span>目标商品{{data.ProductNum}}件</span></div>
 							</li>
-							<li>
+							<li v-if="data.ProductAddress">
 								<label>发货地</label>
 								<div class="txt-r"><span>{{data.ProductAddress}}</span></div>
 							</li>
@@ -538,13 +538,13 @@
 										<div class="from">
 											<p>店内宝贝链接1</p>
 											<div class="from-item mt10">
-												<input class="input" id="ShopProAlink" style="width:300px" v-model="data.ShoparoundLink1" type="text" placeholder="店内宝贝链接1" />
+												<input class="input" id="ShopProAlink" style="width:300px" v-model="data.ShopProAlink" type="text" placeholder="店内宝贝链接1" />
 											</div>
 										</div>
 										<div class="from">
 											<p>店内宝贝链接2</p>
 											<div class="from-item mt10">
-												<input class="input" id="ShopProBlink" style="width:300px" v-model="data.ShoparoundLink2" type="text" placeholder="店内宝贝链接2" />
+												<input class="input" id="ShopProBlink" style="width:300px" v-model="data.ShopProBlink" type="text" placeholder="店内宝贝链接2" />
 											</div>
 										</div>
 									</div>
@@ -659,7 +659,7 @@
 											</div>
 										</div>
 										<div class="ftbtn mb10 mt10">
-											<p class="btn" id="heduiBtn" @click="checkPlayOrderNo">点我核对</p>
+											<p class="btn cfff" id="heduiBtn" @click="checkPlayOrderNo">点我核对</p>
 										</div>
 									</div>
 								</div>
@@ -948,6 +948,7 @@ export default {
                 TaskAcceptNo:this.TaskAcceptNo,
                 PlatOrderNo: this.playOrderNo,
 			}).then(res=>{
+			 	this.comfirmOrderNo = this.playOrderNo;
 				this.checkOrderNoStatus=true;
               if(data.isYanOrder==0){
                 toast(res.msg);
@@ -1126,25 +1127,25 @@ export default {
 			// 浏览店铺
 			if((data.IsBrowseStore==1||data.IsCollectionShop==1||data.IsCollectionProduct==1||data.IsAddCart==1)&&data.AcceptTaskStatus!=9){
 				
-				if(!data.ShoparoundLink1){
+				if(!data.ShopProAlink){
 					toast("店内宝贝链接不能为空");
 					return false;
 				}
-				if(data.ShoparoundLink1.indexOf("http")){
+				if(data.ShopProAlink.indexOf("http")){
 					toast("请输入正确的链接地址");
 					return false;
 				}
-				huobisanjiaJson["ShopProAlink"] = data.ShoparoundLink1; 
+				huobisanjiaJson["ShopProAlink"] = data.ShopProAlink; 
 
-				if(!data.ShoparoundLink2){
+				if(!data.ShopProBlink){
 					toast("店内宝贝链接不能为空");
 					return false;
 				}
-				if(data.ShoparoundLink2.indexOf("http")){
+				if(data.ShopProBlink.indexOf("http")){
 					toast("请输入正确的链接地址");
 					return false;
 				}
-				huobisanjiaJson["ShopProBlink"] = data.ShoparoundLink2; 
+				huobisanjiaJson["ShopProBlink"] = data.ShopProBlink; 
 
 				// if ($("#otherA")[0]) {
 				// 	if (isNullOrEmpty($("#otherA").val())) {
@@ -1255,7 +1256,7 @@ export default {
 
 
 			
-			if (!this.checkProLinkMain && data.AcceptTaskStatus != 9) {
+			if (!this.checkProLinkMainStatus && data.AcceptTaskStatus != 9) {
 				toast("请核对商品链接");
 				return false;
 			}
@@ -1263,7 +1264,7 @@ export default {
 				toast("请核对店铺名称");
 				return false;
 			}
-			if (!this.checkKeyword && data.AcceptTaskStatus != 9) {
+			if (!this.checkKeywordStatus && data.AcceptTaskStatus != 9) {
 				toast("请核对关键词");
 				return false;
 			}
@@ -1282,7 +1283,7 @@ export default {
 						return false;
 					}
 					var reg = /^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,4})?$/;
-					if (!reg.test(orderMoney) || orderMoney > 1000000000000) {
+					if (!reg.test(this.orderPrice) || this.orderPrice > 1000000000000) {
 						toast("请输入正确的订单金额");
 						return false;
 					}
@@ -1316,7 +1317,7 @@ export default {
 				Token: this.token,
 				TaskAcceptNo: this.TaskAcceptNo,
 				ImgJson: JSON.stringify(imageBase64),
-				PlatOrderNo: this.playOrderNo,
+				PlatOrderNo: this.comfirmOrderNo,
 				PlatOrderMoney: this.orderPrice,
 				ConsigneeName: data.ConsigneeName,
 				ConsigneeMobile: data.ConsigneeMobile,

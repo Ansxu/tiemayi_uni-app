@@ -56,7 +56,7 @@
                             <i class="icon num">1</i>
                             <dl>
                                 <dt><label>接受任务</label><span>{{data.CreateTime}}</span></dt>
-                                <dd v-if="data.AcceptTaskStatus==2&&!isNullOrEmpty(data.PlatOrderNo)">
+                                <dd v-if="data.AcceptTaskStatus==2&&data.PlatOrderNo">
                                     <label>提交订单号</label><span id="txt_platOrderNo">{{data.PlatOrderNo}}</span>
                                     <p class="link_btn copybtn" @click="copy(data.PlatOrderNo)">复制</p>
                                 </dd>
@@ -159,14 +159,14 @@
                                     </dd>
 								</block>
 
-                                <dd v-if="data.IsBrowseStore==1&&data.ImgJson"><label>浏览店铺</label></dd>
-                                <dd v-if="data.IsBrowseStore==1&&data.ImgJson">
+                                <dd v-if="data.IsBrowseStore==1&&data.IsPresaleTask==0&&data.IsGoodTask==0&&(data.IsCompetingGoodsTask==0)&&data.IsNewPasswordTask==0"><label>浏览店铺</label></dd>
+                                <dd v-if="data.IsBrowseStore==1&&data.IsPresaleTask==0&&data.IsGoodTask==0&&(data.IsCompetingGoodsTask==0)&&data.IsNewPasswordTask==0">
                                     <div class="imglist thumbnails">
-                                        <span class="img">
-                                            <img :src="data.ImgJson.TargetProductTopImg" v-if="data.ImgJson.TargetProductTopImg"  @click="previewImage([data.ImgJson.TargetProductTopImg])">
+                                        <span class="img" v-if="data.ImgJson.TargetProductTopImg">
+                                            <img :src="data.ImgJson.TargetProductTopImg"  @click="previewImage([data.ImgJson.TargetProductTopImg])">
                                         </span>
-                                        <span class="img">
-                                            <img  :src="data.ImgJson.TargetProductBottomImg" v-if="data.ImgJson.TargetProductBottomImg"  @click="previewImage([data.ImgJson.TargetProductBottomImg])">
+                                        <span class="img" v-if="data.ImgJson.TargetProductBottomImg">
+                                            <img  :src="data.ImgJson.TargetProductBottomImg"  @click="previewImage([data.ImgJson.TargetProductBottomImg])">
                                         </span>
                                         <span class="img" v-if="data.ImgJson.ShopProductBottomImgA">
                                             <img :src="data.ImgJson.ShopProductBottomImgA"  @click="previewImage([data.ImgJson.ShopProductBottomImgA])">
@@ -271,7 +271,10 @@
                             <i class="icon num">4</i>
                             <dl>
                                 <dt><label>收货好评</label>
-                                    <span class="text_r c_Org" style="float:right;" id="evaluation_Countdown" v-if="data.AcceptTaskStatus==2 && data.EvaluationCountdown < 72"></span>
+                                    <span class="text_r c_Org" style="float:right;" id="evaluation_Countdown" 
+                                        v-if="data.AcceptTaskStatus==2 && data.EvaluationCountdown < data.ReceivingTime">
+                                        {{AcceptTaskTimeEnd}}
+                                    </span>
                                 </dt>
                                 <dd><label>第一步：去{{data.PlatName}}评价并截图</label> 
                                     <div class="evaluate_box" v-if="data.EvaluationClaim">
@@ -320,8 +323,41 @@
                                 </dd>
                                 <dd class="text_r"><p class="link_btn blue">点击可查看图片</p></dd>
                                 <dd class="text_r"><span>{{data.EvaluationTitle}}</span>
-                                    <p class="btn" @click="confirmTask(data.EvaluationCountdown)" v-if="data.AcceptTaskStatus==2">去收货</p>
+                                    <p class="btn" @click="confirmTask(data.EvaluationCountdown,data.ReceivingTime)" 
+                                    v-if="data.AcceptTaskStatus==2">去收货</p>
+                                    <!-- 收货弹窗 -->
+                                    <div class="EvaluationMask" v-if="showEvaluationMask">
+                                        <div class="content">
+                                            <h3 class="layer_tips">请上传物流截图和评价截图</h3>
+                                            <div class="piclist Uploadimg">
+                                                <ul class="clear">
+                                                    <li>
+                                                        <div class="img" @click="upImg('LogisticsReceiptImg')">
+                                                            <div class="upimg">
+                                                                <img class="uploadImg" :src="LogisticsReceiptImg" v-if="LogisticsReceiptImg"/>
+                                                            </div>
+                                                        </div>
+                                                        <p class="text">请上传物流截图</p>
+                                                    </li>
+                                                    <li>
+                                                        <div class="img" @click="upImg('EvaluationImg')">
+                                                            <div class="upimg">
+                                                                <img class="uploadImg" :src="EvaluationImg"  v-if="EvaluationImg"/>
+                                                            </div>
+                                                        </div>
+                                                        <p class="text">请上传评价截图</p>
+                                                    </li>
+                                                </ul>
+                                                <div class="maskBtn">
+                                                    <p @click="EvaluationOK">确定</p>
+                                                    <p @click="showEvaluationMask = false">取消</p>
+                                                </div>
+                                        </div>
+                                        </div>
+                                    </div>
+
                                 </dd>
+
                             </dl>
                         </li>
                         <li :class="['no5',{'active':data.AcceptTaskStatus==8}]">
@@ -367,7 +403,7 @@
 </template>
 
 <script>
-import {post,toast,goUrl,previewImage,saveFile} from '@/utils';
+import {post,toast,goUrl,previewImage,saveFile,getImgPath} from '@/utils';
 import h5Copy  from '@/utils/junyi-h5-copy';
 export default {
   data() {
@@ -380,8 +416,13 @@ export default {
         cancelTastList:['找不到商品','不想做这个任务','达不到商家的要求','其他'],
         cancelTastIndex:0,//取消任务的原因下标
         showCancelTask:false,
-        timeEnd:'',//倒计时
+        timeEnd:'',//操作任务倒计时
         timeFn:null,
+        AcceptTaskTimeEnd:'',//接受任务倒计时
+        AcceptTaskTimeFn:null,//
+        showEvaluationMask:false,//是否显示上传物流和评价截图
+        LogisticsReceiptImg:'',//物流截图
+        EvaluationImg:'',//评价截图
     };
   },
   onLoad(options) {
@@ -402,6 +443,10 @@ export default {
                 if (data.AcceptTaskStatus == 0) {
                     this.timerStart(data.OperationCountdown);
                 }
+                if (data.AcceptTaskStatus == 2 && data.EvaluationCountdown < data.ReceivingTime) {
+                    this.EvaluationTimerStart(data.EvaluationCountdown,data.ReceivingTime);
+                }
+                data.ImgJson = JSON.parse(data.ImgJson);
                 this.data = data;
 			})
         },
@@ -493,6 +538,75 @@ export default {
                 }
             }, 1000);
         },
+        // 收货倒计时
+        EvaluationTimerStart(countdown,ReceivingTime) {
+            const that = this;
+            var hour = (ReceivingTime - countdown).toFixed(2);
+            var h = parseInt(hour.split(".")[0]);
+            var m = parseInt((hour-h)*60);
+            var alls = 60 * 60 * h + m * 60;
+            var s = 59;
+            this.AcceptTaskTimeFn = setInterval(function() {
+                if (alls <= 0) {
+                    clearInterval(this.AcceptTaskTimeFn);
+                    that.AcceptTaskTimeEnd = "评价倒计时 00:00:00";
+                } else {
+                    var str = "";
+                    str = (h > 0 ? h >= 10 ? h : "0" + h : "00") + ":" + (m > 0 ? m >= 10 ? m : "0" + m : "00") + ":" + (s > 0 ? s >= 10 ? s : "0" + s : "00");
+                    that.AcceptTaskTimeEnd = "评价倒计时 " + str
+                    --s;
+                    --alls;
+                    if (m == 0 && h > 0 && alls > 0) {
+                        --h;
+                        m = 59
+                    }
+                    if (s == 0) {
+                        --m;
+                        s = 60;
+                    }
+                }
+            }, 1000);
+        },
+        // 收货
+        confirmTask(evaluationCountdown,ReceivingTime) {
+            if (evaluationCountdown < ReceivingTime) {
+                toast(`发货不到${ReceivingTime}小时，不能确认收货`);
+                return false;
+            }
+            this.showEvaluationMask = true;
+        },
+        // 确认上传截图
+        EvaluationOK(){
+            if (!this.LogisticsReceiptImg) {
+                toast("请上传物流截图");
+                return false;
+            }
+            if (!this.EvaluationImg) {
+                toast("请上传评价截图");
+                return false;
+            }
+            let imgjson = {
+                LogisticsReceiptImg:this.LogisticsReceiptImg,
+                EvaluationImg:this.EvaluationImg
+            };
+            post('Task/CompleteTask',{
+                UserId: this.userId,
+                Token: this.token,
+                TaskAcceptNo: this.TaskAcceptNo,
+                OkImgJson: JSON.stringify(imgjson),
+            }).then(res=>{
+                toast(res.msg);
+                this.getData();
+            })
+        },
+	  	// 上传图片
+        upImg(obj){
+            const that = this;
+            getImgPath(1,[],['compressed']).then(path=>{
+                that[obj] = path[0];
+            })
+		},
+
   }
 };
 </script>
@@ -584,6 +698,50 @@ export default {
 .img{
     img{
         height:100%;
+    }
+}
+.EvaluationMask{
+    background:rgba(0,0,0,.6);
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    .content{
+        background:#fff;
+        border-radius:7px;
+        width:90%;
+        h3{
+            text-align:center;
+            line-height:1.5;
+            padding-top:20px;
+        }
+        ul{
+            padding:10px;   
+            margin-left:0!important;
+            li{
+                border-left:none!important;
+                width:100px;
+                margin:20px 25px!important;
+            }
+        }
+    }
+    .maskBtn{
+        display:flex;
+        align-items:center;
+        border-top:1px #e8e8e8 solid;
+        p{
+            width:50%;
+            text-align:center;
+            line-height:3;
+            &:first-child{
+                color:royalblue;
+                border-right:1px #e8e8e8 solid;
+            }
+        }
     }
 }
 </style>

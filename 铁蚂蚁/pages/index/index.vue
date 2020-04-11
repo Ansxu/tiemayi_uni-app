@@ -51,7 +51,7 @@
               <p>垫付任务</p>
             </a>
           </li>
-          <li>
+          <!-- <li>
             <a href="javascript:IsNovice();" class="box">
               <i class="icon">
                 <img src="/static/image/icons/nav2.png" />
@@ -77,7 +77,7 @@
               </i>
               <p>用户群</p>
             </a>
-          </li>
+          </li> -->
         </ul>
       </div>
       <div class="Announcement bg_fff mb10">
