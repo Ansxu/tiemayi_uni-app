@@ -38,7 +38,7 @@
 							<p class="title">{{item.Remark}}</p>
 							<div class="flex">
 							    <div class="flexItem flex1">
-							        <p class="time">{{item.AddTime}}</p>
+							        <p class="time">{{editTime(item.AddTime,'time')}}</p>
 							    </div>
 							    <p class="price">{{item.Change}} 积分</p>
 							</div>
@@ -52,10 +52,11 @@
 </template>
 
 <script>
-	import {post} from '@/utils';
+	import {post,editTime} from '@/utils';
 	export default {
 		data(){
 			return{
+				editTime,
 				userId:"",
 				token: "",
 				pageNo:1,

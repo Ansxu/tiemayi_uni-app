@@ -113,6 +113,16 @@ export default {
         }
     },
     onLoad(){
+        this.OnlyVal = '';
+        this.phone = '';
+        this.pwd = '';
+        this.comfirmPwd = '';
+        this.isCode = false;
+        this.code = '';
+        this.imgCode = '';
+        this.page = 1;
+        this.timeEnd = 60;
+        this.timeFn = null;
         this.upOnlyVal();
     },
     methods:{
@@ -136,7 +146,7 @@ export default {
                 VerifyType: 2,
                 ImgCode: this.imgCode,
                 OnlyVal: this.OnlyVal
-            },{isLoadin:true}).then(res=>{
+            },{isLogin:true}).then(res=>{
                 toast('已发送至该手机',true);
                 this.timeFn = setInterval(()=>{
                     this.timeEnd-=1;
@@ -174,7 +184,7 @@ export default {
                 VerifyType: 2,
                 VerifyCode: this.code,
                 NewLoginPwd: this.pwd
-            },{isLoadin:true})
+            },{isLogin:true})
             toast('修改成功！',true)
             this.back();
         },

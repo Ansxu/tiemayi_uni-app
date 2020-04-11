@@ -429,10 +429,24 @@ export default {
     this.userId = uni.getStorageSync('userId');
     this.token = uni.getStorageSync('token');
     this.TaskAcceptNo = options.TaskAcceptNo;
+    this.init();
     this.getData();
+
   },
-  onShow() {},
+  onShow() {
+      
+  },
   methods: {
+        init(){
+            this.showEvaluationMask =false;
+            this.LogisticsReceiptImg ='';
+            this.EvaluationImg ='';
+            this.AcceptTaskTimeEnd='';
+            this.AcceptTaskTimeFn =false;
+            this.timeEnd='';
+            this.timeFn =false;
+            this.showCancelTask=false;
+        },
 		getData(){
 			post('Task/LoadOperationalTask',{
                 UserId: this.userId,
@@ -446,7 +460,7 @@ export default {
                 if (data.AcceptTaskStatus == 2 && data.EvaluationCountdown < data.ReceivingTime) {
                     this.EvaluationTimerStart(data.EvaluationCountdown,data.ReceivingTime);
                 }
-                data.ImgJson = JSON.parse(data.ImgJson);
+                data.ImgJson&&(data.ImgJson = JSON.parse(data.ImgJson));
                 this.data = data;
 			})
         },

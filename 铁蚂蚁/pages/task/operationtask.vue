@@ -825,11 +825,57 @@ export default {
     this.userId = uni.getStorageSync('userId');
     this.token = uni.getStorageSync('token');
     this.TaskAcceptNo = options.TaskAcceptNo;
+    this.init();
     this.getData();
 	this.getAreaList();//获取地址列表
   },
   onShow() {},
   methods: {
+	  init(){
+		this.playOrderNo='',//下单的订单编号
+		this.comfirmOrderNo='',//完成的单号
+		this.orderPrice='',//订单价格
+		this.checkShopNameStatus=false,//是否已核对店铺名称
+		this.ShopNameArr=[],//补全店铺名称
+		this.checkKeywordStatus=false,//是否已核对补全关键词
+		this.SetCommodityKeywordsArr=[],//补全关键词
+		this.checkProLinkMainStatus=false,//是否已核对宝贝链接
+		this.ShoparoundLinkMain=[],//验证主宝贝链接
+		this.checkOrderNoStatus=false,//是否已核对订单号
+		// 截图
+		this.screenshot={
+			ScreenshotMerchantProductSearch:'',//下单搜索列表截图
+			CollectionCompetitiveProducts1:'',//藏竞品店铺截图
+			CollectionCompetitiveProducts2:'',//收藏竞品商品截图
+			CollectionCompetitiveProducts3:'',//加竞品购物车截图
+			AddAShoppingCart:'',//加购物车截图
+			CollectionOfGoods:'',//收藏商品截图
+			collectionShop:'',//收藏店铺截图
+			//额外操作截图
+			scotherA:'',//收藏竞品1截图
+			scotherB:'',//收藏竞品2截图
+			jgotherA:'',//加购竞品1截图
+			jgotherB:'',//加购竞品2截图
+
+			scdpotherA:'',//收藏店铺截图
+			cartImg:'',//加入购物车截图
+			fbbotherA:'',//浏览副宝贝截图
+			dzotherA:'',//点赞好评截图
+			llwdjotherA:'',//浏览问大家截图
+			twwdjotherA:'',//提问问大家截图
+			// 店内商品
+			targetTop:'',//目标商品顶部截图
+			targetBottom:'',//目标商品底部截图
+			shopProA:'',//店内商品A截图
+			shopProB:'',//店内商品B截图
+			// 附加商品
+			AdditionalProductA1:'',//附加商品1顶部截图
+			AdditionalProductB1:'',//附加商品1底部截图
+			AdditionalProductA2:'',//附加商品2顶部截图
+			AdditionalProductB2:'',//附加商品2底部截图
+		},
+		this.OperationCountdown = false;
+	  },
 		getData(){
 			post('Task/LoadOperationalTask',{
                 UserId: this.userId,

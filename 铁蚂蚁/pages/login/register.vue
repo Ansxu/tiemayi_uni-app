@@ -144,9 +144,9 @@ export default {
         return {
             host,
             OnlyVal: "",//图形验证码图像
-            phone:'15014010199',
-            pwd:'123456',
-            comfirmPwd:'123456',
+            phone:'',
+            pwd:'',
+            comfirmPwd:'',
             isCode:false,//是否已获取短信验证码
             code:'',
             imgCode:'',
@@ -158,6 +158,18 @@ export default {
         }
     },
     onLoad(){
+        this.OnlyVal= "",//图形验证码图像
+        this.phone='',
+        this.pwd='',
+        this.comfirmPwd='',
+        this.isCode=false,//是否已获取短信验证码
+        this.code='',
+        this.imgCode='',
+        this.qq='',
+        this.inviteCode='',//邀请码
+        this.read=false,//是否已阅读用户协议
+        this.timeEnd=60,
+        this.timeFn=null;//倒计时的方法
         this.upOnlyVal();
     },
     methods:{
@@ -181,7 +193,7 @@ export default {
                 VerifyType: 0,
                 ImgCode: this.imgCode,
                 OnlyVal: this.OnlyVal
-            },{isLoadin:true}).then(res=>{
+            },{isLogin:true}).then(res=>{
                 toast('已发送至该手机',true);
                 this.timeFn = setInterval(()=>{
                     this.timeEnd-=1;
@@ -200,7 +212,7 @@ export default {
                 Password: this.pwd,
                 InviteCode: this.inviteCode,
                 QQ:this.qq
-            },{isLoadin:true})
+            },{isLogin:true})
             toast('注册成功！',true)
             this.back();
         },

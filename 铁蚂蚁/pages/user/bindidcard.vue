@@ -15,13 +15,13 @@
 					<div class="weui-cell">
 						<div class="weui-cell__bd">
 							<input type="text" class="weui-input" 
-								:disabled="data.IsAUT===1" v-model.trim="data.Idcard"  id="realName" placeholder="请输入您的真实姓名" />
+								:disabled="data.IsAUT===1" v-model.trim="data.UserRName"  id="realName" placeholder="请输入您的真实姓名" />
 						</div>
 					</div>
 					<div class="weui-cell">
 						<div class="weui-cell__bd">
 							<input type="text" class="weui-input" 
-								:disabled="data.IsAUT===1" v-model.trim="data.UserRName" id="idNum" placeholder="请输入您的身份证号码" />
+								:disabled="data.IsAUT===1" v-model.trim="data.Idcard" id="idNum" placeholder="请输入您的身份证号码" />
 						</div>
 					</div>
 				</div>
@@ -121,6 +121,14 @@ export default {
         }
     },
     onLoad(){
+		this.data={
+			Idcard:'',
+			UserRName:'',
+			IdcardNegative:'',
+			IdcardPositive:'',
+			IdcardInHand:'',
+			IsAUT:0,
+		};
 		this.userId = uni.getStorageSync('userId');
 		this.token = uni.getStorageSync('token');
 		this.getData();

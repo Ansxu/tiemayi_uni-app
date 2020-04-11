@@ -43,13 +43,23 @@ export default {
             tabIndex:1,
         };
     },
-    onLoad() {
+    onLoad(options) {
+        console.log(options)
 		this.userId = uni.getStorageSync('userId');
-		this.token = uni.getStorageSync('token');
+        this.token = uni.getStorageSync('token');
+        this.tabIndex= options.type*1||1;//1--垫付任务；2--浏览任务
 		this.getData();
     },
-    onShow() {},
+    onShow() {
+
+    },
     methods: {
+        checkTask(){
+            // post('task/GetTaskList',{
+            //     UserId: this.userId,
+            //     Token: this.token,
+            // })
+        },
 		getData(){
 			post('Task/GetTaskTypePlatform',{
                 UserId: this.userId,

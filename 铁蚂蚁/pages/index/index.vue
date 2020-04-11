@@ -44,22 +44,22 @@
       <div class="navIcon bg_fff mb10">
         <ul class="li25 clear">
           <li>
-            <a href="javascript:IsNovice();" class="box">
+            <div @click="goUrl('task/platformlist',{type:1})" class="box">
               <i class="icon">
                 <img src="/static/image/icons/nav1.png" />
               </i>
               <p>垫付任务</p>
-            </a>
+            </div>
           </li>
-          <!-- <li>
-            <a href="javascript:IsNovice();" class="box">
+          <li>
+            <div @click="goUrl('task/platformlist',{type:2})" class="box">
               <i class="icon">
                 <img src="/static/image/icons/nav2.png" />
               </i>
               <p>浏览任务</p>
-            </a>
+            </div>
           </li>
-          <li>
+          <!-- <li>
             <div @click="goUrl('user/vip/vip')" class="box">
               <i class="icon">
                 <img src="/static/image/icons/nav6.png" />
@@ -132,7 +132,7 @@
             <!-- <li><a href="#" class="task_cj">积分抽奖</a></li> -->
             <!--<li><a href="html/user/shareqrcode.html" class="task_qrcode">分享二维码</a></li>-->
             <li>
-              <a class="task_qrcode" id="lottery" @click="goUrl('')">积分抽奖</a>
+              <div class="task_qrcode" id="lottery" @click="goUrl('')">积分抽奖</div>
             </li>
             <li>
               <div @click="goUrl('other/invite')" class="task_yq">邀请好友</div>
@@ -192,7 +192,6 @@ export default {
   },
   methods: {
     getBanner() {
-		console.log(123)
       get("Advertisement/GetHomeBanners",{},{isLogin:true}).then(res => {
         this.banner = res.obj;
       });
@@ -245,7 +244,7 @@ export default {
     // 跳转到详情
     taskDetail(TaskAcceptNo) {
       goUrl("task/selectoperation", {
-        id: TaskAcceptNo
+        TaskAcceptNo: TaskAcceptNo
       });
     },
     //点击新手任务
@@ -353,6 +352,9 @@ export default {
           display:flex;
           align-items:center;
           justify-content:space-between;
+          p{
+            width:75%;
+          }
           span{
             color:#999;
             font-size:12px;

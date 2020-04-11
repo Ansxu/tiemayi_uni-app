@@ -65,7 +65,7 @@
             </div>
         </div>
         <!--底部-->
-        <div class="dd_footer addAcount__footer">
+        <div class="dd_footer addAcount__footer" v-if="data.AccountCount<data.MaxBindAccount">
             <div class="inner">
                 <div class="dd_Btns">
                     <div @click="goUrl('user/'+url)" class="weui-btn">

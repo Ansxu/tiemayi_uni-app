@@ -69,7 +69,7 @@
 					</li>
 					<li class="clearfix">
 						<p class="title_name pull-left">垫付金额：</p>
-						<p class="main_container pull-right">{{(taskOrder.AdvancePaymentMoney<1)?'无需垫付':taskOrder.AdvancePaymentMoney+'元'}}</p>
+						<p class="main_container pull-right">{{(1>taskOrder.AdvancePaymentMoney)?'无需垫付':taskOrder.AdvancePaymentMoney+'元'}}</p>
 					</li>
 					<li class="clearfix">
 						<p class="title_name pull-left">任务佣金：</p>
@@ -218,7 +218,8 @@ export default {
 				AccountIdList: AccountIdList.join(','),
 				PlatIdList: PlatIdList.join(','),
 				TaskType: this.TaskType,//任务类型，0全部，1垫付任务，2浏览任务
-				MaxAdvancePayMoney: this.MaxAdvancePayMoney
+				MaxAdvancePayMoney: this.MaxAdvancePayMoney,
+				VersionControl:"1.3.57"
 			}).then(res=>{
 				this.taskOrder = res.obj;
 				this.closeTask();

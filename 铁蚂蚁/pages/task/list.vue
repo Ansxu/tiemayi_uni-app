@@ -1,6 +1,12 @@
 <template>
 	<div class="bg_gray">
-		<headers>全部任务</headers>
+		<div class="h45">
+			<div class="head bb_border">
+				<p @click="back" class="btn_back"></p>
+				<div class="title center">全部任务</div>
+				<p  id="accountName" class="icon_r txt">{{data.PlatAccount}}</p>
+			</div>
+		</div>
 		<div class="main" name="dropDownRefresh">
 			<div class="df_taskList bg_fff">
 				<ul id="taskList">
@@ -53,6 +59,7 @@ export default {
 			pageSize:12,
 			notData:false,
 			list:[],
+			data:{},
 			newTask:{},//新任务
         }
     },
@@ -88,6 +95,7 @@ export default {
 				const data = res.obj;
 				if(this.page===1){
 					this.list=[];
+					this.data = data;
 				}
 				if(data.TaskList.length<this.pageSize&&this.page!==1){
 					this.notData = true;//没有数据了
@@ -110,6 +118,9 @@ export default {
 			goUrl('task/selectoperation',{
 				TaskAcceptNo
 			})
+		},
+		back(){
+			uni.navigateBack()
 		}
 
 	},

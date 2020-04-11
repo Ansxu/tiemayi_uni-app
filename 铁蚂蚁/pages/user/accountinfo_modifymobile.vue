@@ -187,7 +187,7 @@ export default {
                 NewVerifyCode: this.newCode,
                 UserId: uni.getStorageSync('userId'),
                 Token: uni.getStorageSync('token')
-            },{isLoadin:true})
+            },{isLogin:true})
             toast('注册成功！',true)
             this.back();
         },

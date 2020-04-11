@@ -30,7 +30,7 @@
                                 <span class="icon-arrow icon-arrowRight"></span>
                             </div>
                         </div>
-                        <div @click="goUrl('user/bindqq')" class="weui-cell">
+                        <!-- <div @click="goUrl('user/bindqq')" class="weui-cell">
                             <div class="weui-cell__hd">
                                 <img src="/static/image/nav/bind_nav1_3.png" alt="" class="icon-navImg"><span class="title">QQ号</span>
                             </div>
@@ -40,7 +40,7 @@
                             <div class="weui-cell__ft">
                                 <span class="icon-arrow icon-arrowRight"></span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -51,7 +51,11 @@
                 <div class="navSection__bd">
                     <div class="weui-cells navList__weui-cells navList2__weui-cells">
                         <!-- <div href="javascript:bindAccountPage('./list/taobaolist.html','淘宝');" class="weui-cell" id="TbAccountShow" v-for="(item,index) in bindList"> -->
-                        <div  class="weui-cell" id="TbAccountShow" v-for="(item,index) in bindList" :key="index" @click="onBindAccount(item)">
+                        <div  class="weui-cell" id="TbAccountShow" 
+                            v-for="(item,index) in bindList" :key="index"
+                            @click="onBindAccount(item)"
+                            v-show="item.PlatName.indexOf('淘宝')!==-1"
+                            >
                             <div class="weui-cell__hd">
                                 <img :src="item.Logo" alt="" class="icon-navImg"><span class="title">{{item.PlatName}}</span>
                             </div>
@@ -170,8 +174,8 @@ export default {
         // ReviewStatus:
         //-1 未绑定 // 0 待审核,// 1 审核通过,// 2  审核失败
         onBindAccount(item){
-            if (this.info.IsAUT !== 1 || this.info.IsQQ !== 1) {
-                toast("需要绑定身份证以及QQ号，并认证后才可以绑定！")
+            if (this.info.IsAUT !== 1) {
+                toast("需要绑定身份证，并认证后才可以绑定！")
                 return;
             }
             //typeId = 1--淘宝；3--京东；4--阿里巴巴；5--拼多多；6--美丽说；7--蘑菇街；

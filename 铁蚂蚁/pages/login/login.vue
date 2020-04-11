@@ -1,6 +1,6 @@
 <template>
     <div class="bg_f8f8f8">
-        <headers>欢迎来到铁蚂蚁</headers>
+        <headers>欢迎来到旺店宝</headers>
         <div class="main">
             <div class="regLogForm">
                 <form action="">
@@ -30,7 +30,6 @@
                         </div>
                         <div class="flex agreement__register">
                             <div class="IconsCK" @click="recording = !recording">
-                                <input name="isremember"  type="checkbox" value="记住账号" />
                                 <span :class="{'inputGou':recording}"></span>
                             </div>
                             <div class="flexItem">记住账号</div>
@@ -55,12 +54,15 @@ export default {
             goUrl,
             phone:'',
             pwd:'',
-            recording:true,//是否记录账号
+            recording:0,//是否记录账号
         }
     },
     onLoad(){
-        this.phone = uni.getStorageSync('userPhone')||'15014010199';
-        this.pwd = uni.getStorageSync('userPassword')||'123456';
+
+        this.phone = uni.getStorageSync('userPhone')||'';
+        this.pwd = uni.getStorageSync('userPassword')||'';
+        this.recording = uni.getStorageSync('recording')||0;
+
     },
     methods:{
         login(){
@@ -73,12 +75,15 @@ export default {
                 // client_secret: ClientSecret
             },{isLogin:true}).then(res=>{
                 const data = res.obj;
+                // 记住账号
                 if(this.recording){
                     uni.setStorageSync('userPhone',this.phone);
                     uni.setStorageSync('userPassword',this.pwd);
+                    uni.setStorageSync('recording',1);//是否记住账号
                 }else{
                     uni.setStorageSync('userPhone','');
                     uni.setStorageSync('userPassword','');
+                    uni.setStorageSync('recording',0);//是否记住账号
                 }
                 uni.setStorageSync('userId',data.UserId);
                 uni.setStorageSync('token',data.Token);

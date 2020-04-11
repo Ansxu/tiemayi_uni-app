@@ -2,9 +2,9 @@
 	<div>
 		<div class="h45">
 		    <div class="head bb_border">
-		            <a href="../../index.html" class="btn_back"></a>
+		            <p href="../../index.html" class="btn_back"></p>
 		            <div class="title center">签到领积分</div>
-		            <a @click="goUrl('./pointrecord')" class="icon_r txt blue">积分记录</a>
+		            <p @click="goUrl('./pointrecord')" class="icon_r txt blue">积分记录</p>
 		        </div>
 		    </div>
 		    <div class="main">
@@ -98,7 +98,6 @@
 			},
 			getData(res){
 				if(res.errcode===0||res.errcode==3){
-					console.log(res)
 					this.data=res
 					this.obj=res.obj
 				}
@@ -109,10 +108,11 @@
 					Token: this.token
 				}).then(res => {
 					// this.res=res
-					if(res.errcode!=0){
+					if(res.errcode==0){
 						uni.showToast({
 							title:res.msg,
 						})
+						this.GetPointInfo();
 					}else if(res.errcode==3){
 						uni.showToast({
 							title:res.msg,

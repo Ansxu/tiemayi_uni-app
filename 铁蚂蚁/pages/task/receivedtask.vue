@@ -110,7 +110,11 @@ export default {
 		this.getMyOrderCount();
     },
     onShow(){
-
+        if (this.userId !== uni.getStorageSync("userId") ||this.token !== uni.getStorageSync("token")) {
+            this.userId = uni.getStorageSync("userId");
+            this.token = uni.getStorageSync("token");
+            this.getMyOrderCount();
+        }
     },
     methods:{
 		getMyOrderCount(){

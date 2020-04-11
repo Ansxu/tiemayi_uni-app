@@ -180,9 +180,9 @@ export default {
         this.getMemberInfo();
     },
     onShow(){
-        this.userId=uni.getStorageSync('userId');
-        this.token=uni.getStorageSync('token');
-        if(!this.userInfo){
+        if (this.userId !== uni.getStorageSync("userId") ||this.token !== uni.getStorageSync("token")) {
+            this.userId = uni.getStorageSync("userId");
+            this.token = uni.getStorageSync("token");
             this.getMemberInfo();
         }
     },

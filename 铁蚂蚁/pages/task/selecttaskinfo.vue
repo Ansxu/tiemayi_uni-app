@@ -60,7 +60,7 @@ export default {
             token:'',
             platformId:'',
             typeIndex:'',
-			data:{}
+			data:[]
         }
     },
     onLoad(options){
@@ -81,7 +81,13 @@ export default {
                 PlatId:this.platformId,
                 TaskType:  this.typeIndex
 			}).then(res=>{
-				this.data = res.obj;
+                this.data = res.obj;
+                if(res.obj.length<1){
+                    toast('没有可以进行接单的账号了哦~')
+                    setTimeout(()=>{
+                        uni.navigateBack();
+                    },1500)
+                }
 			}).catch(err=>{
                 setTimeout(()=>{
                     uni.navigateBack();
@@ -89,6 +95,13 @@ export default {
             })
 		},
 		submit(){
+            if(!this.data[0]) {
+                toast('没有可以进行接单的账号了哦~')
+                setTimeout(()=>{
+                    uni.navigateBack();
+                },1500)
+                return;
+            }
 			goUrl('task/list',{
                 PlatformId: this.platformId,
                 AccountId:this.data[0].Id,
