@@ -36,12 +36,12 @@
 	                        <th>奖励</th>
 	                    </tr>
 	                    <tbody id="inviterList">
-							<tr class="bd" v-for="(item,index) in 8" :key="index">
+							<tr class="bd" v-for="(item,index) in data" :key="index">
 							    <!-- <td class="no no{{index+1}}"><span>{{index+1}}</span></td> -->
-								<td class="no" :class="`no{index+1}`"><span>{{index+1}}</span></td>
-							    <td>13545676545</td>
-							    <td>vvfk345</td>
-							    <td>30金</td>
+								<td :class="'no'+'no'+index+1"><span>{{index+1}}</span></td>
+								<td>{{item.MobileStr}}</td>
+								<td>{{item.InviteesNumber}}</td>
+								<td>{{item.RewardCommission}}金</td>
 							</tr>
 	                    </tbody>
 	                </table>
@@ -52,6 +52,39 @@
 </template>
 
 <script>
+	import {get} from '@/utils'
+	export default {
+		data(){
+			return{
+				userId:'',
+				token:'',
+				data:{}
+			}
+		},
+		onLoad(){
+			this.userId = uni.getStorageSync("userId");
+			this.token = uni.getStorageSync("token");
+			this.init()
+			// console.log(this.data)
+		},
+		onShow(){
+			  if (
+				  this.userId !== uni.getStorageSync("userId") ||
+				  this.token !== uni.getStorageSync("token")
+				) {
+				  this.userId = uni.getStorageSync("userId");
+				  this.token = uni.getStorageSync("token");
+				}
+		},
+		methods:{
+			init(){
+				get('Member/GetInviterList').then(res => {
+					console.log(res)
+					this.data=res.obj
+				})
+			}
+		}
+	}
 </script>
 
 <style>
