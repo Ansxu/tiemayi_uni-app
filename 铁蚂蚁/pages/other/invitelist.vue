@@ -2,7 +2,7 @@
 	<div class="bg_img">
 	    <div class="h45">
 	        <div class="head bb_border">
-	            <a href="../../index.html" class="btn_back"></a>
+	            <a @click="back" class="btn_back"></a>
 	            <div class="title center">邀请奖励排行榜</div>
 	        </div>
 	    </div>
@@ -77,6 +77,11 @@
 				}
 		},
 		methods:{
+			back(){
+				uni.navigateBack({
+					delta:1
+				})
+			},
 			init(){
 				get('Member/GetInviterList').then(res => {
 					console.log(res)

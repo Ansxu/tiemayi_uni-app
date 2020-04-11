@@ -2,7 +2,7 @@
 	<div>
 	<div class="h45">
 	        <div class="head bb_border">
-	            <a href="../../index.html" class="btn_back"></a>
+	            <a @click="back" class="btn_back"></a>
 	            <div class="title center">推广奖励</div>
 	        </div>
 	    </div>
@@ -11,15 +11,15 @@
 	            <ul class="ul-list">
 	                <li>
 	                    <label>我的邀请码</label>
-	                    <div class="txt-r"><span class="blue" id="MyInvitationCode">0</span>	<a class="link_btn copybtn" style="display:none;" id="copyinvitebtn" onclick="CopyInviteCode()">复制</a></div>
+	                    <div class="txt-r" ><span class="blue" id="MyInvitationCode">{{data.MyInvitationCode}}</span>	<a class="link_btn copybtn" style="display:none;" id="copyinvitebtn" onclick="CopyInviteCode()">复制</a></div>
 	                </li>
 	                <li>
 	                    <label>已完成任务单数</label>
-	                    <div class="txt-r"><span class="blue" id="CompletedTaskNum">1</span></div>
+	                    <div class="txt-r"><span class="blue" id="CompletedTaskNum">{{data.CompletedTaskNum}}</span></div>
 	                </li>
 	                <li>
 	                    <label>推广总数</label>
-	                    <div class="txt-r"><span class="c_Org" id="PromotionSum">1</span>个</div>
+	                    <div class="txt-r"><span class="c_Org" id="PromotionSum">{{data.PromotionSum}}</span>个</div>
 	                </li>
 	                <!-- <li>
 	                    <label>徒弟</label>
@@ -32,18 +32,18 @@
 	                <div class="txt-r text_l">三级徒弟完成任务邀请人可获得佣金 <span class="c_Org" id="promotionIncomeFeeThree"></span></div>
 	             </li> -->
 	                <li class="totalbox">
-	                    <div class="box">
-	                        <span class="num" id="RegisteredNum">0人</span><br>
-	                        <span class="txt">已注册</span>
+	                    <div class="box"  @click="goUrl('other/mysubordinate',{'clickval':0})">
+	                        <span class="num" id="RegisteredNum">{{data.RegisteredNum}}人</span><br>
+	                        <span class="txt">徒弟</span>
 	                    </div>
-	                    <div class="box">
-	                        <span class="num" id="CertifiedNum">0人</span><br>
-	                        <span class="txt">已认证</span>
+	                    <div class="box" @click="goUrl('other/mysubordinate',{'clickval':1})">
+	                        <span class="num" id="CertifiedNum">{{data.CertifiedNum}}人</span><br>
+	                        <span class="txt">徒孙</span>
 	                    </div>
 	                </li>
 	                <li>
 	                    <label>累计奖励</label>
-	                    <div class="txt-r"><span class="c_Org" id="RewardAmount">0.00</span> 金</div>
+	                    <div class="txt-r"><span class="c_Org" id="RewardAmount">{{data.RewardAmount}}</span> 金</div>
 	                </li>
 	            </ul>
 	        </div>
@@ -60,15 +60,94 @@
 	            </div>
 	        </div>
 	    </div>
-	    <div class="null50">
+	    <div class="null50" >
 	        <footer class="ftbtn bt_border">
-	            <a class="btn" id="btnShare">立即分享</a>
+	            <view class="btn" id="btnShare" @click="goShare" v-if="data.MyInvitationCode" >立即分享</view>
 	        </footer>
 	    </div>
 	</div>
 </template>
 
 <script>
+	// import NativeShare from '@/utils/NativeShare'
+	import {post , goUrl} from '@/utils'
+	export default{
+		data(){
+			return {
+					goUrl,
+					userId:'',
+					token:'',
+					data:{}
+				}
+			},
+			onLoad(){
+				this.userId = uni.getStorageSync("userId");
+				this.token = uni.getStorageSync("token");
+				// console.log(this.data)
+				this.init()
+			},
+			onShow(){
+				  if (
+					  this.userId !== uni.getStorageSync("userId") ||
+					  this.token !== uni.getStorageSync("token")
+					) {
+					  this.userId = uni.getStorageSync("userId");
+					  this.token = uni.getStorageSync("token");
+					}
+			},
+			methods:{
+				//分享
+				goShare(){
+					console.log('分享')
+					// var nativeShare = new NativeShare()
+					// // console.log(NativeShare)
+					// var shareData = {
+					//             title: '11111',
+					//             desc: '11111',
+					//             // 如果是微信该link的域名必须要在微信后台配置的安全域名之内的。
+					//             link: 'http://localhost:8080/',
+					//             icon: 'https://avatar.csdn.net/5/2/E/1_qq175023117.jpg?1539049275',
+					//             // 不要过于依赖以下两个回调，很多浏览器是不支持的
+					//             success: function() {
+					//                 alert('分享成功')
+					//             },
+					//             fail: function() {
+					//                 alert('分享失败')
+					//             }
+					//         }
+					//         nativeShare.setShareData(shareData)
+					 
+					//         function call(command) {
+					//             try {
+					//                 nativeShare.call(command)
+					//             } catch (err) {
+					//                 // 如果不支持，你可以在这里做降级处理
+					//                 alert(err.message)
+					//             }
+					//         }
+					 
+					//         function setTitle(title) {
+					//             nativeShare.setShareData({
+					//                 title: title,
+					//             })
+					//         }
+				},
+				back(){
+					uni.navigateBack({
+						delta:1
+					})
+				},
+				init(){
+					post('Member/GetMemberByInvite',{
+						UserId:  this.userId,
+						Token: this.token
+					}).then(res => {
+						console.log(res)
+						this.data=res.obj
+					})
+				}
+			}
+	}
 </script>
 
 <style lang="scss" scoped>

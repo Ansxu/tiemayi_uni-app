@@ -6,7 +6,7 @@
                 <div class="title center">加入VIP</div>
             </div>
         </div>
-        <div class="main">
+        <div class="main" v-if="!mark">
             <div class="joinVIP" style="border-top:none;">
                 <div class="joinVIP_section">
                     <div class="joinVIP_section__hd">
@@ -41,50 +41,45 @@
             </div>
         </div>
         <!--底部-->
-        <div class="dd_footer VIP__dd_footer">
+        <div class="dd_footer VIP__dd_footer" v-if="!mark">
             <div class="inner">
                 <div class="dd_Btns flex flexAlignCenter justifyCenter">
-                    <div class="weui-btn weui-btn-active" id="btn-joinVIP">同意加入</div>
+                    <div class="weui-btn weui-btn-active" id="btn-joinVIP" @tap="joinVip" >同意加入</div>
                 </div>
             </div>
         </div>
         <!--选择套餐弹窗-->
-        <div class="defaultPage allScreenPage selectSetMealPage">
-            <div class="h45">
-                <div class="head bb_border">
-                    <a href="javascript:;" class="btn_back"></a>
-                    <div class="title center">加入VIP</div>
-                </div>
-            </div>
-            <div class="main">
-                <div class="joinVIP" style="border-top:none;">
-                    <div class="selectSetMeal">
-                        <div class="selectSetMeal__hd">
-                            <h2 class="title">选择VIP套餐</h2>
-                        </div>
-                        <!--  循环 -->
-                        <!-- <script id="gradeListTemp" type="text/x-dot-template">
-                            {{~it:value:index}}
-                            <li value={{=value.VipPrice}} name={{=value.VipName}} index={{=value.Id}}>
-                                <div class="outside">
-                                    <div class="weui-btn">{{=value.VipName}}</div>
-                                </div>
-                            </li>
-                            {{~}}
-                        </script> -->
-                        <div class="selectSetMeal__bd">
-                            <ul class="setMealList dd_BtnsList li50" id="vipselect">
-
-                            </ul>
-                        </div>
-                        <div class="selectSetMeal__ft">
-                            <div class="weui-btn weui-btn-active btn-pay" id="btn-pay">请选择VIP套餐</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--选择套餐弹窗 end-->
+      <div class="joinVIP" style="border-top:none;" v-if="mark">
+          <div class="selectSetMeal">
+              <div class="selectSetMeal__hd">
+                  <h2 class="title">选择VIP套餐</h2>
+              </div>
+              <!--  循环 -->
+              <!-- <script id="gradeListTemp" type="text/x-dot-template">
+                  {{~it:value:index}}
+                  <li value={{=value.VipPrice}} name={{=value.VipName}} index={{=value.Id}}>
+                      <div class="outside">
+                          <div class="weui-btn">{{=value.VipName}}</div>
+                      </div>
+                  </li>
+                  {{~}}
+              </script> -->
+              <div class="selectSetMeal__bd">
+                  <ul class="setMealList dd_BtnsList li50" id="vipselect" v-for="(item,index) in data" :key="index">
+      				<li @click="setMealList(item.VipPrice,item.VipName,item.Id,index)" :class="i==index? 'active':''">
+      					<div class="outside">
+      						<div class="weui-btn">{{item.VipName}}</div>
+      					</div>
+      				</li>
+                  </ul>
+              </div>
+              <div class="selectSetMeal__ft">
+                  <div class="weui-btn weui-btn-active btn-pay" id="btn-pay" @click.stop="btnPay">{{str}}</div>
+              </div>
+          </div>
+      </div>
+       
+		<!--选择套餐弹窗 end-->
 
         <!-- <script type="text/javascript">
                 $(function() {
@@ -144,27 +139,96 @@
 </template>
 
 <script>
-import {} from '@/utils';
+import {get , post} from '@/utils';
 export default {
     data(){
         return {
-
+			userId:'',
+			token:'',
+			data:{},
+			mark:false,
+			str:'选择VIP套餐',
+			price:'',
+			name:'',
+			id:'',
+			i:null
         }
     },
-    onLoad(){
-
-    },
-    onShow(){
-
-    },
+   onLoad(){
+   	this.userId = uni.getStorageSync("userId");
+   	this.token = uni.getStorageSync("token");
+   	// console.log(this.data)
+   	this.init()
+   },
+   onShow(){
+   	  if (
+   		  this.userId !== uni.getStorageSync("userId") ||
+   		  this.token !== uni.getStorageSync("token")
+   		) {
+   		  this.userId = uni.getStorageSync("userId");
+   		  this.token = uni.getStorageSync("token");
+   		}
+   },
     methods:{
-
+		init(){
+			get('Money/GetVIPList').then(res => {
+				console.log(res)
+				this.data=res.obj
+			})
+		},
+		// 打开弹窗
+		joinVip(){
+			console.log(123)
+			this.mark=true
+		},
+		setMealList(price,name,id,i){
+			this.price=price
+			this.name=name
+			this.id=id
+			this.i=i
+			this.str="立即支付" +this.price + "金"
+		},
+		btnPay(){
+			let that =this
+			uni.showModal({
+				
+				title:'温馨提示',
+				content:'您购买旺店宝' + this.name + '套餐,需支付' + this.price + '金币',
+				 success: function (res) {
+				        if (res.confirm) {
+				            console.log('用户点击确定');
+							post('Money/UserBuyVIP',{
+								 UserId: that.userId,
+								 Token: that.token,
+								 SetMealId: that.id
+							}).then(res =>{
+								console.log(res)
+								if(res.errcode==1){
+									uni.showToast({
+										title:res.msg,
+										success() {
+											uni.redirectTo({
+												url:'../menber'
+											})
+										}
+									})
+								}
+							})
+				        } else if (res.cancel) {
+				            console.log('用户点击取消');
+				        }
+				    }
+			})
+		}
     }
 }
 </script>
 
 <style lang="scss" scoped>
     .allScreenPage {
-        display: none;
+        display: block;
     }
+	.joinVIP{
+		padding: 39px 12px;
+	}
 </style>
