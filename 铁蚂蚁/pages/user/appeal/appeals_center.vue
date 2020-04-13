@@ -21,7 +21,8 @@
                     <li onclick="appealInfo({{=value.Id}})">
                         <div class="box">
                             <div class="title">
-                                <p class="text">【{{=value.QuestionTypeText}}】{{=value.Question}}</p><a href="javascript:;" class="link_btn">{{=value.StatusText}}</a>
+                                <p class="text">【{{=value.QuestionTypeText}}】{{=value.Question}}</p>
+								<a href="javascript:;" class="link_btn">{{=value.StatusText}}</a>
                             </div>
                             <div class="info">
                                 <span class="shopid">申诉ID：{{=value.Id}}</span>
@@ -32,13 +33,13 @@
                     {{~}}
                 </script> -->
                 <div class="tabcon bg_fff">
-                    <ul class="appealslist" id="appealItems" v-for="(item,index) in data">
+                    <ul class="appealslist" id="appealItems" v-for="(item,index) in data" :key="index">
 						<li @click="appealInfo(item.Id)">
 						    <div class="box">
 						        <div class="title">
 						            <p class="text">【{{item.QuestionTypeText}}】{{item.Question}}</p>
-									<a href="javascript:;" class="link_btn">{{item.StatusText}}</a>
-									<a v-if="num==1&&item.Status==0" class="link_btn" style="padding: 0 8px;" @click.stop="cexiao(item.Id)">撤销</a>
+									<p class="link_btn">{{item.StatusText}}</p>
+									<p v-if="num==1&&item.Status==0" class="link_btn" style="padding: 0 8px;" @click.stop="cexiao(item.Id)">撤销</p>
 						        </div>
 						        <div class="info">
 						            <span class="shopid">申诉ID：{{item.Id}}</span>
@@ -53,10 +54,10 @@
 						<view class="text">
 							请输入撤销原因
 						</view>
-						<input type="text" @input="cexiaoTx" maxlength="-1">
+						<input type="text" @input="cexiaoTx" placeholder="请输入" maxlength="-1">
 						<view class="tipBtn">
 							<view class="y"  @click="yes">确定</view>
-							<view @click="choose">取消</view>
+							<view class="n" @click="choose">取消</view>
 						</view>
 					</view>
 				</view>
@@ -93,18 +94,17 @@ export default {
     },
 	onReachBottom: function() {
 		this.pageNo++
-		this.init(this.num) 
+		this.init() 
 	},
     methods:{
-		init(num){
-			let a =num
+		init(){
 			let that=this
 			post('Appeal/GetAppealListPage',{
 				UserId: this.userId,
 				Token: this.token,
 				Page: this.pageNo, //当前页数
 				PageSize: this.pageSize, //每页显示数量   是否必填：N
-				Complainant: a, //申诉方 0-申诉我的 1-我发起的申诉   默认进来加载 【我收到的申诉】
+				Complainant: this.num, //申诉方 0-申诉我的 1-我发起的申诉   默认进来加载 【我收到的申诉】
 			}).then(res => {
 				let data=res.obj.AppealList
 				// this.data=data
@@ -133,9 +133,8 @@ export default {
 		},
 		//tab切换
 		gettab(index){
-			console.log(index)
 			this.num=index
-			this.init(index)
+			this.init()
 			if(index==0){
 				this.show=true
 			}else{
@@ -143,7 +142,7 @@ export default {
 			}
 		},
 		cexiao(id){
-			this.mark=true
+			this.mark=true;
 			this.id=id
 		},
 		cexiaoTx(e){
@@ -164,12 +163,11 @@ export default {
 				 AppealId: this.id,
 				 ReplyContent: this.cexiaoVal, //册小原因
 			}).then(res =>{
-					console.log(res)
 					uni.showToast({
 						title:res.msg,
 						success() {
 							that.mark=false
-							that.init(this.num) 
+							that.init() 
 						}
 					})
 					
@@ -191,7 +189,7 @@ export default {
 		position: fixed;
 		top: 0;
 		left: 0;
-		background-color: rgba(0,0,0,0.2);
+		background-color: rgba(0,0,0,0.5);
 		width: 100vw;
 		height: 100vh;
 		// position: relative;
@@ -200,27 +198,31 @@ export default {
 			left: 10vw;
 			top: 30vh;
 			background-color: #fff;
+			border-radius:5px;
+			overflow:hidden;
 			width: 80vw;
-			height: 20vh;
 			.text{
-				font-size: 15px;
+				font-size: 16px;
 				text-align: center;
 				margin-top: 3%;
+				line-height:3;
 			}
 			input{
 				text-align: center;
 				width: 90%;
-				border: solid #aaa 1px;
+				line-height:2;
+				height:30px;
+				border: solid #e8e8e8 1px;
 				margin: 3% 5% 10% 5%;
 			}
 			.tipBtn{
-				background-color: #BBB;
+				background-color: #f2f2f2;
 				height: 45px;
 				display: flex;
 				view{
-					border-top:1px solid #ACACB4;
+					border-top:1px solid #e8e8e8;
 					font-size: 15px;
-					color: #007AFF;
+					color: #999;
 					flex: 1;
 					justify-content: center;
 					align-items: center;
@@ -228,7 +230,8 @@ export default {
 					line-height: 45px;
 				}
 				.y{
-					border-right: 1px solid #aaa;
+					color: #007AFF;
+					border-right: 1px solid #e8e8e8;
 				}
 			}
 		}
