@@ -98,7 +98,7 @@
                                 <input type="checkbox" id="isagree" />
                                 <span :class="{'inputGou':read}"></span>
                             </div>
-                            <div class="flexItem">我已阅读并同意<span id="showAgreementShade">《铁蚂蚁用户协议》</span></div>
+                            <div class="flexItem">我已阅读并同意<span id="showAgreementShade">《旺店宝用户协议》</span></div>
                         </div>
                         <div class="weui-btn weui-btn-active btn-register" id="btnReg" @click="submit">立即注册</div>
                         <div class="hasAccountMag" @click="back">已有账号？立即登录</div>
@@ -195,6 +195,7 @@ export default {
                 OnlyVal: this.OnlyVal
             },{isLogin:true}).then(res=>{
                 toast('已发送至该手机',true);
+                this.upOnlyVal();
                 this.timeFn = setInterval(()=>{
                     this.timeEnd-=1;
                     if(this.timeEnd<1){
@@ -202,6 +203,8 @@ export default {
                         clearInterval(this.timeFn);
                     }
                 },1000)
+            }).catch(()=>{
+                this.upOnlyVal();
             })
         },
         async submit(){

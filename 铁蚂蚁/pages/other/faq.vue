@@ -4,18 +4,6 @@
 		<div class="main">
 			<div class="Faq">
 				<div class="Faq-type">
-					<!--  循环 -->
-					<!-- <script id="FAQListTemp" type="text/x-dot-template"> -->
-					<!-- 	{{~it:value:index}}
-						<li>
-							<a class="box" href="./faqdetail.html">
-								<i class="icon"><img src={{=value.Logo}}></i>
-								<p>{{=value.ClassName}}</p>
-								<div style="display:none">{{=value.Id}}</div>
-							</a>
-						</li>
-						{{~}}
-					</script> -->
 					<ul class="li50 clear">
 						<li v-for="(item,index) in list" :key="index">
 							<div class="box" @click="goUrl('other/faqdetail',{id:item.Id,name:item.ClassName})">
@@ -35,7 +23,6 @@
 				</div>
 	
 				<div class="ftbtn mb10">
-					<!-- <a class="btn qqbtn">QQ咨询</a> -->
 					<a class="btn qqbtn" :href="qqurl">QQ咨询</a>
 				</div>
 			</div>

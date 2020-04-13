@@ -2,9 +2,9 @@
 	<div class="bg_f8f8f8">
 		<div class="h45">
 			<div class="head bb_border">
-				<a @click="backUrl" class="btn_back"></a>
+				<p @click="backUrl" class="btn_back"></p>
 				<div class="title center" id="commisontitle">佣金提现</div>
-				<a @click="goUrl('./withdraw_record')" class="icon_r txt">查看明细</a>
+				<p @click="goUrl('./withdraw_record')" class="icon_r txt">查看明细</p>
 			</div>
 		</div>
 		<div class="main">
@@ -34,36 +34,26 @@
 						<div class="weui-btn" :class="[btnType=='yongjintx'?'weui-btn-active':'']" @click='select' id="yongjintx" >佣金提现</div>
 						<div class="weui-btn" :class="[btnType=='benjintx'?'weui-btn-active':'']" @click='select' id="benjintx">本金提现</div>
 					</div>
-					<input type="hidden" id="cash10" readonly="true"/>
-					<input type="hidden" id="cash11" readonly="true"/>
-					<input type="hidden" id="cash20" readonly="true"/>
-					<input type="hidden" id="cash21" readonly="true"/>
 					<!--tab-->
 					<div class="tabShowBox" style="margin-bottom: 0;">
 						<div class="tabItem">
 							<div class="regLogForm onlyIpt__form" style="padding-top:0;">
 								<p class="priceMsg">
-									<span id="cash" v-if="btnType=='yongjintx'">可提金币：{{data.Amount}}金</span>
-									<span id="cash" v-else-if="btnType=='benjintx'">可提金币：{{data.Wallet}}金</span>
-									<span id="cash" v-else>可提金币：0金</span>
-									<span id="frozencash" v-if="btnType=='yongjintx'">冻结金币：{{data.FrozenAmount}}金</span>
-									<span id="frozencash" v-else-if="btnType=='benjintx'">冻结金币：{{data.FrozenWallet}}金</span>
-									<span id="frozencash" v-else>冻结金币：0金</span>
+									<span id="cash" v-if="btnType=='yongjintx'">可提金币：{{btnType=='yongjintx'?data.Amount:data.Wallet}}金</span>
+									<span id="frozencash" v-if="btnType=='yongjintx'">冻结金币：{{btnType=='yongjintx'?data.FrozenAmount:data.FrozenWallet}}金</span>
 								</p>
-								<form action="">
-									<div class="weui-cells">
-										<div class="weui-cell">
-											<div class="weui-cell__bd">
-												<input type="number" placeholder="请输入提现金额" class="weui-input" :value="value" :disabled="disabl"  @input="input"/>
-											</div>
-										</div>
-										<div class="weui-cell">
-											<div class="weui-cell__bd">
-												<input type="password" placeholder="请输入登录密码" class="weui-input" id="passkey" :value="password" @input="passkey" />
-											</div>
+								<div class="weui-cells">
+									<div class="weui-cell">
+										<div class="weui-cell__bd">
+											<input type="number" placeholder="请输入提现金额" class="weui-input" :value="value" :disabled="disabl"  @input="input"/>
 										</div>
 									</div>
-								</form>
+									<div class="weui-cell">
+										<div class="weui-cell__bd">
+											<input type="password" placeholder="请输入登录密码" class="weui-input" id="passkey" :value="password" @input="passkey" />
+										</div>
+									</div>
+								</div>
 								<p class="priceMsg" style="margin:0;" v-if="btnType=='yongjintx'">
 									<span id="tipsText" v-if="value>data.MinCommissionWithdraw">实际到账：{{total}}元&nbsp;(1金 = {{data.CommissionConversion}}元)</span>
 									<span id="tipsText" v-else>实际到账：{{total}}元&nbsp;(1金 = {{data.CommissionConversion}}元)(手续费{{data.AmountProportionOfFees}}元)</span>
@@ -102,6 +92,9 @@ export default {
         }
     },
   onLoad(){
+	this.value ='';
+	this.password ='';
+	this.disabl= false;
   	this.userId = uni.getStorageSync("userId");
   	this.token = uni.getStorageSync("token");
 	this.init()
@@ -150,10 +143,15 @@ export default {
 				const data=res.obj
 				console.log(data)
 				this.data=data
+			}).catch(()=>{
+				setTimeout(()=>{
+					this.backUrl();
+				},1500)
 			})
 		},
 		// 获取提现金额
 		input(e){
+			console.log(e)
 			if(this.btnType==''){
 				uni.showToast({ 
 					title:'请选择提现款项！',
@@ -176,8 +174,8 @@ export default {
 						this.total=this.value* (this.data.CommissionConversion)
 					}else if(this.value< this.data.MinCommissionWithdraw &&this.value!=0){
 						this.total=this.value* (this.data.CommissionConversion) - this.data.AmountProportionOfFees
-					}else if(this.value==0&&this.value==''  ) {
-						console.log(this.value)
+					}else if(this.value==0||this.value==''  ) {
+						console.log(this.value) 
 						this.total=0
 					}
 				} 

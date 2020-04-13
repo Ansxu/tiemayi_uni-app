@@ -1,11 +1,6 @@
 <template>
 	<div style="padding:20upx;">
-		<div class="h45">
-			<div class="head bb_border">
-				<a href="javascript:history.go(-1);" class="btn_back"></a>
-				<div class="title center">公告详情</div>
-			</div>
-		</div>
+		<headers>公告详情</headers>
 		<div class="main pd12">
 			<div class="notice-hd">
 				<div class="box">
@@ -20,7 +15,7 @@
 </template>
 
 <script>
-import {post,toast,goUrl,editTime} from '@/utils';
+import {post,toast,goUrl,editTime,filePath} from '@/utils';
 import h5Copy  from '@/utils/junyi-h5-copy';
 export default {
   data() {
@@ -47,7 +42,10 @@ export default {
 				Token: this.token,
                 NoticeId: this.id
 		  }).then(res=>{
-			  this.data = res.obj;
+			  const data = res.obj;
+			  data.Memo=data.Memo.replace(/\<img/g,`<img style="max-width:100%;"`);
+			  data.Memo=data.Memo.replace(/src="\//g,`src="`+filePath+'/');
+			  this.data = data;
 		  })
 	  }
   },

@@ -132,7 +132,7 @@
             <!-- <li><a href="#" class="task_cj">积分抽奖</a></li> -->
             <!--<li><a href="html/user/shareqrcode.html" class="task_qrcode">分享二维码</a></li>-->
             <li>
-              <div class="task_qrcode" id="lottery" @click="goUrl('')">积分抽奖</div>
+              <div class="task_qrcode" id="lottery" @click="lotteryUrl">积分抽奖</div>
             </li>
             <li>
               <div @click="goUrl('other/invite')" class="task_yq">邀请好友</div>
@@ -286,12 +286,25 @@ export default {
       }).then(res => {
         this.unreadCount = res.obj;
       });
+    },
+    // 判断是否有几分抽奖
+    lotteryUrl(){
+      post("PlayActivities/lotteryUrl").then(res => {
+      }).catch(err=>{
+        if(err.errcode==2){
+            //跳转页面
+            location.href = err.url;
+        }
+      });
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.head .icon_r {
+     width: 45px;
+}
 .content {
   display: flex;
   flex-direction: column;
@@ -364,4 +377,5 @@ export default {
     }
   }
 }
+
 </style>

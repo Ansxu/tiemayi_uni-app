@@ -158,17 +158,18 @@ export default {
 		},
 		//官方介入
 		guanfangjieru(){
+			const that = this;
 			uni.showModal({
 				title:'温馨提醒',
 				content:"您真的要发起官方介入吗？",
 				success(r) {
 					if(r.confirm){
-						that.AppealId(that.AppealId)
+						that.faqijieru()
 					}
 				}
 			})
 		},
-		faqijieru(AppealId){
+		faqijieru(){
 			post('Appeal/InitiatePlatformInvolvement',{
 				UserId: this.userId,
 				Token: this.token,
@@ -178,9 +179,12 @@ export default {
 					title:res.msg,
 					icon:'none',
 					success() {
-						uni.navigateTo({
-							url:'./appeals_center'
+						uni.showToast({
+							title:res.msg
 						})
+						setTimeout(()=>{
+							uni.navigateBack();
+						},1500)
 					}
 				})
 			})
@@ -207,7 +211,9 @@ export default {
 								 ReplyImgS: that.replyImgS,
 								 ReplyImgT: that.replyImgT
 							}).then(res => {
-								console.log(res)
+								uni.showToast({
+									title:res.msg
+								})
 							})
 						}else if(r.cancel){
 							

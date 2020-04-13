@@ -169,7 +169,6 @@ export default {
 			// })
 			Promise.all([pathToBase64(this.data.IdcardPositive),pathToBase64(this.data.IdcardNegative),pathToBase64(this.data.IdcardInHand)])
 			.then(arr=>{
-				console.log(arr,'arr')
 				post('Member/BindUserIdCard',{
 					UserId: this.userId,
 					Token: this.token,

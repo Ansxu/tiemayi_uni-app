@@ -264,7 +264,7 @@
 	padding: 10px 12px;
 }
 .appealslist .box .title{ height: 30px; line-height: 30px; overflow: hidden;}
-.appealslist .box .title p{ max-width: 70%; float: left;}
+.appealslist .box .title p{ max-width: 67%; float: left;}
 .appealslist .box .title .link_btn{
 	height: 30px;
 	float: right;

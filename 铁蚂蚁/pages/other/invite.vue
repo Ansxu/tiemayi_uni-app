@@ -1,17 +1,14 @@
 <template>
 	<div>
-	<div class="h45">
-	        <div class="head bb_border">
-	            <a @click="back" class="btn_back"></a>
-	            <div class="title center">推广奖励</div>
-	        </div>
-	    </div>
+		<headers>推广奖励</headers>
 	    <div class="main" style="background: #fff;">
 	        <div class="Promotion">
 	            <ul class="ul-list">
 	                <li>
 	                    <label>我的邀请码</label>
-	                    <div class="txt-r" ><span class="blue" id="MyInvitationCode">{{data.MyInvitationCode}}</span>	<a class="link_btn copybtn" style="display:none;" id="copyinvitebtn" onclick="CopyInviteCode()">复制</a></div>
+	                    <div class="txt-r" ><span class="blue" id="MyInvitationCode">{{data.MyInvitationCode}}</span>
+							<p class="link_btn copybtn" style="display:none;" id="copyinvitebtn" onclick="CopyInviteCode()">复制</p>
+							</div>
 	                </li>
 	                <li>
 	                    <label>已完成任务单数</label>

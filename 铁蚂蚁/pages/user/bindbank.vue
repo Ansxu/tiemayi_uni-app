@@ -18,7 +18,7 @@
                 <div class="weui-cells">
                     <div class="weui-cell">
                         <div class="weui-cell__bd">
-                            <input type="text" v-model.trim="data.BankCardName" :disabled="data.IsAUT===1" class="weui-input" id="BankCardName" placeholder="请输入持卡人姓名">
+                            <input type="text" v-model.trim="data.BankCardName" :disabled="data.IsBindBank===1" class="weui-input" id="BankCardName" placeholder="请输入持卡人姓名">
                         </div>
                     </div>
                     <div class="weui-cell">
@@ -26,7 +26,7 @@
                             <input type="text" class="weui-input"  v-model.trim="data.BankCardNo" id="BankCardNo" placeholder="请输入卡号">
                         </div>
                     </div>
-                    <div class="weui-cell selectCity__weui-cell select__weui-cell" @click="showArea">
+                    <!-- <div class="weui-cell selectCity__weui-cell select__weui-cell" @click="showArea">
                         <div class="weui-cell__bd">
                             <input type="text" class="weui-input" v-model="data.BankRegionText" disabled  id="area"  value="" placeholder="请选择开户银行所在地区" />
                             <span class="icon-arrow icon-arrowRight"></span>
@@ -35,16 +35,16 @@
 
                     <div class="weui-cell">
                         <div class="weui-cell__bd">
-                            <input type="text" class="weui-input" v-model.trim="data.BankAddress" :disabled="data.IsAUT===1" id="BankAddress" placeholder="请输入开户行详细地址">
+                            <input type="text" class="weui-input" v-model.trim="data.BankAddress" :disabled="data.IsBindBank===1" id="BankAddress" placeholder="请输入开户行详细地址">
                         </div>
-                    </div>
+                    </div> -->
                     <div class="weui-cell" id="showSelectBankNamePage" @click="onShowBankList">
                         <div class="weui-cell__bd">
                             <input type="text" class="weui-input" v-model.trim="data.BankName" disabled id="BankName" placeholder="请选择开户银行">
                         </div>
                     </div>
                 </div>
-                <div @click="submit" v-if="data.IsAUT!==1" class="weui-btn weui-btn-active btn-submit" style="margin-top:.2rem;">提交</div>
+                <div @click="submit" v-if="data.IsBindBank!==1" class="weui-btn weui-btn-active btn-submit" style="margin-top:.2rem;">提交</div>
             </div>
         </div>
         <!--弹窗-->
@@ -105,7 +105,7 @@ export default {
             userId:'',
 			token:'',
             data:{
-                IsAUT:1,
+                IsBindBank:1,
                 BankCardName:'', //绑定的银行卡用户名
                 BankCardNo:'', //银行卡卡号
                 BankName:'', //银行卡对应的银行名称
@@ -158,7 +158,7 @@ export default {
         },
         // 显示城市选择
         showArea(){
-            // if(this.data.IsAUT===1){
+            // if(this.data.IsBindBank===1){
             //     return;
             // } 
             if(this.areaList.length<1){
@@ -174,7 +174,7 @@ export default {
         },
         // 显示银行列表
         onShowBankList(){
-            if(this.data.IsAUT===1) return;
+            if(this.data.IsBindBank===1) return;
             this.showBankList= true;
         },
         // 确认选择银行
@@ -216,7 +216,10 @@ export default {
                 BankCardNo: data.BankCardNo, //银行卡号
                 BankName: data.BankName, //银行名称； 建设银行，农业银行 ....
 			}).then(res=>{
-                
+                toast('提交成功，待管理员审核！')
+                setTimeout(()=>{
+                    uni.navigateBack();
+                })
 			})
         },
         check(){
@@ -224,8 +227,8 @@ export default {
             if(!data.BankCardName)return '请输入持卡人姓名！';
             if(!data.BankCardNo)return '请输入银行卡号！';
             if(!data.BankName)return '请选择银行名称！';
-            if(!data.BankAddress)return '请输入银行详细地址！';
-            if(this.defaultArea.length<1)return '请选择地区！';
+            // if(!data.BankAddress)return '请输入银行详细地址！';
+            // if(this.defaultArea.length<1)return '请选择地区！';
             return false;
         }
     }

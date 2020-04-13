@@ -56,7 +56,7 @@
         <div class="defaultPage twoStep__defaultPage allScreenPage" v-if="page===2">
             <div class="h45">
                 <div class="head">
-                    <a href="javascript:;" class="btn_back"></a>
+                    <p href="javascript:;" class="btn_back"></p>
                     <div class="title center">忘记密码</div>
                 </div>
             </div>

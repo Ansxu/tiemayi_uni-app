@@ -1,11 +1,6 @@
 <template>
 	<div>
-		<div class="h45">
-			<div class="head">
-				<a href="javascript:history.go(-1);" class="btn_back"></a>
-				<div class="title center">阿里巴巴截图示例图</div>
-			</div>
-		</div>
+        <headers>阿里巴巴截图示例图</headers>
 		<div class="main">
 			<div class="swiperImgBox bind__swiperImgBox">
 				<img src="/static/image/examplespic/albb/pic0.jpg" alt="" />

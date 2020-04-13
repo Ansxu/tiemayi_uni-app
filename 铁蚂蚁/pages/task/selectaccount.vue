@@ -1,11 +1,6 @@
 <template>
     <div class="bg_f8f8f8">
-        <div class="h45">
-            <div class="head bb_border">
-                <a href="javascript:api.closeWin();" class="btn_back"></a>
-                <div class="title center">选择账号</div>
-            </div>
-        </div>
+        <headers>选择账号</headers>
         <div class="main">
             <!--  循环 -->
             <!-- <script id="accountListTemp" type="text/x-dot-template">

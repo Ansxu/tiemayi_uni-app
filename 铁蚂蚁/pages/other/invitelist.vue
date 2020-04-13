@@ -1,11 +1,6 @@
 <template>
 	<div class="bg_img">
-	    <div class="h45">
-	        <div class="head bb_border">
-	            <a @click="back" class="btn_back"></a>
-	            <div class="title center">邀请奖励排行榜</div>
-	        </div>
-	    </div>
+		<headers>邀请奖励排行榜</headers>
 	    <div class="main Ranking">
 	        <div class="Rankbox">
 	            <div class="Rankhd">

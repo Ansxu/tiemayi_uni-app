@@ -1,11 +1,6 @@
 <template>
 	<div class="bg_gray">
-		<div class="h45">
-	        <div class="head bb_border">
-	            <view @click="back" class="btn_back"></view>
-	            <div class="title center">我的推广</div>
-	        </div>
-	    </div>
+		<headers>我的推广</headers>
 	    <div class="main app_tg">
 	        <div class="tab-hd tabList">
 	            <ul class="li50 clear">
@@ -98,11 +93,6 @@
 						
 						this.init()
 					}
-				},
-				back(){
-					uni.navigateBack({
-						delta:1
-					})
 				},
 				init(){
 					let that=this

@@ -1,11 +1,6 @@
 <template>
 	<div style="background: #ffeec9;">
-		<div class="h45">
-		        <div class="head">
-		            <a href="../../index.html" class="btn_back"></a>
-		            <div class="title center">拉新人领奖金</div>
-		        </div>
-		    </div>
+			<headers>拉新人领奖金</headers>
 		    <div class="main acti_Rule">
 		        <div class="Rulebanner">
 		            <div class="img"><img src="/static/image/banner/newrulesimg.jpg"></div>
