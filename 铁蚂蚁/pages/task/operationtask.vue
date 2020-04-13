@@ -1442,9 +1442,10 @@ export default {
 			} else
 				--m
 			var s = 59;
+			const that = this;
 			this.OperationCountdown = setInterval(function() {
 				if (alls <= 0) {
-					clearInterval(this.OperationCountdown);
+					clearInterval(that.OperationCountdown);
 					toast("任务超时未处理，系统已取消");
 					uni.navigateBack();
 				} else {

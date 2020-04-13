@@ -239,8 +239,8 @@ export default {
 		},
 		// 确认任务
 		taskOk(){
-			this.taskOrder.TaskAcceptNo='';
 			goUrl('task/selectoperation',{TaskAcceptNo:this.taskOrder.TaskAcceptNo})
+			this.taskOrder.TaskAcceptNo='';
 		},
 		ontips(){
 			uni.showModal({

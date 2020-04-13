@@ -412,7 +412,9 @@ export default {
         userId:'',
         token:'',
         TaskAcceptNo:'',
-        data:{},
+        data:{
+            ImgJson:{}
+        },
         cancelTastList:['找不到商品','不想做这个任务','达不到商家的要求','其他'],
         cancelTastIndex:0,//取消任务的原因下标
         showCancelTask:false,
@@ -453,14 +455,18 @@ export default {
                 Token: this.token,
                 TaskAcceptNo:this.TaskAcceptNo
 			}).then(res=>{
-                const data =res.obj;
+                let data =res.obj;
                 if (data.AcceptTaskStatus == 0) {
                     this.timerStart(data.OperationCountdown);
                 }
                 if (data.AcceptTaskStatus == 2 && data.EvaluationCountdown < data.ReceivingTime) {
                     this.EvaluationTimerStart(data.EvaluationCountdown,data.ReceivingTime);
                 }
-                data.ImgJson&&(data.ImgJson = JSON.parse(data.ImgJson));
+                if(data.ImgJson){
+                    data.ImgJson = JSON.parse(data.ImgJson);
+                }else{
+                     data.ImgJson ={}
+                }
                 this.data = data;
 			})
         },
@@ -527,7 +533,6 @@ export default {
             let s = 59;
             that.timeFn = setInterval(function() {
                 if (alls <= 0) {
-                    has_click = false;
                     clearInterval(that.timeFn);
                     that.timeEnd="提交倒计时 00:00:00"
                     toast("任务超时未处理，系统已取消");
