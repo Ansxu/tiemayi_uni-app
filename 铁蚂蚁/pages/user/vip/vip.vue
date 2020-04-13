@@ -1,11 +1,12 @@
 <template>
     <div>
-        <div class="h45">
+        <!-- <div class="h45">
             <div class="head bb_border">
                 <a href="../member.html" class="btn_back"></a>
                 <div class="title center">加入VIP</div>
             </div>
-        </div>
+        </div> -->
+		<headers>加入VIP</headers>
         <div class="main" v-if="!mark">
             <div class="joinVIP" style="border-top:none;">
                 <div class="joinVIP_section">

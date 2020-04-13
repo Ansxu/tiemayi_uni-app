@@ -54,8 +54,8 @@
                         <div  class="weui-cell" id="TbAccountShow" 
                             v-for="(item,index) in bindList" :key="index"
                             @click="onBindAccount(item)"
-                            v-show="item.PlatName.indexOf('淘宝')!==-1"
                             >
+                            <!-- v-show="item.PlatName.indexOf('淘宝')!==-1" -->
                             <div class="weui-cell__hd">
                                 <img :src="item.Logo" alt="" class="icon-navImg"><span class="title">{{item.PlatName}}</span>
                             </div>
@@ -178,7 +178,7 @@ export default {
                 toast("需要绑定身份证，并认证后才可以绑定！")
                 return;
             }
-            //typeId = 1--淘宝；3--京东；4--阿里巴巴；5--拼多多；6--美丽说；7--蘑菇街；
+            //typeId = 1--淘宝；2-天猫；3--京东；4--阿里巴巴；5--拼多多；6--美丽说；7--蘑菇街；
             let params = {};
             // 淘宝
             if(item.PlatName.indexOf('淘宝')!==-1){
@@ -186,6 +186,7 @@ export default {
             }else
             // 京东
             if(item.PlatName.indexOf('京东')!==-1){
+			console.log(item,'item')
                params= {name:'京东',typeId:3,url:'bindjd'};
             }else
             // 阿里巴巴

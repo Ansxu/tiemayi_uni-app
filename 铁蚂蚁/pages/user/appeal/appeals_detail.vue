@@ -1,11 +1,13 @@
 <template>
     <div>
-        <div class="h45">
+        <!-- <div class="h45">
             <div class="head bb_border">
                 <view @click="back" class="btn_back"></view>
                 <div class="title center">申诉详情</div>
             </div>
-        </div>
+        </div> -->
+		
+		<headers>申诉详情</headers>
         <div class="main">
             <div class="appealsDetail">
                 <div class="stepInfo">

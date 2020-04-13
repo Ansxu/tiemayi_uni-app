@@ -139,21 +139,47 @@
 </template>
 
 <script>
-import {} from '@/utils';
+import {post} from '@/utils';
 export default {
     data(){
         return {
-
+			accountId:0
         }
     },
-    onLoad(){
-
+    onLoad(e){
+        this.userId = uni.getStorageSync('userId');
+        this.token = uni.getStorageSync('token');
+		console.log(e)
+		if(e!={}){
+			this.accountId=e.id
+		}else{
+			this.accountId='0'
+		}
+		console.log(this.accountId)
+		// console.log(e)
+		this.init(this.accountId);
     },
     onShow(){
 
     },
     methods:{
-
+		init(id){
+			let accountId=0
+			if(id){
+				accountId=id
+			}else {
+				accountId=0
+			}
+			console.log(accountId)
+			post('Member/LoadMemberAccountInfo',{
+				UserId: this.userId,
+				Token: this.token,
+				PlatId: 3, //平台ID  1淘宝 2天猫 3京东 5拼多多 7蘑菇街 6 美丽说
+				AccountId: accountId
+			}).then(res => {
+				console.log(res)
+			})
+		}
     }
 }
 </script>

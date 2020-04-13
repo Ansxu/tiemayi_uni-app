@@ -99,6 +99,7 @@ export default {
         this.name = options.name;
         this.typeId = options.typeId;
         this.url = options.url;
+		console.log(options)
         this.getData();
     },
     onShow(){
