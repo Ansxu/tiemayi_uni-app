@@ -8,6 +8,7 @@
                 <a @click="goUrl('./withdraw')" class="icon_r txt">提现</a>
             </div>
         </div>
+		<!-- <headers>申诉详情</headers> -->
         <div class="main">
             <div class="commisionTop">
                 <p class="title">累计佣金（金）</p>

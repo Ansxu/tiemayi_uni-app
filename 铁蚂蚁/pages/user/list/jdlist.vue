@@ -86,21 +86,38 @@
 </template>
 
 <script>
-import {} from '@/utils';
+import {post} from '@/utils';
 export default {
     data(){
         return {
 
         }
     },
-    onLoad(){
-
-    },
-    onShow(){
-
-    },
+   onLoad(){
+   	this.userId = uni.getStorageSync("userId");
+   	this.token = uni.getStorageSync("token");
+   	// console.log(this.data)
+   	this.init()
+   },
+   onShow(){
+   	  if (
+   		  this.userId !== uni.getStorageSync("userId") ||
+   		  this.token !== uni.getStorageSync("token")
+   		) {
+   		  this.userId = uni.getStorageSync("userId");
+   		  this.token = uni.getStorageSync("token");
+   		}
+   },
     methods:{
-
+		init(){
+			post('Member/LoadMemberAccountList',{
+                UserId: this.userId,
+                Token: this.token,
+                PlatId: 3
+			}).then(res => {
+				console.log(res)
+			})
+		}
     }
 }
 </script>
