@@ -9,7 +9,7 @@ const host = 'http://hnapi.wtvxin.com/api/';// 红鸟  旺店宝测试
 // const host = 'http://xmyapi.wtvxin.com/api/';// 铁蚂蚁测试
 const website = 'http://hn.wtvxin.com';
 const wssPath = 'wss://hxapia.com/WebSocketServer.ashx';// wss地址
-const filePath = 'http://www.hxapia.com';// 测试后台地址
+const filePath = 'http://www.hnapi.com';// 测试后台地址
 const LoginPath = "/pages/login/login";//登录路径
 const RegisterPath = "/pages/login/register/main";//注册路径
 

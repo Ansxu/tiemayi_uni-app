@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import {post,toast,goUrl,editTime} from '@/utils';
+import {post,toast,goUrl,editTime,filePath} from '@/utils';
 import h5Copy  from '@/utils/junyi-h5-copy';
 export default {
   data() {
@@ -42,7 +42,10 @@ export default {
 				Token: this.token,
                 NoticeId: this.id
 		  }).then(res=>{
-			  this.data = res.obj;
+			  const data = res.obj;
+			  data.Memo=data.Memo.replace(/\<img/g,`<img style="max-width:100%;"`);
+			  data.Memo=data.Memo.replace(/src="\//g,`src="`+filePath+'/');
+			  this.data = data;
 		  })
 	  }
   },

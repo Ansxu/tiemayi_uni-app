@@ -20,8 +20,7 @@
 													{{item.Title}}
 												</span>
 											</div>
-							<div class="desc">
-							{{item.Memo}}
+							<div class="desc" v-html="item.Memo">
 							</div>
 						</div>
 						<div class="box_ft"><p class="link_btn arrow_r" @click="goUrl('other/messagedetail',{id:item.Id})">查看详情</p></div>

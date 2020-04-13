@@ -302,6 +302,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.head .icon_r {
+     width: 45px;
+}
 .content {
   display: flex;
   flex-direction: column;
@@ -374,4 +377,5 @@ export default {
     }
   }
 }
+
 </style>
