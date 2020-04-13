@@ -2,9 +2,9 @@
 	<div class="bg_f8f8f8">
 		<div class="h45">
 			<div class="head bb_border">
-				<a @click="backUrl" class="btn_back"></a>
+				<p @click="backUrl" class="btn_back"></p>
 				<div class="title center" id="commisontitle">佣金提现</div>
-				<a @click="goUrl('./withdraw_record')" class="icon_r txt">查看明细</a>
+				<p @click="goUrl('./withdraw_record')" class="icon_r txt">查看明细</p>
 			</div>
 		</div>
 		<div class="main">

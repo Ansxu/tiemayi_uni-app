@@ -141,14 +141,14 @@
                             <span style="color:#7A7A7A">淘宝验号</span>
                         </div>
                     </li>
-                    <li class="messageMenuLi">
+                    <!-- <li class="messageMenuLi">
                         <div @click="goUrl('user/version')" class="outside">
                             <div>
                                 <img src="/static/image/nav/memberindex_nav2_5.png" alt="" />
                             </div>
                             <span style="color:#7A7A7A">版本信息</span>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
             <div  class="weui-btn btn-loginOut" @click="signOut">退出登录</div>

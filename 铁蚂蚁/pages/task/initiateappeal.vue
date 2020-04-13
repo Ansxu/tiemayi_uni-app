@@ -34,7 +34,7 @@
 						</li>
 					</ul>
 				</div>
-				<a class="btn_100" onclick="submitAppeal()">提交</a>
+				<p class="btn_100" onclick="submitAppeal()">提交</p>
 			</div>
 			<div class="from pd12">
 			<div class="">请在下方选择选项并描述你的问题</div>
@@ -59,7 +59,7 @@
 			<div class="flexbox">
 				<span>收到本金</span><input type="text" id="money3" value="" class="input2" placeholder="请输入收到本金">
 			</div>
-			<a class="btn_100 mt15" onclick="submitAppeal()">提交</a>
+			<p class="btn_100 mt15" onclick="submitAppeal()">提交</p>
 			</div>
 		</div>
 	</div>

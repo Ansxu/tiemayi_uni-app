@@ -1,11 +1,6 @@
 <template>
 	<div>
-		<div class="h45">
-			<div class="head bb_border">
-				<a href="../../index.html" class="btn_back"></a>
-				<div class="title center">积分抽奖</div>
-			</div>
-		</div>
+		<headers>积分抽奖</headers>
 		<div class="cj_content" style="padding-bottom: .3rem;">
 				<!--转盘-->
 				<div class="zhuanpanContent" style="padding-top:.6rem;padding-bottom: .4rem;">

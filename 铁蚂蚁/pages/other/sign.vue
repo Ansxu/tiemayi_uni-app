@@ -12,15 +12,14 @@
 		            <div class="Sign-top">
 		                <div class="dl">
 		                    <p>我的积分</p>
-		                    <span id="MyPoint" v-if="data.errcode!=0">{{obj.Score}}</span>
-							<span id="MyPoint" v-else>0</span>
+		                    <span id="MyPoint">{{obj.Score}}</span>
 		                </div>
 		            </div>
 		            <div class="Sign-c">
-		                <div class="Signbtn active" @click="goSign">
+		                <div :class="['Signbtn',{'active':data.errcode===3}]" @click="goSign">
 		                    <div class="inner">
 		                        <span class="txt " v-if="data.errcode===3" >已签到</span>
-								<span class="txt " v-else >已签到</span>
+								<span class="txt " v-else >签到</span>
 		                        <span class="num" id="ThisPoint">+1积分</span>
 		                    </div>
 		                </div>
@@ -28,9 +27,10 @@
 		            </div>
 		            <div class="Sign-day">
 		                <div class="jfitem">
-		                    <div class="jf cur" v-if="obj.DayScore==1" id="forOneDay"><i class="icon">+1</i></div>
-							<div class="jf " v-else id="forOneDay"><i class="icon">+1</i></div>
-		                    <div class="jf cur" v-if="obj.DayScore==2" id="forTwoDay"><i class="icon">+2</i></div>
+		                    <div class="jf " :class="{'cur':obj.GotoDay>index}" id="forOneDay" v-for="(item,index) in 7" :key="index">
+								<i class="icon">+{{index+1}}</i>
+							</div>
+		                    <!-- <div class="jf cur" v-if="obj.DayScore==2" id="forTwoDay"><i class="icon">+2</i></div>
 							<div class="jf " v-else id="forTwoDay"><i class="icon">+2</i></div>
 		                    <div class="jf cur" v-if="obj.DayScore==3" id="forThreeDay"><i class="icon">+3</i></div>
 							<div class="jf" v-else id="forThreeDay"><i class="icon">+3</i></div>
@@ -41,7 +41,7 @@
 		                    <div class="jf cur" v-if="obj.DayScore==6" id="forSixDay"><i class="icon">+6</i></div>
 							<div class="jf" v-else id="forSixDay"><i class="icon">+6</i></div>
 		                    <div class="jf cur" v-if="obj.DayScore==7" id="forSevenDay"><i class="icon">+7</i></div>
-							<div class="jf" v-else id="forSevenDay"><i class="icon">+7</i></div>
+							<div class="jf" v-else id="forSevenDay"><i class="icon">+7</i></div> -->
 		                </div>
 		                <!-- <div class="dayitem">
 		                    <div class="day">07-22</div>
@@ -97,10 +97,11 @@
 				})
 			},
 			getData(res){
-				if(res.errcode===0||res.errcode==3){
+				if(res.errcode==0||res.errcode==3){
 					this.data=res
 					this.obj=res.obj
 				}
+				console.log(this.data,this.obj)
 			},
 			goSign(){
 				post('integral/SignInGetPoints',{

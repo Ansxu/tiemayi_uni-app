@@ -1,25 +1,6 @@
 <template>
     <div class="bg_f8f8f8">
-        <div class="h45">
-            <div class="head bb_border">
-                <a @click="backUrl" class="btn_back" id="backup"></a>
-                <div class="title center" id="titletop">{{wallettext}}</div>
-            </div>
-        </div>
-        <!--  循环 -->
-        <!-- <script id="recordListTemp" type="text/x-dot-template">
-            {{~it:value:index}}
-            <li>
-                <div class="title">{{=value.Remark}}</div>
-                <div class="flex">
-                    <div class="flexItem flex1">
-                        <p class="time">{{=getDateText(value.CreateTime).Format("yyyy-MM-dd hh:mm:ss")}}</p>
-                    </div>
-                    <p class="price">{{=value.Change}}</p>
-                </div>
-            </li>
-            {{~}}
-        </script> -->
+		<headers>{{wallettext}}</headers>
         <div class="main">
             <ul class="commisionList withdrawRecordList" id="recordlist" style="margin-top:.1rem;" v-for="(item,index) in WithdrawList" :key="index">
 				<li>
@@ -77,11 +58,6 @@ export default {
 		// console.log(this.RecordDetail)
 	},
     methods:{
-		backUrl(){
-			uni.navigateBack({
-				delta:1
-			})
-		},
 		init(){
 			let that =this
 			post('Withdraw/GetWithdrawLogPage',{
@@ -94,7 +70,6 @@ export default {
 				const data = res.obj
 				// this.WithdrawList=data.WithdrawList
 				if(that.PageNo>1){
-					console.log(1231321)
 					if(data.WithdrawList.length==0){
 						uni.showToast({
 							title:'全部加载完成',
