@@ -1,15 +1,18 @@
 
 <script>
 export default {
-	onLaunch: function() {
+	onLaunch: function(options) {
 		// setFontSize();
-		console.log('App Launch')
+		// 邀请码
+		if(options.query.InvitationCode){
+			uni.setStorageSync('InvitationCode',options.query.InvitationCode)
+		}
 	},
 	onShow: function() {
-		console.log('App Show')
+		// console.log('App Show')
 	},
 	onHide: function() {
-		console.log('App Hide')
+		// console.log('App Hide')
 	}
 }
 </script>
