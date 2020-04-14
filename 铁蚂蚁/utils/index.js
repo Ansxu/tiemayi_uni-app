@@ -49,7 +49,8 @@ function request(url, data,method, loginFn) {
         AppId,
         Timetamp,
         Sign,
-        RequestFrom
+        RequestFrom,
+        'content-type':'application/json'
       },
       success: function (res) {
         uni.hideLoading();

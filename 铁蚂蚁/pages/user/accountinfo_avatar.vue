@@ -4,7 +4,7 @@
         <div class="main">
             <div class="bindSection">
                 <div class="dd__hd">
-                    <span class="titleMsg">点击上传图片(上传后，长按看大图，点击可更换图片）</span>
+                    <span class="titleMsg">点击上传图片(上传后，点击可更换图片）</span>
                 </div>
                 <ul class="dd_piclist li25">
                     <li>
@@ -42,7 +42,6 @@ export default {
     },
     onLoad(){
         this.userInfo=uni.getStorageSync('userInfo');
-        console.log(this.userInfo)
     },
     onShow(){
 
@@ -50,31 +49,27 @@ export default {
     methods:{
         upAvatar(){
             getImgPath(1,[],['compressed']).then(path=>{
-                console.log(path,'path')
                 this.userInfo.Avatar = path[0]; 
             })
         },
-        async base64Img(arr){
-            return new Promise(async (resolve,reject)=>{
-                let base27Arr = []
-                for(let i = 0;i < arr.length;i++){
-                let res = '';
-                if(/https?:\/\/(?:[^/]+\.)?([^./]+\.\w*.(?:cn|com|top|com\.tw))(?:$|\/)/.test(arr[i])){
-                    res=arr[i]
-                }else{
-                    res = await pathToBase64(arr[i]);
-                }
-                base27Arr.push(res)
-                }
-                resolve(base27Arr)
-            })
-        },
+        // async base64Img(arr){
+        //     return new Promise(async (resolve,reject)=>{
+        //         let res = '';
+        //         if(/https?:\/\/(?:[^/]+\.)?([^./]+\.\w*.(?:cn|com|top|com\.tw))(?:$|\/)/.test(arr)){
+        //             res=arr
+        //         }else{
+        //             res = await pathToBase64(arr);
+        //         }
+        //         resolve(res)
+        //     })
+        // },
         submit(){
-            this.base64Img([this.userInfo.Avatar]).then(imgbase64path=>{
+            pathToBase64(this.userInfo.Avatar).then(imgbase64path=>{
+                console.log(imgbase64path)
                 post('Member/EditHeadImage',{
                     UserId: uni.getStorageSync('userId'),
                     Token: uni.getStorageSync('token'),
-                    Avatar:imgbase64path[0]
+                    Avatar:imgbase64path
                 }).then(res=>{
                     uni.showToast({
                         title:'头像上传成功！'

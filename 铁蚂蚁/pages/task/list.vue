@@ -96,6 +96,7 @@ export default {
 				if(this.page===1){
 					this.list=[];
 					this.data = data;
+					this.notData = false;
 				}
 				if(data.TaskList.length<this.pageSize&&this.page!==1){
 					this.notData = true;//没有数据了
@@ -130,7 +131,7 @@ export default {
 		uni.stopPullDownRefresh();//得到数据后停止下拉刷新
 	},
 	onReachBottom(){
-		if(this.notData){
+		if(!this.notData){
 			this.page+=1;
 			this.getData();
 		}

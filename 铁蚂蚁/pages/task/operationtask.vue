@@ -1362,6 +1362,7 @@ export default {
 				UserId: this.userId,
 				Token: this.token,
 				TaskAcceptNo: this.TaskAcceptNo,
+				// ImgJson: imageBase64,
 				ImgJson: JSON.stringify(imageBase64),
 				PlatOrderNo: this.comfirmOrderNo,
 				PlatOrderMoney: this.orderPrice,
@@ -1371,7 +1372,7 @@ export default {
 				CityCode: data.AccountCityCode,
 				DistrictCode: data.AccountDistrictCode,
 				AddressInfo: data.AccountAddress,
-				ShopAroundjson:huobisanjiaJson
+				ShopAroundjson:JSON.stringify(huobisanjiaJson)
 			}).then(res=>{
 				toast(res.msg);
 				setTimeout(()=>{
@@ -1424,7 +1425,9 @@ export default {
 							res = await pathToBase64(val);
 						}
 					}
-					base64Obj[key[i]]=res;
+					if(res){
+						base64Obj[key[i]]=res;
+					}
 				}
                 resolve(base64Obj)
             })

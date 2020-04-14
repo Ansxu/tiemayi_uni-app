@@ -260,7 +260,8 @@
                             <dl>
                                 <dt><label>商家确认订单</label></dt>
                                 <dd><label>任务类型</label><span>{{data.PlatType}}</span></dd>
-                                <dd><label>返款方式</label><span>平台返款</span></dd>
+                                <dd><label>返款方式</label><span>{{data.FanType}}</span></dd>
+                                <dd><label>转账人</label><span>{{data.TransferUserName}}</span></dd>
                                 <dd><label>返款金额</label><span class="c_Org">{{data.Amount}}元</span></dd>
                                 <dd class="text_r"><span>平台规定商家24小时内返款</span>
                                     <p class="btn" onclick="urgeRebate()" v-if="data.AcceptTaskStatus==1&&data.IsReminders==0&&data.IsAppeal!=1">催返款</p>

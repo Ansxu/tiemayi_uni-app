@@ -13,7 +13,7 @@ export function pathToBase64(path) {
 			img.onerror = reject
 			img.src = path
 			return
-		}
+		}else
 		if (typeof plus === 'object') {
 			var bitmap = new plus.nativeObj.Bitmap('bitmap' + Date.now())
 			bitmap.load(path, function() {
@@ -29,7 +29,7 @@ export function pathToBase64(path) {
 				reject(error)
 			})
 			return
-		}
+		}else
 		if (typeof wx === 'object' && wx.canIUse('getFileSystemManager')) {
 			wx.getFileSystemManager().readFile({
 				filePath: path,
@@ -42,8 +42,9 @@ export function pathToBase64(path) {
 				}
 			})
 			return
+		}else{
+			reject(new Error('not support'))
 		}
-		reject(new Error('not support'))
 	})
 }
 

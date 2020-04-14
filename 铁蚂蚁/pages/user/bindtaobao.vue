@@ -214,6 +214,7 @@ export default {
 				CreditRating: '', //信用等级 √ 可为空
 				TaobaoValue: '', //淘气值 √
 				ConsumerCategoryList: '', //购物类目 √ //购物类目Id集合字符串(例：”1,2,3”)，最多选择3个
+				ConsumerCategoryIdList:[],//购物类目的id
 				// CreditRatingImg: '', //信誉等级图片base64  √
 				// TaobaoValueImg: '', //淘气值图片base64 √
 				// VerifiedImg: '', //实名认证图片base64 √
@@ -290,7 +291,10 @@ export default {
                 PlatId: 1, //平台ID  1淘宝 2天猫 3京东 5拼多多 7蘑菇街 6 美丽说
                 AccountId: this.data.AccountId
 			}).then(res=>{
-				this.data= res.obj;
+				const data = res.obj;
+				Object.keys(data).map(item=>{
+					this.data[item] = data[item];
+				})
 			})
 		},
 		//获取购物类目
@@ -338,9 +342,11 @@ export default {
 		// 完成购物类目选择
 		confirmShoppingCategory(){
 			let arr =[];
+			let arrId =[];
 			this.ShoppingCategory.map(item=>{
 				if(item.status){
-					arr.push(item.Name)
+					arr.push(item.Name);
+					arrId.push(item.Id);
 				}
 			})
 			if(arr.length<5){
@@ -349,6 +355,7 @@ export default {
 			if(arr.length>8){
 				toast('购物类目不能大于8个');return;
 			}
+			this.data.ConsumerCategoryIdList = arrId.join(',');
 			this.data.ConsumerCategoryList = arr.join(',');
 			this.showShoppingCategoryWin = false;
 		},
@@ -374,7 +381,7 @@ export default {
                     Age: data.Age, //年龄 √
                     CreditRating: data.CreditRating, //信用等级 √ 可为空
                     TaobaoValue: data.TaobaoValue, //淘气值 √
-                    ConsumerCategoryList: data.ConsumerCategoryList, //购物类目 √ //购物类目Id集合字符串(例：”1,2,3”)，最多选择3个
+                    ConsumerCategoryList: data.ConsumerCategoryIdList, //购物类目 √ //购物类目Id集合字符串(例：”1,2,3”)，最多选择3个
                     // CreditRatingImg: xinyudengjiImg, //信誉等级图片base64  √
                     // TaobaoValueImg: taoqizhiImg, //淘气值图片base64 √
                     // VerifiedImg: shimingrenzhengImg, //实名认证图片base64 √
