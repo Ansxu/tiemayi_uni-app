@@ -388,7 +388,7 @@ export default {
                     // BorrowingImg: huabeiIMg //花呗图片base64 √
 			}).then(res=>{
 				toast(res.msg,true);
-				setTImeout(()=>{
+				setTimeout(()=>{
 					uni.navigateBack();
 				},1500)
 			})

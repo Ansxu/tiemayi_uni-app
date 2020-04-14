@@ -9,7 +9,8 @@ const host = 'http://hnapi.wtvxin.com/api/';// 红鸟  旺店宝测试
 // const host = 'http://xmyapi.wtvxin.com/api/';// 铁蚂蚁测试
 const website = 'http://hn.wtvxin.com';
 const wssPath = 'wss://hxapia.com/WebSocketServer.ashx';// wss地址
-const filePath = 'http://www.hnapi.com';// 测试后台地址
+const filePath = 'http://www.hnapi.com';//文件域名
+const hostPath = 'http://hnapi.wtvxin.com';//主机路径
 const LoginPath = "/pages/login/login";//登录路径
 const RegisterPath = "/pages/login/register/main";//注册路径
 
@@ -19,7 +20,7 @@ const AppId = 'A6010957284142';
 const ClientId = '32422354D41A4E7814D0ACDF510D2167';
 const ClientSecret = '79C8F22AB0DD19B4A74F254A75887DAA';
 export {
-  host,filePath,wssPath,
+  host,filePath,wssPath,hostPath,
   dateUtils,LoginPath,RegisterPath,ClientId,ClientSecret
 }
 

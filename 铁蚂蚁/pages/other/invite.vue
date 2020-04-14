@@ -67,14 +67,16 @@
 
 <script>
 	// import NativeShare from '@/utils/NativeShare'
-	import {post , goUrl} from '@/utils'
+	import {post , goUrl,copy,hostPath,toast} from '@/utils'
+	import h5Copy  from '@/utils/junyi-h5-copy';
 	export default{
 		data(){
 			return {
 					goUrl,
 					userId:'',
 					token:'',
-					data:{}
+					data:{},
+					copyLink:hostPath+'/index.html#/?InvitationCode=',//分享链接
 				}
 			},
 			onLoad(){
@@ -95,7 +97,12 @@
 			methods:{
 				//分享
 				goShare(){
-					console.log('分享')
+					const res = h5Copy(this.copyLink);
+					if(res){
+						toast('邀请链接复制成功！去粘贴给好友吧。',true)
+					}else{
+						toast('复制失败，请重试！')
+					}
 					// var nativeShare = new NativeShare()
 					// // console.log(NativeShare)
 					// var shareData = {
@@ -140,7 +147,8 @@
 						Token: this.token
 					}).then(res => {
 						console.log(res)
-						this.data=res.obj
+						this.data=res.obj;
+						this.copyLink += res.obj.MyInvitationCode;
 					})
 				}
 			}

@@ -166,7 +166,7 @@ export default {
         this.code='',
         this.imgCode='',
         this.qq='',
-        this.inviteCode='',//邀请码
+        this.inviteCode=uni.getStorageSync('InvitationCode')||'',//邀请码
         this.read=false,//是否已阅读用户协议
         this.timeEnd=60,
         this.timeFn=null;//倒计时的方法

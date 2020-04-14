@@ -799,6 +799,7 @@ export default {
 			jgotherB:'',//加购竞品2截图
 
 			scdpotherA:'',//收藏店铺截图
+			collectionProduct:'',//收藏商品截图
 			cartImg:'',//加入购物车截图
 			fbbotherA:'',//浏览副宝贝截图
 			dzotherA:'',//点赞好评截图
@@ -858,6 +859,7 @@ export default {
 			jgotherB:'',//加购竞品2截图
 
 			scdpotherA:'',//收藏店铺截图
+			collectionProduct:'',//收藏商品截图
 			cartImg:'',//加入购物车截图
 			fbbotherA:'',//浏览副宝贝截图
 			dzotherA:'',//点赞好评截图
@@ -1207,58 +1209,60 @@ export default {
 				// 	}
 				// 	imageJson["OtherShopProBottomImgB"] = $("#otherB").val();
 				// }
-				// 店内商品
-				if((data.IsNewPasswordTask==0)&&(data.IsCompetingGoodsTask==0)&&(data.IsPresaleTask==0)&&(data.IsGoodTask==0)){
-					
-					if(!screenshot.targetTop){
-						toast("目标商品顶部截图不能为空");
-						return false;
-					}
-					imageJson["TargetProductTopImg"] = screenshot.targetTop;
+				if(data.IsBrowseStore==1&&data.TaskType!=2){
+					// 店内商品
+					if((data.IsNewPasswordTask==0)&&(data.IsCompetingGoodsTask==0)&&(data.IsPresaleTask==0)&&(data.IsGoodTask==0)){
+						
+						if(!screenshot.targetTop){
+							toast("目标商品顶部截图不能为空");
+							return false;
+						}
+						imageJson["TargetProductTopImg"] = screenshot.targetTop;
 
-					if(!screenshot.targetBottom){
-						toast("目标商品底部截图不能为空");
-						return false;
-					}
-					imageJson["TargetProductBottomImg"] = screenshot.targetBottom;
+						if(!screenshot.targetBottom){
+							toast("目标商品底部截图不能为空");
+							return false;
+						}
+						imageJson["TargetProductBottomImg"] = screenshot.targetBottom;
 
-					if(!screenshot.shopProA){
-						toast("店内商品A截图不能为空");
-						return false;
-					}
-					imageJson["ShopProductBottomImgA"] = screenshot.shopProA;
+						if(!screenshot.shopProA){
+							toast("店内商品A截图不能为空");
+							return false;
+						}
+						imageJson["ShopProductBottomImgA"] = screenshot.shopProA;
 
-					if(!screenshot.shopProB){
-						toast("店内商品B截图不能为空");
-						return false;
+						if(!screenshot.shopProB){
+							toast("店内商品B截图不能为空");
+							return false;
+						}
+						imageJson["ShopProductBottomImgB"] = screenshot.shopProB;
 					}
-					imageJson["ShopProductBottomImgB"] = screenshot.shopProB;
-				}
-				// 附加商品
-				if(data.TaskType==1&&(data.ProductName1||data.ProductName2)){
-					if(!screenshot.AdditionalProductA1){
-						toast("附加商品1顶部截图不能为空");
-						return false;
+					// 附加商品
+					if(data.TaskType==1&&(data.ProductName1||data.ProductName2)){
+						if(!screenshot.AdditionalProductA1){
+							toast("附加商品1顶部截图不能为空");
+							return false;
+						}
+						imageJson["AdditionalProductA1"] = screenshot.AdditionalProductA1;
+						
+						if(!screenshot.AdditionalProductB1){
+							toast("附加商品1底部截图不能为空");
+							return false;
+						}
+						imageJson["AdditionalProductB1"] = screenshot.AdditionalProductB1;
+						
+						if(!screenshot.AdditionalProductA2){
+							toast("附加商品2顶部截图不能为空");
+							return false;
+						}
+						imageJson["AdditionalProductA2"] = screenshot.AdditionalProductA2;
+						
+						if(!screenshot.AdditionalProductB2){
+							toast("附加商品2底部截图不能为空");
+							return false;
+						}
+						imageJson["AdditionalProductB2"] = screenshot.AdditionalProductB2;
 					}
-					imageJson["AdditionalProductA1"] = screenshot.AdditionalProductA1;
-					
-					if(!screenshot.AdditionalProductB1){
-						toast("附加商品1底部截图不能为空");
-						return false;
-					}
-					imageJson["AdditionalProductB1"] = screenshot.AdditionalProductB1;
-					
-					if(!screenshot.AdditionalProductA2){
-						toast("附加商品2顶部截图不能为空");
-						return false;
-					}
-					imageJson["AdditionalProductA2"] = screenshot.AdditionalProductA2;
-					
-					if(!screenshot.AdditionalProductB2){
-						toast("附加商品2底部截图不能为空");
-						return false;
-					}
-					imageJson["AdditionalProductB2"] = screenshot.AdditionalProductB2;
 				}
 				if(data.Llshoucandp==1){
 					if(!screenshot.collectionShop){
@@ -1279,11 +1283,11 @@ export default {
 			// 下单核对end
 			// 收藏商品截图
 			if(data.ShouCansp==1  && data.IsAddedservices==1){
-				if(!screenshot.collectionProductImg){
+				if(!screenshot.collectionProduct){
 					toast("收藏商品截图不能为空");
 					return false;
 				}
-				imageJson["ProductCollectionImg"] = screenshot.collectionProductImg;
+				imageJson["ProductCollectionImg"] = screenshot.collectionProduct;
 			}
 			// if ($("#merchantChatImg")[0]) {
 			// 	if (isNullOrEmpty($("#merchantChatImg").val())) {
@@ -1376,7 +1380,8 @@ export default {
 			}).then(res=>{
 				toast(res.msg);
 				setTimeout(()=>{
-					goUrl('task/receivedtask');
+					// goUrl('task/receivedtask');
+					uni.navigateBack();
 				},1500);
 			})
 		},
@@ -1405,8 +1410,9 @@ export default {
 		},
 	  	// 上传图片
         upImg(obj){
+			const that = this;
             getImgPath(1,[],['compressed']).then(path=>{
-                this.screenshot[obj] = path[0]; 
+                that.screenshot[obj] = path[0]; 
             })
 		},
 		// 转base64图片
