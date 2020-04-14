@@ -10,7 +10,7 @@
 			<div class="dd_msgBox bind__msgBox" style="padding:.1rem .12rem;">
 				<p class="title" style="font-size: .15rem;color:#222;">注意事项</p>
 				<p>账号审核时间<span class="color_e40000">（周一至周五09:00-18:00）</span>，账号提交后一工作日内完成 审核，如遇到周末或节假日顺廷，审核工作人工进行，用户请耐心等待， 新手务必查看
-					<a class="color_e40000" href="jd_bindexamplespic.html">截图示例</a>！</p>
+					<view class="color_e40000" @click="goUrl('user/jd_bindexamplespic')">截图示例</view>！</p>
 			</div>
 			<div class="bindSection">
 				<div class="dd__hd">
@@ -21,31 +21,32 @@
 						<div class="weui-cells">
 							<div class="weui-cell">
 								<div class="weui-cell__bd">
-									<input type="text" class="weui-input" id="jdName" placeholder="请输入京东用户名" />
+									<input type="text" class="weui-input" id="jdName" @input="jdName" placeholder="请输入京东用户名" />
 								</div>
 							</div>
 							<div class="weui-cell">
 								<div class="weui-cell__bd">
-									<input type="text" class="weui-input" id="shouhuoren" placeholder="收货人姓名" />
+									<input type="text" class="weui-input" id="shouhuoren"  @input="shouhuoren" placeholder="收货人姓名" />
 								</div>
 							</div>
 							<div class="weui-cell">
 								<div class="weui-cell__bd">
-									<input type="text" class="weui-input" id="lianxidianhua" placeholder="联系电话" />
+									<input type="text" class="weui-input" id="lianxidianhua"  @input="lianxidianhua" placeholder="联系电话" />
 								</div>
 							</div>
 							<div class="weui-cell selectCity__weui-cell select__weui-cell">
 								<div class="weui-cell__bd">
-									<input type="text" class="weui-input"  id="area"  value="" placeholder="请选择城市" onclick="picker3()"/>
+									<input type="text" class="weui-input"  id="area"  :value="pickerText" placeholder="请选择城市" @click="openAddres"/>
 									<span class="icon-arrow icon-arrowRight"></span>
 								</div>
-								<input type="hidden" id="provinceCode" readonly="true"/>
+								<!-- <input type="hidden" id="provinceCode" readonly="true"/>
 								<input type="hidden" id="cityCode" readonly="true"/>
-								<input type="hidden" id="districtCode" readonly="true"/>
+								<input type="hidden" id="districtCode" readonly="true"/> 	-->
 							</div>
+							<simple-address ref="simpleAddress" :pickerValueDefault="cityPickerValueDefault" @onConfirm="onConfirm" ></simple-address>
 							<div class="weui-cell">
 								<div class="weui-cell__bd">
-									<input type="text" class="weui-input" id="xiangxidizhi"  placeholder="请输入详细地址" />
+									<input type="text" class="weui-input" id="xiangxidizhi" @input="xiangxidizhi"  placeholder="请输入详细地址" />
 								</div>
 							</div>
 						</div>
@@ -62,21 +63,21 @@
 							<div class="weui-cell selectSex__weui-cell select__weui-cell">
 								<div class="weui-cell__bd">
 									<select name="" id="sexId" class="weui-input">
-										<option value="0">请选择性别</option>
-										<option value="1">男</option>
-										<option value="2">女</option>
+										<option @click="sex(0)" value="0">请选择性别</option>
+										<option @click="sex(1)" value="1">男</option>
+										<option @click="sex(2)" value="2">女</option>
 
 									</select>
 								</div>
 							</div>
 							<div class="weui-cell">
 								<div class="weui-cell__bd">
-									<input type="text" class="weui-input" id="nianling" placeholder="请输入你的年龄" />
+									<input type="text" class="weui-input" id="nianling" @input="nianling" placeholder="请输入你的年龄" />
 								</div>
 							</div>
 							<div class="weui-cell selectGrade__weui-cell select__weui-cell">
 								<div class="weui-cell__bd">
-										<input type="text" class="weui-input" id="xydj" placeholder="请输入京东值" />
+										<input type="text" class="weui-input" id="xydj" @input="xydj" placeholder="请输入京东值" />
 									<span class="icon-arrow icon-arrowRight"></span>
 								</div>
 							</div>
@@ -88,13 +89,13 @@
 			<div class="bindSection">
 				<div class="dd__hd">
 					<span class="titleMsg">点击上传图片(上传后，长按看大图，点击可更换图片）</span>
-					<a href="jd_bindexamplespic.html" class="lookExamples color_e40000">查看截图示列</a>
+					<view @click="goUrl('user/jd_bindexamplespic')" class="lookExamples color_e40000">查看截图示列</view>
 				</div>
 				<ul class="dd_piclist li25">
 					<li>
 						<div class="outside">
 							<div class="img">
-									<div class="upimg" onclick="getpic(this,'pic0',10)"><img src="" class="uploadImg"/></div>
+									<div class="upimg" @click="getpic(0)"><image @longtap="bigImg(pic1)" :src="pic1" class="uploadImg"/></image></div>
 									<input type="hidden" id="pic0" readonly="true"/>
 							</div>
 							<p class="title">京东账户</p>
@@ -103,7 +104,7 @@
 					<li>
 						<div class="outside">
 							<div class="img">
-									<div class="upimg" onclick="getpic(this,'pic1',10)"><img src="" class="uploadImg"/></div>
+									<div class="upimg" @click="getpic(1)"><image @longtap="bigImg(pic2)" :src="pic2" class="uploadImg"/></image></div>
 									<input type="hidden" id="pic1" readonly="true"/>
 							</div>
 							<p class="title">账户等级</p>
@@ -112,7 +113,7 @@
 					<li>
 						<div class="outside">
 							<div class="img">
-									<div class="upimg" onclick="getpic(this,'pic2',10)"><img src="" class="uploadImg"/></div>
+									<div class="upimg" @click="getpic(2)"><image @longtap="bigImg(pic3)" :src="pic3" class="uploadImg"/></image></div>
 									<input type="hidden" id="pic2" readonly="true"/>
 							</div>
 							<p class="title">实名认证</p>
@@ -121,7 +122,7 @@
 					<li>
 						<div class="outside">
 							<div class="img">
-									<div class="upimg" onclick="getpic(this,'pic3',10)"><img src="" class="uploadImg"/></div>
+									<div class="upimg" @click="getpic(3)"><image @longtap="bigImg(pic4)" :src="pic4" class="uploadImg"/></image></div>
 									<input type="hidden" id="pic3" readonly="true"/>
 							</div>
 							<p class="title">白条信息</p>
@@ -133,57 +134,301 @@
 			<div class="dd__hd" style="padding-top:0;">
 				<p class="titleMsg color_e40000">京东白条：选填，开通京东白条账号接单可获得更多佣金</p>
 			</div>
-			<a href="javascript:;" class="weui-btn weui-btn-active btn-submit" style="margin:.15rem .12rem .2rem;">提交审核</a>
+			<view class="weui-btn weui-btn-active btn-submit" @click="submit" style="margin:.15rem .12rem .2rem;">提交审核</view>
 		</div>
 	</body>
 </template>
 
 <script>
-import {post} from '@/utils';
+import { pathToBase64, base64ToPath } from '@/utils/image-tools.js'
+import {post,goUrl} from '@/utils';
+import simpleAddress from '@/components/simple-address/simple-address.nvue'
 export default {
     data(){
         return {
-			accountId:0
+			goUrl,
+			cityPickerValueDefault: [0, 0, 0],
+			accountId:0,
+			name:'',
+			receiver:'',
+			contactNum:'',
+			age:'',
+			jdvalue:'',
+			address:'',
+			pickerText:'',
+			sexId:0,
+			pic1:'',
+			pic2:'',
+			pic3:'',
+			pic4:'',
+			ProvinceCode:'',
+			CityCode:'',
+			DistrictCode:'',
+			
+			UserCenterImg:'',
+			AccountLevelImg:'',
+			VerifiedImg: '',
+			BorrowingImg: ''
+			
         }
     },
+	components:{
+		simpleAddress
+	},
     onLoad(e){
         this.userId = uni.getStorageSync('userId');
         this.token = uni.getStorageSync('token');
 		console.log(e)
-		if(e!={}){
+		this.accountId=e.id?0:e.id
+		if(this.accountId){
 			this.accountId=e.id
-		}else{
-			this.accountId='0'
+			this.init(this.accountId);
 		}
-		console.log(this.accountId)
-		// console.log(e)
-		this.init(this.accountId);
+
     },
     onShow(){
 
     },
     methods:{
 		init(id){
-			let accountId=0
-			if(id){
-				accountId=id
-			}else {
-				accountId=0
-			}
-			console.log(accountId)
 			post('Member/LoadMemberAccountInfo',{
 				UserId: this.userId,
 				Token: this.token,
 				PlatId: 3, //平台ID  1淘宝 2天猫 3京东 5拼多多 7蘑菇街 6 美丽说
-				AccountId: accountId
+				AccountId: id
 			}).then(res => {
 				console.log(res)
 			})
+		},
+		// 京东用户名
+		jdName(e){
+			this.name=e.detail.value
+		},
+		// 收货人
+		shouhuoren(e){
+			this.receiver=e.detail.value
+		},
+		// 联系电话
+		lianxidianhua(e){
+			this.contactNum=e.detail.value
+		},
+		//详细地址
+		xiangxidizhi(e){
+			this.address=e.detail.value
+		},
+		//年龄
+		nianling(e){
+			this.age=e.detail.value
+		},
+		//京东值
+		xydj(e){
+			this.jdvalue=e.detail.value
+		},
+		//打开地址选择器
+		openAddres() {
+			this.cityPickerValueDefault = [0,0,0]
+			this.$refs.simpleAddress.open();
+		},
+		//地址选择器确定
+		onConfirm(e) {
+			let that=this
+			this.pickerText = e.label;
+			let str= this.pickerText.replace('-',' ')
+			str= str.replace('-',' ')
+			console.log(this.pickerText)
+			post('Area/AreaByCode',{
+				AreaText:str
+			}).then(res=>{
+				console.log(res)
+				that.ProvinceCode=res.obj.provinceCode
+				that.CityCode=res.obj.cityCode
+				that.DistrictCode=res.obj.districtCode
+			})
+		},
+		//性别id
+		sex(e){
+			this.sexId=e
+		},
+		//上传图片
+		getpic(e){
+			console.log(e)
+			let type = e
+			let imgUrl=''
+			let that =this
+			uni.chooseImage({
+				count: 1, //默认9
+				sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+				sourceType: ['album','camera'], //从相册选择
+				success: function (res) {
+				    // console.log(JSON.stringify(res.tempFilePaths));
+					
+					
+					//转换为base64
+					pathToBase64(res.tempFilePaths[0])
+					.then(base64 => {
+						imgUrl=base64
+						console.log(base64)
+						if(type==0){
+							that.pic1=res.tempFilePaths[0]
+							that.UserCenterImg=imgUrl
+							// console.log(that.pic1)
+						}else if(type==1){
+							that.pic2=res.tempFilePaths[0]
+							that.AccountLevelImg=imgUrl
+						}else if(type==2){
+							that.pic3=res.tempFilePaths[0]
+							that.VerifiedImg=imgUrl
+						}else if(type==3){
+							that.pic4=res.tempFilePaths[0]
+							that.BorrowingImg=imgUrl
+						}
+						// console.log(imgUrl)
+					})
+					.catch(error => {
+						// console.error(error)
+					})
+					
+					// console.log(imgUrl)
+				}
+			})
+			
+			
+		},
+		//长按查看图片
+		bigImg(e){
+			let urls=[]
+			urls.push(e)
+			console.log(urls)
+			return false
+			uni.previewImage({
+			    urls: res.tempFilePaths,
+			    longPressActions: {
+			        itemList: ['发送给朋友', '保存图片', '收藏'],
+			        success: function(data) {
+			            console.log('选中了第' + (data.tapIndex + 1) + '个按钮,第' + (data.index + 1) + '张图片');
+			        },
+			        fail: function(err) {
+			            console.log(err.errMsg);
+			        }
+			    }
+			});
+		},
+		//提交审核
+		submit(){
+			 var reg = /^[0-9]\d*$/;
+			if(this.name==''){
+				uni.showToast({
+					title:'必须填写平台的账号',
+					icon:'none'
+				})
+				return false;
+			}else if(this.receiver==''){
+				uni.showToast({
+					title:'必须填写收货人',
+					icon:'none'
+				})
+				return false;
+			}else if(this.contactNum==''){
+				uni.showToast({
+					title:'必须填写联系电话',
+					icon:'none'
+				})
+				return false;
+			}else if(this.pickerText==''){
+				uni.showToast({
+					title:'必须选择省市区',
+					icon:'none'
+				})
+				return false;
+			}else if(this.address==''){
+				uni.showToast({
+					title:'必须填写收货详细地址',
+					icon:'none'
+				})
+				return false;
+			}else if(this.sex==''){
+				uni.showToast({
+					title:'必须选择性别',
+					icon:'none'
+				})
+				return false;
+			}else if(this.age==''){
+				uni.showToast({
+					title:'必须填写年龄',
+					icon:'none'
+				})
+				return false;
+			}else if(!reg.test(this.age)){
+				uni.showToast({
+					title:'请输入正确的年龄数值',
+					icon:'none'
+				})
+				return false;
+			}else if(this.pic1==''){
+				uni.showToast({
+					title:'必须上传京东账户图片',
+					icon:'none'
+				})
+				return false;
+			}else if(this.pic2==''){
+				uni.showToast({
+					title:'必须上传账户等级图片',
+					icon:'none'
+				})
+				return false;
+			}else if(this.pic3==''){
+				uni.showToast({
+					title:'必须上传实名认证图片',
+					icon:'none'
+				})
+				return false;
+			}
+			post('Member/BindOnAccount',{
+				UserId: this.userId,
+				Token: this.token,
+				PlatId: 3, //平台ID  1淘宝 2天猫 3京东 5拼多多 7蘑菇街 6 美丽说
+				// AccountId: this.accountId,
+				PlatAccount: this.name, //平台账号√
+				ConsigneeName: this.receiver, //收货人√
+				ConsigneeCall: this.contactNum, //联系电话√
+				ProvinceCode: this.ProvinceCode, //省份code √
+				CityCode: this.CityCode, //市区code √
+				DistrictCode: this.DistrictCode, //区县code √
+				Address: this.address, //详细地址 √
+				Gender: this.sex, //男女性别 √
+				Age: this.age, //年龄 √
+				CreditRating: '', //信用等级 √ 可为空
+				// TaobaoValue:taoqizhi,//淘气值 √
+				// ConsumerCategoryList:'',//购物类目 √
+				UserCenterImg: this.UserCenterImg, //京东账户图片base64  √
+				AccountLevelImg: this.AccountLevelImg, //账户等级图片base64 √
+				VerifiedImg: this.VerifiedImg, //实名认证图片base64 √
+				BorrowingImg: this.BorrowingImg //白条图片base64 √
+			}).then(res =>{
+				if(res.errcode==0){
+					uni.showToast({
+						title:res.msg,
+						icon:'none',
+						success() {
+							setTimeout(function(){
+								uni.redirectTo({
+									url:'./bindlist'
+								})
+							},1500)
+						}
+					})
+				}
+			})
+			
 		}
-    }
+	}
 }
 </script>
 
 <style lang="scss" scoped>
-
+	.uploadImg{
+		width: 100%;
+		height: 100%;
+	}
+	.color_e40000{display: inline-block;}
 </style>
