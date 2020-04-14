@@ -159,6 +159,7 @@ export default {
                 OnlyVal: this.OnlyVal
             }).then(res=>{
                 toast('已发送至该手机',true);
+                this.upOnlyVal();
                 this.timeFn = setInterval(()=>{
                     this.timeEnd-=1;
                     if(this.timeEnd<1){
@@ -166,6 +167,8 @@ export default {
                         clearInterval(this.timeFn);
                     }
                 },1000)
+            }).catch(err=>{
+                this.upOnlyVal();
             })
         },
         // 点击下一步

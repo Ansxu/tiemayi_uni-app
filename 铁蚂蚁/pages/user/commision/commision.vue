@@ -2,10 +2,10 @@
     <div class="bg_f8f8f8">
         <div class="h45">
             <div class="head bb_border">
-                <a @click="backUrl" class="btn_back"></a>
+                <p @click="backUrl" class="btn_back"></p>
                 <div class="title center">佣金收益</div>
                 <!-- 提现这里动态传参 -->
-                <a @click="goUrl('./withdraw')" class="icon_r txt">提现</a>
+                <p @click="goUrl('./withdraw')" class="icon_r txt">提现</p>
             </div>
         </div>
 		<!-- <headers>申诉详情</headers> -->
@@ -54,7 +54,7 @@
 							<div class="title">{{item.Remark}}</div>
 							<div class="flex">
 							    <div class="flexItem flex1">
-							        <p class="time">{{item.AddTime}}</p>
+							        <p class="time">{{editTime(item.AddTime,'time')}}</p>
 							    </div>
 							    <p class="price">{{item.Change}} 金</p>
 							</div>
@@ -68,10 +68,11 @@
 </template>
 
 <script>
-import {post} from '@/utils';
+import {post,editTime} from '@/utils';
 export default {
     data(){
         return {
+			editTime,
 			userId:"",
 			token: "",
 			pageSize:10,
