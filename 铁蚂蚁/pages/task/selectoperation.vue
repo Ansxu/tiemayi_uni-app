@@ -265,7 +265,7 @@
                                 <dd><label>转账人</label><span>{{data.TransferUserName}}</span></dd>
                                 <dd><label>返款金额</label><span class="c_Org">{{data.Amount}}元</span></dd>
                                 <dd class="text_r"><span>平台规定商家24小时内返款</span>
-                                    <p class="btn" onclick="urgeRebate()" v-if="data.AcceptTaskStatus==1&&data.IsReminders==0&&data.IsAppeal!=1">催返款</p>
+                                    <p class="btn" @click="urgeRebate" v-if="data.AcceptTaskStatus==1&&data.IsReminders==0&&data.IsAppeal!=1">催返款</p>
                                 </dd>
                             </dl>
                         </li>
@@ -303,14 +303,18 @@
                                                 <img :src="data.EvaluationImg4">
                                             </span>
                                         </div>
-                                        <p class="link_btn" @click="saveImg">点击下载图片</p>
+                                        <!-- <p class="link_btn" @click="saveImg">点击下载图片</p> -->
                                     </div>
                                 </dd>
                                 <block v-if="data.EvaluationVideo">
                                     <dd><label style="width:100%">第二步：上传视频好评</label></dd>
                                     <dd>
                                     </dd>
-                                    <dd class="text_r"><div class="evaluate_box"><p class="link_btn" onclick="downVideo()">点击下载视频</p></div></dd>
+                                    <dd class="text_r" v-if="data.EvaluationVideo">
+                                        <div class="evaluate_box">
+                                            <a class="link_btn" :href="data.EvaluationVideo">点击预览视频</a>
+                                        </div>
+                                    </dd>
 								</block>
                                 <dd><label>第二步：上传物流签收与评价截图</label></dd>
                                 <dd>
@@ -470,7 +474,6 @@ export default {
                 }else{
                      data.ImgJson ={}
                 }
-                console.log(data)
                 this.data = data;
 			})
         },
@@ -598,6 +601,20 @@ export default {
             }
             this.showEvaluationMask = true;
         },
+        // 催返款
+        urgeRebate(){
+            post('Task/RemindingRefunds',{
+                UserId: this.userId,
+                Token: this.token,
+                TaskAcceptNo: this.TaskAcceptNo
+            }).then(res=>{
+                toast(res.msg,true);
+                setTimeout(()=>{
+                    this.init();
+                    this.getData();
+                },1500)
+            })
+        },
         // 确认上传截图
         EvaluationOK(){
             if (!this.LogisticsReceiptImg) {
@@ -620,8 +637,10 @@ export default {
                     OkImgJson: JSON.stringify(imgjson),
                 }).then(res=>{
                     toast(res.msg);
-                    this.init();
-                    this.getData();
+                    setTimeout(()=>{
+                        this.init();
+                        this.getData();
+                    },1500)
                 })
             })
         },

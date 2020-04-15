@@ -1362,6 +1362,24 @@ export default {
 				}
 			}
 			const imageBase64 = await this.base64Img();
+			console.log(imageBase64,'imageBase64')
+			console.log({
+				UserId: this.userId,
+				Token: this.token,
+				TaskAcceptNo: this.TaskAcceptNo,
+				// ImgJson: imageBase64,
+				ImgJson: JSON.stringify(imageBase64),
+				PlatOrderNo: this.comfirmOrderNo,
+				PlatOrderMoney: this.orderPrice,
+				ConsigneeName: data.ConsigneeName,
+				ConsigneeMobile: data.ConsigneeMobile,
+				ProvinceCode: data.AccountProvinceCode,
+				CityCode: data.AccountCityCode,
+				DistrictCode: data.AccountDistrictCode,
+				AddressInfo: data.AccountAddress,
+				ShopAroundjson:JSON.stringify(huobisanjiaJson)
+			})
+			return;
 			post('Task/SubmitTask',{
 				UserId: this.userId,
 				Token: this.token,

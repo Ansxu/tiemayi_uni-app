@@ -192,6 +192,10 @@ export default {
 				toast('请输入身份证！');
 				return false;
 			}
+			if(data.Idcard<18){
+				toast('请输入正确身份证！');
+				return false;
+			}
 			if(!data.UserRName){
 				toast('请输入姓名！');
 				return false;

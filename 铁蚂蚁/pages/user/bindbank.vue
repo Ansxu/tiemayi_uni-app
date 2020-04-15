@@ -219,7 +219,7 @@ export default {
                 toast('提交成功，待管理员审核！')
                 setTimeout(()=>{
                     uni.navigateBack();
-                })
+                },1500)
 			})
         },
         check(){

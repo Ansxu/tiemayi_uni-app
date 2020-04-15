@@ -106,7 +106,7 @@
         "router" : {
             "mode" : "hash"
         },
-        "title" : "红鸟",
+        "title" : "旺店宝",
         "uniStatistics" : {
             "enable" : true
         }

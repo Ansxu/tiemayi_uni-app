@@ -98,7 +98,7 @@
                                 <input type="checkbox" id="isagree" />
                                 <span :class="{'inputGou':read}"></span>
                             </div>
-                            <div class="flexItem">我已阅读并同意<span id="showAgreementShade">《旺店宝用户协议》</span></div>
+                            <div class="flexItem">我已阅读并同意<span id="showAgreementShade" @click="showRead = true">《旺店宝用户协议》</span></div>
                         </div>
                         <div class="weui-btn weui-btn-active btn-register" id="btnReg" @click="submit">立即注册</div>
                         <div class="hasAccountMag" @click="back">已有账号？立即登录</div>
@@ -106,18 +106,18 @@
                 </form>
             </div>
         </div>
-        <div class="shade">
+        <div class="shade" v-if="showRead">
             <div class="shade__content">
                 <div class="shade-item agreement__shadeItem">
                     <div class="shade__hd">
-                        <h2 class="shade__title">铁蚂蚁用户注册协议</h2>
-                        <span class="btn-close"></span>
+                        <h2 class="shade__title">旺店宝用户注册协议</h2>
+                        <span class="btn-close" @click="showRead = false"></span>
                     </div>
                     <div class="shade__bd">
                         <div class="agreementCon">
-                            <p>欢迎您加入铁蚂蚁会员！</p>
-                            <p>在注册之前，请您详细阅读以下有关铁蚂蚁的使用条件与规则，并确认同意在您使用任何铁蚂蚁提供的信息、服务与活动时，皆能遵守。<br /> § 铁蚂蚁 使用 手机号码 做为使用者验证、服务启用、密码查询与变更之依据。因此在您申请加入 铁蚂蚁 时，请务必确认 您所填写的手机号码是正确的。<br /> § 铁蚂蚁 使用个人信息如习惯语言、国别、生日、联系资料等作为系统设定、提供服务、系统查询等依据，因此在您申请加入 铁蚂蚁 时，请务必详实填写个人信息。<br
-                                /> § 您有妥善保管注册信息的责任与义务，我们建议您不要将自己的账号、服务经由转借、出售或任何方式提供他人使用。您对因您个人保管不当所造成的任何损失，应负全部责任。 <br /> § 您使用铁蚂蚁提供的信息、服务、活动时，皆应遵守著作权、专利权、商标权、肖像权等相关法律规范，任何侵犯铁蚂蚁与他人权利的行为，您应负全部责任。<br /> § 不得利用本站危害国家安全、泄露国家秘密，不得侵犯国家社会集体的和公民的合法权益，不得利用本站制作、复制和传播下列信息：<br
+                            <p>欢迎您加入旺店宝会员！</p>
+                            <p>在注册之前，请您详细阅读以下有关旺店宝的使用条件与规则，并确认同意在您使用任何旺店宝提供的信息、服务与活动时，皆能遵守。<br /> § 旺店宝 使用 手机号码 做为使用者验证、服务启用、密码查询与变更之依据。因此在您申请加入 旺店宝 时，请务必确认 您所填写的手机号码是正确的。<br /> § 旺店宝 使用个人信息如习惯语言、国别、生日、联系资料等作为系统设定、提供服务、系统查询等依据，因此在您申请加入 旺店宝 时，请务必详实填写个人信息。<br
+                                /> § 您有妥善保管注册信息的责任与义务，我们建议您不要将自己的账号、服务经由转借、出售或任何方式提供他人使用。您对因您个人保管不当所造成的任何损失，应负全部责任。 <br /> § 您使用旺店宝提供的信息、服务、活动时，皆应遵守著作权、专利权、商标权、肖像权等相关法律规范，任何侵犯旺店宝与他人权利的行为，您应负全部责任。<br /> § 不得利用本站危害国家安全、泄露国家秘密，不得侵犯国家社会集体的和公民的合法权益，不得利用本站制作、复制和传播下列信息：<br
                                 /> （一）煽动抗拒、破坏宪法和法律、行政法规实施的；
                                 <br /> （二）煽动颠覆国家政权，推翻社会主义制度的；
                                 <br /> （三）煽动分裂国家、破坏国家统一的；
@@ -152,6 +152,7 @@ export default {
             imgCode:'',
             qq:'',
             inviteCode:'',//邀请码
+            showRead:false,
             read:false,//是否已阅读用户协议
             timeEnd:60,
             timeFn:null,//倒计时的方法
@@ -167,6 +168,7 @@ export default {
         this.imgCode='',
         this.qq='',
         this.inviteCode=uni.getStorageSync('InvitationCode')||'',//邀请码
+        this.showRead=false,//是否已阅读用户协议
         this.read=false,//是否已阅读用户协议
         this.timeEnd=60,
         this.timeFn=null;//倒计时的方法
@@ -272,5 +274,10 @@ export default {
 
 <style lang="scss" scoped>
 @import url('../../css/d_style.css');
-
+.shade{
+    display:block;
+}
+.shade-item{
+    display:block!important;
+}
 </style>

@@ -119,8 +119,8 @@ export default {
             host,
             page:1,//1=第一步；2=第二步
             OnlyVal: "",//图形验证码图像
-            phone:'15014010199',
-            newPhone:'15014010199',
+            phone:'',
+            newPhone:'',
             isCode:false,//是否已获取短信验证码
             code:'',
             newCode:'',

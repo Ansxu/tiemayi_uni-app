@@ -96,12 +96,12 @@
             </ul>
           </div>
         </div>
-        <div class="notice_wechat">
+        <!-- <div class="notice_wechat">
           客服QQ号:
           <span id="wechat_num"></span>&nbsp;添加&nbsp;
           <span>工作时间:9:00-22:00</span>
         </div>
-        <input type="hidden" id="wechat_qrCode" />
+        <input type="hidden" id="wechat_qrCode" /> -->
       </div>
       <!--新手-->
       <div class="xinshou">

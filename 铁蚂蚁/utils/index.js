@@ -30,7 +30,7 @@ let status = false;
 const code={
   success:0,//成功
   fail:1,//失败
-  notRegister:-3,//未注册
+  notRegister:2,//未注册
   resCode1:200,//成功特别方式
 }
 

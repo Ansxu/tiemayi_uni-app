@@ -57,7 +57,7 @@
 						    <div class="title">{{item.Remark}}</div>
 						    <div class="flex">
 						        <div class="flexItem flex1">
-						            <p class="time">{{item.AddTime}}</p>
+						            <p class="time">{{editTime(item.AddTime,'time')}}</p>
 						        </div>
 						        <p class="price">{{item.Change}} 元</p>
 						    </div>
@@ -71,10 +71,11 @@
 </template>
 
 <script>
-import {post} from '@/utils';
+import {post,editTime} from '@/utils';
 export default {
     data(){
         return {
+			editTime,
 			userId:"",
 			token: "",
 			pageSize:10,

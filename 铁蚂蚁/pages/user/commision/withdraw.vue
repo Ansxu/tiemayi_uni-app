@@ -10,7 +10,7 @@
 		<div class="main">
 			<div class="dd_msgBox" style="padding:.1rem .12rem;">
 				<p class="title" style="font-size: .15rem;">提现说明</p>
-				<p>1、佣金未满<span id="min_commission">{{data.MinCommissionWithdraw}}</span>扣<span id="Amount_Fees">{{data.AmountProportionOfFees}}</span>元手续费，提现金额小于<span id="MinWithdrawCommission">{{data.MinWithdrawCommission/100}}</span>元无法提现，平台<span class="withdrawalTime">{{data.CashWithdrawalTime}}</span>小时内完成提现审核
+				<p>1、佣金未满<span id="min_commission">{{data.MinCommissionWithdraw}}</span>扣<span id="Amount_Fees">{{data.AmountProportionOfFees}}</span>元手续费，提现金额小于<span id="MinWithdrawCommission">{{data.MinWithdrawCommission}}</span>元无法提现，平台<span class="withdrawalTime">{{data.CashWithdrawalTime}}</span>小时内完成提现审核
 				<!-- <p>1、佣金<span id="min_commission">{{data.MinCommissionWithdraw}}</span>金币起提，平台<span class="withdrawalTime">{{data.CashWithdrawalTime}}</span>小时内完成提现审核 -->
 					<br /> 2、本金可随时提现(<span id="min_principal">{{data.MinPrincipalWithdrawal}}</span>元起提)，平台<span class="withdrawalTime">{{data.CashWithdrawalTime}}</span>小时内完成提现审核
 					<br /> 3、申请提现后，相应金币进入冻结不可用状态
@@ -65,7 +65,7 @@
 					            <input type="hidden" id="amountProportionOfFees" readonly="true"/>
 					           <input type="hidden" id="walletProportionOfFees" readonly="true"/>
 					           <input type="hidden" id="commissionConversion" readonly="true"/>
-								<a @click="sumbit" class="weui-btn weui-btn-active btn-submit" style="margin-top:.2rem;">提交</a>
+								<p @click="sumbit" class="weui-btn weui-btn-active btn-submit" style="margin-top:.2rem;">提交</p>
 							</div>
 
 						</div>
@@ -168,14 +168,16 @@ export default {
 						title:'超出可提现金额',
 						icon:'none'
 					})
+					this.value=''
+					this.total=0
 				}else{
 					this.value=this.value=parseFloat(e.detail.value)
 					if(this.value >= this.data.MinCommissionWithdraw){
 						this.total=this.value* (this.data.CommissionConversion)
 					}else if(this.value< this.data.MinCommissionWithdraw &&this.value!=0){
 						this.total=this.value* (this.data.CommissionConversion) - this.data.AmountProportionOfFees
-					}else if(this.value==0||this.value==''  ) {
-						console.log(this.value) 
+					}else if(!this.value) {
+						this.value=''
 						this.total=0
 					}
 				} 
@@ -185,6 +187,8 @@ export default {
 						title:'超出可提现金额',
 						icon:'none'
 					})
+					this.value=''
+					this.total=0
 				}else if(this.data.MinPrincipalWithdrawal<parseFloat(e.detail.value*this.data.CommissionConversion)<this.data.Amount){
 					// this.value=e.detail.value
 					// this.total=this.value* (this.data.CommissionConversion/100)
@@ -195,6 +199,7 @@ export default {
 						title:'提现金额过低',
 						icon:'none'
 					})
+					this.value=''
 					this.total=0
 				}
 			}
@@ -205,83 +210,98 @@ export default {
 			
 		},
 		sumbit(){
-			let that = this
-			console.log(0)
+			const that = this;
+			const data = this.data;
 			if(this.value==''){
 				uni.showToast({
 					title:'请输入提现金额',
 					icon:'none'
 				})
-			}else if(this.value !='' && this.password==''){
+				return;
+			}
+			if(this.value !='' && this.password==''){
 				uni.showToast({
 					title:'请输入登录密码',
 					icon:'none'
 				})
-			}else {
-				if(that.btnType=='yongjintx'){
-					if(this.value < this.data.MinCommissionWithdraw){
-						// this.value=this.value.toFixed(4)
-						console.log(this.value)
-						uni.showModal({
-							title:'佣金提现小于最小佣金提现额度需扣除手续费',
-							success(r) {
-								if(r.confirm){
-									post('Withdraw/CommCommissionWithdrawal',{
-										 UserId: that.userId,
-										 Token: that.token,
-										 WithdrawalAmount: that.value,
-										 LoginPassWord: that.password
-									}).then(res =>{
-										console.log(res)
-									})
-								}else{
-									that.value=''
-									this.total=0
-									that.password=''
-								}
-							}
-						})
-					}else{
-						// this.value=this.value.toFixed(4)
-						console.log(this.value)
-						uni.showModal({
-							title:'是否提现拥金',
-							success(r) {
-								if(r.confirm){
-									post('Withdraw/CommCommissionWithdrawal',{
-										 UserId: that.userId,
-										 Token: that.token,
-										 WithdrawalAmount: that.value,
-										 LoginPassWord: that.password
-									}).then(res =>{
-										console.log(res)
-										that.value=''
-										that.total=0
-										that.password=''
-									})
-								}else{
-									that.value=''
-									that.total=0
-									that.password=''
-								}
-							}
-						})
-						
-					}
-				}else if(that.btnType=='benjintx'){
-					post('Withdraw/PrincipalWithdrawal',{
-						UserId: that.userId,
-						Token: that.token,
-						WithdrawalAmount: that.value,
-						LoginPassWord: that.password
-					}).then(res => {
-						uni.showToast({
-							title:res.msg,
-							icon:'none'
-						})
-					})
-				}
+				return;
 			}
+			if(that.btnType=='yongjintx'){ 
+				if(this.value<data.MinWithdrawCommission){
+					uni.showToast({
+						title:'提现佣金不能少于'+data.MinWithdrawCommission,
+						icon:'none'
+					})
+					return;
+				}
+				if(this.value < this.data.MinCommissionWithdraw){
+					// this.value=this.value.toFixed(4)
+					uni.showModal({
+						title:'佣金提现小于最小佣金提现额度需扣除手续费',
+						success(r) {
+							if(r.confirm){
+								that.success();
+							}
+						}
+					})
+				}else{
+					// this.value=this.value.toFixed(4)
+					uni.showModal({
+						title:'是否提现拥金',
+						success(r) {
+							if(r.confirm){
+								that.success();
+							}
+						}
+					})
+					
+				}
+			}else if(that.btnType=='benjintx'){
+				if(this.value<data.MinPrincipalWithdrawal){
+					uni.showToast({
+						title:'提现本金不能少于'+data.MinPrincipalWithdrawal,
+						icon:'none'
+					})
+					return;
+				}
+				uni.showModal({
+					title:'是否提现本金',
+					success(r) {
+						if(r.confirm){
+							post('Withdraw/PrincipalWithdrawal',{
+								UserId: that.userId,
+								Token: that.token,
+								WithdrawalAmount: that.value,
+								LoginPassWord: that.password
+							}).then(res =>{
+								that.value=''
+								that.total=0
+								that.password='';
+								that.init();
+								uni.showToast({
+									title:'提现成功！'
+								})
+							})
+						}
+					}
+				})
+			}
+		},
+		success(){
+			post('Withdraw/CommCommissionWithdrawal',{
+					UserId: this.userId,
+					Token: this.token,
+					WithdrawalAmount: this.value,
+					LoginPassWord: this.password
+			}).then(res =>{
+				this.value=''
+				this.total=0
+				this.password='';
+				this.init();
+				uni.showToast({
+					title:'提现成功！'
+				})
+			})
 		}
     }
 }

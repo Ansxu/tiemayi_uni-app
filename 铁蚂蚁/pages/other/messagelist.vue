@@ -81,7 +81,12 @@ export default {
 			  if(list.NoticeList.length<this.pageSize){
 				  this.notData = true;
 			  }
-			  this.list.push(...list.NoticeList);
+			  list.NoticeList.map(item=>{
+				  let str = item.Memo.replace(/<img.*?>/g,'');
+				//   item.Memo = str.substr(0,100);
+				  item.Memo = str;
+				this.list.push(item)
+			  });
 		  })
 	  }
   },
