@@ -85,27 +85,6 @@ function request(url, data,method, loginFn) {
                   }
                 })
               }
-            } else {
-              // 设置需要重新登录执行的函数
-              // getApp()--微信全局对象
-              if (loginFn) {
-                // 创建全局对象userInfoReadyCallback为匿名函数，执行需要重新登录函数
-                getApp().userInfoReadyCallback = () => {
-                  loginFn()
-                }
-              }
-              // 登录过期自动重新登录
-              logins({
-                success() {
-                  if (getApp().userInfoReadyCallback) {
-                    getApp().userInfoReadyCallback()
-                    // 执行完成清空匿名函数
-                    getApp().userInfoReadyCallback = null
-                  }
-                }
-              }).then(() => {
-                reject()
-              });
             }
             break;
           default:
@@ -253,6 +232,8 @@ export function judgeLogin(){
             uni.navigateTo({
               url: LoginPath
             })
+          }else{
+            goUrl('index/index')
           }
         }
       })

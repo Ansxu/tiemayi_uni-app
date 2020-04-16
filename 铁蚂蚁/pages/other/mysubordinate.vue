@@ -29,7 +29,7 @@
 							<tr v-for="(item,index) in data.SubordinateList" :key="index">
 								<td><p style="color:#0094ff;">{{item.UserRName}}</p><p>{{item.Mobile}}</p></td>
 								<td>{{item.Income}} 金</td>
-								<td>{{item.CreateTime}}</td>
+								<td>{{editTime(item.CreateTime,'time')}}</td>
 							</tr>
 	                    </tbody>
 	                </table>
@@ -45,19 +45,20 @@
 </template>
 
 <script>
-	import {post} from '@/utils'
+	import {post,editTime} from '@/utils'
 	export default {
 		data(){
 			return {
-					userId:'',
-					token:'',
-					pageNo:1,
-					selectval:0,
-					stop:true,
-					data:{},
-					sel:true
-				}
-			},
+				editTime,
+				userId:'',
+				token:'',
+				pageNo:1,
+				selectval:0,
+				stop:true,
+				data:{},
+				sel:true
+			}
+		},
 			onLoad(e){
 				this.userId = uni.getStorageSync("userId");
 				this.token = uni.getStorageSync("token");
