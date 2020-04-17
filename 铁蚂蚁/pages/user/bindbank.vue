@@ -226,7 +226,7 @@ export default {
             const data = this.data;
             if(!data.BankCardName)return '请输入持卡人姓名！';
             if(!data.BankCardNo)return '请输入银行卡号！';
-            if(data.BankCardNo.length<6)return '请输入正确的银行卡号！';
+            if((data.BankCardNo.toString()).length<10)return '请输入正确的银行卡号！';
             if(!data.BankName)return '请选择银行名称！';
             // if(!data.BankAddress)return '请输入银行详细地址！';
             // if(this.defaultArea.length<1)return '请选择地区！';

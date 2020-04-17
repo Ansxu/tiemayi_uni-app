@@ -188,16 +188,16 @@ export default {
 		// 校验
 		check(){
 			const data = this.data;
+			if(!data.UserRName){
+				toast('请输入姓名！');
+				return false;
+			}
 			if(!data.Idcard){
 				toast('请输入身份证！');
 				return false;
 			}
-			if(data.Idcard<18){
+			if((data.Idcard.toString()).length<18){
 				toast('请输入正确身份证！');
-				return false;
-			}
-			if(!data.UserRName){
-				toast('请输入姓名！');
 				return false;
 			}
 			if(!data.IdcardPositive){
