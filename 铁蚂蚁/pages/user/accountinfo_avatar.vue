@@ -65,7 +65,6 @@ export default {
         // },
         submit(){
             pathToBase64(this.userInfo.Avatar).then(imgbase64path=>{
-                console.log(imgbase64path)
                 post('Member/EditHeadImage',{
                     UserId: uni.getStorageSync('userId'),
                     Token: uni.getStorageSync('token'),

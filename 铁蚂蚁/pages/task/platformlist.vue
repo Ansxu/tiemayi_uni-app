@@ -44,14 +44,14 @@ export default {
         };
     },
     onLoad(options) {
-        console.log(options)
 		this.userId = uni.getStorageSync('userId');
         this.token = uni.getStorageSync('token');
         this.tabIndex= options.type*1||1;//1--垫付任务；2--浏览任务
 		this.getData();
     },
     onShow() {
-
+		this.userId = uni.getStorageSync('userId');
+        this.token = uni.getStorageSync('token');
     },
     methods: {
         checkTask(){

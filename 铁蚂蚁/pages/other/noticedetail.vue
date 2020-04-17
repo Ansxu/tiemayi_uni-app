@@ -5,7 +5,7 @@
 			<div class="notice-hd">
 				<div class="box">
 					<div class="title"><p class="text">{{data.Title}}</p><i class="icon icon_txt">公告</i></div>
-					<div class="desc"><span>旺店宝</span> <span class="time">{{editTime(data.PubTime,'time')}}</span></div>
+					<div class="desc"><span>旺店宝</span> <span class="time" v-if="data.PubTime">{{editTime(data.PubTime,'time')}}</span></div>
 				</div>
 			</div>
 			<div class="noticecon" v-html="data.Memo">

@@ -178,8 +178,6 @@ export default {
     this.token = uni.getStorageSync("token");
     this.getBanner();
     this.getTaskList(); // 获取工作列表
-    this.getUnreadCount(); // 获取未读消息数量
-    this.getMessageList(); //滚动公告
   },
   onShow() {
     if (
@@ -204,6 +202,8 @@ export default {
         MemberAcceptTaskStatus: 5,
         Page: 1
       }).then(res => {
+        this.getUnreadCount(); // 获取未读消息数量
+        this.getMessageList(); //滚动公告
         this.taskList = res.obj.AcceptTaskList;
       });
     },

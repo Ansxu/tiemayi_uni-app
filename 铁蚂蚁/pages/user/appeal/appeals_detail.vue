@@ -52,48 +52,64 @@
                             <dl>
                                 <dt><label>协商处理</label></dt>
                                 <dd class="text_l">
-                                    <div class="reply_box" v-if="data.Status==0&&data.AppealType!=0" >
+                                    <div class="reply_box" v-if="data.Status==0&&data.AppealType!=0&&!data.Reply" >
                                         <div class="textarea_box" style="margin-right:.1rem;">
                                             <textarea @input="textarea" placeholder="输入回复申诉信息" id="txtReply"></textarea>
                                         </div>
                                         <div class="piclist Uploadimg">
-                                            <div style="width: 25%; float: left; padding:0.1rem 0.1rem 0 0;">
+                                            <div style="width: 100px; float: left; padding:10px 10px 0 0;">
                                                 <div class="img">
-                                                    <div class="upimg" @click="getpic(1)"><img class="uploadImg" /></div>
-                                                    <input type="hidden" id="replyImgF" readonly="true" />
+                                                    <div class="upimg" @click="getpic(1)">
+														<img class="uploadImg" v-if="replyImgF" :src="replyImgF" />
+													</div>
                                                 </div>
                                             </div>
-                                            <div style="width: 25%; float: left; padding:0.1rem 0.1rem 0 0;">
+                                            <div style="width: 100px; float: left; padding:10px 10px 0 0;">
                                                 <div class="img">
-                                                    <div class="upimg" @click="getpic(2)"><img class="uploadImg" /></div>
-                                                    <input type="hidden" id="replyImgS" readonly="true" />
+                                                    <div class="upimg" @click="getpic(2)">
+														<img class="uploadImg" v-if="replyImgS" :src="replyImgS" />
+													</div>
                                                 </div>
                                             </div>
-                                            <div style="width: 25%; float: left; padding:0.1rem 0.1rem 0 0;">
+                                            <div style="width: 100px; float: left; padding:10px 10px 0 0;">
                                                 <div class="img">
-                                                    <div class="upimg" @click="getpic(3)"><img class="uploadImg" /></div>
-                                                    <input type="hidden" id="replyImgT" readonly="true" />
+                                                    <div class="upimg" @click="getpic(3)">
+														<img class="uploadImg" v-if="replyImgT" :src="replyImgT" />
+													</div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <view class="btn" id="replyAppeal" style="margin-top:.1rem;" @click="replyAppeal">回复申诉</view>
+                                        <view class="btn" id="replyAppeal" v-if="!data.Reply" style="margin-top:.1rem;" @click="replyAppeal">回复申诉</view>
                                     </div>
-                                    <span class='reply_text' v-if="data.AppealType==0 &&data.Reply!=''">商家回复内容：{{data.Reply}}</span>
-                                    <span class='reply_text' v-else-if="data.AppealType!=0 &&data.Reply!=''">会员回复内容：{{data.Reply}}</span>
-									<div id="replyImg" class="imglist thumbnails">
+                                    <span class='reply_text' v-if="data.AppealType==0 &&data.Reply">商家回复内容：{{data.Reply}}</span>
+                                    <span class='reply_text' v-else-if="data.AppealType!=0 &&data.Reply">会员回复内容：{{data.Reply}}</span>
+									<div id="replyImg" class="imglist thumbnails" v-if="data.ReplyImgF||data.ReplyImgS||data.ReplyImgT">
+										<div class="img" v-if="data.ReplyImgF" @click="preImg(data.ReplyImgF)">
+											<div class="upimg">
+												<img class="uploadImg" :src="data.ReplyImgF" />
+											</div>
+										</div><div class="img" v-if="data.ReplyImgS" @click="preImg(data.ReplyImgS)">
+											<div class="upimg">
+												<img class="uploadImg" :src="data.ReplyImgS" />
+											</div>
+										</div><div class="img" v-if="data.ReplyImgT" @click="preImg(data.ReplyImgT)">
+											<div class="upimg">
+												<img class="uploadImg" :src="data.ReplyImgT" />
+											</div>
+										</div>
                                     </div>
                                     <!-- <a class="btn">回复申诉</a> -->
-                                    <a  class="btn" v-if="data.Status==0&&data.AppealType==0" @click="guanfangjieru" id="guanfangjieru">官方介入</a>
+                                    <p  class="btn" v-if="data.Status==0&&data.AppealType==0" @click="guanfangjieru" id="guanfangjieru">官方介入</p>
                                     <!-- <a class="btn">完结申诉</a> -->
                                 </dd>
                             </dl>
                         </li>
-                        <li class="no4" :class="data.Status!=0?'active':''">
+                        <li class="no4" :class="data.Status==1?'active':''">
                             <i class="icon num">4</i>
                             <dl>
                                 <dd>
                                     <span class='platformreply_text'>平台回复内容：{{data.PlatformReply}}</span>
-                                    <label>已经完成</label>
+                                    <label v-if="data.PlatformReply">已经完成</label>
                                 </dd>
                             </dl>
                         </li>
@@ -105,7 +121,8 @@
 </template>
 
 <script>
-import {post} from '@/utils';
+import {post,getImgPath} from '@/utils';
+import {pathToBase64} from '@/utils/image-tools';
 export default {
     data(){
         return {
@@ -146,8 +163,8 @@ export default {
 				Token: this.token,
 				AppealId: this.AppealId
 			}).then(res =>{
-				console.log(res)
-				this.data=res.obj
+				const data = res.obj;
+				this.data=res.obj;
 			}).catch(err =>{
 				if(err.errcode==2){
 					uni.redirectTo({
@@ -202,25 +219,46 @@ export default {
 					content:'只能回复一次申诉信息，确认回复该内容？',
 					success(r) {
 						if(r.confirm){
-							post('Appeal/ReplySellerAppeal',{
-								 UserId: that.userId,
-								 Token: that.token,
-								 AppealId: that.AppealId,
-								 ReplyContent: that.text,
-								 ReplyImgF: that.replyImgF,
-								 ReplyImgS: that.replyImgS,
-								 ReplyImgT: that.replyImgT
-							}).then(res => {
-								uni.showToast({
-									title:res.msg
+							let pathArr=[];
+							if(that.replyImgF){
+								pathArr.push(pathToBase64(that.replyImgF))
+							}if(that.replyImgS){
+								pathArr.push(pathToBase64(that.replyImgS))
+							}if(that.replyImgT){
+								pathArr.push(pathToBase64(that.replyImgT))
+							}
+							if(pathArr.length>0){
+								Promise.all(pathArr).then(imgPath=>{
+									that.submit(imgPath);
 								})
-							})
+							}else{
+								that.submit();
+							}
 						}else if(r.cancel){
 							
 						}
 					}
 				})
 			}
+		},
+		submit(imgPath=[]){
+			let that =this
+			post('Appeal/ReplySellerAppeal',{
+				UserId: that.userId,
+				Token: that.token,
+				AppealId: that.AppealId,
+				ReplyContent: that.text,
+				ReplyImgF: imgPath[0]||'',
+				ReplyImgS: imgPath[1]||'',
+				ReplyImgT: imgPath[2]||''
+			}).then(res => {
+				uni.showToast({
+					title:res.msg
+				})
+				setTimeout(()=>{
+					that.init();
+				},1500)
+			})
 		},
 		//回复文本
 		textarea(e){
@@ -234,29 +272,23 @@ export default {
 				sizeType: ['original', 'compressed'],
 				longPressActions:true,
 				success(res) {
-					console.log('成功')
 				}
 			})
 		},
 		//拍照或从相册获取图片
 		getpic(e){
-			let url=''
-			uni.chooseImage({
-			    count: 1, //默认9
-			    success: function (res) {
-			        console.log(JSON.stringify(res.tempFilePaths));
-					url=JSON.stringify(res.tempFilePaths)
-			    }
-			});
-			if(e==1){
-				this.replyImgF=url
-			}
-			if(e==2){
-				this.replyImgS=url
-			}
-			if(e==3){
-				this.replyImgT=url
-			}
+			getImgPath().then(res=>{
+				let url=res[0];
+				if(e==1){
+					this.replyImgF=url
+				}
+				if(e==2){
+					this.replyImgS=url
+				}
+				if(e==3){
+					this.replyImgT=url
+				}
+			})
 		}
     }
 }
@@ -264,4 +296,21 @@ export default {
 
 <style lang="scss" scoped>
     @import url('../../../css/task.css');
+	.upimg{
+		img{
+		width:100%;
+		height:100%;
+		}
+	}
+	.piclist{
+		&>div{
+			width:100px;
+			height:100px;
+			margin-bottom:10px;
+		}
+		.img{
+			padding-bottom:0;
+			height:100%;
+		}
+	}
 </style>

@@ -129,10 +129,10 @@ export default {
         this.selectPlatformId = options.selectPlatformId||0;
 		this.taskOrder.TaskAcceptNo='';//重置已接的任务
 		this.getAllPlatFormAccount();
-		this.getCompletionRate();
     },
     onShow(){
-
+		this.userId = uni.getStorageSync('userId');
+		this.token = uni.getStorageSync('token');
     },
     methods:{
 		// 查询账号是否满足接单条件
@@ -144,6 +144,7 @@ export default {
                 SelectAccountId: this.selectAccountId,
                 SelectPlatFormId: this.selectPlatformId
 			}).then(res=>{
+				this.getCompletionRate();
 				const data = res.obj;
 				data.map((item,index)=>{
 					const name = item.PlatName;

@@ -9,7 +9,8 @@ const host = 'http://hnapi.wtvxin.com/api/';// 红鸟  旺店宝测试
 // const host = 'http://xmyapi.wtvxin.com/api/';// 铁蚂蚁测试
 const website = 'http://hn.wtvxin.com';
 const wssPath = 'wss://hxapia.com/WebSocketServer.ashx';// wss地址
-const filePath = 'http://www.hnapi.com';//文件域名
+// const filePath = 'http://www.hnapi.com';//文件域名
+const filePath = 'http://hn.wtvxin.com';//文件域名
 const hostPath = 'http://hnapi.wtvxin.com';//主机路径
 const LoginPath = "/pages/login/login";//登录路径
 const RegisterPath = "/pages/login/register/main";//注册路径
@@ -199,26 +200,28 @@ export function requestNotLoad(url, data,method, loginFn) {
 // 如果status.isLogin存在，就是登录注册页面请求登录，不用判断是否登录
 export function get(url, data,status={}, loginFn) {
   return new Promise ((resolve,reject)=>{
-    if(!status||!status.isLogin){
-      if(!judgeLogin()){ reject()};
+    if((!status||!status.isLogin)&&!judgeLogin()){
+        reject()
+    }else{
+      request(url, data,'GET', loginFn).then(res=>{
+        resolve(res)
+      }).catch(err=>{
+        reject(err)
+      })
     }
-    request(url, data,'GET', loginFn).then(res=>{
-      resolve(res)
-    }).catch(err=>{
-      reject(err)
-    })
 })
 }
 export function post(url, data,status,loginFn) {
   return new Promise ((resolve,reject)=>{
-    if(!status||!status.isLogin){
-      if(!judgeLogin()){ reject()};
+    if((!status||!status.isLogin)&&!judgeLogin()){
+        reject()
+    }else{
+      request(url, data,'POST', loginFn).then(res=>{
+        resolve(res)
+      }).catch(err=>{
+        reject(err)
+      })
     }
-    request(url, data,'POST', loginFn).then(res=>{
-      resolve(res)
-    }).catch(err=>{
-      reject(err)
-    })
   })
 }
 //判断是否登录，未登录做弹窗跳转登录页面

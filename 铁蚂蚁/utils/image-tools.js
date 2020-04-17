@@ -8,7 +8,20 @@ export function pathToBase64(path) {
 				canvas.width = img.width
 				canvas.height = img.height
 				c2x.drawImage(img, 0, 0)
-				resolve(canvas.toDataURL())
+				let base64 = canvas.toDataURL('image/jpeg',0.2);
+				// base64.replace('data:image/jpeg;base64,','')//更准确的计算
+				let base64Length = base64.length;
+				let fileLength  = parseInt(base64Length - (base64Length / 8) * 2);
+				let size = (fileLength / 1024 / 1024).toFixed(2);//转m
+				if(size>1.5){
+					uni.showToast({
+						title:'图片过大，请重新上传！',
+						icon:'none'
+					})
+					reject();
+				}
+
+				resolve(base64)
 			}
 			img.onerror = reject
 			img.src = path

@@ -189,15 +189,19 @@ export default {
     methods:{
         //获取用户信息
         async getMemberInfo() {
-            const res = await get('Login/GetMemberInfo',{
-                UserId: this.userId,
-                Token: this.token
-            })
-            const data = res.obj;
-            this.userInfo = data;
-            uni.setStorageSync('userInfo',data);
-            // uni.setStorage('isAdvanceRange', isAdvanceRange);
+            try{
+                const res = await get('Login/GetMemberInfo',{
+                    UserId: this.userId,
+                    Token: this.token
+                })
 
+                const data = res.obj;
+                this.userInfo = data;
+                uni.setStorageSync('userInfo',data);
+                // uni.setStorage('isAdvanceRange', isAdvanceRange);
+            }catch(err){
+                console.log(err,'try')
+            }
         },
         // 退出登录
         async signOut(){

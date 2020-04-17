@@ -1380,7 +1380,7 @@ export default {
 			}).then(res=>{
 				toast(res.msg);
 				setTimeout(()=>{
-					goUrl('task/receivedtask');
+					uni.reLaunch({url:'/pages/task/receivedtask'});
 					// uni.navigateBack();
 				},1500);
 			})
