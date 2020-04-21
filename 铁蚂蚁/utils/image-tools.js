@@ -8,6 +8,7 @@ export function pathToBase64(path) {
 				canvas.width = img.width
 				canvas.height = img.height
 				c2x.drawImage(img, 0, 0)
+				console.log(path);
 				let base64 = canvas.toDataURL('image/jpeg',0.2);
 				// base64.replace('data:image/jpeg;base64,','')//更准确的计算
 				let base64Length = base64.length;

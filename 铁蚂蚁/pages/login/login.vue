@@ -36,8 +36,9 @@
                         </div>
                         <div  class="weui-btn weui-btn-active btn-login" @click="login">登录</div>
                         <div class="hasAccountMag">
-                            <div style="color:#222;" @click="goUrl('login/forgetpwd')">忘记密码</div>还没有账号？
-                            <div class="a" @click="goUrl('login/register')" >立即注册</div>
+                            <div style="color:#222;" @click="goUrl('login/forgetpwd')">忘记密码</div>
+                            <!-- 还没有账号？ -->
+                            <!-- <div class="a" @click="goUrl('login/register')" >立即注册</div> -->
                         </div>
                     </div>
                 </form>
@@ -47,7 +48,7 @@
 </template>
 
 <script>
-import {goUrl,valPhone,toast,post,ClientId,ClientSecret} from '@/utils'
+import {goUrl,valPhone,toast,post,get,ClientId,ClientSecret} from '@/utils'
 export default {
     data(){
         return {

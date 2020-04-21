@@ -15,16 +15,16 @@
 					</ul>
 			</div>
 	
-			<div class="online">
+			<!-- <div class="online">
 				<div class="title">在线客服<span>(09:00~22:00)</span></div>
-				<div class="desc">
-					所有常见问题都有相应的解决方案，请参考常见问题自主解决，如 果常见问题无法解决您的问题在咨询客服，由于客服咨询量较大， 请尽可能的描述清楚您的问题，以便快速解决
+					<div class="desc">
+						所有常见问题都有相应的解决方案，请参考常见问题自主解决，如 果常见问题无法解决您的问题在咨询客服，由于客服咨询量较大， 请尽可能的描述清楚您的问题，以便快速解决
 					</div>
-				</div>
+			</div>
 	
 				<div class="ftbtn mb10">
 					<a class="btn qqbtn" :href="qqurl">QQ咨询</a>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

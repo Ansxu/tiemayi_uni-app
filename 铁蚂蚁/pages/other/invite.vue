@@ -76,7 +76,7 @@
 					userId:'',
 					token:'',
 					data:{},
-					copyLink:hostPath+'/index.html#/?InvitationCode=',//分享链接
+					copyLink:hostPath+'#/?InvitationCode=',//分享链接
 				}
 			},
 			onLoad(){

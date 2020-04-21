@@ -280,12 +280,12 @@
                                 </dt>
                                 <dd><label>第一步：去{{data.PlatName}}评价并截图</label> 
                                     <div class="evaluate_box" v-if="data.EvaluationClaim">
-                                        <p class="evaluateTit">文字要求<span class="c_Org">（评价必须粘贴一下文字）</span></p>
+                                        <p class="evaluateTit">文字要求<span class="c_Org">（评价必须粘贴以下文字）</span></p>
                                         <textarea type="text" class="keybox" id="praiseText" readonly :value="data.EvaluationClaim" disabled></textarea>
                                         <p class="link_btn" @click="copy(data.EvaluationClaim)">复制评价文字</p>
                                     </div>
                                     <div class="evaluate_box" style="margin-top:0.5rem;" v-if="data.EvaluationImg||data.EvaluationImg1||data.EvaluationImg2||data.EvaluationImg3||data.EvaluationImg4">
-                                        <p class="evaluateTit">图片要求<span class="c_Org">（在评价里必须上传一下图片）</span></p>
+                                        <p class="evaluateTit">图片要求<span class="c_Org">（在评价里必须上传以下图片）</span></p>
                                         <div class="imglist thumbnails evaluationImglst">
                                             <span class="img" v-if="data.EvaluationImg" @click="previewImage([data.EvaluationImg])">
                                                 <img :src="data.EvaluationImg">
@@ -789,5 +789,9 @@ export default {
             }
         }
     }
+}
+.evaluate_box .link_btn{
+    float:none;
+    display:inline-block;
 }
 </style>

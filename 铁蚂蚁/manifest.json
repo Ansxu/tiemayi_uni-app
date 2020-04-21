@@ -93,7 +93,7 @@
             "disableHostCheck" : true,
             "proxy" : {
                 "/api" : {
-                    "target" : "http://xmyapi.wtvxin.com",
+                    "target" : "http://hnapi.wtvxin.com",
                     "changeOrigin" : true,
                     "secure" : false,
                     "pathRewrite" : {

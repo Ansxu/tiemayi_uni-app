@@ -212,23 +212,28 @@ export default {
 			},7000);
 		},
 		// 接任务
+		
 		sendTask(AccountIdList,PlatIdList){
-			post('Task/NewsSystemSendTask',{
-				UserId: this.userId,
-				Token: this.token,
-				AccountIdList: AccountIdList.join(','),
-				PlatIdList: PlatIdList.join(','),
-				TaskType: this.TaskType,//任务类型，0全部，1垫付任务，2浏览任务
-				MaxAdvancePayMoney: this.MaxAdvancePayMoney,
-				VersionControl:"1.3.57"
-			}).then(res=>{
-				this.taskOrder = res.obj;
-				this.closeTask();
-			}).catch(err=>{
-				this.closeTask();
-				if(err.errcode===3){
-					toast('你还有未操作的任务，请操作后再接其他任务！')
-				}
+			get('Login/GetAppVersion',{temp:99}).then(Version=>{
+				const VersionControl = Version.obj.AppVersion;
+				post('Task/NewsSystemSendTask',{
+					UserId: this.userId,
+					Token: this.token,
+					AccountIdList: AccountIdList.join(','),
+					PlatIdList: PlatIdList.join(','),
+					TaskType: this.TaskType,//任务类型，0全部，1垫付任务，2浏览任务
+					MaxAdvancePayMoney: this.MaxAdvancePayMoney,
+					VersionControl
+				}).then(res=>{
+					this.taskOrder = res.obj;
+					this.closeTask();
+				}).catch(err=>{
+					this.closeTask();
+					if(err.errcode===3){
+						toast('你还有未操作的任务，请操作后再接其他任务！')
+					}
+				})
+			
 			})
 		},
 		// 取消接任务

@@ -26,7 +26,7 @@
                                         <input type="text" v-model.trim="imgCode" class="weui-input" placeholder="请输入图像验证码" id="txtcode" />
                                     </div>
                                 </div>
-                                <div class="weui-cell__ft">
+                                <div class="weui-cell__ft" @click="upOnlyVal">
                                     <div class="imgBox">
                                         <img  :src="host+'Member/GetImageCode?OnlyVal='+OnlyVal" id="ValidateImg" alt="验证码,看不清楚?请点击刷新验证码"/>
                                     </div>

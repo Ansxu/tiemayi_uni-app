@@ -81,7 +81,7 @@
 								<img class="upimg" :src="data.IdcardInHand" alt="" v-if="data.IdcardInHand">
 								<img class="upimg" src="/static/image/tx/tx_pic.png" alt="" v-else>
 							</div>
-							<p class="title">手持身份证照</p>
+							<p class="title">自拍照</p>
 						</div>
 					</li>
 					<li>
@@ -209,7 +209,7 @@ export default {
 				return false;
 			}
 			if(!data.IdcardInHand){
-				toast('请上传手持身份证！');
+				toast('请上传自拍照！');
 				return false;
 			}
 			return true;

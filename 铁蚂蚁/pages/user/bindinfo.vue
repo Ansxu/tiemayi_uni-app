@@ -174,10 +174,11 @@ export default {
         // ReviewStatus:
         //-1 未绑定 // 0 待审核,// 1 审核通过,// 2  审核失败
         onBindAccount(item){
-            if (this.info.IsAUT !== 1) {
-                toast("需要绑定身份证，并认证后才可以绑定！")
-                return;
-            }
+            // 判断是否需要先认证身份证
+            // if (this.info.IsAUT !== 1) {
+            //     toast("需要绑定身份证，并认证后才可以绑定！")
+            //     return;
+            // }
             //typeId = 1--淘宝；2-天猫；3--京东；4--阿里巴巴；5--拼多多；6--美丽说；7--蘑菇街；
             let params = {};
             // 淘宝

@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import {post,toast,goUrl} from '@/utils';
+import {post,get,toast,goUrl} from '@/utils';
 import notData from '@/components/bottomNotData.vue';
 export default {
 	components:{notData},
@@ -105,14 +105,17 @@ export default {
 			})
 		},
 		ConfirmationTask(TaskListNo){
-			post('Task/UserDetermineTask',{
-                UserId: this.userId,
-                Token: this.token,
-                AccountId: this.AccountId,
-				TaskListNo,
-				VersionControl:'1.3.57'
-			}).then(res=>{
-				this.newTask = res.obj;
+			get('Login/GetAppVersion',{temp:99}).then(Version=>{
+				const VersionControl = Version.obj.AppVersion;
+				post('Task/UserDetermineTask',{
+					UserId: this.userId,
+					Token: this.token,
+					AccountId: this.AccountId,
+					TaskListNo,
+					VersionControl
+				}).then(res=>{
+					this.newTask = res.obj;
+				})
 			})
 		},
 		newTaskOk(TaskAcceptNo){

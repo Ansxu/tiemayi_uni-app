@@ -2,16 +2,15 @@ import md5 from 'js-md5';
 
 //API接口地址
 // 线上
-// const host = 'https://api.damingduo.cn/api/';
+const host = 'https://api.naomiebie.cn/api/';//红鸟  旺店宝
+const filePath = 'http://top.naosongduan.cn';//文件域名
+const hostPath = 'http://top.naosongduan.cn/h5/index.html';//主机路径
 // 线上后台地址
-// const filePath = 'http://xcx.gllgyz.com';
-const host = 'http://hnapi.wtvxin.com/api/';// 红鸟  旺店宝测试
-// const host = 'http://xmyapi.wtvxin.com/api/';// 铁蚂蚁测试
+// const host = 'http://hnapi.wtvxin.com/api/';// 红鸟  旺店宝测试
+// const filePath = 'http://hn.wtvxin.com';//文件域名
+// const hostPath = 'http://hnapi.wtvxin.com/index.html';//主机路径
 const website = 'http://hn.wtvxin.com';
 const wssPath = 'wss://hxapia.com/WebSocketServer.ashx';// wss地址
-// const filePath = 'http://www.hnapi.com';//文件域名
-const filePath = 'http://hn.wtvxin.com';//文件域名
-const hostPath = 'http://hnapi.wtvxin.com';//主机路径
 const LoginPath = "/pages/login/login";//登录路径
 const RegisterPath = "/pages/login/register/main";//注册路径
 
@@ -45,6 +44,7 @@ function request(url, data,method, loginFn) {
     const Sign = md5(AppId + ClientId + ClientSecret + Apikey + Timetamp); //签名
     uni.request({
       url: host + url,
+      // url: '/api/' + url,
       method: method,
       data: data,
       header: {
@@ -275,7 +275,7 @@ export function trim(str) {
 }
 //验证手机号
 export function valPhone(tel) {
-  var r_phone = /^[1][3,4,5,6,7,8][0-9]{9}$/;
+  var r_phone = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
   // var phoneNumber = $.trim($('#phoneNumber').val());
   if (trim(tel) == "") {
     toast( "手机号不能为空!");
