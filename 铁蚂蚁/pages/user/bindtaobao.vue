@@ -2,8 +2,8 @@
 	<div class="bg_f8f8f8">
 		<headers>绑定淘宝账号</headers>
 		<div class="main">
-			<div class="dd_msgBox bind__msgBox" style="padding:.1rem .12rem;">
-				<p class="title" style="font-size: .15rem;color:#222;">注意事项</p>
+			<div class="dd_msgBox bind__msgBox" style="padding:10px 12px;">
+				<p class="title" style="font-size: 15px;color:#222;">注意事项</p>
 				<p>账号审核时间<span class="color_e40000">（周一至周五09:00-18:00）</span>，账号提交后一工作日内完成 审核，如遇到周末或节假日顺廷，审核工作人工进行，用户请耐心等待， 新手务必查看
 					<a class="color_e40000" href="taobao_bindexamplespic.html">截图示例</a>！</p>
 			</div>
@@ -134,7 +134,7 @@
 			<div class="dd__hd" style="padding-top:0;">
 				<p class="titleMsg color_e40000">花呗：选填，开通花呗账号接单可获得更多佣金</p>
 			</div>
-			<div @click="submit" class="weui-btn weui-btn-active btn-submit" style="margin:.15rem .12rem .2rem;">提交审核</div>
+			<div @click="submit" class="weui-btn weui-btn-active btn-submit" style="margin:15px 12px 20px;">提交审核</div>
 		</div>
 
 		<!--请选择购物类目的弹窗-->

@@ -22,7 +22,7 @@
                 <p class="completionRate-p">
                     4、优先给完成率高、被投诉率低、接单少量的用户
                 </p>
-                <div class="completionRate-tit" style="margin-top:.3rem;">
+                <div class="completionRate-tit" style="margin-top:30px">
                     <p>完成率</p>
                 </div>
                 <div class="completionRate-text">完成率是指你最近30天内所有完成订单数占有系统派送给你的订单总数百分比。</div>
@@ -38,7 +38,7 @@
                 <p class="completionRate-p">
                     4、管理员取消的订单
                 </p>
-                <div class="completionRate-text" style="padding-bottom:.3rem;">维持高完成率可以保持平台对商家和用户的可靠性，也会增加系统派送订单给你的优先级</div>
+                <div class="completionRate-text" style="padding-bottom:30px;">维持高完成率可以保持平台对商家和用户的可靠性，也会增加系统派送订单给你的优先级</div>
             </div>
         </div>
     </div>

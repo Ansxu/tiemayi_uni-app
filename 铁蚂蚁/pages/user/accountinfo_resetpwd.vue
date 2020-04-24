@@ -84,11 +84,11 @@ export default {
 
 <style lang="scss" scoped>
     .btn-submit {
-        margin-top: .3rem;
-        margin-bottom: .15rem;
+        margin-top: 30px;
+        margin-bottom: 15px;
     }
 
     .regLogForm .weui-input {
-        padding-left: .12rem;
+        padding-left: 12px;
     }
 </style>

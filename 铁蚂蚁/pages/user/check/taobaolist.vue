@@ -16,7 +16,7 @@
                                     </div>
                                     <div class="weui-cell__ft">
                                         <span class="status" style="display:block;width:100%;text-align:right;">{{list.ReviewStatusText}}</span>
-                                        <p style="font-size:0.12rem;">最后验证时间：{{list.time}}</p>
+                                        <p style="font-size:12px;">最后验证时间：{{list.time}}</p>
                                     </div>
                                 </div>
                                 <div class="weui-cell">

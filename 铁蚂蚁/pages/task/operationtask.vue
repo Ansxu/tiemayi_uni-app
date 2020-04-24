@@ -58,18 +58,18 @@
 								</div>
 							</div>
 						</block>
-						<div class="g-name" style="font-size:0.16rem;font-weight:bold;">注：附加产品必须在店铺内找到，并一起下单</div>
+						<div class="g-name" style="font-size:16px;font-weight:bold;">注：附加产品必须在店铺内找到，并一起下单</div>
 					</block>
 					<div class="g-name c_Org" v-if="data.IsPresaleTask==1">
 						隔日单任务：{{data.PaymentStartTime}} 到 {{data.PaymentEndTime}}在{{data.PlatName}}平台去下单
-						<p style="font-size:0.16rem;font-weight:bold;color:red;">不到订单支付时间不能拍下付款，否则该笔订单任务撤销（处罚10金一单）</p>
+						<p style="font-size:16px;font-weight:bold;color:red;">不到订单支付时间不能拍下付款，否则该笔订单任务撤销（处罚10金一单）</p>
 					</div>
 				</div>
 				<!--审核信息-->
 				<div class="checkInfo">
-					<p style="font-size:0.2rem; color:red;" v-if="data.Remark">说明：{{data.Remark}}</p>
+					<p style="font-size:20px; color:red;" v-if="data.Remark">说明：{{data.Remark}}</p>
 					<div class="attachClaimImg">
-						<p style="font-size:0.2rem; color:red;" v-if="data.AttachClaimImg||data.AttachClaimImg1||data.AttachClaimImg2">备注图片：</p>
+						<p style="font-size:20px; color:red;" v-if="data.AttachClaimImg||data.AttachClaimImg1||data.AttachClaimImg2">备注图片：</p>
 						<!-- 查看备注图片 -->
 						<div class="img_div" v-if="data.AttachClaimImg" @click="previewImage([data.AttachClaimImg])">
 							<img :src="data.AttachClaimImg" />
@@ -128,7 +128,7 @@
 						</ul>
 					</div>
 					<div class="itembox">
-						<div class="titleHd"><span>订单留言</span><span style="color:red; font-size:.13rem;">（任务如需订单留言的，下单时务必按要求操作）</span></div>
+						<div class="titleHd"><span>订单留言</span><span style="color:red; font-size:13px;">（任务如需订单留言的，下单时务必按要求操作）</span></div>
 						<div class="txtbox c_Org">{{data.ShopMessage}}</div>
 						<div class="txtbox c_Org" v-if="data.TaskIsAddCar==1">需要把主商品加入购物车</div>
 						<div class="txtbox c_Org" v-if="data.TaskIsChat==1">需要会员与客服聊天</div>
@@ -190,7 +190,7 @@
 								</div>
 								<div class="Examine">
 									<div style="text-align:center;">店铺名认证：{{data.ShopName}}</div>
-									<div class="inputbox_group">
+									<div class="inputbox_group flex-center">
 										<block v-for="(item,index) in data.ShopName" :key="index">
 											<input v-if="item=='*'" v-model="ShopNameArr[index]"  class="input" name="shopname" type="text" placeholder="补全" maxlength="1" /> 
 											<input v-else class="input" name="shopname" type="text" :value="item" readonly /> 
@@ -205,7 +205,7 @@
 								</div>
 								<div class="Examine">
 									<div style="text-align:center;">关键词认证：{{data.SetCommodityKeywords}}</div>
-									<div class="inputbox_group">
+									<div class="inputbox_group flex-center">
 										<block v-for="(item,index) in data.SetCommodityKeywords" :key="index">
 											<input v-if="item=='*'" v-model="SetCommodityKeywordsArr[index]"  class="input"  type="text" placeholder="补全" maxlength="1" />
 											<input v-else class="input" name="Keywords" type="text" :value="item" readonly />
@@ -692,7 +692,7 @@
 									</block>
 									<block v-if="data.TaskExpressId>0">
 										<!-- onclick="lookmore()" -->
-										<p style="color:red; font-size:.15rem; padding-top:5px;">注意：下面填写的收货地址一定要和平台下单的订单收货地址一致<img class="fr"  style="width:.26rem;height:.26rem;" src="/static/image/icons/more.png" /></p>
+										<p style="color:red; font-size:15px; padding-top:5px;">注意：下面填写的收货地址一定要和平台下单的订单收货地址一致<img class="fr"  style="width:26px;height:26px;" src="/static/image/icons/more.png" /></p>
 										<div id="userinfo" style="display:none">
 										<div class="from">
 											<p>订单收货联系人：</p>
@@ -724,7 +724,7 @@
 						</div>
 					</div>
 				</div>
-				<p style="font-size:0.16rem;font-weight:bold;color:red;" v-if="((data.IsPresaleTask==1&&data.AcceptTaskStatus!=9))||(data.IsCompetingGoodsTask==1&&data.AcceptTaskStatus!=9)">不到订单支付时间不能拍下付款，否则该笔订单任务撤销（处罚10金一单）</p>
+				<p style="font-size:16px;font-weight:bold;color:red;" v-if="((data.IsPresaleTask==1&&data.AcceptTaskStatus!=9))||(data.IsCompetingGoodsTask==1&&data.AcceptTaskStatus!=9)">不到订单支付时间不能拍下付款，否则该笔订单任务撤销（处罚10金一单）</p>
 				<div class="ftbtn mb10 mt10">
 					<p class="btn" id="submitBtn" @click="submitTask">提交审核</p>
 				</div>
@@ -1525,8 +1525,8 @@ export default {
 	.boxinput{
 	border: 1px #000 solid!important;
 	border-radius: 2px;
-	height: .4rem;
-	line-height: .4rem;
+	height: 40px;
+	line-height: 40px;
 	}
 	.titleHd{
 		margin:0;

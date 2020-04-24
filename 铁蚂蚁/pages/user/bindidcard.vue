@@ -9,7 +9,7 @@
 				</p>
 			</div>
 		</div>
-		<div class="bindForm regLogForm onlyIpt__form" style="padding: 0 .1rem .1rem;">
+		<div class="bindForm regLogForm onlyIpt__form" style="padding: 0 10px 10px;">
 			<form action="">
 				<div class="weui-cells" style="margin-top:0;">
 					<div class="weui-cell">
@@ -95,7 +95,7 @@
 
 			</div>
 		</div>
-		<div class="weui-btn weui-btn-active btn-submit" @click="submit" v-if="data.IsAUT!==1" style="margin:.2rem .12rem .2rem;">提交</div>
+		<div class="weui-btn weui-btn-active btn-submit" @click="submit" v-if="data.IsAUT!==1" style="margin:20px 12px 20px;">提交</div>
 	</div>
 </div>
 </template>
@@ -150,7 +150,7 @@ export default {
 		// 上传照片,1-正面，2反面,3-手持照片
 		upImg(type){
 			if(this.data.IsAUT==1)return;
-			getImgPath().then(res=>{
+			getImgPath(1,['album']).then(res=>{
 				if(type===1){
 					this.data.IdcardPositive = res;
 				}else if(type===2){

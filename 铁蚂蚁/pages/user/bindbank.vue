@@ -14,7 +14,7 @@
                     <p style="color:red;display:none;" id="isbandtext">修改银行卡资料请联系我们微信客服：</p>
                 </div>
             </div>
-            <div class="bindForm regLogForm onlyIpt__form" style="padding-top:.1rem;">
+            <div class="bindForm regLogForm onlyIpt__form" style="padding-top:10px;">
                 <div class="weui-cells">
                     <div class="weui-cell">
                         <div class="weui-cell__bd">
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                 </div>
-                <div @click="submit" v-if="data.IsBindBank!==1" class="weui-btn weui-btn-active btn-submit" style="margin-top:.2rem;">提交</div>
+                <div @click="submit" v-if="data.IsBindBank!==1" class="weui-btn weui-btn-active btn-submit" style="margin-top:20px;">提交</div>
             </div>
         </div>
         <!--弹窗-->

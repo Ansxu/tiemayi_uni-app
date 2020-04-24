@@ -159,8 +159,8 @@
 	
 	.link_btn {
 	  display: inline-block;
-	  height: .35rem;
-	  line-height: .35rem;
+	  height: 35px;
+	  line-height: 35px;
 	  color: #5c91f1;
 	  border: 1px solid #ddd;
 	  border-radius: 4px;

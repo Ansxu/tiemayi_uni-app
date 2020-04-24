@@ -161,9 +161,9 @@ export default {
             margin: auto;
         }
         .tklimg{
-          width: 1rem;
-          height: 1rem;
-          margin: .1rem auto;
+          width: 100px;
+          height: 100px;
+          margin: 10px auto;
         }
         .tklimg img{
           width: 100%;

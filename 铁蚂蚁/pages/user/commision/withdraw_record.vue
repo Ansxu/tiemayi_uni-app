@@ -2,7 +2,7 @@
     <div class="bg_f8f8f8">
 		<headers>{{wallettext}}</headers>
         <div class="main">
-            <ul class="commisionList withdrawRecordList" id="recordlist" style="margin-top:.1rem;" v-for="(item,index) in WithdrawList" :key="index">
+            <ul class="commisionList withdrawRecordList" id="recordlist" style="margin-top:10px;" v-for="(item,index) in WithdrawList" :key="index">
 				<li>
 				    <div class="title">{{item.Remark}}</div>
 				    <div class="flex">

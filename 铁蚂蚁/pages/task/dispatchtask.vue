@@ -159,7 +159,7 @@ export default {
 				//  如果没有一个绑定过的账号
 				if(!this.isVerification){
 					uni.showModal({
-						title:'没有绑定账号或账号未审核！',
+						title:'没有绑定账号或账号未验号！',
 						success(e){
 							uni.navigateBack();
 						}

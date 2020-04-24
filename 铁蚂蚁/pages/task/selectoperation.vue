@@ -28,11 +28,11 @@
                 </div>
                 <div class="g-name c_Org" v-if="data.IsPresaleTask==1">
                         预售任务：{{data.PaymentStartTime}} 到 {{data.PaymentEndTime}}在{{data.PlatName}}平台去下单
-                        <p style="font-size:0.16rem;font-weight:bold;color:red;">不到订单时间支付不能拍下付款，否则该笔订单无效</p>
+                        <p style="font-size:16px;font-weight:bold;color:red;">不到订单时间支付不能拍下付款，否则该笔订单无效</p>
                 </div>
                 <div class="g-name c_Org" v-if="data.IsTrialStatus==1">
                         商家审号任务：{{data.TrialNumberTime}} 分钟内审号完成,请稍等片刻
-                        <p style="font-size:0.16rem;font-weight:bold;color:red;">	商家审号通过才能操作，否则该笔订单无效</p>
+                        <p style="font-size:16px;font-weight:bold;color:red;">	商家审号通过才能操作，否则该笔订单无效</p>
                 </div>
             </div>
             <div class="StatusInfo">
@@ -48,7 +48,7 @@
                         @click="onShowCancelTask">
                         <!-- href="{{data.AcceptTaskStatus==0||data.AcceptTaskStatus==9?" javascript:cancelTheTask(); ":"javascript:; "}}"> -->
                     取消任务</p> 
-                    <p style="color:red; font-size:.18rem;" class="text_l" v-if="data.AcceptTaskStatus==4">拒绝返款原因：{{data.SellerDenialReason}}</p>
+                    <p style="color:red; font-size:18px;" class="text_l" v-if="data.AcceptTaskStatus==4">拒绝返款原因：{{data.SellerDenialReason}}</p>
                 </div>
                 <div class="stepInfo">
                     <ul>
@@ -232,24 +232,24 @@
 								</dd>
 								</block>
 
-								<div class="from" style="margin-bottom:.1rem;" v-if="data.ShoparoundLink1">
+								<div class="from" style="margin-bottom:10px;" v-if="data.ShoparoundLink1">
                                     <p class="text">货比三家链接1：{{data.ShoparoundLink1}}</p>
 								</div>
-								<div class="from" style="margin-bottom:.1rem;" v-if="data.ShoparoundLink2">
+								<div class="from" style="margin-bottom:10px;" v-if="data.ShoparoundLink2">
                                     <p class="text">货比三家链接2：{{data.ShoparoundLink2}}</p>
 								</div>
-								<div class="from" style="margin-bottom:.1rem;" v-if="data.ShopProAlink">
+								<div class="from" style="margin-bottom:10px;" v-if="data.ShopProAlink">
                                     <p class="text">副宝贝链接1：{{data.ShopProAlink}}</p>
 								</div>
-								<div class="from" style="margin-bottom:.1rem;" v-if="data.ShopProBlink">
+								<div class="from" style="margin-bottom:10px;" v-if="data.ShopProBlink">
                                     <p class="text">副宝贝链接2：{{data.ShopProBlink}}</p>
 								</div>
-								<div class="from No" style="margin-bottom:.1rem;" v-if="data.PlatOrderNo">
+								<div class="from No" style="margin-bottom:10px;" v-if="data.PlatOrderNo">
                                     <div>订单编号：{{data.PlatOrderNo}}
                                         <p class="link_btn copybtn" style="display:inline-block" @click="copy(data.PlatOrderNo)">复制</p>
                                     </div>
 								</div>
-								<div class="from" style="margin-bottom:.1rem;" v-if="data.PayMoney">
+								<div class="from" style="margin-bottom:10px;" v-if="data.PayMoney">
                                     <p>实付金额：{{data.PayMoney}}元</p>
 								</div>
 								<!-- <dd class="text_r"><p class="link_btn blue">点击可查看图片</p></dd> -->
@@ -284,7 +284,7 @@
                                         <textarea type="text" class="keybox" id="praiseText" readonly :value="data.EvaluationClaim" disabled></textarea>
                                         <p class="link_btn" @click="copy(data.EvaluationClaim)">复制评价文字</p>
                                     </div>
-                                    <div class="evaluate_box" style="margin-top:0.5rem;" v-if="data.EvaluationImg||data.EvaluationImg1||data.EvaluationImg2||data.EvaluationImg3||data.EvaluationImg4">
+                                    <div class="evaluate_box" style="margin-top:50px;" v-if="data.EvaluationImg||data.EvaluationImg1||data.EvaluationImg2||data.EvaluationImg3||data.EvaluationImg4">
                                         <p class="evaluateTit">图片要求<span class="c_Org">（在评价里必须上传以下图片）</span></p>
                                         <div class="imglist thumbnails evaluationImglst">
                                             <span class="img" v-if="data.EvaluationImg" @click="previewImage([data.EvaluationImg])">

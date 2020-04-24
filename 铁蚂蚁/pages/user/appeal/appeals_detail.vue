@@ -53,7 +53,7 @@
                                 <dt><label>协商处理</label></dt>
                                 <dd class="text_l">
                                     <div class="reply_box" v-if="data.Status==0&&data.AppealType!=0&&!data.Reply" >
-                                        <div class="textarea_box" style="margin-right:.1rem;">
+                                        <div class="textarea_box" style="margin-right:10px">
                                             <textarea @input="textarea" placeholder="输入回复申诉信息" id="txtReply"></textarea>
                                         </div>
                                         <div class="piclist Uploadimg">
@@ -79,7 +79,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <view class="btn" id="replyAppeal" v-if="!data.Reply" style="margin-top:.1rem;" @click="replyAppeal">回复申诉</view>
+                                        <view class="btn" id="replyAppeal" v-if="!data.Reply" style="margin-top:10px;" @click="replyAppeal">回复申诉</view>
                                     </div>
                                     <span class='reply_text' v-if="data.AppealType==0 &&data.Reply">商家回复内容：{{data.Reply}}</span>
                                     <span class='reply_text' v-else-if="data.AppealType!=0 &&data.Reply">会员回复内容：{{data.Reply}}</span>

@@ -66,7 +66,7 @@ export default {
 
 <style lang="scss" scoped>
     .swiperImgBox {
-        border-top: .1rem solid #f8f8f8;
-        border-bottom: .1rem solid #f8f8f8;
+        border-top: 10px solid #f8f8f8;
+        border-bottom: 10px solid #f8f8f8;
     }
 </style>

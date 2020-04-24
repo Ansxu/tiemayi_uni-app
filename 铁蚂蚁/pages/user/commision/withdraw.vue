@@ -8,8 +8,8 @@
 			</div>
 		</div>
 		<div class="main">
-			<div class="dd_msgBox" style="padding:.1rem .12rem;">
-				<p class="title" style="font-size: .15rem;">提现说明</p>
+			<div class="dd_msgBox" style="padding:10px 12px;">
+				<p class="title" style="font-size: 15px;">提现说明</p>
 				<p>1、佣金未满<span id="min_commission">{{data.MinCommissionWithdraw}}</span>扣<span id="Amount_Fees">{{data.AmountProportionOfFees}}</span>元手续费，提现金额小于<span id="MinWithdrawCommission">{{data.MinWithdrawCommission}}</span>元无法提现，平台<span class="withdrawalTime">{{data.CashWithdrawalTime}}</span>小时内完成提现审核
 				<!-- <p>1、佣金<span id="min_commission">{{data.MinCommissionWithdraw}}</span>金币起提，平台<span class="withdrawalTime">{{data.CashWithdrawalTime}}</span>小时内完成提现审核 -->
 					<br /> 2、本金可随时提现(<span id="min_principal">{{data.MinPrincipalWithdrawal}}</span>元起提)，平台<span class="withdrawalTime">{{data.CashWithdrawalTime}}</span>小时内完成提现审核
@@ -65,7 +65,7 @@
 					            <input type="hidden" id="amountProportionOfFees" readonly="true"/>
 					           <input type="hidden" id="walletProportionOfFees" readonly="true"/>
 					           <input type="hidden" id="commissionConversion" readonly="true"/>
-								<p @click="sumbit" class="weui-btn weui-btn-active btn-submit" style="margin-top:.2rem;">提交</p>
+								<p @click="sumbit" class="weui-btn weui-btn-active btn-submit" style="margin-top:20px;">提交</p>
 							</div>
 
 						</div>

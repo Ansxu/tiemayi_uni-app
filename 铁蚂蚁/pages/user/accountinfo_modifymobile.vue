@@ -223,7 +223,7 @@ export default {
 
 <style lang="scss" scoped>
     .btn-submit {
-        margin-top: .3rem;
-        margin-bottom: .15rem;
+        margin-top: 30px;
+        margin-bottom: 15px;
     }
 </style>
