@@ -34,7 +34,7 @@
 	                        <span class="txt">徒弟</span>
 	                    </div>
 	                    <div class="box" @click="goUrl('other/mysubordinate',{'clickval':1})">
-	                        <span class="num" id="CertifiedNum">{{data.CertifiedNum}}人</span><br>
+	                        <span class="num" id="CertifiedNum">{{data.DiscipleNum}}人</span><br>
 	                        <span class="txt">徒孙</span>
 	                    </div>
 	                </li>

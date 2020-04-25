@@ -29,7 +29,7 @@
 							</block>
 							<p class="text c_Org" v-if="data.TaskType==2">普通浏览任务{{(data.IsCollectionShop==1||data.IsCollectionProduct==1?"+收藏":"")+(data.IsAddCart==1?"+加购物车":"")}}</p>
 						</div>
-						<div class="img fr presale-img" style="display:none" v-if="data.IsPresaleTask==1">
+						<div class="img fr presale-img" style="display:none"  v-if="data.IsPresaleTask==1">
 						<img src="/static/image/nav/presaletask.png" />
 						</div>
 					</div>
@@ -60,9 +60,9 @@
 						</block>
 						<div class="g-name" style="font-size:16px;font-weight:bold;">注：附加产品必须在店铺内找到，并一起下单</div>
 					</block>
-					<div class="g-name c_Org" v-if="data.IsPresaleTask==1">
-						隔日单任务：{{data.PaymentStartTime}} 到 {{data.PaymentEndTime}}在{{data.PlatName}}平台去下单
-						<p style="font-size:16px;font-weight:bold;color:red;">不到订单支付时间不能拍下付款，否则该笔订单任务撤销（处罚10金一单）</p>
+					<div class="g-name c_Org" v-if="data.IsPresaleTask==1||data.IsAdvanceTask==1">
+						{{data.IsPresaleTask==1?"隔日单任务":"预售任务"}}：{{data.PaymentStartTime}} 到 {{data.PaymentEndTime}}在{{data.PlatName}}平台去下单
+						<p style="font-size:15px;font-weight:bold;color:red;">不到订单支付时间不能拍下付款，否则该笔订单任务撤销（处罚10金一单）</p>
 					</div>
 				</div>
 				<!--审核信息-->
@@ -128,7 +128,7 @@
 						</ul>
 					</div>
 					<div class="itembox">
-						<div class="titleHd"><span>订单留言</span><span style="color:red; font-size:13px;">（任务如需订单留言的，下单时务必按要求操作）</span></div>
+						<div class="titleHd"><span>订单留言</span><span style="color:red; font-size:12px;">（任务如需订单留言的，下单时务必按要求操作）</span></div>
 						<div class="txtbox c_Org">{{data.ShopMessage}}</div>
 						<div class="txtbox c_Org" v-if="data.TaskIsAddCar==1">需要把主商品加入购物车</div>
 						<div class="txtbox c_Org" v-if="data.TaskIsChat==1">需要会员与客服聊天</div>
@@ -551,7 +551,7 @@
 									<!-- 店内商品 -->
 									<div class="piclist Uploadimg" v-if="data.IsBrowseStore==1&&data.TaskType!=2">
 										<ul class="clear">
-											<block v-if="(data.IsNewPasswordTask==0)&&(data.IsCompetingGoodsTask==0)&&(data.IsPresaleTask==0)&&(data.IsGoodTask==0)">
+											<block v-if="(data.IsNewPasswordTask==0)&&(data.IsCompetingGoodsTask==0)&&(data.IsPresaleTask==0)&&(data.IsGoodTask==0)&&(data.IsAdvanceTask==0)">
 												<li>
 													<div class="img" @click="upImg('targetTop')">
 														<div class="upimg">
@@ -644,7 +644,7 @@
 								</div>
 							</div>
 							<block v-if="data.TaskType==1">
-								<div class="Step Step-4" v-if="(data.ChatPlaceAnOrder>0&&(data.IsPresaleTask==0||(data.IsPresaleTask==1&&data.AcceptTaskStatus==9)))&&(data.IsCompetingGoodsTask==0||(data.IsCompetingGoodsTask==1&&data.AcceptTaskStatus==9))">
+								<div class="Step Step-4" v-if="(data.ChatPlaceAnOrder>0&&(data.IsPresaleTask==0||(data.IsPresaleTask==1&&data.AcceptTaskStatus==9))&&(data.IsAdvanceTask==0||(data.IsAdvanceTask==1&&data.AcceptTaskStatus==9)))&&(data.IsCompetingGoodsTask==0||(data.IsCompetingGoodsTask==1&&data.AcceptTaskStatus==9))">
 									<div class="No"><span>{{(data.IsSearchList==1||data.IsComparisonShop==1)?(data.IsBrowseStore==1||data.IsCollectionShop==1||data.IsCollectionProduct==1||data.IsAddCart==1)?"第三步":"第二步":"第一步"}}&nbsp;下单核对</span>
 										<p style="display:none" class="link_btn" @click="showExamples(2)">点击查看示例</p>
 									</div>
@@ -663,7 +663,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="Step Step-5" v-if="(data.IsPresaleTask==0||(data.IsPresaleTask==1&&data.AcceptTaskStatus==9))&&(data.IsCompetingGoodsTask==0||(data.IsCompetingGoodsTask==1&&data.AcceptTaskStatus==9))">
+								<div class="Step Step-5" v-if="(data.IsPresaleTask==0||(data.IsPresaleTask==1&&data.AcceptTaskStatus==9))&&(data.IsAdvanceTask==0||(data.IsAdvanceTask==1&&data.AcceptTaskStatus==9))&&(data.IsCompetingGoodsTask==0||(data.IsCompetingGoodsTask==1&&data.AcceptTaskStatus==9))">
 									<div class="No">
 										<span>
 										{{(data.IsSearchList==1||data.IsComparisonShop==1)?(data.IsBrowseStore==1||data.IsCollectionShop==1||data.IsCollectionProduct==1||data.IsAddCart==1)?data.ChatPlaceAnOrder>0?"第四步":"第三步":"第二步":"第一步"}}&nbsp;平台下单信息
@@ -724,7 +724,7 @@
 						</div>
 					</div>
 				</div>
-				<p style="font-size:16px;font-weight:bold;color:red;" v-if="((data.IsPresaleTask==1&&data.AcceptTaskStatus!=9))||(data.IsCompetingGoodsTask==1&&data.AcceptTaskStatus!=9)">不到订单支付时间不能拍下付款，否则该笔订单任务撤销（处罚10金一单）</p>
+				<p style="font-size:15px;font-weight:bold;color:red;" v-if="((data.IsPresaleTask==1&&data.AcceptTaskStatus!=9))||(data.IsCompetingGoodsTask==1&&data.AcceptTaskStatus!=9)">不到订单支付时间不能拍下付款，否则该笔订单任务撤销（处罚10金一单）</p>
 				<div class="ftbtn mb10 mt10">
 					<p class="btn" id="submitBtn" @click="submitTask">提交审核</p>
 				</div>
@@ -1054,12 +1054,13 @@ export default {
 				imageJson["CollectionCompetitiveProducts3"] = screenshot.CollectionCompetitiveProducts3;
 			}
 			// 加购物车截图--收藏商品截图
-			if(data.IsPresaleTask==1&&data.AcceptTaskStatus!=9){
+			if(data.IsPresaleTask==1&&data.AcceptTaskStatus!=9&&(data.ShootTheNextDay==0||data.ShootTheNextDay==2)){
 				if(!screenshot.AddAShoppingCart){
 					toast("加购物车截图不能为空");
 					return false;
 				}
 				imageJson["AddAShoppingCart"] = screenshot.AddAShoppingCart;
+				
 				if(!screenshot.CollectionOfGoods){
 					toast("收藏商品截图不能为空");
 					return false;
@@ -1211,7 +1212,7 @@ export default {
 				// }
 				if(data.IsBrowseStore==1&&data.TaskType!=2){
 					// 店内商品
-					if((data.IsNewPasswordTask==0)&&(data.IsCompetingGoodsTask==0)&&(data.IsPresaleTask==0)&&(data.IsGoodTask==0)){
+					if((data.IsNewPasswordTask==0)&&(data.IsCompetingGoodsTask==0)&&(data.IsPresaleTask==0)&&(data.IsGoodTask==0)&&(data.IsAdvanceTask==0)){
 						
 						if(!screenshot.targetTop){
 							toast("目标商品顶部截图不能为空");
@@ -1326,8 +1327,8 @@ export default {
 				toast("订单未通过验证无法提交审核");
 				return false
 			}
-			if (data.TaskType > 0 && (data.IsPresaleTask == 0 || (data.IsPresaleTask == 1 && data.AcceptTaskStatus == 9)) && (data.IsCompetingGoodsTask == 0 || (data.IsCompetingGoodsTask == 1 && data.AcceptTaskStatus == 9))) {
-				if (data.TaskType == 1 && (data.IsPresaleTask == 0 || (data.IsPresaleTask == 1 && data.AcceptTaskStatus == 9)) && (data.IsCompetingGoodsTask == 0 || (data.IsCompetingGoodsTask == 1 && data.AcceptTaskStatus == 9))) {
+			if (data.TaskType > 0 && (data.IsPresaleTask==0||(data.IsPresaleTask==1&&data.AcceptTaskStatus==9))&&(data.IsAdvanceTask==0||(data.IsAdvanceTask==1&&data.AcceptTaskStatus==9))&&(data.IsCompetingGoodsTask==0||(data.IsCompetingGoodsTask==1&&data.AcceptTaskStatus==9))) {
+				if (data.TaskType == 1 ) {
 					if (!this.orderPrice) {
 						toast("任务为垫付任务，请输入平台下单的订单金额");
 						return false;

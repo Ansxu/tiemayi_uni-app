@@ -144,7 +144,6 @@ export default {
                 SelectAccountId: this.selectAccountId,
                 SelectPlatFormId: this.selectPlatformId
 			}).then(res=>{
-				this.getCompletionRate();
 				const data = res.obj;
 				data.map((item,index)=>{
 					const name = item.PlatName;
@@ -164,6 +163,8 @@ export default {
 							uni.navigateBack();
 						}
 					})
+				}else{
+					this.getCompletionRate();
 				}
 			})
 		},

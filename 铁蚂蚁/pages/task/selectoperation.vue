@@ -22,18 +22,24 @@
                         <p class="text" v-if="data.AcceptTaskStatus==0"><span id="count_down" class="c_Org">{{timeEnd}}</span>
                         </p>
                     </div>
-                    <div class="img fr presale-img" v-if="data.IsPresaleTask==1">
+                    <div class="img fr presale-img" v-if="data.IsAdvanceTask==1">
                         <img src="/static/image/nav/presaletask.png" />
                     </div>
                 </div>
-                <div class="g-name c_Org" v-if="data.IsPresaleTask==1">
+                
+				<div class="g-name c_Org"  v-if="data.IsPresaleTask==1||data.IsCompetingGoodsTask==1||data.IsAdvanceTask==1">
+						<!-- {{data.IsPresaleTask==1?"隔日单任务：":"竞品黑科技任务："}}{{data.PaymentStartTime}} 到 {{data.PaymentEndTime}}在{{data.PlatName}}平台去下单
+						<p style="font-size:16px;font-weight:bold;color:red;">不到订单支付时间不能拍下付款，否则该笔订单任务撤销（处罚10金一单）</p> -->
+                        {{data.IsPresaleTask==1?"隔日单任务：":(data.IsCompetingGoodsTask==1?"竞品黑科技任务：":"预售单任务：")}}{{data.PaymentStartTime}} 到 {{data.PaymentEndTime}}在{{data.PlatName}}平台去下单
+				</div>
+                <!-- <div class="g-name c_Org" v-if="data.IsPresaleTask==1">
                         预售任务：{{data.PaymentStartTime}} 到 {{data.PaymentEndTime}}在{{data.PlatName}}平台去下单
                         <p style="font-size:16px;font-weight:bold;color:red;">不到订单时间支付不能拍下付款，否则该笔订单无效</p>
                 </div>
                 <div class="g-name c_Org" v-if="data.IsTrialStatus==1">
                         商家审号任务：{{data.TrialNumberTime}} 分钟内审号完成,请稍等片刻
                         <p style="font-size:16px;font-weight:bold;color:red;">	商家审号通过才能操作，否则该笔订单无效</p>
-                </div>
+                </div> -->
             </div>
             <div class="StatusInfo">
                 <div class="Btns mb10">
@@ -158,34 +164,39 @@
                                                 </div>
                                     </dd>
 								</block>
-                                <block v-if="data.IsBrowseStore==1&&data.TaskType!=2">
-                                    <dd v-if="data.IsBrowseStore==1&&data.IsPresaleTask==0&&data.IsGoodTask==0&&(data.IsCompetingGoodsTask==0)&&data.IsNewPasswordTask==0"><label>浏览店铺</label></dd>
-                                    <dd v-if="data.IsBrowseStore==1&&data.IsPresaleTask==0&&data.IsGoodTask==0&&(data.IsCompetingGoodsTask==0)&&data.IsNewPasswordTask==0">
+                                <!-- <block v-if="data.TaskType!=2&&data.IsBrowseStore==1&&data.IsPresaleTask==0&&data.IsGoodTask==0&&(data.IsCompetingGoodsTask==0)&&data.IsNewPasswordTask==0"> -->
+                                <block v-if="data.IsBrowseStore==1&&data.IsPresaleTask==0&&data.IsGoodTask==0&&(data.IsCompetingGoodsTask==0)&&data.IsNewPasswordTask==0">
+                                    <dd ><label>浏览店铺</label></dd>
+                                    <dd>
                                         <div class="imglist thumbnails">
-                                            <span class="img" v-if="data.ImgJson.TargetProductTopImg">
-                                                <img :src="data.ImgJson.TargetProductTopImg"  @click="previewImage([data.ImgJson.TargetProductTopImg])">
+                                            <span class="img">
+                                                <img :src="data.ImgJson.TargetProductTopImg"  @click="previewImage([data.ImgJson.TargetProductTopImg])" v-if="data.ImgJson.TargetProductTopImg">
                                             </span>
-                                            <span class="img" v-if="data.ImgJson.TargetProductBottomImg">
-                                                <img  :src="data.ImgJson.TargetProductBottomImg"  @click="previewImage([data.ImgJson.TargetProductBottomImg])">
+                                            <span class="img">
+                                                <img  :src="data.ImgJson.TargetProductBottomImg"  @click="previewImage([data.ImgJson.TargetProductBottomImg])" v-if="data.ImgJson.TargetProductBottomImg">
                                             </span>
-                                            <span class="img" v-if="data.ImgJson.ShopProductBottomImgA">
-                                                <img :src="data.ImgJson.ShopProductBottomImgA"  @click="previewImage([data.ImgJson.ShopProductBottomImgA])">
+                                            <span class="img">
+                                                <img :src="data.ImgJson.ShopProductBottomImgA"  @click="previewImage([data.ImgJson.ShopProductBottomImgA])" v-if="data.ImgJson.ShopProductBottomImgA">
                                             </span>
-                                            <span class="img" v-if="data.ImgJson.ShopProductBottomImgB">
-                                                <img :src="data.ImgJson.ShopProductBottomImgB"  @click="previewImage([data.ImgJson.ShopProductBottomImgB])">
+                                            <span class="img">
+                                                <img :src="data.ImgJson.ShopProductBottomImgB"  @click="previewImage([data.ImgJson.ShopProductBottomImgB])" v-if="data.ImgJson.ShopProductBottomImgB">
                                             </span>
-                                            <span class="img" v-if="data.TaskType==1&&(data.ProductName1||data.ProductName2)">
-                                                <img :src="data.ImgJson.AdditionalProductA1" v-if="data.ImgJson.AdditionalProductA1"  @click="previewImage([data.ImgJson.AdditionalProductA1])">
-                                            </span>
-                                            <span class="img" v-if="data.TaskType==1&&(data.ProductName1||data.ProductName2)">
-                                                <img :src="data.ImgJson.AdditionalProductB1" v-if="data.ImgJson.AdditionalProductB1"  @click="previewImage([data.ImgJson.AdditionalProductB1])">
-                                            </span>
-                                            <span class="img" v-if="data.ProductName2&&data.ImgJson.AdditionalProductA2">
-                                                    <img :src="data.ImgJson.AdditionalProductA2" v-if="data.ImgJson.AdditionalProductA2"  @click="previewImage([data.ImgJson.AdditionalProductA2])">
-                                            </span>
-                                            <span class="img" v-if="data.ProductName2&&data.ImgJson.AdditionalProductB2">
-                                                <img :src="data.ImgJson.AdditionalProductB2"  @click="previewImage([data.ImgJson.AdditionalProductB2])">
-                                            </span>
+                                            <block v-if="data.ProductName1">
+                                                <span class="img">
+                                                    <img :src="data.ImgJson.AdditionalProductA1"   @click="previewImage([data.ImgJson.AdditionalProductA1])" v-if="data.TaskType==1&&(data.ProductName1||data.ProductName2)&&data.ImgJson.AdditionalProductA1">
+                                                </span>
+                                                <span class="img">
+                                                    <img :src="data.ImgJson.AdditionalProductB1"  @click="previewImage([data.ImgJson.AdditionalProductB1])" v-if="data.TaskType==1&&(data.ProductName1||data.ProductName2)&&data.ImgJson.AdditionalProductB1">
+                                                </span>
+                                            </block>
+                                            <block v-if="it.ProductName2">
+                                                <span class="img">
+                                                        <img :src="data.ImgJson.AdditionalProductA2"  @click="previewImage([data.ImgJson.AdditionalProductA2])" v-if="data.ProductName2&&data.ImgJson.AdditionalProductA2">
+                                                </span>
+                                                <span class="img">
+                                                    <img :src="data.ImgJson.AdditionalProductB2"  @click="previewImage([data.ImgJson.AdditionalProductB2])" v-if="data.ProductName2&&data.ImgJson.AdditionalProductB2">
+                                                </span>
+                                            </block>
                                         </div>
                                     </dd>
                                 </block>
@@ -287,20 +298,30 @@
                                     <div class="evaluate_box" style="margin-top:50px;" v-if="data.EvaluationImg||data.EvaluationImg1||data.EvaluationImg2||data.EvaluationImg3||data.EvaluationImg4">
                                         <p class="evaluateTit">图片要求<span class="c_Org">（在评价里必须上传以下图片）</span></p>
                                         <div class="imglist thumbnails evaluationImglst">
-                                            <span class="img" v-if="data.EvaluationImg" @click="previewImage([data.EvaluationImg])">
-                                                <img :src="data.EvaluationImg">
+                                            <span class="img">
+                                                <block v-if="data.EvaluationImg" @click="previewImage([data.EvaluationImg])">
+                                                    <img :src="data.EvaluationImg">
+                                                </block>
                                             </span> 
-                                            <span class="img" v-if="data.EvaluationImg1"  @click="previewImage([data.EvaluationImg1])">
-                                                <img :src="data.EvaluationImg1">
+                                            <span class="img">
+                                                <block v-if="data.EvaluationImg1"  @click="previewImage([data.EvaluationImg1])">
+                                                    <img :src="data.EvaluationImg1">
+                                                </block>
                                             </span> 
-                                            <span class="img" v-if="data.EvaluationImg2"  @click="previewImage([data.EvaluationImg2])">
-                                                <img :src="data.EvaluationImg2">
+                                            <span class="img">
+                                                <block v-if="data.EvaluationImg2"  @click="previewImage([data.EvaluationImg2])">
+                                                    <img :src="data.EvaluationImg2">
+                                                </block>
                                             </span> 
-                                            <span class="img" v-if="data.EvaluationImg3"  @click="previewImage([data.EvaluationImg3])">
-                                                <img :src="data.EvaluationImg3">
+                                            <span class="img">
+                                                <block  v-if="data.EvaluationImg3"  @click="previewImage([data.EvaluationImg3])">
+                                                    <img :src="data.EvaluationImg3">
+                                                </block>
                                             </span> 
-                                            <span class="img" v-if="data.EvaluationImg4"  @click="previewImage([data.EvaluationImg4])">
-                                                <img :src="data.EvaluationImg4">
+                                            <span class="img">
+                                                <block  v-if="data.EvaluationImg4"  @click="previewImage([data.EvaluationImg4])">
+                                                    <img :src="data.EvaluationImg4">
+                                                </block>
                                             </span>
                                         </div>
                                         <!-- <p class="link_btn" @click="saveImg">点击下载图片</p> -->
@@ -319,11 +340,11 @@
                                 <dd><label>第二步：上传物流签收与评价截图</label></dd>
                                 <dd>
                                     <div class="imglist thumbnails">
-                                        <span class="img" v-if="data.OkImgJson.LogisticsReceiptImg" @click="previewImage([data.OkImgJson.LogisticsReceiptImg])">
-                                            <img :src="data.OkImgJson.LogisticsReceiptImg">
+                                        <span class="img">
+                                            <img :src="data.OkImgJson.LogisticsReceiptImg" v-if="data.OkImgJson.LogisticsReceiptImg" @click="previewImage([data.OkImgJson.LogisticsReceiptImg])">
                                         </span>
-                                        <span class="img" v-if="data.OkImgJson.EvaluationImg" @click="previewImage([data.OkImgJson.EvaluationImg])">
-                                            <img :src="data.OkImgJson.EvaluationImg">
+                                        <span class="img">
+                                            <img :src="data.OkImgJson.EvaluationImg" v-if="data.OkImgJson.EvaluationImg" @click="previewImage([data.OkImgJson.EvaluationImg])">
                                         </span>
                                     </div>
                                 </dd>
@@ -473,6 +494,11 @@ export default {
                     data.ImgJson = JSON.parse(data.ImgJson);
                 }else{
                      data.ImgJson ={}
+                }
+                if(data.OkImgJson){
+                    data.OkImgJson = JSON.parse(data.OkImgJson);
+                }else{
+                     data.OkImgJson ={}
                 }
                 this.data = data;
 			})
@@ -793,5 +819,10 @@ export default {
 .evaluate_box .link_btn{
     float:none;
     display:inline-block;
+}
+.presale-img{
+    position: absolute!important;
+    right: 0;
+    top: 120px;
 }
 </style>

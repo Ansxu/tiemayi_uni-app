@@ -85,13 +85,11 @@
 				seltab(e){
 					this.pageNo=1
 					console.log(e)
-					if(this.selectval==e==0){
+					if(e==0){
 						this.selectval=e
-						
 						this.init()
-					}else if(this.selectval==e==1){
+					}else if(e==1){
 						this.selectval=e
-						
 						this.init()
 					}
 				},
@@ -102,7 +100,7 @@
 						Token: this.token,
 						Page: this.pageNo,
 						PageSize: 15,
-						IsDisciple: this.selectval,
+						IsDisciple: this.selectval*1,
 					}).then(res => {
 						// console.log(res)
 						this.data=res.obj
