@@ -1536,4 +1536,9 @@ export default {
 	.cfff{
 		color:#fff!important;
 	}
+	.flex-center{
+		display:flex;
+		align-items:center;
+		flex-flow:row wrap;
+	}
 </style>
