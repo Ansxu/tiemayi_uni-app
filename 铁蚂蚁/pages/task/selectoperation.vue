@@ -189,7 +189,7 @@
                                                     <img :src="data.ImgJson.AdditionalProductB1"  @click="previewImage([data.ImgJson.AdditionalProductB1])" v-if="data.TaskType==1&&(data.ProductName1||data.ProductName2)&&data.ImgJson.AdditionalProductB1">
                                                 </span>
                                             </block>
-                                            <block v-if="it.ProductName2">
+                                            <block v-if="data.ProductName2">
                                                 <span class="img">
                                                         <img :src="data.ImgJson.AdditionalProductA2"  @click="previewImage([data.ImgJson.AdditionalProductA2])" v-if="data.ProductName2&&data.ImgJson.AdditionalProductA2">
                                                 </span>
