@@ -1054,18 +1054,21 @@ export default {
 				imageJson["CollectionCompetitiveProducts3"] = screenshot.CollectionCompetitiveProducts3;
 			}
 			// 加购物车截图--收藏商品截图
-			if(data.IsPresaleTask==1&&data.AcceptTaskStatus!=9&&(data.ShootTheNextDay==0||data.ShootTheNextDay==2)){
-				if(!screenshot.AddAShoppingCart){
-					toast("加购物车截图不能为空");
-					return false;
+			if(data.IsPresaleTask==1&&data.AcceptTaskStatus!=9){
+				if((data.ShootTheNextDay==0||data.ShootTheNextDay==2)){
+					if(!screenshot.AddAShoppingCart){
+						toast("加购物车截图不能为空");
+						return false;
+					}
+					imageJson["AddAShoppingCart"] = screenshot.AddAShoppingCart;
 				}
-				imageJson["AddAShoppingCart"] = screenshot.AddAShoppingCart;
-				
-				if(!screenshot.CollectionOfGoods){
-					toast("收藏商品截图不能为空");
-					return false;
+				if((data.ShootTheNextDay==1||data.ShootTheNextDay==2)){
+					if(!screenshot.CollectionOfGoods){
+						toast("收藏商品截图不能为空");
+						return false;
+					}
+					imageJson["CollectionOfGoods"] = screenshot.CollectionOfGoods;
 				}
-				imageJson["CollectionOfGoods"] = screenshot.CollectionOfGoods;
 				
 			}
 			// 货比三家

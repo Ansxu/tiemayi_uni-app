@@ -65,7 +65,7 @@
 							
 							<div class="weui-cell" @click="showPicker('CreditRating')">
 								<div class="weui-cell__bd">
-									<input type="text" class="weui-input" id="nianling" disabled v-model.trim="data.CreditRating" placeholder="请选择信誉等级" />
+									<input type="text" class="weui-input" id="nianling" disabled v-model.trim="CreditRating.default" placeholder="请选择信誉等级" />
 									<span class="icon-arrow icon-arrowRight"></span>
 								</div>
 							</div>
@@ -234,17 +234,17 @@ export default {
 			// 信誉
 			CreditRating:{
 				array:[
-					{label:'1心'},
-					{label:'2心'},
-					{label:'3心'},
-					{label:'4心'},
-					{label:'5心'},
-					{label:'1钻'},
-					{label:'2钻'},
-					{label:'3钻'},
-					{label:'4钻'},
-					{label:'5钻'},
-					{label:'皇冠及以上'}
+					{label:'1心',val:1},
+					{label:'2心',val:2},
+					{label:'3心',val:3},
+					{label:'4心',val:4},
+					{label:'5心',val:5},
+					{label:'1钻',val:6},
+					{label:'2钻',val:7},
+					{label:'3钻',val:8},
+					{label:'4钻',val:9},
+					{label:'5钻',val:10},
+					{label:'皇冠及以上',val:11}
 				],
 				default:'1心',
 			},
@@ -336,8 +336,9 @@ export default {
 		},
         // 单项联动选择
         onConfirm(e){
-            this.data[this.nowSelectVal] = e.result;
-            this[this.nowSelectVal].default = e.result;
+			let val = e.checkArr.val||e.checkArr.label;
+            this.data[this.nowSelectVal] = val;
+            this[this.nowSelectVal].default = e.checkArr.label;
 		},
 		// 完成购物类目选择
 		confirmShoppingCategory(){
@@ -360,6 +361,7 @@ export default {
 			this.showShoppingCategoryWin = false;
 		},
 		submit(){
+			console.log(this.data.CreditRating)
 			const tips = this.check();
 			if(tips){
 				toast(tips);return;

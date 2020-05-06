@@ -299,29 +299,19 @@
                                         <p class="evaluateTit">图片要求<span class="c_Org">（在评价里必须上传以下图片）</span></p>
                                         <div class="imglist thumbnails evaluationImglst">
                                             <span class="img">
-                                                <block v-if="data.EvaluationImg" @click="previewImage([data.EvaluationImg])">
-                                                    <img :src="data.EvaluationImg">
-                                                </block>
+                                                <img :src="data.EvaluationImg" v-if="data.EvaluationImg" @click="previewImage([data.EvaluationImg])">
                                             </span> 
                                             <span class="img">
-                                                <block v-if="data.EvaluationImg1"  @click="previewImage([data.EvaluationImg1])">
-                                                    <img :src="data.EvaluationImg1">
-                                                </block>
+                                                    <img :src="data.EvaluationImg1" v-if="data.EvaluationImg1"  @click="previewImage([data.EvaluationImg1])">
                                             </span> 
                                             <span class="img">
-                                                <block v-if="data.EvaluationImg2"  @click="previewImage([data.EvaluationImg2])">
-                                                    <img :src="data.EvaluationImg2">
-                                                </block>
+                                                    <img :src="data.EvaluationImg2" v-if="data.EvaluationImg2"  @click="previewImage([data.EvaluationImg2])">
                                             </span> 
                                             <span class="img">
-                                                <block  v-if="data.EvaluationImg3"  @click="previewImage([data.EvaluationImg3])">
-                                                    <img :src="data.EvaluationImg3">
-                                                </block>
+                                                    <img :src="data.EvaluationImg3" v-if="data.EvaluationImg3"  @click="previewImage([data.EvaluationImg3])">
                                             </span> 
                                             <span class="img">
-                                                <block  v-if="data.EvaluationImg4"  @click="previewImage([data.EvaluationImg4])">
-                                                    <img :src="data.EvaluationImg4">
-                                                </block>
+                                                    <img :src="data.EvaluationImg4" v-if="data.EvaluationImg4"  @click="previewImage([data.EvaluationImg4])">
                                             </span>
                                         </div>
                                         <!-- <p class="link_btn" @click="saveImg">点击下载图片</p> -->

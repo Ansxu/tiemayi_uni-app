@@ -150,7 +150,7 @@ export default {
 		// 上传照片,1-正面，2反面,3-手持照片
 		upImg(type){
 			if(this.data.IsAUT==1)return;
-			getImgPath(1,['album']).then(res=>{
+			getImgPath(1,['camera']).then(res=>{
 				if(type===1){
 					this.data.IdcardPositive = res;
 				}else if(type===2){
