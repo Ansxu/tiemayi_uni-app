@@ -142,132 +142,132 @@
 						<div class="titleHd"><span>任务步骤</span></div>
 						<div class="StepBox">
 
-						<div class="Step Step-1">
-							<div class="txtbox">
-								<div class="piclist Uploadimg">
-									<ul class="clear">
-									<li v-if="data.IsCompetingGoodsTask==1&&data.AcceptTaskStatus==9">
-										<div class="img" @click="upImg('ScreenshotMerchantProductSearch')">
-											<div class="upimg">
-												<img class="uploadImg" :src="screenshot.ScreenshotMerchantProductSearch"/>
+							<div class="Step Step-1">
+								<div class="txtbox">
+									<div class="piclist Uploadimg">
+										<ul class="clear">
+										<li v-if="data.IsCompetingGoodsTask==1&&data.AcceptTaskStatus==9">
+											<div class="img" @click="upImg('ScreenshotMerchantProductSearch')">
+												<div class="upimg">
+													<img class="uploadImg" :src="screenshot.ScreenshotMerchantProductSearch"/>
+												</div>
 											</div>
-										</div>
-										<p class="text">下单搜索列表</p>
-									</li>
-									<li v-if="data.CollectionCompetitiveProducts1==1&&data.AcceptTaskStatus!=9">
-										<div class="img" @click="upImg('CollectionCompetitiveProducts1')">
-											<div class="upimg">
-												<img class="uploadImg" :src="screenshot.CollectionCompetitiveProducts1"/>
+											<p class="text">下单搜索列表</p>
+										</li>
+										<li v-if="data.CollectionCompetitiveProducts1==1&&data.AcceptTaskStatus!=9">
+											<div class="img" @click="upImg('CollectionCompetitiveProducts1')">
+												<div class="upimg">
+													<img class="uploadImg" :src="screenshot.CollectionCompetitiveProducts1"/>
+												</div>
 											</div>
-										</div>
-										<p class="text">收藏竞品店铺</p>
-									</li>
-									<li v-if="data.CollectionCompetitiveProducts2==1&&data.AcceptTaskStatus!=9">
-										<div class="img" @click="upImg('CollectionCompetitiveProducts2')">
-											<div class="upimg">
-												<img class="uploadImg" :src="screenshot.CollectionCompetitiveProducts2"/>
+											<p class="text">收藏竞品店铺</p>
+										</li>
+										<li v-if="data.CollectionCompetitiveProducts2==1&&data.AcceptTaskStatus!=9">
+											<div class="img" @click="upImg('CollectionCompetitiveProducts2')">
+												<div class="upimg">
+													<img class="uploadImg" :src="screenshot.CollectionCompetitiveProducts2"/>
+												</div>
 											</div>
-										</div>
-										<p class="text">收藏竞品商品</p>
-									</li>
-									<li v-if="data.CollectionCompetitiveProducts3==1&&data.AcceptTaskStatus!=9">
-										<div class="img" @click="upImg('CollectionCompetitiveProducts3')">
-											<div class="upimg">
-												<img class="uploadImg" :src="screenshot.CollectionCompetitiveProducts3"/>
+											<p class="text">收藏竞品商品</p>
+										</li>
+										<li v-if="data.CollectionCompetitiveProducts3==1&&data.AcceptTaskStatus!=9">
+											<div class="img" @click="upImg('CollectionCompetitiveProducts3')">
+												<div class="upimg">
+													<img class="uploadImg" :src="screenshot.CollectionCompetitiveProducts3"/>
+												</div>
 											</div>
-										</div>
-										<p class="text">加竞品购物车</p>
-									</li>
-									</ul>
+											<p class="text">加竞品购物车</p>
+										</li>
+										</ul>
+									</div>
 								</div>
 							</div>
-						</div>
 
-						<block v-if="data.AcceptTaskStatus!=9">
-							<div class="Step Step-2">
-								<div class="No"><span>核对店铺是否正确 </span>
-									<p class="link_btn" @click="showExamples(4)">点击查看示例</p>
-								</div>
-								<div class="Examine">
-									<div style="text-align:center;">店铺名认证：{{data.ShopName}}</div>
-									<div class="inputbox_group flex-center">
-										<block v-for="(item,index) in data.ShopName" :key="index">
-											<input v-if="item=='*'" v-model="ShopNameArr[index]"  class="input" name="shopname" type="text" placeholder="补全" maxlength="1" /> 
-											<input v-else class="input" name="shopname" type="text" :value="item" readonly /> 
-										</block>
+							<block v-if="data.AcceptTaskStatus!=9">
+								<div class="Step Step-2">
+									<div class="No"><span>核对店铺是否正确 </span>
+										<p class="link_btn" @click="showExamples(4)">点击查看示例</p>
 									</div>
-									<p class="btn_100" @click="checkShopName">补全后点我核对</p>
-								</div>
-							</div>
-							<div class="Step Step-2" v-if="data.SetCommodityKeywords">
-								<div class="No"><span>核对关键词是否正确  </span>
-									<p class="link_btn" @click="showExamples(5)">点击查看示例</p>
-								</div>
-								<div class="Examine">
-									<div style="text-align:center;">关键词认证：{{data.SetCommodityKeywords}}</div>
-									<div class="inputbox_group flex-center">
-										<block v-for="(item,index) in data.SetCommodityKeywords" :key="index">
-											<input v-if="item=='*'" v-model="SetCommodityKeywordsArr[index]"  class="input"  type="text" placeholder="补全" maxlength="1" />
-											<input v-else class="input" name="Keywords" type="text" :value="item" readonly />
-										</block>
+									<div class="Examine">
+										<div style="text-align:center;">店铺名认证：{{data.ShopName}}</div>
+										<div class="inputbox_group flex-center">
+											<block v-for="(item,index) in data.ShopName" :key="index">
+												<input v-if="item=='*'" v-model="ShopNameArr[index]"  class="input" name="shopname" type="text" placeholder="补全" maxlength="1" /> 
+												<input v-else class="input" name="shopname" type="text" :value="item" readonly /> 
+											</block>
+										</div>
+										<p class="btn_100" @click="checkShopName">补全后点我核对</p>
 									</div>
-									<p class="btn_100" @click="checkKeywords">补全后点我核对</p>
 								</div>
-							</div>
-						</block>
+								<div class="Step Step-2" v-if="data.SetCommodityKeywords">
+									<div class="No"><span>核对关键词是否正确  </span>
+										<p class="link_btn" @click="showExamples(5)">点击查看示例</p>
+									</div>
+									<div class="Examine">
+										<div style="text-align:center;">关键词认证：{{data.SetCommodityKeywords}}</div>
+										<div class="inputbox_group flex-center">
+											<block v-for="(item,index) in data.SetCommodityKeywords" :key="index">
+												<input v-if="item=='*'" v-model="SetCommodityKeywordsArr[index]"  class="input"  type="text" placeholder="补全" maxlength="1" />
+												<input v-else class="input" name="Keywords" type="text" :value="item" readonly />
+											</block>
+										</div>
+										<p class="btn_100" @click="checkKeywords">补全后点我核对</p>
+									</div>
+								</div>
+							</block>
 
-						<div class="Step Step-1" v-if="data.IsPresaleTask==1&&data.AcceptTaskStatus!=9">
-							<div class="txtbox">
-								<div class="piclist Uploadimg">
-									<ul class="clear">
-									<li v-if="(data.ShootTheNextDay==0||data.ShootTheNextDay==2)&&data.IsPresaleTask==1">
-										<div class="img" @click="upImg('AddAShoppingCart')">
-											<div class="upimg">
-												<img class="uploadImg" :src="screenshot.AddAShoppingCart"/>
+							<div class="Step Step-1" v-if="data.IsPresaleTask==1&&data.AcceptTaskStatus!=9">
+								<div class="txtbox">
+									<div class="piclist Uploadimg">
+										<ul class="clear">
+										<li v-if="(data.ShootTheNextDay==0||data.ShootTheNextDay==2)&&data.IsPresaleTask==1">
+											<div class="img" @click="upImg('AddAShoppingCart')">
+												<div class="upimg">
+													<img class="uploadImg" :src="screenshot.AddAShoppingCart"/>
+												</div>
+											</div>
+											<p class="text">加购物车</p>
+										</li>
+										<li v-if="(data.ShootTheNextDay==1||data.ShootTheNextDay==2)&&data.IsPresaleTask==1">
+											<div class="img" @click="upImg('CollectionOfGoods')">
+												<div class="upimg">
+													<img class="uploadImg" :src="screenshot.CollectionOfGoods"/>
+												</div>
+											</div>
+											<p class="text">收藏商品</p>
+										</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<div class="Step Step-1" v-if="data.IsComparisonShop==1&& data.TaskType==1&& data.AcceptTaskStatus!=9">
+								<div class="No"><span>第一步&nbsp;货比三家</span>
+									<p class="link_btn" @click="showExamples(0)">点击查看示例</p>
+								</div>
+								<div class="txtbox">
+									<p>1、请确认使用接单账号登录{{data.PlatName}}应用</p>
+									<p>2、点击搜索框粘贴指定的关键词</p>
+									<p>3、按要求设置筛选价格区间、所在地、类目等搜索条件缩小查询范围
+									</p>
+									<p>4、随机点开搜索列表中别家的任意2个商品，慢慢滑动浏览商品直 到底部（分别浏览一分钟以上）然后上传链接
+									</p>
+									<div class="piclist Uploadimg">
+										<div class="from">
+											<p>货比三家链接1</p>
+											<div class="from-item mt10">
+												<input class="input" id="huobisanj1" style="width:300px" v-model="data.ShoparoundLink1" type="text" placeholder="货比商品链接1" />
 											</div>
 										</div>
-										<p class="text">加购物车</p>
-									</li>
-									<li v-if="(data.ShootTheNextDay==1||data.ShootTheNextDay==2)&&data.IsPresaleTask==1">
-										<div class="img" @click="upImg('CollectionOfGoods')">
-											<div class="upimg">
-												<img class="uploadImg" :src="screenshot.CollectionOfGoods"/>
+										<div class="from">
+											<p>货比三家链接2</p>
+											<div class="from-item mt10">
+												<input class="input" id="huobisanj2" style="width:300px" v-model="data.ShoparoundLink2" type="text" placeholder="货比商品链接2" />
 											</div>
 										</div>
-										<p class="text">收藏商品</p>
-									</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-
-						<div class="Step Step-1" v-if="data.IsComparisonShop==1&& data.TaskType==1&& data.AcceptTaskStatus!=9">
-							<div class="No"><span>第一步&nbsp;货比三家</span>
-								<p class="link_btn" @click="showExamples(0)">点击查看示例</p>
-							</div>
-							<div class="txtbox">
-								<p>1、请确认使用接单账号登录{{data.PlatName}}应用</p>
-								<p>2、点击搜索框粘贴指定的关键词</p>
-								<p>3、按要求设置筛选价格区间、所在地、类目等搜索条件缩小查询范围
-								</p>
-								<p>4、随机点开搜索列表中别家的任意2个商品，慢慢滑动浏览商品直 到底部（分别浏览一分钟以上）然后上传链接
-								</p>
-								<div class="piclist Uploadimg">
-									<div class="from">
-										<p>货比三家链接1</p>
-										<div class="from-item mt10">
-											<input class="input" id="huobisanj1" style="width:300px" v-model="data.ShoparoundLink1" type="text" placeholder="货比商品链接1" />
-										</div>
-									</div>
-									<div class="from">
-										<p>货比三家链接2</p>
-										<div class="from-item mt10">
-											<input class="input" id="huobisanj2" style="width:300px" v-model="data.ShoparoundLink2" type="text" placeholder="货比商品链接2" />
-										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 
 							<div class="Step Step-1" v-if="(data.ShouCanjp1==1||data.ShouCanjp2==1)&&data.TaskType==1 && data.IsAddedservices==1">
 								<div class="txtbox">
@@ -1318,7 +1318,7 @@ export default {
 				toast("请核对店铺名称");
 				return false;
 			}
-			if (!this.checkKeywordStatus && data.AcceptTaskStatus != 9) {
+			if (!this.checkKeywordStatus && data.AcceptTaskStatus != 9 && data.SetCommodityKeywords) {
 				toast("请核对关键词");
 				return false;
 			}
