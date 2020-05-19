@@ -2,13 +2,13 @@ import md5 from 'js-md5';
 
 //API接口地址
 // 线上
-// const host = 'https://api.naomiebie.cn/api/';//红鸟  旺店宝
-// const filePath = 'http://top.naosongduan.cn';//文件域名
-// const hostPath = 'http://top.naosongduan.cn/h5/index.html';//主机路径
+const host = 'https://api.naomiebie.cn/api/';//红鸟  旺店宝
+const filePath = 'http://top.naosongduan.cn';//文件域名
+const hostPath = 'http://top.naosongduan.cn/h5/index.html';//主机路径
 // 测试
-const host = 'http://hnapi.wtvxin.com/api/';// 红鸟  旺店宝测试
-const filePath = 'http://hn.wtvxin.com';//文件域名
-const hostPath = 'http://hnapi.wtvxin.com/index.html';//主机路径
+// const host = 'http://hnapi.wtvxin.com/api/';// 红鸟  旺店宝测试
+// const filePath = 'http://hn.wtvxin.com';//文件域名
+// const hostPath = 'http://hnapi.wtvxin.com/index.html';//主机路径
 
 const website = 'http://hn.wtvxin.com';
 const wssPath = 'wss://hxapia.com/WebSocketServer.ashx';// wss地址

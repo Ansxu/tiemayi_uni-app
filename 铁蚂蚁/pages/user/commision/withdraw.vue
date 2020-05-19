@@ -45,12 +45,12 @@
 								<div class="weui-cells">
 									<div class="weui-cell">
 										<div class="weui-cell__bd">
-											<input type="number" placeholder="请输入提现金额" class="weui-input" :value="value" :disabled="disabl"  @input="input"/>
+											<input type="number" placeholder="请输入提现金额" class="weui-input" :disabled="disabl"  v-model="value"/>
 										</div>
 									</div>
 									<div class="weui-cell">
 										<div class="weui-cell__bd">
-											<input type="password" placeholder="请输入登录密码" class="weui-input" id="passkey" :value="password" @input="passkey" />
+											<input type="password" placeholder="请输入登录密码" class="weui-input" id="passkey" v-model="password"/>
 										</div>
 									</div>
 								</div>
@@ -212,6 +212,16 @@ export default {
 		sumbit(){
 			const that = this;
 			const data = this.data;
+			if(this.btnType==''){
+				uni.showToast({ 
+					title:'请选择提现款项！',
+					icon:'none',
+					success() {
+						this.disabl=true
+					}
+				})
+				return;
+			}
 			if(this.value==''){
 				uni.showToast({
 					title:'请输入提现金额',

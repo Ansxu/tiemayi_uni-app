@@ -1243,29 +1243,32 @@ export default {
 					}
 					// 附加商品
 					if(data.TaskType==1&&(data.ProductName1||data.ProductName2)){
-						if(!screenshot.AdditionalProductA1){
-							toast("附加商品1顶部截图不能为空");
-							return false;
+						if(data.ProductName1){
+							if(!screenshot.AdditionalProductA1){
+								toast("附加商品1顶部截图不能为空");
+								return false;
+							}
+							imageJson["AdditionalProductA1"] = screenshot.AdditionalProductA1;
+							
+							if(!screenshot.AdditionalProductB1){
+								toast("附加商品1底部截图不能为空");
+								return false;
+							}
+							imageJson["AdditionalProductB1"] = screenshot.AdditionalProductB1;
 						}
-						imageJson["AdditionalProductA1"] = screenshot.AdditionalProductA1;
-						
-						if(!screenshot.AdditionalProductB1){
-							toast("附加商品1底部截图不能为空");
-							return false;
+						if(data.ProductName2){
+							if(!screenshot.AdditionalProductA2){
+								toast("附加商品2顶部截图不能为空");
+								return false;
+							}
+							imageJson["AdditionalProductA2"] = screenshot.AdditionalProductA2;
+							
+							if(!screenshot.AdditionalProductB2){
+								toast("附加商品2底部截图不能为空");
+								return false;
+							}
+							imageJson["AdditionalProductB2"] = screenshot.AdditionalProductB2;
 						}
-						imageJson["AdditionalProductB1"] = screenshot.AdditionalProductB1;
-						
-						if(!screenshot.AdditionalProductA2){
-							toast("附加商品2顶部截图不能为空");
-							return false;
-						}
-						imageJson["AdditionalProductA2"] = screenshot.AdditionalProductA2;
-						
-						if(!screenshot.AdditionalProductB2){
-							toast("附加商品2底部截图不能为空");
-							return false;
-						}
-						imageJson["AdditionalProductB2"] = screenshot.AdditionalProductB2;
 					}
 				}
 				if(data.Llshoucandp==1){

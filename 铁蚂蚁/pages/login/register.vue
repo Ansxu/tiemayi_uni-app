@@ -73,7 +73,7 @@
                                 </div>
                             </div>
                         </div> -->
-                        <div class="weui-cell">
+                        <!-- <div class="weui-cell">
                             <div class="weui-cell__hd">
                                 <img src="/static/image/icons/d_email.png" alt="" class="iconImg" />
                             </div>
@@ -82,7 +82,7 @@
                                     <input type="number" v-model.trim="qq" class="weui-input" placeholder="请输入QQ（必填）" id="txtQQ" />
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="weui-cell">
                             <div class="weui-cell__hd">
                                 <img src="/static/image/icons/d_yaoqing.png" alt="" class="iconImg" />
@@ -249,10 +249,10 @@ export default {
                 toast('两次输入密码不一致！');
                 return false;
             }
-            if(!this.qq){
-                toast('请输入QQ！');
-                return false;
-            }
+            // if(!this.qq){
+            //     toast('请输入QQ！');
+            //     return false;
+            // }
             if(!this.inviteCode){
                 toast('请输入邀请码！');
                 return false;
