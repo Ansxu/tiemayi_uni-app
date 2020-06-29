@@ -26,11 +26,18 @@
                         <img src="/static/image/nav/presaletask.png" />
                     </div>
                 </div>
-                
 				<div class="g-name c_Org"  v-if="data.IsPresaleTask==1||data.IsCompetingGoodsTask==1||data.IsAdvanceTask==1">
+					<block v-if="IsTrialStatus==1">
+						商家审号任务：{{data.TrialNumberTime}} 分钟内审号完成,请稍等片刻
+						<p style="font-size:0.16rem;font-weight:bold;color:red;">商家审号通过才能操作，否则该笔订单无效</p>
+					</block>
 						<!-- {{data.IsPresaleTask==1?"隔日单任务：":"竞品黑科技任务："}}{{data.PaymentStartTime}} 到 {{data.PaymentEndTime}}在{{data.PlatName}}平台去下单
 						<p style="font-size:16px;font-weight:bold;color:red;">不到订单支付时间不能拍下付款，否则该笔订单任务撤销（处罚10金一单）</p> -->
                         {{data.IsPresaleTask==1?"隔日单任务：":(data.IsCompetingGoodsTask==1?"竞品黑科技任务：":"预售单任务：")}}{{data.PaymentStartTime}} 到 {{data.PaymentEndTime}}在{{data.PlatName}}平台去下单
+				</div>
+				<div class="g-name c_Org"  v-if="data.IsTrialStatus==1">
+						商家审号任务：{{data.TrialNumberTime}} 分钟内审号完成,请稍等片刻
+						<p style="font-size:0.16rem;font-weight:bold;color:red;">商家审号通过才能操作，否则该笔订单无效</p>
 				</div>
                 <!-- <div class="g-name c_Org" v-if="data.IsPresaleTask==1">
                         预售任务：{{data.PaymentStartTime}} 到 {{data.PaymentEndTime}}在{{data.PlatName}}平台去下单
@@ -43,7 +50,7 @@
             </div>
             <div class="StatusInfo">
                 <div class="Btns mb10">
-                    <p :class="['btn',{'cur':data.AcceptTaskStatus<1||(data.AcceptTaskStatus==9&&data.PayCountdown>0)||(data.AcceptTaskStatus==9&&data.CompetingGoodsCountdown>0)}]" @click="operationTask">
+                    <p :class="['btn',{'cur':data.IsTrialStatus!==1&&(data.AcceptTaskStatus<1||(data.AcceptTaskStatus==9&&data.PayCountdown>0)||(data.AcceptTaskStatus==9&&data.CompetingGoodsCountdown>0))}]" @click="operationTask">
                         <!-- href="{{=(data.AcceptTaskStatus<=1||(data.AcceptTaskStatus==9&&data.PayCountdown>0))&&(data.IsTrialStatus==0||data.IsTrialStatus==2)?" javascript:operationTask(); ":"javascript:; "}}"> -->
                         {{data.AcceptTaskStatus==1?"重新提交":data.AcceptTaskStatus==9&&data.PayCountdown>0?"下单提交":"操作任务"}}
                     </p>
@@ -495,7 +502,7 @@ export default {
         },
         // 操作任务
         operationTask(){
-            if(this.data.AcceptTaskStatus<1||(this.data.AcceptTaskStatus==9&&this.data.PayCountdown>0)||(this.data.AcceptTaskStatus==9&&this.data.CompetingGoodsCountdown>0)){
+            if((this.data.AcceptTaskStatus<1||(this.data.AcceptTaskStatus==9&&this.data.PayCountdown>0)||(this.data.AcceptTaskStatus==9&&this.data.CompetingGoodsCountdown>0))&&this.data.IsTrialStatus!=1){
                 goUrl('task/operationtask',{
                     TaskAcceptNo:this.TaskAcceptNo
                 })
