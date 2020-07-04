@@ -45,8 +45,9 @@
 				{ "path": "invite" },
 				{ "path": "faqdetail" },
 				{ "path": "faq" },
-				{ "path": "choujiang" }
-			]
+				{ "path": "choujiang" },
+			    {"path" : "shopComing"}
+            ]
 		},
 		{
 			"root": "pages/user",

@@ -146,14 +146,6 @@
 								<div class="txtbox">
 									<div class="piclist Uploadimg">
 										<ul class="clear">
-										<li v-if="data.IsCompetingGoodsTask==1&&data.AcceptTaskStatus==9">
-											<div class="img" @click="upImg('ScreenshotMerchantProductSearch')">
-												<div class="upimg">
-													<img class="uploadImg" :src="screenshot.ScreenshotMerchantProductSearch"/>
-												</div>
-											</div>
-											<p class="text">下单搜索列表</p>
-										</li>
 										<li v-if="data.CollectionCompetitiveProducts1==1&&data.AcceptTaskStatus!=9">
 											<div class="img" @click="upImg('CollectionCompetitiveProducts1')">
 												<div class="upimg">
@@ -263,6 +255,24 @@
 											<p>货比三家链接2</p>
 											<div class="from-item mt10">
 												<input class="input" id="huobisanj2" style="width:300px" v-model="data.ShoparoundLink2" type="text" placeholder="货比商品链接2" />
+											</div>
+										</div>
+										<div class="from" v-if="data.IsAppointCompet==1">
+											<p>货比三家链接3</p>
+											<div class="from-item mt10">
+												<input class="input" id="IsAppointCompet1" style="width:300px" v-model="data.IsAppointCompetlink1" type="text" placeholder="货比商品链接2" />
+											</div>
+										</div>
+										<div class="from" v-if="data.IsAppointCompet==1">
+											<p>货比三家链接4</p>
+											<div class="from-item mt10">
+												<input class="input" id="IsAppointCompet2" style="width:300px" v-model="data.IsAppointCompetlink2" type="text" placeholder="货比商品链接2" />
+											</div>
+										</div>
+										<div class="from" v-if="data.IsAppointCompet==1">
+											<p>货比三家链接5</p>
+											<div class="from-item mt10">
+												<input class="input" id="IsAppointCompet3" style="width:300px" v-model="data.IsAppointCompetlink3" type="text" placeholder="货比商品链接2" />
 											</div>
 										</div>
 									</div>
@@ -785,7 +795,6 @@ export default {
 		checkOrderNoStatus:false,//是否已核对订单号
 		// 截图
 		screenshot:{
-			ScreenshotMerchantProductSearch:'',//下单搜索列表截图
 			CollectionCompetitiveProducts1:'',//藏竞品店铺截图
 			CollectionCompetitiveProducts2:'',//收藏竞品商品截图
 			CollectionCompetitiveProducts3:'',//加竞品购物车截图
@@ -845,7 +854,6 @@ export default {
 		this.checkOrderNoStatus=false,//是否已核对订单号
 		// 截图
 		this.screenshot={
-			ScreenshotMerchantProductSearch:'',//下单搜索列表截图
 			CollectionCompetitiveProducts1:'',//藏竞品店铺截图
 			CollectionCompetitiveProducts2:'',//收藏竞品商品截图
 			CollectionCompetitiveProducts3:'',//加竞品购物车截图
@@ -1023,13 +1031,6 @@ export default {
 			let imageJson = {};
 			const data = this.data;
 			const screenshot = this.screenshot;
-			if(data.IsCompetingGoodsTask==1&&data.AcceptTaskStatus==9){
-				if(!screenshot.ScreenshotMerchantProductSearch){
-					toast("下单搜索列表截图不能为空");
-					return false;
-				}
-				imageJson["ScreenshotMerchantProductSearch"] = screenshot.ScreenshotMerchantProductSearch;
-			}
 			
 			if(data.CollectionCompetitiveProducts1==1&&data.AcceptTaskStatus!=9){
 				if(!screenshot.CollectionCompetitiveProducts1){
@@ -1093,7 +1094,39 @@ export default {
 					return false;
 				}
 				huobisanjiaJson["ShopAroundlink2"] = data.ShoparoundLink2; 
+			}
+			
+			//额外货比连接
+			if(data.IsAppointCompet==1){
+				if(!data.IsAppointCompetlink1){
+					toast("货比三家链接不能为空");
+					return false;
+				}
+				if(data.IsAppointCompetlink1.indexOf("http")){
+					toast("请输入正确的货比三家链接地址");
+					return false;
+				}
+				huobisanjiaJson["IsAppointCompetlink1"] = data.IsAppointCompetlink1; 
 				
+				if(!data.IsAppointCompetlink2){
+					toast("货比三家链接不能为空");
+					return false;
+				}
+				if(data.IsAppointCompetlink2.indexOf("http")){
+					toast("请输入正确的货比三家链接地址");
+					return false;
+				}
+				huobisanjiaJson["IsAppointCompetlink2"] = data.IsAppointCompetlink2; 
+				
+				if(!data.IsAppointCompetlink3){
+					toast("货比三家链接不能为空");
+					return false;
+				}
+				if(data.IsAppointCompetlink3.indexOf("http")){
+					toast("请输入正确的货比三家链接地址");
+					return false;
+				}
+				huobisanjiaJson["IsAppointCompetlink3"] = data.IsAppointCompetlink3; 
 			}
 			//额外操作截图
 			if((data.ShouCanjp1==1||data.ShouCanjp2==1)&&data.TaskType==1 && data.IsAddedservices==1){

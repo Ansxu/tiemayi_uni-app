@@ -120,6 +120,17 @@
                                         </div>
                                     </dd>
                                 </block>
+								
+								<block v-if="data.ImgJson&&data.ImgJson.CollectionCompetitiveProducts1&&data.IsCompetingGoodsTask==1">
+								<dd><label>收藏竞品店铺</label></dd>
+								<dd>
+											<div class="imglist thumbnails">
+												<span class="img">
+													<img :src="data.ImgJson.CollectionCompetitiveProducts1" @click="previewImage([data.ImgJson.CollectionCompetitiveProducts1])">
+												</span>
+											</div>
+								</dd>
+								</block>
                                 <block v-if="data.ImgJson&&data.ImgJson.CollectionCompetitiveProducts2&&data.IsCompetingGoodsTask==1">
 								<dd><label>收藏竞品商品</label></dd>
 								<dd>
@@ -140,6 +151,7 @@
 											</div>
 								</dd>
 								</block>
+								
 
                                 
 
@@ -255,6 +267,15 @@
 								</div>
 								<div class="from" style="margin-bottom:10px;" v-if="data.ShoparoundLink2">
                                     <p class="text">货比三家链接2：{{data.ShoparoundLink2}}</p>
+								</div>
+								<div class="from" style="margin-bottom:10px;" v-if="data.IsAppointCompetlink1&&data.IsCompetingGoodsTask==1">
+								    <p class="text">货比三家链接3：{{data.IsAppointCompetlink1}}</p>
+								</div>
+								<div class="from" style="margin-bottom:10px;" v-if="data.IsAppointCompetlink2&&data.IsCompetingGoodsTask==1">
+								    <p class="text">货比三家链接4：{{data.IsAppointCompetlink2}}</p>
+								</div>
+								<div class="from" style="margin-bottom:10px;" v-if="data.IsAppointCompetlink3&&data.IsCompetingGoodsTask==1">
+								    <p class="text">货比三家链接5：{{data.IsAppointCompetlink3}}</p>
 								</div>
 								<div class="from" style="margin-bottom:10px;" v-if="data.ShopProAlink">
                                     <p class="text">副宝贝链接1：{{data.ShopProAlink}}</p>
@@ -423,6 +444,17 @@
             </div>
         </div>
     </div>
+	<!-- 审号中 -->
+	<div class="msgallbox" v-if="showmsgallbox">
+		<div class="msgbox">
+			<div class="msgtitle">通知</div>
+			<div class="contentbox">
+				<div class="msgcontent" id="newsContent">{{newsContent}}</div>
+				<div class="msgcontent" style="color:red;font-weight:bold;margin-bottom:.1rem" id="newsTime" v-if="shownewsTime">{{newsTime}}</div>
+			</div>
+			<div class="msgbtn" @click="isOk()">确定</div>
+		</div>
+	</div>
   </div>
 </template>
 
@@ -450,6 +482,13 @@ export default {
         showEvaluationMask:false,//是否显示上传物流和评价截图
         LogisticsReceiptImg:'',//物流截图
         EvaluationImg:'',//评价截图
+		showmsgallbox:false,//显示审号提醒
+		newsContent:"商家审核旺旺中请稍等...",//审号提示
+		newsTime:"00:00:00",//审号倒计时
+		shownewsTime:true,
+		timerTrialStatus:null,//审号计时器
+		timerTrialStatus2:null,//审号计时器2
+		IsTrialStatus:0,
     };
   },
   onLoad(options) {
@@ -473,6 +512,8 @@ export default {
             this.timeEnd='';
             this.timeFn =false;
             this.showCancelTask=false;
+			this.showmsgallbox=false;
+			this.IsTrialStatus=0;
         },
 		getData(){
 			post('Task/LoadOperationalTask',{
@@ -482,11 +523,30 @@ export default {
 			}).then(res=>{
                 let data =res.obj;
                 if (data.AcceptTaskStatus == 0) {
+					clearInterval(this.timeFn)
                     this.timerStart(data.OperationCountdown);
                 }
                 if (data.AcceptTaskStatus == 2 && data.EvaluationCountdown < data.ReceivingTime) {
+					clearInterval(this.AcceptTaskTimeFn)
                     this.EvaluationTimerStart(data.EvaluationCountdown,data.ReceivingTime);
                 }
+				if (data.IsTrialStatus == 1||data.IsTrialStatus == 2||data.IsTrialStatus == 3) {//1:申号中,2:审号成功，3:失败
+					this.IsTrialStatus=data.IsTrialStatus
+					clearInterval(this.timerTrialStatus);
+					clearInterval(this.timerTrialStatus2);
+					if(data.IsTrialStatus == 1){
+						this.showmsgallbox=true
+						this.shownewsTime=true
+						this.timerTrial2();//掉自身接口更新状态
+						this.timerTrial(data.TrialNumberTimeCountdown);
+					}else if (data.IsTrialStatus == 2) {
+					  this.newsContent="商家已同意操作请开始操作任务"
+					  this.shownewsTime=false
+					}else if (data.IsTrialStatus == 3) {
+					  this.newsContent="商家已取消操作请重新领取其他任务"
+					  this.shownewsTime=false
+					}
+				}
                 if(data.ImgJson){
                     data.ImgJson = JSON.parse(data.ImgJson);
                 }else{
@@ -597,7 +657,7 @@ export default {
             var s = 59;
             this.AcceptTaskTimeFn = setInterval(function() {
                 if (alls <= 0) {
-                    clearInterval(this.AcceptTaskTimeFn);
+                    clearInterval(that.AcceptTaskTimeFn);
                     that.AcceptTaskTimeEnd = "评价倒计时 00:00:00";
                 } else {
                     var str = "";
@@ -616,6 +676,53 @@ export default {
                 }
             }, 1000);
         },
+		//审号倒计时
+		timerTrial(countdown) {
+			const that = this;
+		    let alls = countdown*1;
+		    this.timerTrialStatus = setInterval(function() {
+		        if (alls <= 0) {
+		            clearInterval(that.timerTrialStatus);
+		        } else {
+					  var str = "";
+					  var d = Math.floor(alls/ 60 / 60 / 24); //天
+					  var h = Math.floor((alls/ 60 / 60) % 24); //时
+					  var m = Math.floor((alls/ 60) % 60); //分
+					  var s = Math.floor((alls) % 60); //秒
+					  if (parseInt(d) < 1) {
+					  d = "";
+					  } else {
+					  d = d + "天";
+					  }
+					  if (parseInt(h) < 10) {
+					  h = "0" + h;
+					  }
+					  if (parseInt(m) < 10) {
+					  m = "0" + m;
+					  }
+					  if (parseInt(s) < 10) {
+					  s = "0" + s;
+					  }
+					  str = d + h + ":" + m + ":" + s;
+					  that.newsTime=str
+					}
+					alls--
+		    }, 1000);
+		},
+		timerTrial2() {
+			const that=this
+		    this.timerTrialStatus2 = setInterval(function() {
+		      that.getData()
+		    }, 10000);
+		},
+		isOk() {
+		  this.showmsgallbox=false
+		  clearInterval(this.timerTrialStatus);
+		  clearInterval(this.timerTrialStatus2);
+		  if(this.IsTrialStatus==1||this.IsTrialStatus==3){
+			  uni.navigateBack({})
+		  }
+		},
         // 收货
         confirmTask(evaluationCountdown,ReceivingTime) {
             if (evaluationCountdown < ReceivingTime) {
@@ -821,5 +928,65 @@ export default {
     position: absolute!important;
     right: 0;
     top: 120px;
+}
+
+
+
+
+
+.msgallbox{
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 9999
+}
+.msgbox{
+	width: 80%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	-webkit-transform: translate(-50%,-50%);
+	background: #fff;
+	border-radius: 16upx;
+	overflow: hidden;
+}
+.msgtitle{
+	font-size: 32upx;
+	font-weight: bold;
+	color: #000;
+	line-height: 1.4;
+	margin-top: 40upx;
+	text-align: center;
+	display: -webkit-box!important;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-break: break-all;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+}
+.contentbox{
+	width: 100%;
+	max-height: 600upx;
+	overflow-y:scroll;;
+}
+.msgbox .msgcontent{
+	width: 100%;
+	line-height: 1.4;
+	box-sizing: border-box;
+	padding: 20upx;
+	/*min-height: .8rem;*/
+	text-align: center;
+}
+.msgbox .msgbtn{
+	width: 100%;
+	height: 80upx;
+	line-height: 80upx;
+	text-align: center;
+	background: #FF662A;
+	color: #fff;
 }
 </style>

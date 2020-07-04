@@ -113,11 +113,16 @@
             <span class="xinshou_text">推广奖励</span>
           </div>
         </div>
-        <div class="xinshouDiv3">
+<!--        <div class="xinshouDiv3">
           <div @click="goUrl('other/faq')">
             <span class="xinshou_text">常见问题</span>
           </div>
-        </div>
+        </div> -->
+		<div class="xinshouDiv3">
+		  <div @click="goUrl('other/shopComing')">
+		    <span class="xinshou_text">商家邀请</span>
+		  </div>
+		</div>
       </div>
       <!--每日任务-->
       <div class="Taskday bg_fff mb10">
