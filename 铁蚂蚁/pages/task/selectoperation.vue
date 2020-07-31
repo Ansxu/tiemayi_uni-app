@@ -368,7 +368,7 @@
                                 </dd>
                                 <!-- <dd class="text_r"><p class="link_btn blue">点击可查看图片</p></dd> -->
                                 <dd class="text_r"><span>{{data.EvaluationTitle}}</span>
-                                    <p class="btn" @click="confirmTask(data.EvaluationCountdown,data.ReceivingTime)" 
+                                    <p class="btn" @click="opentips" 
                                     v-if="data.AcceptTaskStatus==2">去收货</p>
                                     <!-- 收货弹窗 -->
                                     <div class="EvaluationMask" v-if="showEvaluationMask">
@@ -450,9 +450,22 @@
 			<div class="msgtitle">通知</div>
 			<div class="contentbox">
 				<div class="msgcontent" id="newsContent">{{newsContent}}</div>
-				<div class="msgcontent" style="color:red;font-weight:bold;margin-bottom:.1rem" id="newsTime" v-if="shownewsTime">{{newsTime}}</div>
+				<div class="msgcontent" style="color:red;font-weight:bold;margin-bottom:20upx" id="newsTime" v-if="shownewsTime">{{newsTime}}</div>
 			</div>
 			<div class="msgbtn" @click="isOk()">确定</div>
+		</div>
+	</div>
+	<!-- 收货提示 -->
+	<div class="msgallbox" v-if="showtipsbox">
+		<div class="msgbox">
+			<div class="msgtitle" style="color:red;font-weight:bold;font-size:36upx">收货提示</div>
+			<div class="contentbox">
+				<div class="msgcontent" id="tipscontent">
+					任务为<label style="color:red;font-weight:bold;font-size:36upx">{{tipstext1}}</label>任务，
+					{{tipstext2}}
+				</div>
+			</div>
+			<div class="msgbtn" @click="closetips()">确定</div>
 		</div>
 	</div>
   </div>
@@ -483,6 +496,9 @@ export default {
         LogisticsReceiptImg:'',//物流截图
         EvaluationImg:'',//评价截图
 		showmsgallbox:false,//显示审号提醒
+		showtipsbox:false,//显示收货提示
+		tipstext1:'普通好评',//收货提示内容
+		tipstext2:'核对快递签收后，点下五星好评，填写15字以上文字评语。',//收货提示内容
 		newsContent:"商家审核旺旺中请稍等...",//审号提示
 		newsTime:"00:00:00",//审号倒计时
 		shownewsTime:true,
@@ -722,6 +738,26 @@ export default {
 		  if(this.IsTrialStatus==1||this.IsTrialStatus==3){
 			  uni.navigateBack({})
 		  }
+		},
+		opentips(){
+			this.showtipsbox=true
+			if(this.data.EvaluationVideo){
+				this.tipstext1="指定视频好评"
+				this.tipstext2='点下五星好评，按商家提供的视频和文字发布视频和评语。'
+			  }else if (this.data.EvaluationImg) {
+				  this.tipstext1="指定图片好评"
+				this.tipstext2='点下五星好评，按商家提供的图片和文字填写图片和评语。'
+			  }else if (this.data.EvaluationClaim) {
+				  this.tipstext1="指定文字好评"
+				this.tipstext2='点下五星好评，按商家指定的文字填写文字评语。'
+			  }else {
+				  this.tipstext1="普通好评"
+				this.tipstext2='核对快递签收后，点下五星好评，填写15字以上文字评语。'
+			  }
+		},
+		closetips(){
+			this.showtipsbox=false;
+			this.confirmTask(this.data.EvaluationCountdown,this.data.ReceivingTime)
 		},
         // 收货
         confirmTask(evaluationCountdown,ReceivingTime) {

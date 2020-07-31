@@ -897,21 +897,20 @@ export default {
 					this.checkOrderNoStatus=true;
 				}
 				this.isPresaleTask = data.IsPresaleTask;
-				if(data.IsPresaleTask==1){
-					uni.showModal({
-						title:'注意！',
-						content:`预售任务，付款时间：${data.PaymentStartTime}-${data.PaymentEndTime}。请完全按照商家要求操作，确认每一步都间隔足够时间，不按照要求做的，平台有权封停账号`,
-						showCancel:false,
-						confirmText:'我知道了'
-					})
-				}else{
-					uni.showModal({
-						title:'注意！',
-						content:`请完全按照商家要求操作，确认每一步都间隔足够时间，不按照要求做的，平台有权封停账`,
-						showCancel:false,
-						confirmText:'我知道了'
-					})
+				let text=""
+				if(data.ProductSpec){
+					text=`下单颜色分类为：${data.ProductSpec}\n`
 				}
+				let text2=""
+				if(data.IsPresaleTask==1){
+					text2=`预售任务，付款时间：${data.PaymentStartTime}-${data.PaymentEndTime}。`
+				}
+				uni.showModal({
+					title:'任务提示！',
+					content:`下单价格：${data.ProductPrice}元\n下单件数：${data.ProductNum}件\n下单总金额为：${data.ProductPrice*data.ProductNum}元\n${text}${text2}请完全按照商家要求操作，确认每一步都间隔足够时间，不按照要求做的，平台有权封停账号`,
+					showCancel:false,
+					confirmText:'我知道了'
+				})
 				// 操作倒计时
 				if (data.AcceptTaskStatus == 0) {
                     this.timerStart(data.OperationCountdown);

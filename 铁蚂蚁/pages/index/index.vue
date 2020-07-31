@@ -153,6 +153,18 @@
           </div>
         </div>
       </div>
+	  <!-- 公共弹框 -->
+	  <div class="msgallbox" v-if="showmsg">
+		<div class="msgbox">
+		  <div class="msgtitle">{{msgtitle}}</div>
+		  <div class="contentbox">
+			<div class="msgcontent">
+			  {{msgcontent}}
+			</div>
+		  </div>
+		  <div class="msgbtn" @click="isread()">确定</div>
+		</div>
+	  </div>
     </div>
     <footers></footers>
   </div>
@@ -176,6 +188,12 @@ export default {
       messageList: [], //滚动公告
       messageTop:0,
       messageInterval:null,//定时器
+	  showmsg:false,
+	  list:[],
+	  Noticelength:"",
+	  Noticeindex:0,
+	  msgtitle:"通知",
+	  msgcontent:""
     };
   },
   onLoad() {
@@ -209,6 +227,7 @@ export default {
       }).then(res => {
         this.getUnreadCount(); // 获取未读消息数量
         this.getMessageList(); //滚动公告
+		this.gettNoticeList();//弹框公共
         this.taskList = res.obj.AcceptTaskList;
       });
     },
@@ -270,18 +289,6 @@ export default {
         }
       });
     },
-    //判断是否有抽奖活动
-    lotteryUrl() {
-      post("PlayActivities/lotteryUrl").then(res => {
-        const data = res.obj;
-        if (res.errcode === 2) {
-          // 待测试跳转地址
-          location.href = json.url;
-        } else {
-          toast(data.msg);
-        }
-      });
-    },
     // 获取未读消息数量
     getUnreadCount() {
       post("Notice/GetNoticeUnreadCount", {
@@ -301,7 +308,44 @@ export default {
             location.href = err.url;
         }
       });
-    }
+    },
+	//弹框公告
+	gettNoticeList() {
+	  post("Notice/GetNoticeByMember", {
+	    UserId: this.userId,
+	    Token: this.token,
+	    Page: 1,
+	    PageSize: 3,
+	    SendType: 0,
+		IsRead:0,//0-未读 1-已读
+	  }).then(res => {
+		this.list=res.obj.NoticeList;
+		this.Noticelength=res.obj.NoticeList.length;
+		this.Noticeindex=0
+		if(this.Noticelength>0){
+			this.showNotice(this.list[0].Id)
+		}
+	  });
+	},
+	showNotice(id) {
+	  post("Notice/ReadNoticeInfo", {
+	    UserId: this.userId,
+	    Token: this.token,
+	    NoticeId:id
+	  }).then(res => {
+		const info=res.obj
+		this.showmsg=true
+		this.msgtitle=info.Title
+		this.msgcontent=info.Memo
+	  });
+	},
+	isread() {
+		this.Noticeindex++
+		this.showmsg=false
+		if(this.Noticeindex<this.Noticelength){
+			this.showNotice(this.list[Noticeindex].Id)
+		}
+	},
   }
 };
 </script>
@@ -383,4 +427,58 @@ export default {
   }
 }
 
+
+/*公共弹框*/
+.msgallbox{
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999
+}
+.msgbox{
+  width: 80%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  background: #fff;
+  border-radius: 16upx;
+  overflow: hidden;
+}
+.msgtitle{
+  font-size: 32upx;
+  color: #000;
+  line-height: 1.4;
+  text-align: center;
+  display: -webkit-box!important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.contentbox{
+  width: 100%;
+  max-height: 600upx;
+  overflow-y:scroll;;
+}
+.msgbox .msgcontent{
+  width: 100%;
+  line-height: 1.4;
+  box-sizing: border-box;
+  padding: 20upx;
+  min-height: 160upx;
+}
+.msgbox .msgbtn{
+  width: 100%;
+  height: 80upx;
+  line-height: 80upx;
+  text-align: center;
+  background: #FF662A;
+  color: #fff;
+}
 </style>
